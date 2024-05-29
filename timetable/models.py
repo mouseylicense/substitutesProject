@@ -37,6 +37,7 @@ class Class(models.Model):
     room = models.CharField(max_length=100)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return str(self.hour)[:5] + " - " + str(
             (datetime.datetime.combine(datetime.date(1, 1, 1), self.hour) + self.duration).time())[
