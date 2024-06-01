@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set Substitution</title>
+</head>
+<body>
+    <form action="" method="post">
+        <select>
+            {% for c in classes %}
+            <option>{{ c }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</body>
+</html>

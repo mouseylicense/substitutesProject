@@ -1,8 +1,10 @@
 import logging
-
-from django.shortcuts import render
+from . import forms
+from django.contrib import messages
+from django.shortcuts import render,get_object_or_404
+from django.urls import reverse
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.utils import timezone
 from django.db.models import Q
 
@@ -22,18 +24,30 @@ def index(request):
     return render(request, 'index.html',
                   {"classes": classes_by_day, "teacher": Teacher.objects.all().order_by("last_sub")})
 
-
-def retrieve_classes(request, teacher):
-    return HttpResponse(Class.objects.filter(teacher__name=teacher).order_by("day_of_week", "hour").__dir__)
-
-
-
+#return teachers avaiable at certain day
 def absences(request):
-    oneabsence = Absence.objects.get()
-    classes = Class.objects.filter(teacher=oneabsence.teacher,day_of_week=DAYS_OF_WEEKDAY[oneabsence.day.weekday()])
-    return HttpResponse(Teacher.objects.filter(~Q(abscence__day=str(timezone.now().date())),class__hour=classes.get().hour))
-    # return HttpResponse(classes)
+    classes = Class.objects.filter(needs_sub=True)
+    if classes.exists():
+        return HttpResponse(Teacher.objects.filter(~Q(absence__day=str(classes)),~Q(class__hour=classes.get().hour)),)
+    else:
+        return HttpResponse("no abscence")
+def reportAbsence(request):
+    form = forms.AbsenceForm()
+    if request.method == 'POST':
+        form = forms.AbsenceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Absence reported.")
+            q = Class.objects.filter(teacher=form.cleaned_data['teacher'],day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['day'].weekday()])
+            for c in q:
+                c.needs_sub = True
+                c.save()
+            return HttpResponseRedirect(reverse('report'))
+        else:
+            return HttpResponse("error")
+    return render(request,"reportAbsence.html", {"form": form})
 
-
-
+#set sub
+def sub(request):
+    return render(request,'setSub.html',{"classes":Class.objects.filter(needs_sub=True).order_by("day_of_week", "hour")})
 
