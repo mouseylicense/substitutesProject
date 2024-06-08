@@ -1,4 +1,4 @@
-from calendar import Day
+from _ast import Sub
 
 from django import forms
 from .models import *
@@ -16,3 +16,7 @@ class AbsenceForm(forms.ModelForm):
             'reason': TextInput(attrs={'class': 'form-control'}),
         }
 
+# class SubForm(forms.ModelForm):
+#     class Meta:
+#         model = ClassNeedsSub
+#         fields = ('Class','substitute_teacher',)

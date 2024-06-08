@@ -4,3 +4,4 @@ from . import models
 admin.site.register(models.Teacher)
 admin.site.register(models.Class)
 admin.site.register(models.Absence)
+admin.site.register(models.ClassNeedsSub)
