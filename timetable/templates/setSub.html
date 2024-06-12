@@ -5,15 +5,14 @@
     <title>Set Substitution</title>
 </head>
 <body>
-{{ form }}
     <form action="" method="post">
-        <label> Class:
+
             <select id="t">
                 {% for c in classes %}
                 <option>{{ c }}</option>
                 {% endfor %}
             </select>
-        </label>
+
     </form>
 </body>
 </html>

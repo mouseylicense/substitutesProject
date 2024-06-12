@@ -45,4 +45,10 @@ def reportAbsence(request):
 
 
 def sub(request):
-    return render(request, 'setSub.html', {"classes": ClassNeedsSub.objects.all().order_by("date"),"form":forms.SubForm()})
+    print(ClassNeedsSub.objects.all())
+    return render(request, 'setSub.html', {"classes": ClassNeedsSub.objects.all().order_by("date")})
+
+
+def get_possible_subs(request,n):
+    c = ClassNeedsSub.objects.get(pk=n)
+    return HttpResponse(Teacher.objects.filter(~Q(absence__day=str(c.date)),~Q(class__hour=c.Class_That_Needs_Sub.hour)).order_by('last_sub'))

@@ -35,15 +35,16 @@ class Teacher(models.Model):
 
 class Absence(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    day = models.DateField()
+    date = models.DateField()
     reason = models.CharField(max_length=100)
     def __str__(self):
         return self.teacher.name + " - " + str(self.day)
+#removes classes that needs sub if absence is deleted
 @receiver(post_delete,sender=Absence)
-def test(sender, instance,using, **kwargs):
-    c = Class.objects.filter(teacher=instance.teacher,day_of_week=DAYS_OF_WEEKDAY_DICT[instance.day.weekday()],needs_sub=True)
+def remove_classes(sender, instance,using, **kwargs):
+    c = ClassNeedsSub.objects.filter(teacher=instance.teacher,date=instance.day)
     for i in c:
-        i.needs_sub = False
+        i.delete()
         i.save()
 
 
@@ -68,4 +69,4 @@ class ClassNeedsSub(models.Model):
     date = models.DateField(default=datetime.date.today)
     substitute_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
-        return str(self.date) + " - " + str(self.Class)
+        return str(self.date) + " - " + str(self.Class_That_Needs_Sub)
