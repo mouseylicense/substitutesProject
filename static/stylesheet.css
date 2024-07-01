@@ -12,20 +12,53 @@ select{
     border-radius: 3px;
 
 }
+.alert{
+    border: cornflowerblue solid 1px;
+    border-radius: 3px;
+    font-family: helvetica, arial, sans-serif;
+    padding: 5px;
+    margin:5px auto;
+    width: 50%;
+    background-color: #90b2f1;
+}
 .field{
     font-family: helvetica, arial, sans-serif;
     padding: 10px;
 }
 
 .container{
+    padding: 5px;
+    font-family: helvetica, arial, sans-serif;
     display:block;
     margin:auto;
-    border:black solid 3px;
+    border:#55AD9B solid 3px;
     width:fit-content;
+    background-color: #F1F8E8;
+}
+input[type=submit]{
+    color: #305a54;
+    font-family: helvetica, arial, sans-serif;
+    font-weight: bold;
+    background-color: #95D2B3;
+    padding: 4px 10px;
+    border: #366e63 solid 1px;
+    margin-left: auto;
+    margin-right: 3px;
+    display: block;
+    border-radius: 2px;
+}
+input[type=submit]:hover{
+    background-color: #55AD9B;
 }
 
+input[type=text],input[type=password]{
+    width: 100%;
+    padding: 3px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
 body{
-    background-color: #F1F8E8;
+    background-color: #D8EFD3;
     width:100%;
     height: 100%;
     margin:0;

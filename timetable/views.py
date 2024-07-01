@@ -34,7 +34,8 @@ def reportAbsence(request):
     if request.method == 'POST':
         form = forms.AbsenceForm(request.POST)
         if form.is_valid():
-
+            absence = Absence(teacher=request.user,date=form.cleaned_data['date'],reason=form.cleaned_data['reason'])
+            absence.save()
             messages.success(request, "Absence reported.")
             q = Class.objects.filter(teacher=request.user,
                                      day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])

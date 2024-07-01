@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+ {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">    <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
 
-{% block content %}
-
+<div class="alert">
   {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
   {% endif %}
@@ -21,7 +21,8 @@
       <p>Please login to see this page.</p>
     {% endif %}
   {% endif %}
-
+</div>
+<div class="container">
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table>
@@ -39,9 +40,18 @@
   </form>
 
   {# Assumes you set up the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
-{% endblock %}
+</div>
+  <p
+          style="
+          font-size: x-small;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          margin: 0;
+          display: flex;
+          justify-content: center;
 
+"><a style="color:black;text-decoration: none" href="{% url 'password_reset' %}">Lost password?</a></p>
 </body>
 </html>
