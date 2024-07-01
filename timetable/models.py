@@ -38,7 +38,7 @@ class Absence(models.Model):
     date = models.DateField()
     reason = models.CharField(max_length=100)
     def __str__(self):
-        return self.teacher.name + " - " + str(self.day)
+        return self.teacher.name + " - " + str(self.date)
 #removes classes that needs sub if absence is deleted
 @receiver(post_delete,sender=Absence)
 def remove_classes(sender, instance,using, **kwargs):

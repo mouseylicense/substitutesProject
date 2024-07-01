@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="sidebar">
+        {% block sidebar %}
+              <a class="active" href="#home">My Subs</a>
+              <a href="#news">Report Absence</a>
+              <a id="logout" href="#about">Logout</a>
+        {% endblock %}
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

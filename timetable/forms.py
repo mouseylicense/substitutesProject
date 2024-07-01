@@ -2,7 +2,8 @@ from _ast import Sub
 
 from django import forms
 from .models import *
-from django.forms import DateInput,Select,TextInput
+from django.forms import DateInput, Select, TextInput
+
 
 class AbsenceForm(forms.ModelForm):
     class Meta:
@@ -11,8 +12,7 @@ class AbsenceForm(forms.ModelForm):
 
         widgets = {
 
-            'teacher': Select(attrs={'class': 'form-select '}),
-            'day': DateInput(attrs={'class': 'datepicker form-control','type':'date'}),
-            'reason': TextInput(attrs={'class': 'form-control'}),
+            'teacher': Select(attrs={'class': 'select'}),
+            'date': DateInput(attrs={'class': 'datepicker', 'type': 'date'}),
+            'reason': TextInput(attrs={'class': 'text-input'}),
         }
-
