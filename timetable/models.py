@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 import datetime
 from django.utils import timezone
@@ -22,13 +23,14 @@ DAYS_OF_WEEKDAY = [
 
 
 # Create your models here.
-class Teacher(models.Model):
+class Teacher(AbstractUser):
+    username = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=10)
     email = models.EmailField(max_length=100)
     last_sub = models.DateField(default=timezone.now)
-    is_available = models.BooleanField(default=True)
-
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['name', 'email','phone_number']
     def __str__(self):
         return self.name
 
@@ -39,6 +41,8 @@ class Absence(models.Model):
     reason = models.CharField(max_length=100)
     def __str__(self):
         return self.teacher.name + " - " + str(self.date)
+
+
 #removes classes that needs sub if absence is deleted
 @receiver(post_delete,sender=Absence)
 def remove_classes(sender, instance,using, **kwargs):

@@ -1,4 +1,7 @@
 import logging
+
+from django.contrib.auth.decorators import login_required
+
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
@@ -25,18 +28,19 @@ def index(request):
                   {"classes": classes_by_day, "teacher": Teacher.objects.all().order_by("last_sub")})
 
 
+@login_required
 def reportAbsence(request):
     form = forms.AbsenceForm()
     if request.method == 'POST':
         form = forms.AbsenceForm(request.POST)
         if form.is_valid():
-            form.save()
+
             messages.success(request, "Absence reported.")
-            q = Class.objects.filter(teacher=form.cleaned_data['teacher'],
-                                     day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['day'].weekday()])
+            q = Class.objects.filter(teacher=request.user,
+                                     day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
 
             for c in q:
-                newClass = ClassNeedsSub(class_name=c, date=form.cleaned_data['day'])
+                newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'])
                 newClass.save()
             return HttpResponseRedirect(reverse('report'))
         else:

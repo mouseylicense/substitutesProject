@@ -1,11 +1,20 @@
 .datepicker{
-    background-color: #F1F8E8;
+    background-color: #fcfdf8;
     padding: 8px 20px 8px 0;
     border: #D8EFD3 solid 1px;
     border-radius: 3px;
+    display: inline-block;
 }
-input{
-    display: block;
+select{
+    background-color: #fcfdf8;
+    padding: 8px 20px 8px 0;
+    border: #D8EFD3 solid 1px;
+    border-radius: 3px;
+
+}
+.field{
+    font-family: helvetica, arial, sans-serif;
+    padding: 10px;
 }
 
 .container{
