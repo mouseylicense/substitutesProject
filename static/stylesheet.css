@@ -35,7 +35,7 @@ select{
     width:fit-content;
     background-color: #F1F8E8;
 }
-input[type=submit]{
+input[type=submit],button[type="submit"]{
     color: #305a54;
     font-family: helvetica, arial, sans-serif;
     font-weight: bold;
@@ -47,7 +47,7 @@ input[type=submit]{
     display: block;
     border-radius: 2px;
 }
-input[type=submit]:hover{
+input[type=submit]:hover,button[type="submit"]:hover{
     background-color: #55AD9B;
 }
 
@@ -62,4 +62,5 @@ body{
     width:100%;
     height: 100%;
     margin:0;
+    overflow: hidden;
 }

@@ -24,13 +24,15 @@ DAYS_OF_WEEKDAY = [
 
 # Create your models here.
 class Teacher(AbstractUser):
-    username = models.CharField(max_length=50, unique=True)
-    name = models.CharField(max_length=100)
+    first_name = None
+    last_name = None
+    username = None
+    name = models.CharField(max_length=100,unique=True)
     phone_number = models.CharField(max_length=10)
     email = models.EmailField(max_length=100)
     last_sub = models.DateField(default=timezone.now)
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['name', 'email','phone_number']
+    USERNAME_FIELD = 'name'
+    REQUIRED_FIELDS = ['email','phone_number']
     def __str__(self):
         return self.name
 

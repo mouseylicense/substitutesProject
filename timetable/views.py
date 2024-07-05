@@ -1,13 +1,13 @@
 import logging
 
 from django.contrib.auth.decorators import login_required
-
+from django.forms import model_to_dict
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .models import *
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
 from django.db.models import Q
 
@@ -56,4 +56,8 @@ def sub(request):
 
 def get_possible_subs(request,n):
     c = ClassNeedsSub.objects.get(pk=n)
-    return HttpResponse(Teacher.objects.filter(~Q(absence__day=str(c.date)),~Q(class__hour=c.Class_That_Needs_Sub.hour)).order_by('last_sub'))
+    teacherQuery = Teacher.objects.filter(~Q(absence__date=str(c.date)),~Q(class__hour=c.Class_That_Needs_Sub.hour)).order_by('last_sub')
+    availableTeachers = []
+    for teacher in teacherQuery:
+        availableTeachers.append(model_to_dict(teacher))
+    return JsonResponse({"availableTeachers": availableTeachers})

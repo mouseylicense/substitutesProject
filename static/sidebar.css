@@ -7,8 +7,13 @@
   position: fixed;
   height: 100%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
-
+#logout{
+  margin-top: auto;
+  background-color: #95D2B3;
+}
 /* Sidebar links */
 .sidebar a {
   display: block;
@@ -24,7 +29,7 @@
 }
 
 /* Links on mouse-over */
-.sidebar a:hover:not(.active) {
+.sidebar a:hover:not(.active),#logout:hover:not(.active) {
   background-color: #366e63;
   color: white;
 }
@@ -53,8 +58,3 @@ div.content {
     text-align: center;
     float: none;
   }}
-#logout{
-  width:200px;
-  position: absolute;
-  bottom: 0;
-}

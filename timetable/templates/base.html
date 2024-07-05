@@ -10,8 +10,8 @@
 <body>
     <div class="sidebar">
         {% block sidebar %}
-              <a class="active" href="#home">My Subs</a>
-              <a href="#news">Report Absence</a>
+              <a class="{% if request.resolver_match.url_name == "showsubs" %}active{% endif %}" href="../mysubs">My Subs</a>
+              <a class="{% if request.resolver_match.url_name == "reportAbsence" %}active{% endif %}" href="../report">Report Absence</a>
               <a id="logout" href="../accounts/logout">Logout</a>
         {% endblock %}
     </div>

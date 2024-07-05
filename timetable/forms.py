@@ -10,8 +10,3 @@ class AbsenceForm(forms.Form):
         reason = forms.CharField(widget=forms.TextInput(attrs={'class': 'text-input','placeholder':'Reason'}))
 
 
-
-# class RegisterForm(UserCreationForm):
-#     class Meta:
-#         model = Teacher
-#         fields = ["name", "password1", "password2", "phone_number", "email"]
