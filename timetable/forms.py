@@ -10,15 +10,11 @@ class AbsenceForm(forms.Form):
     reason = forms.CharField(widget=forms.TextInput(attrs={'class': 'text-input', 'placeholder': 'Reason'}))
 
 
-class SubstituteForm(forms.ModelForm):
+class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(
         ClassNeedsSub.objects.order_by('date').filter(substitute_teacher=None),
         widget=forms.Select(attrs={'id': 'sub'}), empty_label="None selected")
-    substitute_teacher__pk = forms.ChoiceField(widget=forms.Select(attrs={'id': 'teacher'}))
-
-    class Meta:
-        model = ClassNeedsSub
-        fields = ('class_that_needs_sub', 'substitute_teacher')
+    substitute_teacher = forms.CharField(widget=forms.Select(attrs={'id': 'teacher'}))
 
 
 class RegistrationForm(forms.ModelForm):

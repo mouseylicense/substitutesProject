@@ -1,6 +1,6 @@
 import logging
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import model_to_dict
 from django.views.decorators.http import require_GET
 
@@ -52,19 +52,20 @@ def reportAbsence(request):
             return HttpResponse("error")
     return render(request, "reportAbsence.html", {"form": form})
 
-
+@permission_required('timetable.add_classneedssub',login_url='/user/login/')
 def sub(request):
     if request.method == 'POST':
         form = forms.SubstituteForm(request.POST)
-        # form["substitute_teacher"] = Teacher.objects.filter(pk=form['substitute_teacher'].data)
-        print(form['substitute_teacher'].data)
+        print(form.data)
         if form.is_valid():
-            sub = form.save()
+            sub = form.cleaned_data['class_that_needs_sub']
+            sub.substitute_teacher = Teacher.objects.filter(pk=form['substitute_teacher'].data).get()
+            sub.save()
 
 
         else:
             print(form.errors)
-    form = forms.SubstituteForm
+    form = forms.SubstituteForm(initial={'substitute_teacher':"None selected"})
     return render(request, 'setSub.html', {"form": form})
 
 @require_GET
@@ -73,7 +74,7 @@ def get_possible_subs(request,n):
     teacherQuery = Teacher.objects.filter(~Q(absence__date=str(c.date)),~Q(class__hour=c.Class_That_Needs_Sub.hour)).order_by('last_sub')
     availableTeachers = []
     for teacher in teacherQuery:
-        availableTeachers.append(model_to_dict(teacher))
+        availableTeachers.append({'id':teacher.pk, 'name':teacher.name})
     return JsonResponse({"availableTeachers": availableTeachers})
 
 
