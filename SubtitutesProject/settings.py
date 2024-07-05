@@ -129,5 +129,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
-
+LOGIN_URL = '/user/login'
 AUTH_USER_MODEL = 'timetable.Teacher'
+LOGOUT_REDIRECT_URL = '/'

@@ -4,32 +4,34 @@
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
-    {{ field }}
+        <div class="field">{{ field }}</div>
     {% endfor %}
     <input type="submit">
 </form>
 </div>
     <script>
-        const districtSelect = document.getElementById('sub');
-        const branchSelect = document.getElementById('teacher');
+        const ClassSelect = document.getElementById('sub');
+        const TeacherSelect = document.getElementById('teacher');
 
-        districtSelect.addEventListener('change', (event) => {
-        const selectedDistrict = event.target.value;
-        const url = `/get/${selectedDistrict}`;
-        console.log(selectedDistrict)
+
+        function changeOptions(event){
+        const selectedClass = ClassSelect.value;
+        const url = `/get/${selectedClass}`;
+        console.log(selectedClass)
         fetch(url)
         .then(response => response.json())
         .then(data => {
-        branchSelect.innerHTML = '';
+        TeacherSelect.innerHTML = '';
         console.log(data)
         data.availableTeachers.forEach((branch) => {
         const option = document.createElement('option');
         option.value = branch.id;
         option.text = branch.name;
-        branchSelect.appendChild(option);
-        });
-        });
-        });
+        TeacherSelect.appendChild(option);
+        })});
+        }
+        changeOptions()
+        ClassSelect.addEventListener('change', (event) => changeOptions(event))
     </script>
 {% endblock %}
 

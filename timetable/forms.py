@@ -13,7 +13,7 @@ class AbsenceForm(forms.Form):
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(
         ClassNeedsSub.objects.order_by('date').filter(substitute_teacher=None),
-        widget=forms.Select(attrs={'id': 'sub'}), empty_label="None selected")
+        widget=forms.Select(attrs={'id': 'sub'}), empty_label=None)
     substitute_teacher = forms.CharField(widget=forms.Select(attrs={'id': 'teacher'}))
 
 
