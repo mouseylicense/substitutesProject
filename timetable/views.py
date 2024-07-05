@@ -2,10 +2,14 @@ import logging
 
 from django.contrib.auth.decorators import login_required
 from django.forms import model_to_dict
+from django.views.decorators.http import require_GET
+
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+
+from .forms import RegistrationForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
@@ -50,10 +54,20 @@ def reportAbsence(request):
 
 
 def sub(request):
-    print(ClassNeedsSub.objects.all())
-    return render(request, 'setSub.html', {"classes": ClassNeedsSub.objects.all().order_by("date")})
+    if request.method == 'POST':
+        form = forms.SubstituteForm(request.POST)
+        # form["substitute_teacher"] = Teacher.objects.filter(pk=form['substitute_teacher'].data)
+        print(form['substitute_teacher'].data)
+        if form.is_valid():
+            sub = form.save()
 
 
+        else:
+            print(form.errors)
+    form = forms.SubstituteForm
+    return render(request, 'setSub.html', {"form": form})
+
+@require_GET
 def get_possible_subs(request,n):
     c = ClassNeedsSub.objects.get(pk=n)
     teacherQuery = Teacher.objects.filter(~Q(absence__date=str(c.date)),~Q(class__hour=c.Class_That_Needs_Sub.hour)).order_by('last_sub')
@@ -61,3 +75,16 @@ def get_possible_subs(request,n):
     for teacher in teacherQuery:
         availableTeachers.append(model_to_dict(teacher))
     return JsonResponse({"availableTeachers": availableTeachers})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            teacher = form.save()
+            teacher.save()
+            return HttpResponseRedirect("/user/login/")
+        else:
+            return render(request,'registration/register.html',{"form":form})
+    form = forms.RegistrationForm()
+    return render(request,'registration/register.html',{"form":form})

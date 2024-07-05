@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+  {% if form.errors %}
+      <div class="alert">
+    <p>{{ form.errors}}</p>
+      </div>
+  {% endif %}
+
+
+<div class="container" style="margin-top:50px">
+  <form method="post" action="">
+    {% csrf_token %}
+
+    <table>
+          {% for field in form %}
+      <tr>
+        <td>{{ field.label_tag}}</td>
+        <td>{{ field }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <input type="submit" value="login">
+  </form>
+
+  {# Assumes you set up the password_reset view in your URLconf #}
+
+</div>
+  <p
+          style="
+          font-size: x-small;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          margin: 0;
+          display: flex;
+          justify-content: center;
+
+"><a style="color:black;text-decoration: none" href="{% url 'password_reset' %}">Lost password?</a></p>
+</body>
+</html>
