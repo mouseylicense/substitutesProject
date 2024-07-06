@@ -77,7 +77,10 @@ def get_possible_subs(request,n):
         availableTeachers.append({'id':teacher.pk, 'name':teacher.name})
     return JsonResponse({"availableTeachers": availableTeachers})
 
-
+@login_required
+def mySubs(request):
+    mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
+    return render(request,"mySubs.html",{"mySubs":mySubs})
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

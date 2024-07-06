@@ -58,9 +58,29 @@ input[type=text],input[type=password]{
     box-sizing: border-box;
 }
 body{
-    background-color: #F4F3F2;
+    background-color: #fdfefb ;
     width:100%;
     height: 100%;
     margin:0;
     overflow: hidden;
+}
+
+.sub-row{
+    font-size: small;
+    display:grid;
+    grid-template-columns: 10% 90%;
+    gap: 3%;
+    font-family: Inter,helvetica,sans-serif;
+
+}
+.sub-details{
+    font-size: small;
+    /*justify-self: end;*/
+    flex-grow: 1;
+    margin-top: 10px;
+    font-family: Inter,helvetica,sans-serif;
+    background-color: #F1F8E8;
+    padding: 5px 50px;
+    border: #D8EFD3 5px solid;
+    border-radius: 19.9px;
 }

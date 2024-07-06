@@ -75,4 +75,7 @@ class ClassNeedsSub(models.Model):
     date = models.DateField(default=datetime.date.today)
     substitute_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
-        return str(self.date) + " - " + str(self.Class_That_Needs_Sub)
+        if self.substitute_teacher is None:
+            return str(self.date) + " - " + str(self.Class_That_Needs_Sub)
+        else:
+            return "✔ " + str(self.date) + " - " + str(self.Class_That_Needs_Sub.hour) + " " + str(self.Class_That_Needs_Sub.name) + " Sub:" + str(self.substitute_teacher.name)

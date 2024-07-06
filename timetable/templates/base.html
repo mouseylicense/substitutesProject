@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="auto">
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'sidebar.css' %}">
@@ -10,7 +10,7 @@
 <body>
     <div class="sidebar">
         {% block sidebar %}
-              <a class="{% if request.resolver_match.url_name == "showsubs" %}active{% endif %}" href="">My Subs</a>
+              <a class="{% if request.resolver_match.url_name == "mySubs" %}active{% endif %}" href="{% url 'mySubs' %}">My Subs</a>
               <a class="{% if request.resolver_match.url_name == "reportAbsence" %}active{% endif %}" href="{% url 'reportAbsence' %}">Report Absence</a>
             {% if perms.timetable.add_classneedssub %}
                 <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">Set Substitution</a>

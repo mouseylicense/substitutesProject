@@ -7,4 +7,5 @@ urlpatterns = [
     path('setSub/',views.sub,name='sub'),
     path('get/<int:n>/',views.get_possible_subs,name='possible subs'),
     path('user/register', views.register, name='register'),
+    path('mySubs/',views.mySubs,name='mySubs'),
 ]
