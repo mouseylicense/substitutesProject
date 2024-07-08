@@ -1,0 +1,47 @@
+.sub-details{
+    min-width: 33%;
+    font-size: small;
+    margin-top: 0;
+    font-family: Inter,helvetica,sans-serif;
+    background-color: #F1F8E8;
+    padding: 5px 50px;
+    border: #D8EFD3 5px solid;
+    border-radius: 19.9px;
+}
+h1,h2,h3{
+    margin: 5px;
+}
+.sub-container{
+    padding: 10px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.problem{
+    box-shadow:  0 3px 5px rgba(255, 0, 0, 0.35);
+
+}
+/* Add a black background color to the top navigation */
+.topnav {
+    border-bottom: #305a54 solid 2px;
+  background-color: #D8EFD3;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    color:black;
+  font-family: helvetica, arial, sans-serif;
+  float: left;
+  text-align: center;
+  padding: 30px 20px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #366e63;
+    color: white;
+}

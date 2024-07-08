@@ -23,12 +23,14 @@ DAYS_OF_WEEKDAY = {
     3: 'Thursday'
 }
 
-
 def index(request):
+    Subs = ClassNeedsSub.objects.filter(date=timezone.now().today())
+    return render(request, 'index.html',{"Subs":Subs})
+def timetable(request):
     classes_by_day = {"Sunday": [], "Monday": [], "Tuesday": [], "Wednesday": [], "Thursday": []}
     for i in classes_by_day:
         classes_by_day[i] = Class.objects.filter(day_of_week=i).order_by("hour")
-    return render(request, 'index.html',
+    return render(request, 'timetable.html',
                   {"classes": classes_by_day, "teacher": Teacher.objects.all().order_by("last_sub")})
 
 

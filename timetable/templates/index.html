@@ -1,37 +1,42 @@
 <!DOCTYPE html>
-<html lang="heb">
-
+<html lang="en">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Time Table</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+    <meta charset="UTF-8">
+    <title>Substitution</title>
 </head>
-
 <body>
-	<h1>TIME TABLE</h1>
-    <label>
-        <select>
-            {% for option in teacher %}
-            <option>{{ option }}</option>
-            {% endfor %}
-        </select>
-    </label>
-    <table class="table table-primary table-bordered">
+<div class="topnav">
+    <a href="{% url "login" %}">Login</a>
+</div>
+<div class="sub-container">
+{% if Subs %}
 
-    {% for key,value in classes.items %}
-        <tr>
-
-        <th>{{ key }}</th>
-            {% for v in value %}
-        <td>{{ v }}</td>
-                {% endfor %}
-                </tr>
-    {% endfor %}
-
-</table>
-
-<p><a href="#">Do it.</a></p>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        {% for sub in Subs %}
+    {% if sub.substitute_teacher.name == null %}
+            <div class="sub-details problem">
+                    {% else %}
+            <div class="sub-details">
+                    {% endif %}
+                    <h1>{{ sub.Class_That_Needs_Sub.name }} - {{ sub.Class_That_Needs_Sub.room }}</h1>
+                    {% if sub.substitute_teacher.name == null %}
+                    <h2 style="color: darkred">No Sub Yet</h2>
+                    {% else %}
+                    <h2 style="color:dimgray">{{ sub.substitute_teacher.name }}</h2>
+                    {% endif %}
+                    <h3 style="color:darkolivegreen">{{ sub.Class_That_Needs_Sub.hour }}</h3>
+                </div>
+        {% endfor %}
+    {% else %}
+        <h1
+                style="font-family: helvetica, arial, sans-serif;
+                font-size: xxx-large;
+                text-align: center;
+        ">
+            No Subs For today!</h1>
+    {% endif %}
+</div>
 </body>
-
 </html>
