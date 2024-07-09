@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-09 21:32+0300\n"
+"POT-Creation-Date: 2024-07-10 00:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\SubtitutesProject\settings.py:150
-msgid "English"
+msgid "Hebrew"
 msgstr ""
 
 #: .\SubtitutesProject\settings.py:151
-msgid "Hebrew"
+msgid "English"
 msgstr ""
 
 #: .\timetable\forms.py:10
@@ -60,28 +60,39 @@ msgstr ""
 msgid "en"
 msgstr ""
 
-#: .\timetable\templates\base.html:14
+#: .\timetable\templates\base.html:3
+#: .\timetable\templates\registration\login.html:3
+#: .\timetable\templates\registration\register.html:3
+msgid "ltr"
+msgstr ""
+
+#: .\timetable\templates\base.html:16
 msgid "My Subs"
 msgstr ""
 
-#: .\timetable\templates\base.html:15
+#: .\timetable\templates\base.html:17
 msgid "Report Absence"
 msgstr ""
 
-#: .\timetable\templates\base.html:17
+#: .\timetable\templates\base.html:19
 msgid "Set Substitution"
 msgstr ""
 
-#: .\timetable\templates\base.html:21
+#: .\timetable\templates\base.html:40
 msgid "Logout"
 msgstr ""
 
 #: .\timetable\templates\index.html:13
+#: .\timetable\templates\registration\login.html:7
 msgid "Login"
 msgstr ""
 
 #: .\timetable\templates\index.html:26
 msgid "No Sub Yet"
+msgstr ""
+
+#: .\timetable\templates\index.html:28
+msgid "Substitute Teacher:"
 msgstr ""
 
 #: .\timetable\templates\index.html:39
@@ -90,11 +101,6 @@ msgstr ""
 
 #: .\timetable\templates\mySubs.html:20
 msgid "No Subs"
-msgstr ""
-
-#: .\timetable\templates\registration\login.html:3
-#: .\timetable\templates\registration\register.html:3
-msgid "ltr"
 msgstr ""
 
 #: .\timetable\templates\registration\login.html:42
@@ -106,10 +112,18 @@ msgstr ""
 msgid "Lost password?"
 msgstr ""
 
+#: .\timetable\templates\registration\register.html:7
+msgid "Register"
+msgstr ""
+
 #: .\timetable\templates\reportAbsence.html:22
 msgid "Report"
 msgstr ""
 
 #: .\timetable\templates\setSub.html:10
 msgid "change"
+msgstr ""
+
+#: .\timetable\views.py:37
+msgid "Absence reported."
 msgstr ""

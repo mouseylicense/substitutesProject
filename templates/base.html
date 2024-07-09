@@ -1,6 +1,6 @@
 {% load i18n %}
 <!DOCTYPE html>
-<html lang={% trans "en" %} dir="auto">
+<html lang={% trans "en" %} dir="{% trans "ltr" %}">
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'sidebar.css' %}">
@@ -9,6 +9,8 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+
+
     <div class="sidebar">
         {% block sidebar %}
               <a class="{% if request.resolver_match.url_name == "mySubs" %}active{% endif %}" href="{% url 'mySubs' %}">{% trans "My Subs" %}</a>
@@ -16,12 +18,29 @@
             {% if perms.timetable.add_classneedssub %}
                 <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">{%  trans "Set Substitution" %}</a>
             {% endif %}
+<div style="margin-top: auto">
+            {% get_current_language_bidi as LANGUAGE_BIDI %}
+            {% get_current_language as LANGUAGE_CODE %}
+            <form  action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                <input name="next" type="hidden" value="/mySubs">
+                <select style="width: 100%" name="language" onchange="this.form.submit()">
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}" {%if language.code == LANGUAGE_CODE%}selected{%endif%}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+
+
             <form id='logout' action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
               <a id="logout" onclick="this.parentNode.submit()">{%  trans "Logout" %}</a>
             </form>
         {% endblock %}
-    </div>
+        </div></div>
     <div class="content">
         {% block content %}
         {% endblock %}

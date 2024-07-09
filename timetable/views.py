@@ -1,21 +1,17 @@
 import logging
-
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import model_to_dict
 from django.views.decorators.http import require_GET
-
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-
 from .forms import RegistrationForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
-from django.core.mail import send_mail
-
+from django.utils.translation import gettext_lazy as _
 DAYS_OF_WEEKDAY = {
     6: 'Sunday',
     0: 'Monday',
@@ -38,14 +34,14 @@ def reportAbsence(request):
         if form.is_valid():
             absence = Absence(teacher=request.user, date=form.cleaned_data['date'], reason=form.cleaned_data['reason'])
             absence.save()
-            messages.success(request, "Absence reported.")
+            messages.success(request, _("Absence reported."))
             q = Class.objects.filter(teacher=request.user,
                                      day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
 
             for c in q:
                 newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'])
                 newClass.save()
-            return HttpResponseRedirect(reverse('report'))
+            return HttpResponseRedirect(reverse('reportAbsence'))
         else:
             return HttpResponse("error")
     return render(request, "reportAbsence.html", {"form": form})

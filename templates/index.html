@@ -16,16 +16,16 @@
 {% if Subs %}
 
         {% for sub in Subs %}
-    {% if sub.substitute_teacher.name == null %}
+    {% if sub.substitute_teacher.username == null %}
             <div class="sub-details problem">
                     {% else %}
             <div class="sub-details">
                     {% endif %}
                     <h1>{{ sub.Class_That_Needs_Sub.name }} - {{ sub.Class_That_Needs_Sub.room }}</h1>
-                    {% if sub.substitute_teacher.name == null %}
+                    {% if sub.substitute_teacher.username == null %}
                     <h2 style="color: darkred">{% trans "No Sub Yet" %}</h2>
                     {% else %}
-                    <h2 style="color:dimgray">{{ sub.substitute_teacher.name }}</h2>
+                    <h2 style="color:dimgray">{% trans "Substitute Teacher:" %}{{ sub.substitute_teacher.username }}</h2>
                     {% endif %}
                     <h3 style="color:darkolivegreen">{{ sub.Class_That_Needs_Sub.hour }}</h3>
                 </div>

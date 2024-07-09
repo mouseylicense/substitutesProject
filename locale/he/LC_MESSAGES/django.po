@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-09 21:32+0300\n"
-"PO-Revision-Date: 2024-07-09 21:33+0300\n"
+"POT-Creation-Date: 2024-07-10 00:44+0300\n"
+"PO-Revision-Date: 2024-07-10 00:45+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -21,12 +21,12 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 
 #: .\SubtitutesProject\settings.py:150
-msgid "English"
-msgstr "אנגלית"
-
-#: .\SubtitutesProject\settings.py:151
 msgid "Hebrew"
 msgstr "עברית"
+
+#: .\SubtitutesProject\settings.py:151
+msgid "English"
+msgstr "אנגלית"
 
 #: .\timetable\forms.py:10
 msgid "Date"
@@ -62,29 +62,40 @@ msgstr "אימייל"
 msgid "en"
 msgstr "he"
 
-#: .\timetable\templates\base.html:14
+#: .\timetable\templates\base.html:3
+#: .\timetable\templates\registration\login.html:3
+#: .\timetable\templates\registration\register.html:3
+msgid "ltr"
+msgstr "rtl"
+
+#: .\timetable\templates\base.html:16
 msgid "My Subs"
 msgstr "ההחלפות שלי"
 
-#: .\timetable\templates\base.html:15
+#: .\timetable\templates\base.html:17
 msgid "Report Absence"
 msgstr "דווח על העדרות"
 
-#: .\timetable\templates\base.html:17
+#: .\timetable\templates\base.html:19
 msgid "Set Substitution"
 msgstr "קבע החלפות"
 
-#: .\timetable\templates\base.html:21
+#: .\timetable\templates\base.html:40
 msgid "Logout"
 msgstr "התנתק"
 
 #: .\timetable\templates\index.html:13
+#: .\timetable\templates\registration\login.html:7
 msgid "Login"
 msgstr "התחבר"
 
 #: .\timetable\templates\index.html:26
 msgid "No Sub Yet"
 msgstr "טרם נקבע מחליף"
+
+#: .\timetable\templates\index.html:28
+msgid "Substitute Teacher:"
+msgstr "מורה מחליף:"
 
 #: .\timetable\templates\index.html:39
 msgid "No Subs For today!"
@@ -93,11 +104,6 @@ msgstr "אין החלפות להיום!"
 #: .\timetable\templates\mySubs.html:20
 msgid "No Subs"
 msgstr "אין החלפות להיום"
-
-#: .\timetable\templates\registration\login.html:3
-#: .\timetable\templates\registration\register.html:3
-msgid "ltr"
-msgstr "rtl"
 
 #: .\timetable\templates\registration\login.html:42
 #: .\timetable\templates\registration\register.html:32
@@ -108,6 +114,10 @@ msgstr "התחבר"
 msgid "Lost password?"
 msgstr "שכחת סיסמה?"
 
+#: .\timetable\templates\registration\register.html:7
+msgid "Register"
+msgstr "הירשם"
+
 #: .\timetable\templates\reportAbsence.html:22
 msgid "Report"
 msgstr "דווח"
@@ -115,3 +125,7 @@ msgstr "דווח"
 #: .\timetable\templates\setSub.html:10
 msgid "change"
 msgstr "החלף"
+
+#: .\timetable\views.py:37
+msgid "Absence reported."
+msgstr "היעדרות דווחה."
