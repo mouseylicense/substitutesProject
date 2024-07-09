@@ -23,9 +23,12 @@ DAYS_OF_WEEKDAY = {
     3: 'Thursday'
 }
 
+
 def index(request):
     Subs = ClassNeedsSub.objects.filter(date=timezone.now().today())
-    return render(request, 'index.html',{"Subs":Subs})
+    return render(request, 'index.html', {"Subs": Subs})
+
+
 def timetable(request):
     classes_by_day = {"Sunday": [], "Monday": [], "Tuesday": [], "Wednesday": [], "Thursday": []}
     for i in classes_by_day:
@@ -40,7 +43,7 @@ def reportAbsence(request):
     if request.method == 'POST':
         form = forms.AbsenceForm(request.POST)
         if form.is_valid():
-            absence = Absence(teacher=request.user,date=form.cleaned_data['date'],reason=form.cleaned_data['reason'])
+            absence = Absence(teacher=request.user, date=form.cleaned_data['date'], reason=form.cleaned_data['reason'])
             absence.save()
             messages.success(request, "Absence reported.")
             q = Class.objects.filter(teacher=request.user,
@@ -54,7 +57,8 @@ def reportAbsence(request):
             return HttpResponse("error")
     return render(request, "reportAbsence.html", {"form": form})
 
-@permission_required('timetable.add_classneedssub',login_url='/user/login/')
+
+@permission_required('timetable.add_classneedssub', login_url='/user/login/')
 def sub(request):
     if request.method == 'POST':
         form = forms.SubstituteForm(request.POST)
@@ -62,27 +66,44 @@ def sub(request):
         if form.is_valid():
             sub = form.cleaned_data['class_that_needs_sub']
             sub.substitute_teacher = Teacher.objects.filter(pk=form['substitute_teacher'].data).get()
+            sub.substitute_teacher__last_sub = sub.date
             sub.save()
 
 
         else:
             print(form.errors)
-    form = forms.SubstituteForm(initial={'substitute_teacher':"None selected"})
+    form = forms.SubstituteForm(initial={'substitute_teacher': "None selected"})
     return render(request, 'setSub.html', {"form": form})
 
+
 @require_GET
-def get_possible_subs(request,n):
+def get_possible_subs(request, n):
     c = ClassNeedsSub.objects.get(pk=n)
-    teacherQuery = Teacher.objects.filter(~Q(absence__date=str(c.date)),~Q(class__hour=c.Class_That_Needs_Sub.hour)).order_by('last_sub')
+    filter_dict = {DAYS_OF_WEEKDAY[c.date.weekday()]: True}
+    # teacherQuery = Teacher.objects.filter(~Q(absence__date=c.date),
+    #                                       ~Q(class__hour=c.Class_That_Needs_Sub.hour) &
+    #                                       ~Q(class__day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()]),
+    #                                       ~Q(classneedssub__date=c.date) &
+    #                                       ~Q(classneedssub__Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour),
+    #                                       substitutes=True,**filter_dict).order_by('last_sub')
+    teacherQuery = (Teacher.objects
+                    .exclude(absence__date=c.date)
+                    .exclude(class__day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],class__hour=c.Class_That_Needs_Sub.hour)
+                    .exclude(classneedssub__date=c.date,classneedssub__Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)
+                    .filter(substitutes=True,**filter_dict))
+    print(teacherQuery)
     availableTeachers = []
     for teacher in teacherQuery:
-        availableTeachers.append({'id':teacher.pk, 'name':teacher.name})
+        availableTeachers.append({'id': teacher.pk, 'name': teacher.name})
     return JsonResponse({"availableTeachers": availableTeachers})
+
 
 @login_required
 def mySubs(request):
     mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
-    return render(request,"mySubs.html",{"mySubs":mySubs})
+    return render(request, "mySubs.html", {"mySubs": mySubs})
+
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -91,6 +112,6 @@ def register(request):
             teacher.save()
             return HttpResponseRedirect("/user/login/")
         else:
-            return render(request,'registration/register.html',{"form":form})
+            return render(request, 'registration/register.html', {"form": form})
     form = forms.RegistrationForm()
-    return render(request,'registration/register.html',{"form":form})
+    return render(request, 'registration/register.html', {"form": form})

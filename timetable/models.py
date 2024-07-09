@@ -30,6 +30,12 @@ class Teacher(AbstractUser):
     name = models.CharField(max_length=100,unique=True)
     phone_number = models.CharField(max_length=10)
     email = models.EmailField(max_length=100)
+    substitutes = models.BooleanField(default=True)
+    Sunday = models.BooleanField(default=True)
+    Monday = models.BooleanField(default=True)
+    Tuesday = models.BooleanField(default=True)
+    Wednesday = models.BooleanField(default=True)
+    Thursday = models.BooleanField(default=True)
     last_sub = models.DateField(default=timezone.now)
     USERNAME_FIELD = 'name'
     REQUIRED_FIELDS = ['email','phone_number']
@@ -48,7 +54,7 @@ class Absence(models.Model):
 #removes classes that needs sub if absence is deleted
 @receiver(post_delete,sender=Absence)
 def remove_classes(sender, instance,using, **kwargs):
-    c = ClassNeedsSub.objects.filter(teacher=instance.teacher,date=instance.day)
+    c = ClassNeedsSub.objects.filter(teacher=instance.teacher,date=instance.date)
     for i in c:
         i.delete()
         i.save()
