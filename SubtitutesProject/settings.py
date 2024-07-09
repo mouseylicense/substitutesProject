@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
+from dotenv import load_dotenv
+from os import environ
+load_dotenv()
 
 # from django.urls import reverse
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,13 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tm+=4*dv#j1e4dn4%j^%1bo5#1_4x$qha@joe#qwz#2@uh(bnk'
-
+SECRET_KEY = environ.get('DJANGO_SECRET_KEY','django-insecure-tm+=4*dv#j1e4dn4%j^%1bo5#1_4x$qha@joe#qwz#2@uh(bnk')
+DEBUG = environ.get('DJANGO_DEBUG', '') != 'False'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,10 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'subs',
-        'USER': 'root',
-        'PASSWORD': 'example',
-        'HOST': '192.168.1.254',
-        'PORT': '3308',
+        'USER': environ['DB_USER'],
+        'PASSWORD': environ['DB_PASSWORD'],
+        'HOST': environ['DB_HOST'],
+        'PORT': environ['DB_PORT'],
     }
 }
 
@@ -135,9 +136,10 @@ AUTH_USER_MODEL = 'timetable.Teacher'
 LOGOUT_REDIRECT_URL = '/'
 
 # Email settings
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = #sender's email-id
-# EMAIL_HOST_PASSWORD =
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = environ['EMAIL_HOST']
+EMAIL_USE_TLS = True
+EMAIL_PORT = environ['EMAIL_PORT']
+EMAIL_HOST_USER = environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = environ['EMAIL_HOST_PASSWORD']
+DEFAULT_FROM_EMAIL = environ['DEFAULT_FROM_EMAIL']

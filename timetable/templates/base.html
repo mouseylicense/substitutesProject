@@ -15,7 +15,10 @@
             {% if perms.timetable.add_classneedssub %}
                 <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">Set Substitution</a>
             {% endif %}
-              <a id="logout" href="{% url 'logout' %}">Logout</a>
+            <form id='logout' action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+              <a id="logout" onclick="this.parentNode.submit()">Logout</a>
+            </form>
         {% endblock %}
     </div>
     <div class="content">

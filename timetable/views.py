@@ -30,14 +30,6 @@ def index(request):
     return render(request, 'index.html', {"Subs": Subs})
 
 
-def timetable(request):
-    classes_by_day = {"Sunday": [], "Monday": [], "Tuesday": [], "Wednesday": [], "Thursday": []}
-    for i in classes_by_day:
-        classes_by_day[i] = Class.objects.filter(day_of_week=i).order_by("hour")
-    return render(request, 'timetable.html',
-                  {"classes": classes_by_day, "teacher": Teacher.objects.all().order_by("last_sub")})
-
-
 @login_required
 def reportAbsence(request):
     form = forms.AbsenceForm()
