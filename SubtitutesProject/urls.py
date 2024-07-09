@@ -17,10 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include, path
-urlpatterns = [
+from django.conf.urls.i18n import i18n_patterns
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('timetable.urls')),
     path('user/', include('django.contrib.auth.urls')),
-
-
-]
+)

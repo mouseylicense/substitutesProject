@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 {% if messages %}
     {% for message in messages %}
@@ -18,7 +19,7 @@
         </div>
     {% endfor %}
  <br>
-     <button type="submit" >Submit</button>
+     <button type="submit" >{% trans "Report" %}</button>
     </form>
     </div>
 {% endblock %}

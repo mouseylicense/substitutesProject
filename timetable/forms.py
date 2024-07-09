@@ -3,25 +3,28 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import *
 from django.forms import DateInput, Select, TextInput
+from django.utils.translation import gettext_lazy as _
 
 
 class AbsenceForm(forms.Form):
-    date = forms.DateField(widget=DateInput(attrs={'class': 'datepicker', 'type': 'date'}))
-    reason = forms.CharField(widget=forms.TextInput(attrs={'class': 'text-input', 'placeholder': 'Reason'}))
+    date = forms.DateField(label=_("Date"), widget=DateInput(attrs={'class': 'datepicker', 'type': 'date'}))
+    reason = forms.CharField(label=_("Reason"),
+                             widget=forms.TextInput(attrs={'class': 'text-input', 'placeholder': _('Reason')}))
 
 
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(
-        ClassNeedsSub.objects.order_by('substitute_teacher__name','date'),
+        ClassNeedsSub.objects.order_by('substitute_teacher__name', 'date'),
+        label=_("Class that needs sub"),
         widget=forms.Select(attrs={'id': 'sub'}), empty_label=None)
     substitute_teacher = forms.CharField(widget=forms.Select(attrs={'id': 'teacher'}))
 
 
 class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput, min_length=8)
-    phone_number = forms.CharField(label='Phone', widget=forms.TextInput(attrs={'type': 'tel', "pattern": "[0-9]{10}"}),
+    password = forms.CharField(label=_('Password'), widget=forms.PasswordInput, min_length=8)
+    phone_number = forms.CharField(label=_('Phone'), widget=forms.TextInput(attrs={'type': 'tel', "pattern": "[0-9]{10}"}),
                                    min_length=10, max_length=10)
-
+    name = forms.CharField(label=_("Name"))
     class Meta:
         model = Teacher
         fields = ('name', 'email', 'phone_number', 'password')

@@ -1,5 +1,6 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% trans "en" %}" dir="auto">
 <head>
  {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">    <meta charset="UTF-8">
@@ -38,7 +39,7 @@
         <td>{{ form.password }}</td>
       </tr>
     </table>
-    <input type="submit" value="login">
+    <input type="submit" value="{% trans "login"%}">
     <input type="hidden" name="next" value="{{ next }}">
   </form>
 
@@ -55,6 +56,6 @@
           display: flex;
           justify-content: center;
 
-"><a style="color:black;text-decoration: none" href="{% url 'password_reset' %}">Lost password?</a></p>
+"><a style="color:black;text-decoration: none" href="{% url 'password_reset' %}">{% trans "Lost password?"%}</a></p>
 </body>
 </html>

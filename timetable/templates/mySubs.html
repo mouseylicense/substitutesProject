@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     {% if mySubs %}
         {% for sub in mySubs %}
@@ -16,6 +17,6 @@
                 font-size: xxx-large;
                 text-align: center;
         ">
-            No Subs</h1>
+            {% trans "No Subs" %}</h1>
     {% endif %}
 {% endblock %}

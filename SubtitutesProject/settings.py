@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 from dotenv import load_dotenv
 from os import environ
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 ROOT_URLCONF = 'SubtitutesProject.urls'
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Jerusalem'
 
@@ -143,3 +144,12 @@ EMAIL_PORT = environ['EMAIL_PORT']
 EMAIL_HOST_USER = environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = environ['EMAIL_HOST_PASSWORD']
 DEFAULT_FROM_EMAIL = environ['DEFAULT_FROM_EMAIL']
+
+# translation
+LANGUAGES = (
+    ('en', _('English')),
+    ('he', _('Hebrew')),
+)
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]

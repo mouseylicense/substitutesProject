@@ -1,5 +1,6 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
@@ -9,7 +10,7 @@
 </head>
 <body>
 <div class="topnav">
-    <a href="{% url "login" %}">Login</a>
+    <a href="{% url "login" %}">{% trans "Login" %}</a>
 </div>
 <div class="sub-container">
 {% if Subs %}
@@ -22,7 +23,7 @@
                     {% endif %}
                     <h1>{{ sub.Class_That_Needs_Sub.name }} - {{ sub.Class_That_Needs_Sub.room }}</h1>
                     {% if sub.substitute_teacher.name == null %}
-                    <h2 style="color: darkred">No Sub Yet</h2>
+                    <h2 style="color: darkred">{% trans "No Sub Yet" %}</h2>
                     {% else %}
                     <h2 style="color:dimgray">{{ sub.substitute_teacher.name }}</h2>
                     {% endif %}
@@ -35,7 +36,7 @@
                 font-size: xxx-large;
                 text-align: center;
         ">
-            No Subs For today!</h1>
+            {%  trans "No Subs For today!" %}</h1>
     {% endif %}
 </div>
 </body>

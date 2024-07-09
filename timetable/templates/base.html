@@ -1,5 +1,6 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en" dir="auto">
+<html lang={% trans "en" %} dir="auto">
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'sidebar.css' %}">
@@ -10,14 +11,14 @@
 <body>
     <div class="sidebar">
         {% block sidebar %}
-              <a class="{% if request.resolver_match.url_name == "mySubs" %}active{% endif %}" href="{% url 'mySubs' %}">My Subs</a>
-              <a class="{% if request.resolver_match.url_name == "reportAbsence" %}active{% endif %}" href="{% url 'reportAbsence' %}">Report Absence</a>
+              <a class="{% if request.resolver_match.url_name == "mySubs" %}active{% endif %}" href="{% url 'mySubs' %}">{% trans "My Subs" %}</a>
+              <a class="{% if request.resolver_match.url_name == "reportAbsence" %}active{% endif %}" href="{% url 'reportAbsence' %}">{%  trans "Report Absence" %}</a>
             {% if perms.timetable.add_classneedssub %}
-                <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">Set Substitution</a>
+                <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">{%  trans "Set Substitution" %}</a>
             {% endif %}
             <form id='logout' action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
-              <a id="logout" onclick="this.parentNode.submit()">Logout</a>
+              <a id="logout" onclick="this.parentNode.submit()">{%  trans "Logout" %}</a>
             </form>
         {% endblock %}
     </div>
