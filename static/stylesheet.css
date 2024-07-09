@@ -47,6 +47,10 @@ input[type=submit],button[type="submit"]{
     display: block;
     border-radius: 2px;
 }
+input[type=submit]:dir(rtl){
+    margin-left: 3px;
+    margin-right: auto;
+}
 input[type=submit]:hover,button[type="submit"]:hover{
     background-color: #55AD9B;
 }

@@ -1,10 +1,10 @@
 {% load i18n %}
 <!DOCTYPE html>
-<html lang="{% trans "en" %}" dir="auto">
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
 <head>
  {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% trans "Login" %}</title>
 </head>
 <body style="    background-color: #D8EFD3;">
 
@@ -31,7 +31,7 @@
     {% csrf_token %}
     <table>
       <tr>
-        <td>{{ form.username.label_tag }}</td>
+        <td>{% trans "Name" %}:</td>
         <td>{{ form.username }}</td>
       </tr>
       <tr>

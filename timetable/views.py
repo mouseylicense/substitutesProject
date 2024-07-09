@@ -83,7 +83,7 @@ def get_possible_subs(request, n):
         **filter_dict)
     availableTeachers = []
     for teacher in teacherQuery:
-        availableTeachers.append({'id': teacher.pk, 'name': teacher.name})
+        availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
     return JsonResponse({"availableTeachers": availableTeachers})
 
 

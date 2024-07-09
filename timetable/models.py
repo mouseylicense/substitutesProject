@@ -6,6 +6,7 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.db.models import Q
 
+from SubtitutesProject import settings
 DAYS_OF_WEEKDAY_DICT = {
     6: 'Sunday',
     0: 'Monday',
@@ -26,8 +27,7 @@ DAYS_OF_WEEKDAY = [
 class Teacher(AbstractUser):
     first_name = None
     last_name = None
-    username = None
-    name = models.CharField(max_length=100,unique=True)
+    username = models.CharField(max_length=100,unique=True,verbose_name="name")
     phone_number = models.CharField(max_length=10)
     email = models.EmailField(max_length=100)
     can_substitute = models.BooleanField(default=True)
@@ -37,10 +37,10 @@ class Teacher(AbstractUser):
     Wednesday = models.BooleanField(default=True)
     Thursday = models.BooleanField(default=True)
     last_sub = models.DateField(default=timezone.now)
-    USERNAME_FIELD = 'name'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email','phone_number']
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class Absence(models.Model):
@@ -48,7 +48,7 @@ class Absence(models.Model):
     date = models.DateField()
     reason = models.CharField(max_length=100)
     def __str__(self):
-        return self.teacher.name + " - " + str(self.date)
+        return self.teacher.username + " - " + str(self.date)
 
 
 #removes classes that needs sub if absence is deleted
@@ -73,7 +73,7 @@ class Class(models.Model):
     def __str__(self):
         return str(self.hour)[:5] + " - " + str(
             (datetime.datetime.combine(datetime.date(1, 1, 1), self.hour) + self.duration).time())[
-                                            :5] + " --- " + self.name + " - " + self.teacher.name
+                                            :5] + " --- " + self.name + " - " + self.name
 
 
 class ClassNeedsSub(models.Model):

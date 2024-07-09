@@ -22,4 +22,5 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('timetable.urls')),
     path('user/', include('django.contrib.auth.urls')),
+
 )

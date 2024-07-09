@@ -14,7 +14,7 @@ class AbsenceForm(forms.Form):
 
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(
-        ClassNeedsSub.objects.order_by('substitute_teacher__name', 'date'),
+        ClassNeedsSub.objects.order_by('substitute_teacher__username', 'date'),
         label=_("Class that needs sub"),
         widget=forms.Select(attrs={'id': 'sub'}), empty_label=None)
     substitute_teacher = forms.CharField(widget=forms.Select(attrs={'id': 'teacher'}))
@@ -22,12 +22,14 @@ class SubstituteForm(forms.Form):
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(label=_('Password'), widget=forms.PasswordInput, min_length=8)
-    phone_number = forms.CharField(label=_('Phone'), widget=forms.TextInput(attrs={'type': 'tel', "pattern": "[0-9]{10}"}),
+    phone_number = forms.CharField(label=_('Phone'),
+                                   widget=forms.TextInput(attrs={'type': 'tel', "pattern": "[0-9]{10}"}),
                                    min_length=10, max_length=10)
     name = forms.CharField(label=_("Name"))
+    email = forms.EmailField(label=_("Email"))
     class Meta:
         model = Teacher
-        fields = ('name', 'email', 'phone_number', 'password')
+        fields = ('username', 'email', 'phone_number', 'password')
 
     def save(self, commit=True):
         # Save the provided password in hashed format

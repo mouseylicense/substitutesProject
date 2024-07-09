@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
 <head>
  {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% trans "Register" %}</title>
 </head>
 <body style="    background-color: #D8EFD3;
 ">
@@ -23,12 +24,12 @@
     <table>
           {% for field in form %}
       <tr>
-        <td>{{ field.label_tag}}</td>
+        <td>{{ field.label}}</td>
         <td>{{ field }}</td>
       </tr>
       {% endfor %}
     </table>
-    <input type="submit" value="login">
+    <input type="submit" value="{% trans "login" %}">
   </form>
 
   {# Assumes you set up the password_reset view in your URLconf #}

@@ -1,0 +1,115 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-09 21:32+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\SubtitutesProject\settings.py:150
+msgid "English"
+msgstr ""
+
+#: .\SubtitutesProject\settings.py:151
+msgid "Hebrew"
+msgstr ""
+
+#: .\timetable\forms.py:10
+msgid "Date"
+msgstr ""
+
+#: .\timetable\forms.py:11 .\timetable\forms.py:12
+msgid "Reason"
+msgstr ""
+
+#: .\timetable\forms.py:18
+msgid "Class that needs sub"
+msgstr ""
+
+#: .\timetable\forms.py:24
+msgid "Password"
+msgstr ""
+
+#: .\timetable\forms.py:25
+msgid "Phone"
+msgstr ""
+
+#: .\timetable\forms.py:28 .\timetable\templates\registration\login.html:34
+msgid "Name"
+msgstr ""
+
+#: .\timetable\forms.py:29
+msgid "Email"
+msgstr ""
+
+#: .\timetable\templates\base.html:3
+#: .\timetable\templates\registration\login.html:3
+#: .\timetable\templates\registration\register.html:3
+msgid "en"
+msgstr ""
+
+#: .\timetable\templates\base.html:14
+msgid "My Subs"
+msgstr ""
+
+#: .\timetable\templates\base.html:15
+msgid "Report Absence"
+msgstr ""
+
+#: .\timetable\templates\base.html:17
+msgid "Set Substitution"
+msgstr ""
+
+#: .\timetable\templates\base.html:21
+msgid "Logout"
+msgstr ""
+
+#: .\timetable\templates\index.html:13
+msgid "Login"
+msgstr ""
+
+#: .\timetable\templates\index.html:26
+msgid "No Sub Yet"
+msgstr ""
+
+#: .\timetable\templates\index.html:39
+msgid "No Subs For today!"
+msgstr ""
+
+#: .\timetable\templates\mySubs.html:20
+msgid "No Subs"
+msgstr ""
+
+#: .\timetable\templates\registration\login.html:3
+#: .\timetable\templates\registration\register.html:3
+msgid "ltr"
+msgstr ""
+
+#: .\timetable\templates\registration\login.html:42
+#: .\timetable\templates\registration\register.html:32
+msgid "login"
+msgstr ""
+
+#: .\timetable\templates\registration\login.html:59
+msgid "Lost password?"
+msgstr ""
+
+#: .\timetable\templates\reportAbsence.html:22
+msgid "Report"
+msgstr ""
+
+#: .\timetable\templates\setSub.html:10
+msgid "change"
+msgstr ""

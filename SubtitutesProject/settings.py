@@ -42,15 +42,16 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'SubtitutesProject.middleware.ForceDefaultLanguageMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
+
 ]
 ROOT_URLCONF = 'SubtitutesProject.urls'
 
@@ -74,7 +75,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SubtitutesProject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'he'
 
 TIME_ZONE = 'Asia/Jerusalem'
 
@@ -147,8 +147,8 @@ DEFAULT_FROM_EMAIL = environ['DEFAULT_FROM_EMAIL']
 
 # translation
 LANGUAGES = (
-    ('en', _('English')),
     ('he', _('Hebrew')),
+    ('en', _('English')),
 )
 LOCALE_PATHS = [
     BASE_DIR / 'locale/',
