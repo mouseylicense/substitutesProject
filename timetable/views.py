@@ -13,7 +13,8 @@ from .forms import RegistrationForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
-from django.db.models import Q
+from django.db.models import Q, Exists, OuterRef
+from django.core.mail import send_mail
 
 DAYS_OF_WEEKDAY = {
     6: 'Sunday',
@@ -66,7 +67,9 @@ def sub(request):
         if form.is_valid():
             sub = form.cleaned_data['class_that_needs_sub']
             sub.substitute_teacher = Teacher.objects.filter(pk=form['substitute_teacher'].data).get()
-            sub.substitute_teacher__last_sub = sub.date
+            teacher = Teacher.objects.get(pk=form['substitute_teacher'].data)
+            teacher.last_sub = form.cleaned_data['class_that_needs_sub'].date
+            teacher.save()
             sub.save()
 
 
@@ -80,18 +83,12 @@ def sub(request):
 def get_possible_subs(request, n):
     c = ClassNeedsSub.objects.get(pk=n)
     filter_dict = {DAYS_OF_WEEKDAY[c.date.weekday()]: True}
-    # teacherQuery = Teacher.objects.filter(~Q(absence__date=c.date),
-    #                                       ~Q(class__hour=c.Class_That_Needs_Sub.hour) &
-    #                                       ~Q(class__day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()]),
-    #                                       ~Q(classneedssub__date=c.date) &
-    #                                       ~Q(classneedssub__Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour),
-    #                                       substitutes=True,**filter_dict).order_by('last_sub')
-    teacherQuery = (Teacher.objects
-                    .exclude(absence__date=c.date)
-                    .exclude(class__day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],class__hour=c.Class_That_Needs_Sub.hour)
-                    .exclude(classneedssub__date=c.date,classneedssub__Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)
-                    .filter(substitutes=True,**filter_dict))
-    print(teacherQuery)
+    teacherQuery = Teacher.objects.filter(
+        ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],hour=c.Class_That_Needs_Sub.hour)),
+        ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"),date=c.date,Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
+        ~Q(absence__date=c.date),
+        can_substitute=True,
+        **filter_dict)
     availableTeachers = []
     for teacher in teacherQuery:
         availableTeachers.append({'id': teacher.pk, 'name': teacher.name})

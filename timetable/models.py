@@ -30,7 +30,7 @@ class Teacher(AbstractUser):
     name = models.CharField(max_length=100,unique=True)
     phone_number = models.CharField(max_length=10)
     email = models.EmailField(max_length=100)
-    substitutes = models.BooleanField(default=True)
+    can_substitute = models.BooleanField(default=True)
     Sunday = models.BooleanField(default=True)
     Monday = models.BooleanField(default=True)
     Tuesday = models.BooleanField(default=True)
