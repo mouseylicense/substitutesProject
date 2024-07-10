@@ -21,12 +21,9 @@ services:
       retries: 10
 
   backend:
-    image: mouseylicense/substitutes:1
+    image: mouseylicense/substitutes:2
     container_name: Substitutes_backend
-    command: sh -c "python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:5858"
     restart: unless-stopped
-    volumes:
-      - .:/app
     ports:
       - "5858:5858"
     env_file:
