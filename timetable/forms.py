@@ -12,6 +12,16 @@ class AbsenceForm(forms.Form):
                              widget=forms.TextInput(attrs={'class': 'text-input', 'placeholder': _('Reason')}))
 
 
+class ClassForm(forms.ModelForm):
+    class Meta:
+        model = Class
+        fields = "__all__"
+        widgets = {
+            "day_of_week": Select(attrs={'id' : 'day_of_week'}),
+            "hour": Select(attrs={'id' : 'hour'}),
+            "room": Select(attrs={'id' : 'room'}),
+        }
+
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(
         ClassNeedsSub.objects.order_by('substitute_teacher__username', 'date'),
@@ -41,3 +51,4 @@ class RegistrationForm(forms.ModelForm):
             user.save()
 
         return user
+

@@ -12,6 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
+
 DAYS_OF_WEEKDAY = {
     6: 'Sunday',
     0: 'Monday',
@@ -72,8 +73,10 @@ def get_possible_subs(request, n):
     c = ClassNeedsSub.objects.get(pk=n)
     filter_dict = {DAYS_OF_WEEKDAY[c.date.weekday()]: True}
     teacherQuery = Teacher.objects.filter(
-        ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],hour=c.Class_That_Needs_Sub.hour)),
-        ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"),date=c.date,Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
+        ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],
+                                     hour=c.Class_That_Needs_Sub.hour)),
+        ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"), date=c.date,
+                                             Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
         ~Q(absence__date=c.date),
         can_substitute=True,
         **filter_dict)
@@ -100,3 +103,28 @@ def register(request):
             return render(request, 'registration/register.html', {"form": form})
     form = forms.RegistrationForm()
     return render(request, 'registration/register.html', {"form": form})
+
+
+def setClasses(request):
+    form = forms.ClassForm
+    return render(request, "setClasses.html", {"form": form})
+
+
+@require_GET
+def get_possible_rooms_and_teachers(request):
+    time = request.GET.get('time')
+    day = request.GET.get('day')
+    # get possible rooms
+    print(time)
+    print(day)
+    # rooms = Room.objects.filter(Exists(Class.objects.filter(Room=OuterRef("pk"), hour=time,day_of_week=DAYS_OF_WEEKDAY[day])))
+    # availableRooms = []
+    # for room in rooms:
+    #     availableRooms.append({'id': room.pk, 'name': room.name})
+    #
+    # #get possible teachers
+    # teachers = Teacher.objects.filter(~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[day],hour=time)))
+    # availableTeachers = []
+    # for teacher in teachers:
+    #     availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
+    # return JsonResponse({"availableRooms": availableRooms,"availableTeachers":availableTeachers})

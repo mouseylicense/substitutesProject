@@ -8,4 +8,6 @@ urlpatterns = [
     path('get/<int:n>/',views.get_possible_subs,name='possible subs'),
     path('user/register', views.register, name='register'),
     path('mySubs/',views.mySubs,name='mySubs'),
+    path('setClasses/',views.setClasses,name='setClasses'),
+    path('getRoom/',views.get_possible_rooms_and_teachers,name='possible_rooms'),
 ]

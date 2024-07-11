@@ -42,6 +42,13 @@ class Teacher(AbstractUser):
         return self.username
 
 
+
+class Room(models.Model):
+    name = models.CharField(max_length=100)
+    has_projector = models.BooleanField(default=True)
+    def __str__(self):
+        return self.name
+
 class Absence(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     date = models.DateField()
@@ -67,14 +74,11 @@ class Class(models.Model):
         choices=[(datetime.time(8, 30), "08:30"), (datetime.time(9, 15), "09:15"), (datetime.time(10, 7), "10:07"),
                  (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45"),
                  (datetime.time(13, 45), "13:45")])
-    duration = models.fields.DurationField(default=datetime.timedelta(days=0, minutes=45))
-    room = models.CharField(max_length=100)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE,null=True,blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return str(self.hour)[:5] + " - " + str(
-            (datetime.datetime.combine(datetime.date(1, 1, 1), self.hour) + self.duration).time())[
-                                            :5] + " --- " + self.name + " - " + self.name
+        return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.username
 
 
 class ClassNeedsSub(models.Model):
@@ -88,3 +92,4 @@ class ClassNeedsSub(models.Model):
         else:
             return "✔ " + str(self.date) + " - " + str(self.Class_That_Needs_Sub.hour) + " " + str(
                 self.Class_That_Needs_Sub.name) + " Sub:" + str(self.substitute_teacher.username)
+
