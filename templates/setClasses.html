@@ -3,25 +3,8 @@
     <div class="container">
     <form>
         {{ form }}
+        {% include "table.html" %}
         <input type="submit">
     </form>
     </div>
-    <script>
-        const TeacherSelect = document.getElementById('teacher');
-        function changeOptions(event){
-        const selectedTeacher = TeacherSelect.value;
-        const url = `/getClasses/${TeacherSelect.value}`;
-        console.log(selectedTeacher)
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-        RoomSelect.innerHTML = '';
-        console.log(data)
-        data.availableRooms.forEach((branch) => {
-            
-        })});
-        }
-        changeOptions()
-        TeacherSelect.addEventListener('change', (event) => changeOptions(event))
-    </script>
 {% endblock %}

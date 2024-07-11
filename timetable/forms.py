@@ -12,16 +12,10 @@ class AbsenceForm(forms.Form):
                              widget=forms.TextInput(attrs={'class': 'text-input', 'placeholder': _('Reason')}))
 
 
-class ClassForm(forms.ModelForm):
-    class Meta:
-        model = Class
-        fields = "__all__"
-        widgets = {
-            "day_of_week": Select(attrs={'id' : 'day_of_week'}),
-            "hour": Select(attrs={'id' : 'hour'}),
-            "room": Select(attrs={'id' : 'room'}),
-            "teacher": Select(attrs={'id' : 'teacher'}),
-        }
+class ClassForm(forms.Form):
+    name = forms.CharField(label=_("Name"),widget=forms.TextInput(attrs={'class': 'text-input', 'placeholder': _('Name')}))
+    teacher = forms.ModelChoiceField(Teacher.objects,label=_("Teacher"),widget=forms.Select(attrs={'class': 'select','id':'teacher'}))
+    room = forms.CharField(widget=forms.Select(attrs={'id': 'room'}))
 
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(

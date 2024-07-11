@@ -111,7 +111,7 @@ def setClasses(request):
 
 
 @require_GET
-def get_possible_rooms_and_teachers(request):
+def get_possible_rooms(request):
     time = request.GET.get('hour')
     day = request.GET.get('day')
     # get possible rooms
@@ -121,20 +121,14 @@ def get_possible_rooms_and_teachers(request):
     availableRooms = []
     for room in rooms:
         availableRooms.append({'id': room.pk, 'name': room.name})
-
-    #get possible teachers
-    teachers = Teacher.objects.filter(~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=day,hour=time)))
-    availableTeachers = []
-    for teacher in teachers:
-        availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
-    return JsonResponse({"availableRooms": availableRooms,"availableTeachers":availableTeachers})
+    return JsonResponse({"availableRooms": availableRooms})
 
 @require_GET
 def get_teacher_classes(request,n):
     classes = Class.objects.filter(teacher__pk=n)
     classesTimes = []
     for c in classes:
-        classesTimes.append({'day':c.day_of_week,"hour":str(c.hour.hour)+":"+str(c.hour.minute)})
+        classesTimes.append({'day':c.day_of_week,"hour":str(c.hour)[:5]})
     return JsonResponse({"classesTimes":classesTimes})
 
 def test(request):
