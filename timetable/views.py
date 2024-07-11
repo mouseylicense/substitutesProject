@@ -128,3 +128,14 @@ def get_possible_rooms_and_teachers(request):
     for teacher in teachers:
         availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
     return JsonResponse({"availableRooms": availableRooms,"availableTeachers":availableTeachers})
+
+@require_GET
+def get_teacher_classes(request,n):
+    classes = Class.objects.filter(teacher__pk=n)
+    classesTimes = []
+    for c in classes:
+        classesTimes.append({'day':c.day_of_week,"hour":str(c.hour.hour)+":"+str(c.hour.minute)})
+    return JsonResponse({"classesTimes":classesTimes})
+
+def test(request):
+    return render(request,"table.html")

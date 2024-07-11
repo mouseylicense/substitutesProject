@@ -1,0 +1,109 @@
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 2px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th{
+            border: 1px solid #dee2e6;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        input {
+            border: 1px solid #dee2e6;
+            padding: 20px 50px;
+            text-align: center;
+            background-color: white;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #343a40;
+        }
+        td{
+            padding: 0;
+        }
+    </style>
+<table>
+        <tr>
+            <th>08:30</th>
+            <td><input id="Sunday-8:30" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Monday-8:30" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Tuesday-8:30" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Wednesday-8:30" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Thursday-8:30" onClick="ButtonClick(this)"  type="button"></td>
+
+        </tr>
+        <tr>
+            <th>09:15</th>
+            <td><input id="Sunday-9:15" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Monday-9:15" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Tuesday-9:15" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Wednesday-9:15" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Thursday-9:15" onClick="ButtonClick(this)"  type="button"></td>
+
+        </tr>
+        <tr>
+            <th>10:07</th>
+            <td><input id="Sunday-10:07" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Monday-10:07" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Tuesday-10:07" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Wednesday-10:07" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Thursday-10:07" onClick="ButtonClick(this)"  type="button"></td>
+
+        </tr>
+        <tr>
+            <th colspan="6">11:00</th>
+        </tr>
+        <tr>
+            <th>11:45</th>
+            <td><input id="Sunday-11:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Monday-11:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Tuesday-11:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Wednesday-11:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Thursday-11:45" onClick="ButtonClick(this)"  type="button"></td>
+
+        </tr>
+        <tr>
+            <th>12:45</th>
+            <td><input id="Sunday-12:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Monday-12:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Tuesday-12:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Wednesday-12:45" onClick="ButtonClick(this)"  type="button"></td>
+            <td><input id="Thursday-12:45" onClick="ButtonClick(this)"  type="button"></td>
+
+        </tr>
+    </table>
+<script>
+    function changeOptions(){
+        const selectedClass = 3;
+        const url = `http://127.0.0.1:8000/getClasses/${selectedClass}`;
+        console.log(selectedClass)
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+        data.classesTimes.forEach((branch) => {
+            console.log(branch.day + "-" + branch.hour)
+            const doc = document.getElementById(branch.day + "-" + branch.hour)
+            doc.onclick = ""
+            doc.style.background = "red";
+        })})}
+    changeOptions()
+</script>
+<script>
+    function ButtonClick(test){
+        alert(test.id)
+    }
+</script>

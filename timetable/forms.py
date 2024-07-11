@@ -20,6 +20,7 @@ class ClassForm(forms.ModelForm):
             "day_of_week": Select(attrs={'id' : 'day_of_week'}),
             "hour": Select(attrs={'id' : 'hour'}),
             "room": Select(attrs={'id' : 'room'}),
+            "teacher": Select(attrs={'id' : 'teacher'}),
         }
 
 class SubstituteForm(forms.Form):

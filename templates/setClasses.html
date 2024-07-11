@@ -7,29 +7,21 @@
     </form>
     </div>
     <script>
-        const HourSelect = document.getElementById('hour');
-        const DaySelect = document.getElementById('day_of_week')
         const TeacherSelect = document.getElementById('teacher');
-        const RoomSelect = document.getElementById('room')
-        console.log(HourSelect.value)
         function changeOptions(event){
-        const selectedClass = DaySelect.value;
-        const url = `{% url "possible_rooms" %}?hour=${HourSelect.value}&day=${DaySelect.value}`;
-        console.log(selectedClass)
+        const selectedTeacher = TeacherSelect.value;
+        const url = `/getClasses/${TeacherSelect.value}`;
+        console.log(selectedTeacher)
         fetch(url)
         .then(response => response.json())
         .then(data => {
         RoomSelect.innerHTML = '';
         console.log(data)
         data.availableRooms.forEach((branch) => {
-        const option = document.createElement('option');
-        option.value = branch.id;
-        option.text = branch.name;
-        RoomSelect.appendChild(option);
-
+            
         })});
         }
         changeOptions()
-        DaySelect.addEventListener('change', (event) => changeOptions(event))
+        TeacherSelect.addEventListener('change', (event) => changeOptions(event))
     </script>
 {% endblock %}
