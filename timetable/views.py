@@ -112,19 +112,19 @@ def setClasses(request):
 
 @require_GET
 def get_possible_rooms_and_teachers(request):
-    time = request.GET.get('time')
+    time = request.GET.get('hour')
     day = request.GET.get('day')
     # get possible rooms
     print(time)
     print(day)
-    # rooms = Room.objects.filter(Exists(Class.objects.filter(Room=OuterRef("pk"), hour=time,day_of_week=DAYS_OF_WEEKDAY[day])))
-    # availableRooms = []
-    # for room in rooms:
-    #     availableRooms.append({'id': room.pk, 'name': room.name})
-    #
-    # #get possible teachers
-    # teachers = Teacher.objects.filter(~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[day],hour=time)))
-    # availableTeachers = []
-    # for teacher in teachers:
-    #     availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
-    # return JsonResponse({"availableRooms": availableRooms,"availableTeachers":availableTeachers})
+    rooms = Room.objects.filter(~Exists(Class.objects.filter(room=OuterRef("pk"), hour=time,day_of_week=day)))
+    availableRooms = []
+    for room in rooms:
+        availableRooms.append({'id': room.pk, 'name': room.name})
+
+    #get possible teachers
+    teachers = Teacher.objects.filter(~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=day,hour=time)))
+    availableTeachers = []
+    for teacher in teachers:
+        availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
+    return JsonResponse({"availableRooms": availableRooms,"availableTeachers":availableTeachers})
