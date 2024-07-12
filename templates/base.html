@@ -18,6 +18,9 @@
             {% if perms.timetable.add_classneedssub %}
                 <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">{%  trans "Set Substitution" %}</a>
             {% endif %}
+            {% if perms.timetable.add_class %}
+                <a class="{% if request.resolver_match.url_name == "setClasses" %}active{% endif %}" href="{% url 'setClasses' %}">{%  trans "Set Classes" %}</a>
+            {% endif %}
 <div style="margin-top: auto">
             {% get_current_language_bidi as LANGUAGE_BIDI %}
             {% get_current_language as LANGUAGE_CODE %}

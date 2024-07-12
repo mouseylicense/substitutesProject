@@ -88,3 +88,21 @@ body{
     border: #D8EFD3 5px solid;
     border-radius: 19.9px;
 }
+.two-fields{
+    gap: 5px;
+    display: flex;
+}
+.subject-input{
+    flex-grow: 1;
+        width: unset !important;
+    padding: unset !important;
+    margin: unset !important;
+    box-sizing: unset !important;
+}
+button[disabled]{
+    background-color: lightgrey;
+}
+#room{
+    width: 100%;
+    margin-bottom: 5px;
+}

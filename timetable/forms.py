@@ -14,11 +14,11 @@ class AbsenceForm(forms.Form):
 
 
 class ClassForm(forms.ModelForm):
-    name = forms.CharField(label=_("Name"),widget=forms.TextInput(attrs={'class': 'text-input', 'placeholder': _('Name')}))
-    teacher = forms.ModelChoiceField(Teacher.objects,label=_("Teacher"),widget=forms.Select(attrs={'class': 'select','id':'teacher'}))
-    day_of_week = forms.CharField(label=_("Day"),widget=forms.TextInput(attrs={"required":"","readonly":"","id":"day"}))
-    hour = forms.CharField(label=_("Hour"),widget=forms.TextInput(attrs={"required":"","readonly":"","type":"hidden","id":"hour"}))
-    room = forms.ModelChoiceField(Room.objects,widget=forms.Select(attrs={'id': 'room'}))
+    name = forms.CharField(label=_("Subject"),widget=forms.TextInput(attrs={'class': 'subject-input', 'placeholder': _('Subject')}))
+    teacher = forms.ModelChoiceField(Teacher.objects,label=_("Teacher"),widget=forms.Select(attrs={"style":"flex-grow:1",'class': 'select','id':'teacher'}))
+    day_of_week = forms.CharField(label=_("Day"),widget=forms.TextInput(attrs={"required":"","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;","id":"day"}))
+    hour = forms.CharField(label=_("Hour"),widget=forms.TextInput(attrs={"required":"","id":"hour","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;"}))
+    room = forms.ModelChoiceField(Room.objects,widget=forms.Select(attrs={'id': 'room',"disabled":""}))
     class Meta:
         model = Class
         fields = ("teacher","name","day_of_week","hour","room")
