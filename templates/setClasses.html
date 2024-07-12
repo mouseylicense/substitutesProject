@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-    <form>
-        {{ form }}
+    <form action="{% url "setClasses" %}" method="post">
+        {% csrf_token %}
+        {{ form.name.label }}
+        {{ form.name }}
+        {{ form.teacher.label }}
+        {{ form.teacher }}       
+        {{ form.day_of_week }}
+        {{ form.hour }}
+        {{ form.room }}
         {% include "table.html" %}
+
         <input type="submit">
     </form>
     </div>

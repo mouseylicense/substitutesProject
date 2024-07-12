@@ -6,7 +6,7 @@ from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .forms import RegistrationForm
+from .forms import RegistrationForm, ClassForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
@@ -106,6 +106,12 @@ def register(request):
 
 
 def setClasses(request):
+    if request.method == 'POST':
+        form = ClassForm(request.POST)
+        if form.is_valid:
+            form.save()
+        else:
+            print(form.errors)
     form = forms.ClassForm
     return render(request, "setClasses.html", {"form": form})
 
@@ -114,10 +120,7 @@ def setClasses(request):
 def get_possible_rooms(request):
     time = request.GET.get('hour')
     day = request.GET.get('day')
-    # get possible rooms
-    print(time)
-    print(day)
-    rooms = Room.objects.filter(~Exists(Class.objects.filter(room=OuterRef("pk"), hour=time,day_of_week=day)))
+    rooms = Room.objects.filter(Exists(Class.objects.filter(room=OuterRef("pk"), hour=time,day_of_week=day)))
     availableRooms = []
     for room in rooms:
         availableRooms.append({'id': room.pk, 'name': room.name})
@@ -130,6 +133,3 @@ def get_teacher_classes(request,n):
     for c in classes:
         classesTimes.append({'day':c.day_of_week,"hour":str(c.hour)[:5]})
     return JsonResponse({"classesTimes":classesTimes})
-
-def test(request):
-    return render(request,"table.html")

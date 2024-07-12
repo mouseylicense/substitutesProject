@@ -41,59 +41,60 @@
 <table>
     <tr>
         <th>08:30</th>
-        <td><button id="Sunday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Monday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Tuesday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Wednesday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Thursday-08:30" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Sunday-08:30" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Monday-08:30" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Tuesday-08:30" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Wednesday-08:30" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Thursday-08:30" onClick="ButtonClick(this)"></button></td>
     </tr>
     <tr>
         <th>09:15</th>
-        <td><button id="Sunday-09:15" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Monday-09:15" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Tuesday-09:15" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Wednesday-09:15" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Thursday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Sunday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Monday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Tuesday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Wednesday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Thursday-09:15" onClick="ButtonClick(this)"></button></td>
     </tr>
     <tr>
         <th>10:07</th>
-        <td><button id="Sunday-10:07" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Monday-10:07" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Tuesday-10:07" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Wednesday-10:07" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Thursday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Sunday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Monday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Tuesday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Wednesday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Thursday-10:07" onClick="ButtonClick(this)"></button></td>
     </tr>
     <tr>
         <th colspan="6">11:00</th>
     </tr>
     <tr>
         <th>11:45</th>
-        <td><button id="Sunday-11:45" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Monday-11:45" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Tuesday-11:45" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Wednesday-11:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Sunday-11:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Monday-11:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Tuesday-11:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Wednesday-11:45" onClick="ButtonClick(this)"></button></td>
     </tr>
     <tr>
         <th>12:45</th>
-        <td><button id="Sunday-12:45" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Monday-12:45" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Tuesday-12:45" onClick="ButtonClick(this)"></button></td>
-        <td><button id="Wednesday-12:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Sunday-12:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Monday-12:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Tuesday-12:45" onClick="ButtonClick(this)"></button></td>
+        <td><button type="button" id="Wednesday-12:45" onClick="ButtonClick(this)"></button></td>
     </tr>
 </table>
 
 
-<input type="text" required readonly id="output">
 <script>
     function resetBoard(){
-        const output = document.getElementById("output")
+        const hour = document.getElementById("hour")
+        const day = document.getElementById("day")
         const buttons = document.getElementsByTagName("button")
         for(let k=0;k<buttons.length;k++){
             buttons[k].disabled = false
             buttons[k].style.background = ""
             buttons[k].className = ""
         }
-        output.value = ""
+        hour.value = ""
+        day.value = ""
     }
     const TeacherSelect = document.getElementById("teacher")
     function changeTimetable(){
@@ -114,26 +115,38 @@
     TeacherSelect.addEventListener('change', (event) => changeTimetable(event))
 </script>
 <script>
-    output = document.getElementById("output")
+
+    let day
+    let hour
+    hourField = document.getElementById("hour")
+    dayField = document.getElementById("day")
     const RoomSelect = document.getElementById("room")
+    let options = RoomSelect.options;
+    function getOptionByText (a) {
+        for (let i = 0; i < options.length; i++) {
+            if (Number(options[i].value) === a) {
+                return options[i]
+            }
+        }
+        return null
+    }
     function ButtonClick(test){
         buttons = document.getElementsByTagName("button")
-        console.log((buttons.length))
         for(let i=0;i<buttons.length;i++){
             buttons[i].className = ""
         }
-        test.className = "selected"
-        output.value = test.id
-        RoomSelect.innerHTML = '';
-        const arr = test.id.split("-")
-        fetch(`{% url "possible_rooms" %}?hour=${arr[1]}&day=${arr[0]}`)
+        for (let i = 0; i < options.length; i++) {
+            options[i].disabled = false
+        }
+        test.className = "selected";
+        [day , hour] = test.id.split("-")
+        hourField.value = hour
+        dayField.value = day
+        fetch(`{% url "possible_rooms" %}?hour=${hour}&day=${day}`)
         .then(response => response.json())
         .then(data => {
         data.availableRooms.forEach((branch) => {
-            option = document.createElement("option")
-            option.value = branch.id
-            option.text = branch.name
-            RoomSelect.append(option)
+            getOptionByText(branch.id).disabled = true
         })})
     }
 </script>
