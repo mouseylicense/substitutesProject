@@ -2,6 +2,8 @@
 {% load i18n %}
 
 {% block content %}
+{{ classesByHour|json_script:"ClassesByHour" }}
+
     <div class="container">
     <form action="{% url "setClasses" %}" method="post">
         {% csrf_token %}
@@ -60,6 +62,14 @@
     </form>
 {#    a script to act when the teacher field is changed and get hours where teacher cant teach#}
     <script>
+        const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
+        function markClasses(){
+        Object.keys(classesByHour).forEach(function(key) {
+           let button = document.getElementById(key)
+            button.style.background = `rgba(195, 201, 83,${classesByHour[key]/7.5})`;
+            button.innerText = classesByHour[key]
+        });
+        }
     function resetBoard(){
         const hour = document.getElementById("hour")
         const day = document.getElementById("day")
@@ -74,7 +84,6 @@
     }
     const TeacherSelect = document.getElementById("teacher")
     function changeTimetable(){
-        resetBoard()
         const selectedClass = TeacherSelect;
         const url = `http://127.0.0.1:8000/getClasses/${selectedClass.value}`;
         console.log(selectedClass)
@@ -87,6 +96,9 @@
             doc.disabled = true
             doc.style.background = "lightgrey";
         })})}
+        markClasses()
+    TeacherSelect.addEventListener('change', (event) => resetBoard())
+    TeacherSelect.addEventListener('change', (event) => markClasses())
     TeacherSelect.addEventListener('change', (event) => changeTimetable(event))
 </script>
     <script>
@@ -127,7 +139,8 @@
         })})
     }
 </script>
-    <style>
+
+        <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -139,7 +152,7 @@
             color: #343a40;
         }
         .selected{
-            background-color: rebeccapurple;
+            background-color: rebeccapurple !important;
         }
         table {
             border-collapse: collapse;
@@ -155,7 +168,9 @@
         }
         button{
             border: 1px solid #dee2e6;
-            padding: 20px 50px;
+            width: 100px;
+            height: 40px;
+            {#padding: 20px 50px;#}
             text-align: center;
             background-color: white;
         }
@@ -167,5 +182,6 @@
             padding: 0;
         }
     </style>
+
     </div>
 {% endblock %}

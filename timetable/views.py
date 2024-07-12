@@ -1,3 +1,4 @@
+import json
 import logging
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import model_to_dict
@@ -68,24 +69,6 @@ def sub(request):
     return render(request, 'setSub.html', {"form": form})
 
 
-@require_GET
-def get_possible_subs(request, n):
-    c = ClassNeedsSub.objects.get(pk=n)
-    filter_dict = {DAYS_OF_WEEKDAY[c.date.weekday()]: True}
-    teacherQuery = Teacher.objects.filter(
-        ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],
-                                     hour=c.Class_That_Needs_Sub.hour)),
-        ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"), date=c.date,
-                                             Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
-        ~Q(absence__date=c.date),
-        can_substitute=True,
-        **filter_dict)
-    availableTeachers = []
-    for teacher in teacherQuery:
-        availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
-    return JsonResponse({"availableTeachers": availableTeachers})
-
-
 @login_required
 def mySubs(request):
     mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
@@ -105,7 +88,9 @@ def register(request):
     return render(request, 'registration/register.html', {"form": form})
 
 
+@permission_required('timetable.add_class')
 def setClasses(request):
+
     if request.method == 'POST':
         form = ClassForm(request.POST)
         if form.is_valid:
@@ -113,23 +98,49 @@ def setClasses(request):
         else:
             print(form.errors)
     form = forms.ClassForm
-    return render(request, "setClasses.html", {"form": form})
+    classes = Class.objects.all()
+    classesByHour = {}
+    for c in classes:
+        if (str(c.day_of_week)+"-"+str(c.hour)[:5]) not in classesByHour:
+            classesByHour[str(c.day_of_week)+"-"+str(c.hour)[:5]] = 1
+        else:
+            classesByHour[str(c.day_of_week)+"-"+str(c.hour)[:5]] += 1
+    return render(request, "setClasses.html", {"form": form,"classesByHour":classesByHour})
 
 
 @require_GET
 def get_possible_rooms(request):
     time = request.GET.get('hour')
     day = request.GET.get('day')
-    rooms = Room.objects.filter(Exists(Class.objects.filter(room=OuterRef("pk"), hour=time,day_of_week=day)))
+    rooms = Room.objects.filter(Exists(Class.objects.filter(room=OuterRef("pk"), hour=time, day_of_week=day)))
     availableRooms = []
     for room in rooms:
         availableRooms.append({'id': room.pk, 'name': room.name})
     return JsonResponse({"availableRooms": availableRooms})
 
+
 @require_GET
-def get_teacher_classes(request,n):
+def get_teacher_classes(request, n):
     classes = Class.objects.filter(teacher__pk=n)
     classesTimes = []
     for c in classes:
-        classesTimes.append({'day':c.day_of_week,"hour":str(c.hour)[:5]})
-    return JsonResponse({"classesTimes":classesTimes})
+        classesTimes.append({'day': c.day_of_week, "hour": str(c.hour)[:5]})
+    return JsonResponse({"classesTimes": classesTimes})
+
+
+@require_GET
+def get_possible_subs(request, n):
+    c = ClassNeedsSub.objects.get(pk=n)
+    filter_dict = {DAYS_OF_WEEKDAY[c.date.weekday()]: True}
+    teacherQuery = Teacher.objects.filter(
+        ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],
+                                     hour=c.Class_That_Needs_Sub.hour)),
+        ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"), date=c.date,
+                                             Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
+        ~Q(absence__date=c.date),
+        can_substitute=True,
+        **filter_dict)
+    availableTeachers = []
+    for teacher in teacherQuery:
+        availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
+    return JsonResponse({"availableTeachers": availableTeachers})
