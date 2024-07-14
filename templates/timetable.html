@@ -1,5 +1,6 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
 {{ classesByHour|json_script:"ClassesByHour" }}
 <head>
     <meta charset="UTF-8">
@@ -70,11 +71,59 @@
           position: relative;
           transition: all 5s ease-in-out;
         }
+         /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
     </style>
 </head>
-<body id="body">
+<body>
 
-<table id="table">
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1 id="name"></h1>
+
+  </div>
+
+</div>
+<table>
     <tr class="timerow">
 
         <th>08:30</th>
@@ -117,38 +166,41 @@
         <td><div class=timeframe  id="Tuesday-12:45" ></div></td>
         <td><div class=timeframe  id="Wednesday-12:45" ></div></td>
     </tr>
+
 </table>
 <script>
     const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
     console.log(classesByHour)
-        function markClasses(){
+
+    const modalText = document.getElementById("modalText")
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+    function markClasses(){
         Object.keys(classesByHour).forEach(function(key) {
            let div = document.getElementById(key)
             for(let i = 0; i<classesByHour[key].length;i++){
                 let new_element = document.createElement("button")
-                new_element.innerText = classesByHour[key][i];
-                new_element.setAttribute("onclick","buttonClick(this);");
+                new_element.innerText = classesByHour[key][i]["name"] + " - " + classesByHour[key][i]["teacher"] + " - " + classesByHour[key][i]["grades"] + " - " + classesByHour[key][i]["room"];
+                new_element.dataset.name = classesByHour[key][i]["name"];
+                new_element.dataset.room = classesByHour[key][i]["room"];
+                new_element.dataset.teacher = classesByHour[key][i]["teacher"];
+                new_element.dataset.grades = classesByHour[key][i]["grades"];
+                new_element.setAttribute("onclick","modalContent(this);")
                 div.append(new_element)
             }
         });
         }
 
-<div id="popup1" class="overlay">
-	<div class="popup">
-		<h2>Here i am</h2>
-		<a class="close" href="#">&times;</a>
-		<div class="content">
-			Thank to pop me out of that button, but now i'm done so you can close this window.
-		</div>
-	</div>
-</div>
-        function buttonClick(element){
-            let popup1 = document.createElement("div");
-            popup1.id = "popup1"
-            popup1.className
-            div.innerText = "test";
-            div.className = "popup";
-            document.getElementById("body").append(div)
+        function modalContent(element){
+            modalText.innerText = element.innerText;
+            modal.style.display = "block";
+        }
+
+
+
+    // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
         }
         markClasses()
 </script>

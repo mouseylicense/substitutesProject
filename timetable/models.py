@@ -4,6 +4,7 @@ import datetime
 from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.utils.translation import gettext_lazy as _
 
 DAYS_OF_WEEKDAY_DICT = {
     6: 'Sunday',
@@ -42,12 +43,13 @@ class Teacher(AbstractUser):
         return self.username
 
 
-
 class Room(models.Model):
     name = models.CharField(max_length=100)
     has_projector = models.BooleanField(default=True)
+
     def __str__(self):
         return self.name
+
 
 class Absence(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
@@ -74,8 +76,53 @@ class Class(models.Model):
         choices=[(datetime.time(8, 30), "08:30"), (datetime.time(9, 15), "09:15"), (datetime.time(10, 7), "10:07"),
                  (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45"),
                  (datetime.time(13, 45), "13:45")])
-    room = models.ForeignKey(Room, on_delete=models.CASCADE,null=True,blank=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
+    students_teacher = models.BooleanField(default=False, verbose_name=_("Is a Student Teaching?"))
+    student_teaching = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Student Teaching"))
+    first_grade = models.BooleanField(default=False, verbose_name=_("First Grade"))
+    second_grade = models.BooleanField(default=False, verbose_name=_("Second Grade"))
+    third_grade = models.BooleanField(default=False, verbose_name=_("Third Grade"))
+    fourth_grade = models.BooleanField(default=False, verbose_name=_("Fourth Grade"))
+    fifth_grade = models.BooleanField(default=False, verbose_name=_("Fifth Grade"))
+    sixth_grade = models.BooleanField(default=False, verbose_name=_("Sixth Grade"))
+    seventh_grade = models.BooleanField(default=False, verbose_name=_("Seventh Grade"))
+    eighth_grade = models.BooleanField(default=False, verbose_name=_("Eighth Grade"))
+    ninth_grade = models.BooleanField(default=False, verbose_name=_("Ninth Grade"))
+    tenth_grade = models.BooleanField(default=False, verbose_name=_("Tenth Grade"))
+    eleventh_grade = models.BooleanField(default=False, verbose_name=_("Eleventh Grade"))
+    twelfth_grade = models.BooleanField(default=False, verbose_name=_("Twelfth Grade"))
+
+    def grade(self):
+        number_to_grade = {
+            1: _("First Grade"),
+            2: _("Second Grade"),
+            3: _("Third Grade"),
+            4: _("Fourth Grade"),
+            5: _("Fifth Grade"),
+            6: _("Sixth Grade"),
+            7: _("Seventh Grade"),
+            8: _("Eighth Grade"),
+            9: _("Ninth Grade"),
+            10: _("Tenth Grade"),
+            11: _("Eleventh Grade"),
+            12: _("Twelfth Grade"),
+        }
+        grades = [self.first_grade, self.second_grade, self.third_grade, self.fourth_grade, self.fifth_grade,
+                  self.sixth_grade, self.seventh_grade, self.eighth_grade, self.ninth_grade, self.tenth_grade,
+                  self.eleventh_grade, self.twelfth_grade]
+
+        if True in grades:
+            last_occurrence = 0
+            first_occurrence = grades.index(True) + 1
+            for grade in grades:
+                if grade == True:
+                    last_occurrence += 1
+            if last_occurrence == first_occurrence:
+                return number_to_grade[first_occurrence]
+            first_and_last = str(number_to_grade[first_occurrence]) + " - " + str(number_to_grade[last_occurrence])
+            return first_and_last
+        return None
 
     def __str__(self):
         return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.username
@@ -92,4 +139,3 @@ class ClassNeedsSub(models.Model):
         else:
             return "✔ " + str(self.date) + " - " + str(self.Class_That_Needs_Sub.hour) + " " + str(
                 self.Class_That_Needs_Sub.name) + " Sub:" + str(self.substitute_teacher.username)
-

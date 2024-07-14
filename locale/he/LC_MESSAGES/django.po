@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 00:44+0300\n"
-"PO-Revision-Date: 2024-07-10 00:45+0300\n"
+"POT-Creation-Date: 2024-07-14 22:08+0300\n"
+"PO-Revision-Date: 2024-07-14 22:08+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -20,13 +20,92 @@ msgstr ""
 "2 : 3);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: .\SubtitutesProject\settings.py:150
+#: .\SubtitutesProject\settings.py:151
 msgid "Hebrew"
 msgstr "עברית"
 
-#: .\SubtitutesProject\settings.py:151
+#: .\SubtitutesProject\settings.py:152
 msgid "English"
 msgstr "אנגלית"
+
+#: .\templates\base.html:3 .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3
+msgid "en"
+msgstr "he"
+
+#: .\templates\base.html:3 .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3
+msgid "ltr"
+msgstr "rtl"
+
+#: .\templates\base.html:16
+msgid "My Subs"
+msgstr "ההחלפות שלי"
+
+#: .\templates\base.html:17
+msgid "Report Absence"
+msgstr "דווח על העדרות"
+
+#: .\templates\base.html:19
+msgid "Set Substitution"
+msgstr "קבע החלפות"
+
+#: .\templates\base.html:22
+msgid "Set Classes"
+msgstr "קבע שיעורים"
+
+#: .\templates\base.html:43
+msgid "Logout"
+msgstr "התנתק"
+
+#: .\templates\index.html:13 .\templates\registration\login.html:7
+msgid "Login"
+msgstr "התחבר"
+
+#: .\templates\index.html:26
+msgid "No Sub Yet"
+msgstr "טרם נקבע מחליף"
+
+#: .\templates\index.html:28
+msgid "Substitute Teacher:"
+msgstr "מורה מחליף:"
+
+#: .\templates\index.html:40
+msgid "No Subs For today!"
+msgstr "אין החלפות להיום!"
+
+#: .\templates\mySubs.html:20
+msgid "No Subs"
+msgstr "אין החלפות להיום"
+
+#: .\templates\registration\login.html:34 .\timetable\forms.py:39
+msgid "Name"
+msgstr "שם"
+
+#: .\templates\registration\login.html:42
+#: .\templates\registration\register.html:32
+msgid "login"
+msgstr "התחבר"
+
+#: .\templates\registration\login.html:59
+msgid "Lost password?"
+msgstr "שכחת סיסמה?"
+
+#: .\templates\registration\register.html:7
+msgid "Register"
+msgstr "הירשם"
+
+#: .\templates\reportAbsence.html:22
+msgid "Report"
+msgstr "דווח"
+
+#: .\templates\setClasses.html:61
+msgid "Add Class"
+msgstr "הוסף שיעור"
+
+#: .\templates\setSub.html:10
+msgid "change"
+msgstr "החלף"
 
 #: .\timetable\forms.py:10
 msgid "Date"
@@ -36,96 +115,94 @@ msgstr "תאריך"
 msgid "Reason"
 msgstr "סיבה"
 
+#: .\timetable\forms.py:17
+msgid "Subject"
+msgstr "נושא"
+
 #: .\timetable\forms.py:18
+msgid "Teacher"
+msgstr "מורה"
+
+#: .\timetable\forms.py:19
+msgid "Day"
+msgstr "יוום"
+
+#: .\timetable\forms.py:20
+msgid "Hour"
+msgstr "שעה"
+
+#: .\timetable\forms.py:29
 msgid "Class that needs sub"
 msgstr "שיעור שצריך החלפה"
 
-#: .\timetable\forms.py:24
+#: .\timetable\forms.py:35
 msgid "Password"
 msgstr "סיסמה"
 
-#: .\timetable\forms.py:25
+#: .\timetable\forms.py:36
 msgid "Phone"
 msgstr "מספר טלפון"
 
-#: .\timetable\forms.py:28 .\timetable\templates\registration\login.html:34
-msgid "Name"
-msgstr "שם"
-
-#: .\timetable\forms.py:29
+#: .\timetable\forms.py:40
 msgid "Email"
 msgstr "אימייל"
 
-#: .\timetable\templates\base.html:3
-#: .\timetable\templates\registration\login.html:3
-#: .\timetable\templates\registration\register.html:3
-msgid "en"
-msgstr "he"
+#: .\timetable\models.py:81
+msgid "Is a Student Teaching?"
+msgstr "מורים מלמדים?"
 
-#: .\timetable\templates\base.html:3
-#: .\timetable\templates\registration\login.html:3
-#: .\timetable\templates\registration\register.html:3
-msgid "ltr"
-msgstr "rtl"
+#: .\timetable\models.py:82
+msgid "Student Teaching"
+msgstr "מורה מלמד"
 
-#: .\timetable\templates\base.html:16
-msgid "My Subs"
-msgstr "ההחלפות שלי"
+#: .\timetable\models.py:83 .\timetable\models.py:98
+msgid "First Grade"
+msgstr "כיתה א'"
 
-#: .\timetable\templates\base.html:17
-msgid "Report Absence"
-msgstr "דווח על העדרות"
+#: .\timetable\models.py:84 .\timetable\models.py:99
+msgid "Second Grade"
+msgstr "כיתה ב'"
 
-#: .\timetable\templates\base.html:19
-msgid "Set Substitution"
-msgstr "קבע החלפות"
+#: .\timetable\models.py:85 .\timetable\models.py:100
+msgid "Third Grade"
+msgstr "כיתה ג'"
 
-#: .\timetable\templates\base.html:40
-msgid "Logout"
-msgstr "התנתק"
+#: .\timetable\models.py:86 .\timetable\models.py:101
+msgid "Fourth Grade"
+msgstr "כיתה ד'"
 
-#: .\timetable\templates\index.html:13
-#: .\timetable\templates\registration\login.html:7
-msgid "Login"
-msgstr "התחבר"
+#: .\timetable\models.py:87 .\timetable\models.py:102
+msgid "Fifth Grade"
+msgstr "כיתה ה'"
 
-#: .\timetable\templates\index.html:26
-msgid "No Sub Yet"
-msgstr "טרם נקבע מחליף"
+#: .\timetable\models.py:88 .\timetable\models.py:103
+msgid "Sixth Grade"
+msgstr "כיתה ו'"
 
-#: .\timetable\templates\index.html:28
-msgid "Substitute Teacher:"
-msgstr "מורה מחליף:"
+#: .\timetable\models.py:89 .\timetable\models.py:104
+msgid "Seventh Grade"
+msgstr "כיתה ז'"
 
-#: .\timetable\templates\index.html:39
-msgid "No Subs For today!"
-msgstr "אין החלפות להיום!"
+#: .\timetable\models.py:90 .\timetable\models.py:105
+msgid "Eighth Grade"
+msgstr "כיתה ח'"
 
-#: .\timetable\templates\mySubs.html:20
-msgid "No Subs"
-msgstr "אין החלפות להיום"
+#: .\timetable\models.py:91 .\timetable\models.py:106
+msgid "Ninth Grade"
+msgstr "כיתה ט'"
 
-#: .\timetable\templates\registration\login.html:42
-#: .\timetable\templates\registration\register.html:32
-msgid "login"
-msgstr "התחבר"
+#: .\timetable\models.py:92 .\timetable\models.py:107
+msgid "Tenth Grade"
+msgstr "כיתה י'"
 
-#: .\timetable\templates\registration\login.html:59
-msgid "Lost password?"
-msgstr "שכחת סיסמה?"
+#: .\timetable\models.py:93 .\timetable\models.py:108
+msgid "Eleventh Grade"
+msgstr "כיתה יא'"
 
-#: .\timetable\templates\registration\register.html:7
-msgid "Register"
-msgstr "הירשם"
+#: .\timetable\models.py:94 .\timetable\models.py:109
+msgid "Twelfth Grade"
+msgstr "כיתה יב'"
 
-#: .\timetable\templates\reportAbsence.html:22
-msgid "Report"
-msgstr "דווח"
-
-#: .\timetable\templates\setSub.html:10
-msgid "change"
-msgstr "החלף"
-
-#: .\timetable\views.py:37
+#: .\timetable\views.py:39
 msgid "Absence reported."
 msgstr "היעדרות דווחה."

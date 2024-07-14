@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 00:44+0300\n"
+"POT-Creation-Date: 2024-07-14 22:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\SubtitutesProject\settings.py:150
+#: .\SubtitutesProject\settings.py:151
 msgid "Hebrew"
 msgstr ""
 
-#: .\SubtitutesProject\settings.py:151
+#: .\SubtitutesProject\settings.py:152
 msgid "English"
+msgstr ""
+
+#: .\templates\base.html:3 .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3
+msgid "en"
+msgstr ""
+
+#: .\templates\base.html:3 .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3
+msgid "ltr"
+msgstr ""
+
+#: .\templates\base.html:16
+msgid "My Subs"
+msgstr ""
+
+#: .\templates\base.html:17
+msgid "Report Absence"
+msgstr ""
+
+#: .\templates\base.html:19
+msgid "Set Substitution"
+msgstr ""
+
+#: .\templates\base.html:22
+msgid "Set Classes"
+msgstr ""
+
+#: .\templates\base.html:43
+msgid "Logout"
+msgstr ""
+
+#: .\templates\index.html:13 .\templates\registration\login.html:7
+msgid "Login"
+msgstr ""
+
+#: .\templates\index.html:26
+msgid "No Sub Yet"
+msgstr ""
+
+#: .\templates\index.html:28
+msgid "Substitute Teacher:"
+msgstr ""
+
+#: .\templates\index.html:40
+msgid "No Subs For today!"
+msgstr ""
+
+#: .\templates\mySubs.html:20
+msgid "No Subs"
+msgstr ""
+
+#: .\templates\registration\login.html:34 .\timetable\forms.py:39
+msgid "Name"
+msgstr ""
+
+#: .\templates\registration\login.html:42
+#: .\templates\registration\register.html:32
+msgid "login"
+msgstr ""
+
+#: .\templates\registration\login.html:59
+msgid "Lost password?"
+msgstr ""
+
+#: .\templates\registration\register.html:7
+msgid "Register"
+msgstr ""
+
+#: .\templates\reportAbsence.html:22
+msgid "Report"
+msgstr ""
+
+#: .\templates\setClasses.html:61
+msgid "Add Class"
+msgstr ""
+
+#: .\templates\setSub.html:10
+msgid "change"
 msgstr ""
 
 #: .\timetable\forms.py:10
@@ -34,96 +113,94 @@ msgstr ""
 msgid "Reason"
 msgstr ""
 
+#: .\timetable\forms.py:17
+msgid "Subject"
+msgstr ""
+
 #: .\timetable\forms.py:18
-msgid "Class that needs sub"
+msgid "Teacher"
 msgstr ""
 
-#: .\timetable\forms.py:24
-msgid "Password"
+#: .\timetable\forms.py:19
+msgid "Day"
 msgstr ""
 
-#: .\timetable\forms.py:25
-msgid "Phone"
-msgstr ""
-
-#: .\timetable\forms.py:28 .\timetable\templates\registration\login.html:34
-msgid "Name"
+#: .\timetable\forms.py:20
+msgid "Hour"
 msgstr ""
 
 #: .\timetable\forms.py:29
+msgid "Class that needs sub"
+msgstr ""
+
+#: .\timetable\forms.py:35
+msgid "Password"
+msgstr ""
+
+#: .\timetable\forms.py:36
+msgid "Phone"
+msgstr ""
+
+#: .\timetable\forms.py:40
 msgid "Email"
 msgstr ""
 
-#: .\timetable\templates\base.html:3
-#: .\timetable\templates\registration\login.html:3
-#: .\timetable\templates\registration\register.html:3
-msgid "en"
+#: .\timetable\models.py:81
+msgid "Is a Student Teaching?"
 msgstr ""
 
-#: .\timetable\templates\base.html:3
-#: .\timetable\templates\registration\login.html:3
-#: .\timetable\templates\registration\register.html:3
-msgid "ltr"
+#: .\timetable\models.py:82
+msgid "Student Teaching"
 msgstr ""
 
-#: .\timetable\templates\base.html:16
-msgid "My Subs"
+#: .\timetable\models.py:83 .\timetable\models.py:98
+msgid "First Grade"
 msgstr ""
 
-#: .\timetable\templates\base.html:17
-msgid "Report Absence"
+#: .\timetable\models.py:84 .\timetable\models.py:99
+msgid "Second Grade"
 msgstr ""
 
-#: .\timetable\templates\base.html:19
-msgid "Set Substitution"
+#: .\timetable\models.py:85 .\timetable\models.py:100
+msgid "Third Grade"
 msgstr ""
 
-#: .\timetable\templates\base.html:40
-msgid "Logout"
+#: .\timetable\models.py:86 .\timetable\models.py:101
+msgid "Fourth Grade"
 msgstr ""
 
-#: .\timetable\templates\index.html:13
-#: .\timetable\templates\registration\login.html:7
-msgid "Login"
+#: .\timetable\models.py:87 .\timetable\models.py:102
+msgid "Fifth Grade"
 msgstr ""
 
-#: .\timetable\templates\index.html:26
-msgid "No Sub Yet"
+#: .\timetable\models.py:88 .\timetable\models.py:103
+msgid "Sixth Grade"
 msgstr ""
 
-#: .\timetable\templates\index.html:28
-msgid "Substitute Teacher:"
+#: .\timetable\models.py:89 .\timetable\models.py:104
+msgid "Seventh Grade"
 msgstr ""
 
-#: .\timetable\templates\index.html:39
-msgid "No Subs For today!"
+#: .\timetable\models.py:90 .\timetable\models.py:105
+msgid "Eighth Grade"
 msgstr ""
 
-#: .\timetable\templates\mySubs.html:20
-msgid "No Subs"
+#: .\timetable\models.py:91 .\timetable\models.py:106
+msgid "Ninth Grade"
 msgstr ""
 
-#: .\timetable\templates\registration\login.html:42
-#: .\timetable\templates\registration\register.html:32
-msgid "login"
+#: .\timetable\models.py:92 .\timetable\models.py:107
+msgid "Tenth Grade"
 msgstr ""
 
-#: .\timetable\templates\registration\login.html:59
-msgid "Lost password?"
+#: .\timetable\models.py:93 .\timetable\models.py:108
+msgid "Eleventh Grade"
 msgstr ""
 
-#: .\timetable\templates\registration\register.html:7
-msgid "Register"
+#: .\timetable\models.py:94 .\timetable\models.py:109
+msgid "Twelfth Grade"
 msgstr ""
 
-#: .\timetable\templates\reportAbsence.html:22
-msgid "Report"
-msgstr ""
-
-#: .\timetable\templates\setSub.html:10
-msgid "change"
-msgstr ""
-
-#: .\timetable\views.py:37
+#: .\timetable\views.py:39
 msgid "Absence reported."
 msgstr ""

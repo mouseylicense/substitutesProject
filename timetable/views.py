@@ -149,8 +149,12 @@ def timetable(request):
     classes = Class.objects.all()
     classesByHour = {}
     for c in classes:
+        grades = str(c.grade())
+        print(grades)
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [c.name + " " + c.teacher.username + " " + c.room.name]
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
+                {"name":c.name, "grades": grades,"teacher":c.teacher.username,"room":c.room.name}]
         else:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(c.name + " " + c.teacher.username + " " + c.room.name)
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades": grades,"teacher":c.teacher.username,"room":c.room.name})
+
     return render(request, "timetable.html", {"classesByHour": classesByHour})
