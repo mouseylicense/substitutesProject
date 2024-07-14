@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ classesByHour|json_script:"ClassesByHour" }}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+        .selected{
+            background-color: rebeccapurple;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 2px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th{
+            padding: 10px 20px;
+            text-align: center;
+        }
+        button{
+            border:0;
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 25px;
+            text-align: center;
+            background-color: white;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #343a40;
+        }
+        td{
+            border-right: 1px solid #dee2e6;
+
+            padding: 0;
+        }
+        .timerow{
+            align-items: stretch;
+            display: flex;
+        }
+        tr{
+            border-bottom: 1px solid #dee2e6;
+        }
+        .timeframe{
+            height: fit-content;
+            min-height: 40px;
+            width: 200px;
+            display:flex;
+            flex-direction: column;
+            text-align: center;
+            background-color: white;
+        }
+        .popup {
+          margin: 70px auto;
+          padding: 20px;
+          background: #fff;
+          border-radius: 5px;
+          width: 30%;
+          position: relative;
+          transition: all 5s ease-in-out;
+        }
+    </style>
+</head>
+<body id="body">
+
+<table id="table">
+    <tr class="timerow">
+
+        <th>08:30</th>
+        <td><div class=timeframe  id="Sunday-08:30" ></div></td>
+        <td><div class=timeframe  id="Monday-08:30" ></div></td>
+        <td><div class=timeframe  id="Tuesday-08:30" ></div></td>
+        <td><div class=timeframe  id="Wednesday-08:30" ></div></td>
+        <td><div class=timeframe  id="Thursday-08:30" ></div></td>
+    </tr>
+    <tr class="timerow">
+        <th>09:15</th>
+        <td><div class=timeframe  id="Sunday-09:15" ></div></td>
+        <td><div class=timeframe  id="Monday-09:15" ></div></td>
+        <td><div class=timeframe  id="Tuesday-09:15" ></div></td>
+        <td><div class=timeframe  id="Wednesday-09:15" ></div></td>
+        <td><div class=timeframe  id="Thursday-09:15" ></div></td>
+    </tr>
+    <tr class="timerow">
+        <th>10:07</th>
+        <td><div class=timeframe  id="Sunday-10:07" ></div></td>
+        <td><div class=timeframe  id="Monday-10:07" ></div></td>
+        <td><div class=timeframe  id="Tuesday-10:07" ></div></td>
+        <td><div class=timeframe  id="Wednesday-10:07" ></div></td>
+        <td><div class=timeframe  id="Thursday-10:07" ></div></td>
+    </tr>
+    <tr>
+        <th colspan="6">11:00</th>
+    </tr>
+    <tr class="timerow">
+        <th>11:45</th>
+        <td><div class=timeframe  id="Sunday-11:45" ></div></td>
+        <td><div class=timeframe  id="Monday-11:45" ></div></td>
+        <td><div class=timeframe  id="Tuesday-11:45" ></div></td>
+        <td><div class=timeframe  id="Wednesday-11:45" ></div></td>
+    </tr>
+    <tr class="timerow">
+        <th>12:45</th>
+        <td><div class=timeframe  id="Sunday-12:45" ></div></td>
+        <td><div class=timeframe  id="Monday-12:45" ></div></td>
+        <td><div class=timeframe  id="Tuesday-12:45" ></div></td>
+        <td><div class=timeframe  id="Wednesday-12:45" ></div></td>
+    </tr>
+</table>
+<script>
+    const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
+    console.log(classesByHour)
+        function markClasses(){
+        Object.keys(classesByHour).forEach(function(key) {
+           let div = document.getElementById(key)
+            for(let i = 0; i<classesByHour[key].length;i++){
+                let new_element = document.createElement("button")
+                new_element.innerText = classesByHour[key][i];
+                new_element.setAttribute("onclick","buttonClick(this);");
+                div.append(new_element)
+            }
+        });
+        }
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>Here i am</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			Thank to pop me out of that button, but now i'm done so you can close this window.
+		</div>
+	</div>
+</div>
+        function buttonClick(element){
+            let popup1 = document.createElement("div");
+            popup1.id = "popup1"
+            popup1.className
+            div.innerText = "test";
+            div.className = "popup";
+            document.getElementById("body").append(div)
+        }
+        markClasses()
+</script>
+</body>
+</html>

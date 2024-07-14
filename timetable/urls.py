@@ -11,4 +11,5 @@ urlpatterns = [
     path('setClasses/',views.setClasses,name='setClasses'),
     path('getRoom/',views.get_possible_rooms,name='possible_rooms'),
     path('getClasses/<int:n>',views.get_teacher_classes,name='get_classes'),
+    path('timetable/',views.timetable,name='timetable'),
 ]

@@ -90,7 +90,6 @@ def register(request):
 
 @permission_required('timetable.add_class')
 def setClasses(request):
-
     if request.method == 'POST':
         form = ClassForm(request.POST)
         if form.is_valid:
@@ -101,11 +100,11 @@ def setClasses(request):
     classes = Class.objects.all()
     classesByHour = {}
     for c in classes:
-        if (str(c.day_of_week)+"-"+str(c.hour)[:5]) not in classesByHour:
-            classesByHour[str(c.day_of_week)+"-"+str(c.hour)[:5]] = 1
+        if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = 1
         else:
-            classesByHour[str(c.day_of_week)+"-"+str(c.hour)[:5]] += 1
-    return render(request, "setClasses.html", {"form": form,"classesByHour":classesByHour})
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] += 1
+    return render(request, "setClasses.html", {"form": form, "classesByHour": classesByHour})
 
 
 @require_GET
@@ -144,3 +143,14 @@ def get_possible_subs(request, n):
     for teacher in teacherQuery:
         availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
     return JsonResponse({"availableTeachers": availableTeachers})
+
+
+def timetable(request):
+    classes = Class.objects.all()
+    classesByHour = {}
+    for c in classes:
+        if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [c.name + " " + c.teacher.username + " " + c.room.name]
+        else:
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(c.name + " " + c.teacher.username + " " + c.room.name)
+    return render(request, "timetable.html", {"classesByHour": classesByHour})
