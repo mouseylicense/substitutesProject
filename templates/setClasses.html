@@ -7,9 +7,11 @@
     <div class="container">
     <form action="{% url "setClasses" %}" method="post">
         {% csrf_token %}
+        {{ form.student_teacher }}{{ form.student_teacher.label }}
         <div class="two-fields">
             {{ form.name }}
             {{ form.teacher }}
+            {{ form.student_teaching }}
         </div>
         <table>
     <tr>
@@ -56,8 +58,32 @@
 </table>
 
         <div class="two-fields">{{ form.day_of_week }}{{ form.hour }}</div>
-        {{ form.room }}
 
+        {{ form.room }}
+        {{ form.first_grade }}
+        {{ form.first_grade.label }}
+        {{ form.second_grade }}
+        {{ form.second_grade.label }}
+        {{ form.third_grade }}
+        {{ form.third_grade.label }}
+        {{ form.fourth_grade }}
+        {{ form.fourth_grade.label }}
+        {{ form.fifth_grade }}
+        {{ form.fifth_grade.label }}
+        {{ form.sixth_grade }}
+        {{ form.sixth_grade.label }}
+        {{ form.seventh_grade }}
+        {{ form.seventh_grade.label }}
+        {{ form.eighth_grade }}
+        {{ form.eighth_grade.label }}
+        {{ form.ninth_grade }}
+        {{ form.ninth_grade.label }}
+        {{ form.tenth_grade }}
+        {{ form.tenth_grade.label }}
+        {{ form.eleventh_grade }}
+        {{ form.eleventh_grade.label }}
+        {{ form.twelfth_grade }}
+        {{ form.twelfth_grade.label }}
         <input type="submit"  value="{% trans "Add Class" %}">
     </form>
 {#    a script to act when the teacher field is changed and get hours where teacher cant teach#}
@@ -139,7 +165,22 @@
         })})
     }
 </script>
+<script>
+    const teacherSelect = document.getElementById("teacher")
+    const CheckBox = document.getElementById("isAStudentTeaching")
+    const studentTeacherInput = document.getElementById("studentTeaching")
+    function toggleTeacherStudent(checkbox){
+        if (CheckBox.checked){
+            teacherSelect.hidden = true;
+            studentTeacherInput.hidden = false;
+        }
+        else {
+            teacherSelect.hidden = false;
+            studentTeacherInput.hidden = true;
+        }
+    }
 
+</script>
         <style>
         body {
             font-family: Arial, sans-serif;

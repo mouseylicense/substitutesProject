@@ -19,9 +19,11 @@ class ClassForm(forms.ModelForm):
     day_of_week = forms.CharField(label=_("Day"),widget=forms.TextInput(attrs={"required":"","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;","id":"day"}))
     hour = forms.CharField(label=_("Hour"),widget=forms.TextInput(attrs={"required":"","id":"hour","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;"}))
     room = forms.ModelChoiceField(Room.objects,widget=forms.Select(attrs={'id': 'room',"disabled":""}))
+    student_teacher = forms.BooleanField(required=False,label=_("Is a Student Teaching?"),widget=forms.CheckboxInput(attrs={"onclick":'toggleTeacherStudent(this);','class':'checkbox','id':'isAStudentTeaching'}))
+    student_teaching = forms.CharField(required=False,widget=TextInput(attrs={'hidden':'','class':'subject-input','id':'studentTeaching'}))
     class Meta:
         model = Class
-        fields = ("teacher","name","day_of_week","hour","room")
+        fields = "__all__"
 
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(

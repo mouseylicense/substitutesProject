@@ -78,7 +78,7 @@ class Class(models.Model):
                  (datetime.time(13, 45), "13:45")])
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
-    students_teacher = models.BooleanField(default=False, verbose_name=_("Is a Student Teaching?"))
+    student_teacher = models.BooleanField(default=False, verbose_name=_("Is a Student Teaching?"))
     student_teaching = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Student Teaching"))
     first_grade = models.BooleanField(default=False, verbose_name=_("First Grade"))
     second_grade = models.BooleanField(default=False, verbose_name=_("Second Grade"))

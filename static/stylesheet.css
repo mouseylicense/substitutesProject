@@ -93,9 +93,9 @@ body{
     display: flex;
 }
 .subject-input{
+    padding:8px 20px 8px 0 !important;
     flex-grow: 1;
-        width: unset !important;
-    padding: unset !important;
+    width: unset !important;
     margin: unset !important;
     box-sizing: unset !important;
 }

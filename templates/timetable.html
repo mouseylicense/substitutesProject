@@ -12,10 +12,12 @@
             padding: 0;
         }
 
-        h1 {
-            text-align: center;
+        h1,h2,h3,h4 {
+            text-align: start;
             color: #343a40;
+            margin:5px;
         }
+
         .selected{
             background-color: rebeccapurple;
         }
@@ -38,6 +40,7 @@
             background-color: white;
         }
         th {
+            border-right: 1px solid #dee2e6;
             background-color: #f2f2f2;
             color: #343a40;
         }
@@ -61,15 +64,6 @@
             flex-direction: column;
             text-align: center;
             background-color: white;
-        }
-        .popup {
-          margin: 70px auto;
-          padding: 20px;
-          background: #fff;
-          border-radius: 5px;
-          width: 30%;
-          position: relative;
-          transition: all 5s ease-in-out;
         }
          /* The Modal (background) */
 .modal {
@@ -97,7 +91,7 @@
 /* The Close Button */
 .close {
   color: #aaa;
-  float: right;
+  float: {% trans "right" %};
   font-size: 28px;
   font-weight: bold;
 }
@@ -108,6 +102,18 @@
   text-decoration: none;
   cursor: pointer;
 }
+#day-row{
+    display: block;
+}
+#empty{
+    width: 40.9333333px;
+    height: 20px;
+}
+.day{
+    height: 40px;
+    padding:0;
+    width: 200px;
+}
     </style>
 </head>
 <body>
@@ -116,14 +122,25 @@
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div id="modal-content" class="modal-content">
     <span class="close">&times;</span>
-    <h1 id="name"></h1>
+    <h1 id="name-and-grades"></h1>
+      <h2 id="teacher"></h2>
+      <h3 id="room"></h3>
+      <h4 id="hour"></h4>
 
   </div>
 
 </div>
 <table>
+    <tr id="day-row">
+        <th id="empty"></th>
+        <th class="day">{% trans "Sunday" %}</th>
+        <th class="day">{% trans "Monday" %}</th>
+        <th class="day">{% trans "Tuesday" %}</th>
+        <th class="day">{% trans "Wednesday" %}</th>
+        <th class="day">{% trans "Thursday" %}</th>
+    </tr>
     <tr class="timerow">
 
         <th>08:30</th>
@@ -172,7 +189,7 @@
     const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
     console.log(classesByHour)
 
-    const modalText = document.getElementById("modalText")
+    const modalContent = document.getElementById("modal-content")
     const modal = document.getElementById("myModal");
     const span = document.getElementsByClassName("close")[0];
     function markClasses(){
@@ -185,14 +202,19 @@
                 new_element.dataset.room = classesByHour[key][i]["room"];
                 new_element.dataset.teacher = classesByHour[key][i]["teacher"];
                 new_element.dataset.grades = classesByHour[key][i]["grades"];
-                new_element.setAttribute("onclick","modalContent(this);")
+                new_element.dataset.hour = key.slice(-5)
+                new_element.setAttribute("onclick","setModalContent(this);")
                 div.append(new_element)
             }
         });
         }
 
-        function modalContent(element){
-            modalText.innerText = element.innerText;
+        function setModalContent(element){
+            modal.style.display = "block";
+            modalContent.querySelector("#name-and-grades").innerText = element.dataset.name + " - " + element.dataset.grades;
+            modalContent.querySelector("#teacher").innerText = element.dataset.teacher
+            modalContent.querySelector("#room").innerText = element.dataset.room
+            modalContent.querySelector("#hour").innerText = element.dataset.hour
             modal.style.display = "block";
         }
 
