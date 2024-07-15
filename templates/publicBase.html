@@ -1,0 +1,38 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
+<head>
+
+    {% load static %}
+    {% block static %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div class="topnav">
+    <a id="login" href="{% url "login" %}">{% trans "Login" %}</a>
+    <a class="{% if request.resolver_match.url_name == "index" %}active{% endif %}" href="{% url "index" %}">{% trans "Today's Subs" %}</a>
+    <a class="{% if request.resolver_match.url_name == "timetable" %}active{% endif %}" href="{% url "timetable" %}">{% trans "Schedule" %}</a>
+
+</div>
+
+
+
+{% block content %}
+{% endblock %}
+<footer style="position: absolute;bottom: 0">        {% get_current_language_bidi as LANGUAGE_BIDI %}
+            {% get_current_language as LANGUAGE_CODE %}
+<form  action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                <input name="next" type="hidden" value="{% url request.resolver_match.url_name %}">
+                <select style="width: 100%" name="language" onchange="this.form.submit()">
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}" {%if language.code == LANGUAGE_CODE%}selected{%endif%}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </form></footer>

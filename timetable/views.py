@@ -66,7 +66,7 @@ def sub(request):
         else:
             print(form.errors)
     form = forms.SubstituteForm(initial={'substitute_teacher': "None selected"})
-    return render(request, 'setSub.html', {"form": form})
+    return render(request, 'setSub.html', {"form": form,"ClassesThatNeedSub":ClassNeedsSub.objects.count()})
 
 
 @login_required

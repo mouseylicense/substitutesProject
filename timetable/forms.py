@@ -15,12 +15,12 @@ class AbsenceForm(forms.Form):
 
 class ClassForm(forms.ModelForm):
     name = forms.CharField(label=_("Subject"),widget=forms.TextInput(attrs={'class': 'subject-input', 'placeholder': _('Subject')}))
-    teacher = forms.ModelChoiceField(Teacher.objects,label=_("Teacher"),widget=forms.Select(attrs={"style":"flex-grow:1",'class': 'select','id':'teacher'}))
+    teacher = forms.ModelChoiceField(Teacher.objects,required=False,label=_("Teacher"),widget=forms.Select(attrs={"style":"flex-grow:1",'class': 'select','id':'teacher'}))
     day_of_week = forms.CharField(label=_("Day"),widget=forms.TextInput(attrs={"required":"","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;","id":"day"}))
     hour = forms.CharField(label=_("Hour"),widget=forms.TextInput(attrs={"required":"","id":"hour","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;"}))
     room = forms.ModelChoiceField(Room.objects,widget=forms.Select(attrs={'id': 'room',"disabled":""}))
     student_teacher = forms.BooleanField(required=False,label=_("Is a Student Teaching?"),widget=forms.CheckboxInput(attrs={"onclick":'toggleTeacherStudent(this);','class':'checkbox','id':'isAStudentTeaching'}))
-    student_teaching = forms.CharField(required=False,widget=TextInput(attrs={'hidden':'','class':'subject-input','id':'studentTeaching'}))
+    student_teaching = forms.CharField(required=False,widget=TextInput(attrs={'placeholder':_("Student Teaching"),'hidden':'','class':'subject-input','id':'studentTeaching'}))
     class Meta:
         model = Class
         fields = "__all__"

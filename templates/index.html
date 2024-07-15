@@ -1,17 +1,7 @@
+{% extends 'publicBase.html' %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
-    <meta charset="UTF-8">
-    <title>Substitution</title>
-</head>
-<body>
-<div class="topnav">
-    <a href="{% url "login" %}">{% trans "Login" %}</a>
-</div>
+{% block title %}{% trans "Today's Subs" %}{% endblock %}
+{% block content %}
 <div class="sub-container">
 {% if Subs %}
 
@@ -39,5 +29,5 @@
         ">
             {%  trans "No Subs For today!" %}</h1>
     {% endif %}
-</body>
-</html>
+    </div>
+{% endblock %}

@@ -1,122 +1,11 @@
+{% extends 'publicBase.html' %}
+{% load static %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
-{{ classesByHour|json_script:"ClassesByHour" }}
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
 
-        h1,h2,h3,h4 {
-            text-align: start;
-            color: #343a40;
-            margin:5px;
-        }
-
-        .selected{
-            background-color: rebeccapurple;
-        }
-        table {
-            border-collapse: collapse;
-            margin: 20px auto;
-            background-color: #fff;
-            border: 2px solid #dee2e6;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        th{
-            padding: 10px 20px;
-            text-align: center;
-        }
-        button{
-            border:0;
-            border-bottom: 1px solid #dee2e6;
-            padding: 10px 25px;
-            text-align: center;
-            background-color: white;
-        }
-        th {
-            border-right: 1px solid #dee2e6;
-            background-color: #f2f2f2;
-            color: #343a40;
-        }
-        td{
-            border-right: 1px solid #dee2e6;
-
-            padding: 0;
-        }
-        .timerow{
-            align-items: stretch;
-            display: flex;
-        }
-        tr{
-            border-bottom: 1px solid #dee2e6;
-        }
-        .timeframe{
-            height: fit-content;
-            min-height: 40px;
-            width: 200px;
-            display:flex;
-            flex-direction: column;
-            text-align: center;
-            background-color: white;
-        }
-         /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: {% trans "right" %};
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-#day-row{
-    display: block;
-}
-#empty{
-    width: 40.9333333px;
-    height: 20px;
-}
-.day{
-    height: 40px;
-    padding:0;
-    width: 200px;
-}
-    </style>
-</head>
-<body>
+{% block static %}    <link rel="stylesheet" type="text/css" href="{% static 'timetable.css' %}">{% endblock %}
+{% block title %}{% trans "Schedule" %}{% endblock %}
+{% block content %}
+    {{ classesByHour|json_script:"ClassesByHour" }}
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -185,46 +74,5 @@
     </tr>
 
 </table>
-<script>
-    const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
-    console.log(classesByHour)
-
-    const modalContent = document.getElementById("modal-content")
-    const modal = document.getElementById("myModal");
-    const span = document.getElementsByClassName("close")[0];
-    function markClasses(){
-        Object.keys(classesByHour).forEach(function(key) {
-           let div = document.getElementById(key)
-            for(let i = 0; i<classesByHour[key].length;i++){
-                let new_element = document.createElement("button")
-                new_element.innerText = classesByHour[key][i]["name"] + " - " + classesByHour[key][i]["teacher"] + " - " + classesByHour[key][i]["grades"] + " - " + classesByHour[key][i]["room"];
-                new_element.dataset.name = classesByHour[key][i]["name"];
-                new_element.dataset.room = classesByHour[key][i]["room"];
-                new_element.dataset.teacher = classesByHour[key][i]["teacher"];
-                new_element.dataset.grades = classesByHour[key][i]["grades"];
-                new_element.dataset.hour = key.slice(-5)
-                new_element.setAttribute("onclick","setModalContent(this);")
-                div.append(new_element)
-            }
-        });
-        }
-
-        function setModalContent(element){
-            modal.style.display = "block";
-            modalContent.querySelector("#name-and-grades").innerText = element.dataset.name + " - " + element.dataset.grades;
-            modalContent.querySelector("#teacher").innerText = element.dataset.teacher
-            modalContent.querySelector("#room").innerText = element.dataset.room
-            modalContent.querySelector("#hour").innerText = element.dataset.hour
-            modal.style.display = "block";
-        }
-
-
-
-    // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-        markClasses()
-</script>
-</body>
-</html>
+<script type="javascript" src="{% static 'timetable.js' %}"></script>
+{% endblock %}

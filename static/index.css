@@ -30,16 +30,30 @@ h1,h2,h3{
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
+.topnav a:dir(rtl) {
     color:black;
   font-family: helvetica, arial, sans-serif;
-  float: left;
+  float: right;
   text-align: center;
   padding: 30px 20px;
   text-decoration: none;
   font-size: 17px;
 }
-
+.topnav a:dir(ltr){
+    float:left;
+    color:black;
+  font-family: helvetica, arial, sans-serif;
+  text-align: center;
+  padding: 30px 20px;
+  text-decoration: none;
+  font-size: 17px;
+}
+#login:dir(rtl){
+    float:left
+}
+#login:dir(ltr){
+    float:right
+}
 /* Change the color of links on hover */
 .topnav a:hover {
     background-color: #366e63;

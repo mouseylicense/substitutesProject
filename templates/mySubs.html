@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block title %}{% trans "My Subs" %}{% endblock %}
 {% block content %}
     {% if mySubs %}
         {% for sub in mySubs %}

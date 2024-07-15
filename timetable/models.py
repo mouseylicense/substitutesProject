@@ -63,7 +63,7 @@ class Absence(models.Model):
 # removes classes that needs sub if absence is deleted
 @receiver(post_delete, sender=Absence)
 def remove_classes(sender, instance, using, **kwargs):
-    c = ClassNeedsSub.objects.filter(teacher=instance.teacher, date=instance.date)
+    c = ClassNeedsSub.objects.filter(substitute_teacher=instance.teacher, date=instance.date)
     for i in c:
         i.delete()
         i.save()
@@ -125,8 +125,10 @@ class Class(models.Model):
         return None
 
     def __str__(self):
-        return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.username
-
+        if self.teacher:
+            return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.username
+        else:
+            return str(self.hour)[:5] + " --- " + self.name + " - " + self.student_teaching
 
 class ClassNeedsSub(models.Model):
     Class_That_Needs_Sub = models.ForeignKey(Class, on_delete=models.CASCADE)
