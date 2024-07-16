@@ -1,5 +1,6 @@
 
 # Substitutes Project (Still looking for a name 😐)
+#### **RUN WITH INCLUDED DOCKER COMPOSE**
 
 This is a school project (not homework!) to help school manage teacher substitutions,
 A teacher (super teacher) enters all classes, and when teachers report Absences classes are marked that they need a Substitution,The super teacher then can mark who Substitutes that class.
@@ -31,42 +32,6 @@ after creating your own superuser with the Admin panel
 | Username  | Password |
 |-----------|----------|
 | Delete_Me | Example  |
-docker-compose.yaml:
 
-```yaml
-version: '3.8'
-services:
-  db:
-    image: mysql:9.0.0
-    container_name: Substitutes_DB
-    restart: unless-stopped
-    volumes:
-      - ./data/conf.d:/etc/mysql/conf.d
-      - ./data/logs:/logs
-      - /usr/local/var/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: subs
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3303:3306"
-    healthcheck:
-      test: ["CMD", "mysql", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}", "-e", "SELECT 1"]
-      timeout: 20s
-      retries: 10
-  backend:
-    image: mouseylicense/substitutes:latest
-    container_name: Substitutes_backend
-    restart: unless-stopped
-    ports:
-      - "5858:5858"
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
-volumes:
-  data:
-```
+
 
