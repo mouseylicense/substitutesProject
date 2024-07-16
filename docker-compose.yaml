@@ -21,9 +21,7 @@ services:
       retries: 10
 
   backend:
-    image: mouseylicense/substitutes:v3
-    command:
-      - sh -c python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput
+    image: mouseylicense/substitutes:v3.00
     container_name: Substitutes_backend
     restart: unless-stopped
     ports:

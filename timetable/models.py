@@ -92,6 +92,10 @@ class Class(models.Model):
     tenth_grade = models.BooleanField(default=False, verbose_name=_("Tenth Grade"))
     eleventh_grade = models.BooleanField(default=False, verbose_name=_("Eleventh Grade"))
     twelfth_grade = models.BooleanField(default=False, verbose_name=_("Twelfth Grade"))
+    class Meta:
+        permissions = (
+            ('see_classes',"can add classes"),
+        )
 
     def grade(self):
         number_to_grade = {
@@ -134,7 +138,10 @@ class ClassNeedsSub(models.Model):
     Class_That_Needs_Sub = models.ForeignKey(Class, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
     substitute_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
-
+    class Meta:
+        permissions = (
+            ("see_subs","can Set Substitutions"),
+        )
     def __str__(self):
         if self.substitute_teacher is None:
             return str(self.date) + " - " + str(self.Class_That_Needs_Sub)

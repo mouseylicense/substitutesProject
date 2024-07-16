@@ -1,6 +1,6 @@
 
 # Substitutes Project (Still looking for a name 😐)
-#### **RUN WITH INCLUDED DOCKER COMPOSE**
+#### **RUNNING WITH INCLUDED DOCKER COMPOSE IS RECOMMENDED**
 
 This is a school project (not homework!) to help school manage teacher substitutions,
 A teacher (super teacher) enters all classes, and when teachers report Absences classes are marked that they need a Substitution,The super teacher then can mark who Substitutes that class.

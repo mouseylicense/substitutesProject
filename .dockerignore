@@ -1,3 +1,4 @@
 .env
 readme.md
 .venv
+docker-compose.yaml
