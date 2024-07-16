@@ -23,10 +23,13 @@ some environment variables need to be defined in an .env file:
 | DB_ROOT_PASSWORD    | Database Root Password                                              |
 | DJANGO_SECRET_KEY   | The Django Secret Key (optional)                                    |
 | DJANGO_DEBUG        | True or False, Choose if django should run in debug mode (optional) |
-After Running the containers, this command should be run to create a super user:
-``` shell
-~$ docker exec -it Substitutes_backend python manage.py createsuperuser
-```
+After Running the containers, A default superuser will be created, the user should be **deleted**
+after creating your own superuser with the Admin panel 
+(create user as usual in user/register/ then change to superuser). The credentials for the default superuser:
+
+| Username  | Password |
+|-----------|----------|
+| Delete_Me | Example  |
 docker-compose.yaml:
 
 ```yaml
