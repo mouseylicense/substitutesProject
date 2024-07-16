@@ -38,7 +38,6 @@ class RegistrationForm(forms.ModelForm):
     phone_number = forms.CharField(label=_('Phone'),
                                    widget=forms.TextInput(attrs={'type': 'tel', "pattern": "[0-9]{10}"}),
                                    min_length=10, max_length=10)
-    name = forms.CharField(label=_("Name"))
     email = forms.EmailField(label=_("Email"))
     class Meta:
         model = Teacher

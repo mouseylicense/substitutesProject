@@ -17,10 +17,10 @@
         {% block sidebar %}
               <a class="{% if request.resolver_match.url_name == "mySubs" %}active{% endif %}" href="{% url 'mySubs' %}">{% trans "My Subs" %}</a>
               <a class="{% if request.resolver_match.url_name == "reportAbsence" %}active{% endif %}" href="{% url 'reportAbsence' %}">{%  trans "Report Absence" %}</a>
-            {% if perms.timetable.add_classneedssub %}
+            {% if perms.timetable.see_subs %}
                 <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">{%  trans "Set Substitution" %}</a>
             {% endif %}
-            {% if perms.timetable.add_class %}
+            {% if perms.timetable.see_classes %}
                 <a class="{% if request.resolver_match.url_name == "setClasses" %}active{% endif %}" href="{% url 'setClasses' %}">{%  trans "Set Classes" %}</a>
             {% endif %}
 <div style="margin-top: auto">

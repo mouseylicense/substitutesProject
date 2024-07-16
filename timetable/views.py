@@ -49,7 +49,7 @@ def reportAbsence(request):
     return render(request, "reportAbsence.html", {"form": form})
 
 
-@permission_required('timetable.add_classneedssub', login_url='/user/login/')
+@permission_required('timetable.see_subs', login_url='/user/login/')
 def sub(request):
     if request.method == 'POST':
         form = forms.SubstituteForm(request.POST)
@@ -88,7 +88,7 @@ def register(request):
     return render(request, 'registration/register.html', {"form": form})
 
 
-@permission_required('timetable.add_class')
+@permission_required('timetable.see_classes')
 def setClasses(request):
     if request.method == 'POST':
         form = ClassForm(request.POST)
