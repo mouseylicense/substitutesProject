@@ -1,4 +1,5 @@
 .env
 readme.md
-.venv
+.venv/
 docker-compose.yaml
+static_output/

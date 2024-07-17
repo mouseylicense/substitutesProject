@@ -21,7 +21,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
     const TeacherSelect = document.getElementById("teacher")
     function changeTimetable(){
         const selectedClass = TeacherSelect;
-        const url = `http://127.0.0.1:8000/getClasses/${selectedClass.value}`;
+        const url = `/getClasses/${selectedClass.value}`;
         console.log(selectedClass)
         fetch(url)
         .then(response => response.json())
@@ -64,7 +64,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
         [day , hour] = test.id.split("-")
         hourField.value = hour
         dayField.value = day
-        fetch(`{% url "possible_rooms" %}?hour=${hour}&day=${day}`)
+        fetch(`/getRoom/?hour=${hour}&day=${day}`)
         .then(response => response.json())
         .then(data => {
         data.availableRooms.forEach((branch) => {
