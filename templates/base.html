@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html lang={% trans "en" %} dir="{% trans "ltr" %}">
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
+<link rel="manifest" href="{% static 'manifest.json' %}">
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'sidebar.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
@@ -21,7 +22,7 @@
                 <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">{%  trans "Set Substitution" %}</a>
             {% endif %}
             {% if perms.timetable.see_classes %}
-                <a class="{% if request.resolver_match.url_name == "setClasses" %}active{% endif %}" href="{% url 'setClasses' %}">{%  trans "Set Classes" %}</a>
+                <a id="setClasses" class="{% if request.resolver_match.url_name == "setClasses" %}active{% endif %}" href="{% url 'setClasses' %}">{%  trans "Set Classes" %}</a>
             {% endif %}
 <div style="margin-top: auto">
             {% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -51,4 +52,11 @@
         {% endblock %}
     </div>
 </body>
+<script>
+ if (!navigator.serviceWorker.controller) {
+     navigator.serviceWorker.register("{% static 'serviceworker.js' %}").then(function(reg) {
+         console.log("Service worker has been registered for scope: " + reg.scope);
+     });
+ }
+</script>
 </html>

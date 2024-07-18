@@ -152,9 +152,17 @@ def timetable(request):
         grades = str(c.grade())
         print(grades)
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
+            if c.teacher:
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
                 {"name":c.name, "grades": grades,"teacher":c.teacher.username,"room":c.room.name}]
+            else:
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
+                {"name":c.name, "grades": grades,"teacher":c.student_teaching,"room":c.room.name}]
         else:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades": grades,"teacher":c.teacher.username,"room":c.room.name})
+            if c.teacher:
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades": grades,"teacher":c.teacher.username,"room":c.room.name})
+            else:
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades": grades,"teacher":c.student_teaching,"room":c.room.name})
+
 
     return render(request, "timetable.html", {"classesByHour": classesByHour})

@@ -52,8 +52,14 @@ div.content {
     width: 100%;
     height: auto;
     position: relative;
+    flex-direction: row;
   }
-  .sidebar a {float: left;}
+  .sidebar a {
+    flex-shrink: 1;
+    float: left;
+    padding:8px;
+    width: 25%;
+  }
   div.content {margin-left: 0;}
 }
 

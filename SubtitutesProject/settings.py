@@ -134,10 +134,10 @@ STATIC_ROOT = 'static_output'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = "/mySubs"
-LOGIN_URL = '/user/login'
+LOGIN_REDIRECT_URL = "/teacher/mySubs"
+LOGIN_URL = '/teacher/user/login'
 AUTH_USER_MODEL = 'timetable.Teacher'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/teacher/user/login'
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

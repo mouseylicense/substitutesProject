@@ -29,6 +29,8 @@ h1,h2,h3{
   overflow: hidden;
 }
 
+
+
 /* Style the links inside the navigation bar */
 .topnav a:dir(rtl) {
     color:black;
@@ -58,4 +60,12 @@ h1,h2,h3{
 .topnav a:hover {
     background-color: #366e63;
     color: white;
+}
+
+@media screen and (max-width: 800px){
+  .topnav a{
+      padding:9px 6px !important;
+
+  }
+
 }

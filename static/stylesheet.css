@@ -110,3 +110,22 @@ button[disabled]{
   background-color: #366e63;
   color: white !important;
 }
+@media screen and (max-width: 700px) {
+  .content{
+      margin-right:0 !important;
+  }
+    .sub-row{
+        font-size: x-small;
+        grid-template-columns: 20% 80%;
+    }
+    .sub-row h1{
+        flex-grow: 1;
+    }
+    .sub-details{
+        flex-shrink: 1;
+        padding: 0 15px;
+    }
+    #setClasses{
+        display: none;
+    }
+}
