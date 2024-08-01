@@ -9,7 +9,6 @@
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-
   <!-- Modal content -->
   <div id="modal-content" class="modal-content">
     <span class="close">&times;</span>
@@ -23,28 +22,101 @@
 </div>
     <div class="filtering">
         <div class="class-filter">
-            <label for="first-grade">{% trans "first grade" %}</label><input value="1" id="first-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="second-grade">{% trans "second grade" %}</label><input value="2" id="second-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="third-grade">{% trans "third grade" %}</label><input value="3" id="third-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="fourth-grade">{% trans "fourth grade" %}</label><input value="4" id="fourth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="fifth-grade">{% trans "fifth grade" %}</label><input value="5" id="fifth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="sixth-grade">{% trans "sixth grade" %}</label><input value="6" id="sixth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="seventh-grade">{% trans "seventh grade" %}</label><input value="7" id="seventh-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="eighth-grade">{% trans "eighth grade" %}</label><input value="8" id="eighth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="ninth-grade">{% trans "ninth grade" %}</label><input value="9" id="ninth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="tenth-grade">{% trans "tenth grade" %}</label><input value="10" id="tenth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="eleventh-grade">{% trans "eleventh grade" %}</label><input value="11" id="eleventh-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
-            <label for="twelfth-grade">{% trans "twelfth grade" %}</label><input value="12" id="twelfth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+           <div>
+    <label class="container-checkbox" for="first-grade">
+        {% trans "First Grade" %}
+        <input value="1" id="first-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="second-grade">
+        {% trans "Second Grade" %}
+        <input value="2" id="second-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="third-grade">
+        {% trans "Third Grade" %}
+        <input value="3" id="third-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="fourth-grade">
+        {% trans "Fourth Grade" %}
+        <input value="4" id="fourth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="fifth-grade">
+        {% trans "Fifth Grade" %}
+        <input value="5" id="fifth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="sixth-grade">
+        {% trans "Sixth Grade" %}
+        <input value="6" id="sixth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="seventh-grade">
+        {% trans "Seventh Grade" %}
+        <input value="7" id="seventh-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="eighth-grade">
+        {% trans "Eighth Grade" %}
+        <input value="8" id="eighth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="ninth-grade">
+        {% trans "Ninth Grade" %}
+        <input value="9" id="ninth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="tenth-grade">
+        {% trans "Tenth Grade" %}
+        <input value="10" id="tenth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="eleventh-grade">
+        {% trans "Eleventh Grade" %}
+        <input value="11" id="eleventh-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div>
+    <label class="container-checkbox" for="twelfth-grade">
+        {% trans "Twelfth Grade" %}
+        <input value="12" id="twelfth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
+        <span class="checkmark"></span>
+    </label>
+</div>
 
-            
+
         </div>
+        <input class="button" type="button" onclick="uncheck()" value="uncheck">
         <select onchange="filterTeachers()" id="teacher-select">
-            <option disabled selected value> ---- </option>
+            <option selected value> ---- </option>
             {% for teacher in teachers  %}
             <option id="{{ teacher }}">{{ teacher }}</option>
             {% endfor %}
         </select>
-    
+
     </div>
     <div class="table-container">
 <table>
@@ -102,6 +174,11 @@
 
 </table>
         </div>
+    <style>
+    .filterGrade,.teacherFilter{
+        display:none;
+    }
+    </style>
 <script type="text/javascript" src="{% static 'timetable.js' %}"></script>
 <script type="text/javascript" src="{% static 'filters.js' %}"></script>
 {% endblock %}
