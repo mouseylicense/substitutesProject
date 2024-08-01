@@ -11,6 +11,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
                 let new_element = document.createElement("button")
                 new_element.innerText = classesByHour[key][i]["name"] + " - " + classesByHour[key][i]["teacher"] + " - " + classesByHour[key][i]["grades_display"] + " - " + classesByHour[key][i]["room"];
                 new_element.dataset.name = classesByHour[key][i]["name"];
+                new_element.className = "class"
                 new_element.dataset.room = classesByHour[key][i]["room"];
                 new_element.dataset.teacher = classesByHour[key][i]["teacher"];
                 new_element.dataset.grades = classesByHour[key][i]["grades_display"];
