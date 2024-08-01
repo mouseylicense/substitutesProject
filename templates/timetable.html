@@ -21,6 +21,30 @@
   </div>
 
 </div>
+    <div class="filtering">
+        <div class="class-filter">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            
+        </div>
+        <select>
+            {% for teacher in teachers  %}
+            <option id="{{ teacher }}">{{ teacher }}</option>
+            {% endfor %}
+        </select>
+    
+    </div>
     <div class="table-container">
 <table>
     <tr id="day-row">

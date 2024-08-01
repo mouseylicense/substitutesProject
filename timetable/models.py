@@ -97,7 +97,19 @@ class Class(models.Model):
             ('see_classes',"can add classes"),
         )
 
-    def grade(self):
+    def all_grades(self):
+        grades = [self.first_grade, self.second_grade, self.third_grade, self.fourth_grade, self.fifth_grade,
+                  self.sixth_grade, self.seventh_grade, self.eighth_grade, self.ninth_grade, self.tenth_grade,
+                  self.eleventh_grade, self.twelfth_grade]
+        i = 1
+        grades_positive = []
+        for grade in grades:
+            if grade:
+                grades_positive.append(i)
+            i += 1
+        return grades_positive
+
+    def str_grades(self):
         number_to_grade = {
             1: _("First Grade"),
             2: _("Second Grade"),
@@ -117,11 +129,10 @@ class Class(models.Model):
                   self.eleventh_grade, self.twelfth_grade]
 
         if True in grades:
-            last_occurrence = 0
+            rev = grades.copy()
+            rev.reverse()
+            last_occurrence = len(grades) - rev.index(True)
             first_occurrence = grades.index(True) + 1
-            for grade in grades:
-                if grade == True:
-                    last_occurrence += 1
             if last_occurrence == first_occurrence:
                 return number_to_grade[first_occurrence]
             first_and_last = str(number_to_grade[first_occurrence]) + " - " + str(number_to_grade[last_occurrence])

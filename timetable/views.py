@@ -147,22 +147,25 @@ def get_possible_subs(request, n):
 
 def timetable(request):
     classes = Class.objects.all()
+    teachers = []
+    for t in Teacher.objects.all():
+        teachers.append(t.username)
     classesByHour = {}
     for c in classes:
-        grades = str(c.grade())
-        print(grades)
+        grades = str(c.str_grades())
+        grades_all = str(c.all_grades())
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
             if c.teacher:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                {"name":c.name, "grades": grades,"teacher":c.teacher.username,"room":c.room.name}]
+                {"name":c.name, "all_grades":grades_all,"grades_display": grades,"teacher":c.teacher.username,"room":c.room.name}]
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                {"name":c.name, "grades": grades,"teacher":c.student_teaching,"room":c.room.name}]
+                {"name":c.name,"all_grades":grades_all, "grades_display": grades,"teacher":c.student_teaching,"room":c.room.name}]
         else:
             if c.teacher:
-                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades": grades,"teacher":c.teacher.username,"room":c.room.name})
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades_display": grades,"all_grades":grades_all,"teacher":c.teacher.username,"room":c.room.name})
             else:
-                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades": grades,"teacher":c.student_teaching,"room":c.room.name})
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades_display": grades,"all_grades":grades_all,"teacher":c.student_teaching,"room":c.room.name})
 
 
-    return render(request, "timetable.html", {"classesByHour": classesByHour})
+    return render(request, "timetable.html", {"classesByHour": classesByHour,"teachers":teachers})
