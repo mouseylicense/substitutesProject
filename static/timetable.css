@@ -126,16 +126,35 @@
     display: flex;
     flex-direction: column;
     padding: 5px;
-    border-right: #c8ffd4 solid 2px;
+    border-right: #305a54 solid 2px;
     height: 100%;
-    background-color: #fbfbff;
+    background-color: rgba(241, 248, 232, 0.2);
 }
 .filtering:dir(rtl){
-    float: right !important;
     width: 10%;
+    float: right !important;
     display: flex;
     flex-direction: column;
+    padding: 5px;
+    border-left: #305a54 solid 2px;
+    height: 100%;
+    background-color: rgba(241, 248, 232, 0.2);
 }
+
+.button{
+    color: #f3f3f3;
+    padding:10px;
+    background-color: #1e4a41;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition-duration: 0.5s;
+}
+
+.button:hover{
+    box-shadow: 5px 10px 15px rgba(0,0,0,0.24);
+}
+
 
 /* checkbox design from w3schools */
 /* The container */
@@ -195,10 +214,10 @@
 
 /* Style the checkmark/indicator */
 .container-checkbox .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
+  left: 4.5px;
+  top: 2.5px;
+  width: 2.5px;
+  height: 5px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);

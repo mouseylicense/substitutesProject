@@ -28,17 +28,14 @@ function filterGrades(){
         }
     }
     if(grades.length > 0){
-    console.log(grades)
     for(let i=0;i<classes.length;i++){
-        console.log("run")
         for(let j=0;j<grades.length;j++){
-            console.log(classes[i].dataset.all_grades);
-            console.log(JSON.parse(classes[i].dataset.all_grades));
-            if(JSON.parse(classes[i].dataset.all_grades).indexOf(grades[j])){
+            if(JSON.parse(classes[i].dataset.all_grades).indexOf(grades[j])===-1){
                 classes[i].classList.add("filterGrade");
             }
             else {
                 classes[i].classList.remove("filterGrade");
+                break
             }
         }
     }}
@@ -49,11 +46,13 @@ function filterGrades(){
     }
 }
 function uncheck(){
+    teacher.value=""
     for(const checkbox of checkboxes){
         if(checkbox.checked){
             checkbox.checked=false
 
         }
     }
+    filterTeachers()
     filterGrades()
 }

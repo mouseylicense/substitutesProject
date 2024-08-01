@@ -109,13 +109,15 @@
 
 
         </div>
-        <input class="button" type="button" onclick="uncheck()" value="uncheck">
+        <label> {% trans "Teacher" %}:
         <select onchange="filterTeachers()" id="teacher-select">
-            <option selected value> ---- </option>
+            <option selected value> -------- </option>
             {% for teacher in teachers  %}
             <option id="{{ teacher }}">{{ teacher }}</option>
             {% endfor %}
         </select>
+        </label>
+            <input class="button" type="button" onclick="uncheck()" value="{% trans "Uncheck All" %}">
 
     </div>
     <div class="table-container">
