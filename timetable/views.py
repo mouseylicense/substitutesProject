@@ -146,6 +146,9 @@ def get_possible_subs(request, n):
 
 
 def timetable(request):
+    rooms = []
+    for room in Room.objects.all():
+        rooms.append(room.name)
     classes = Class.objects.all()
     teachers = []
     for t in Teacher.objects.all():
@@ -168,4 +171,4 @@ def timetable(request):
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades_display": grades,"all_grades":grades_all,"teacher":c.student_teaching,"room":c.room.name})
 
 
-    return render(request, "timetable.html", {"classesByHour": classesByHour,"teachers":teachers})
+    return render(request, "timetable.html", {"classesByHour": classesByHour,"teachers":teachers,"rooms":rooms})

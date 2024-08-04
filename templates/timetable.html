@@ -6,6 +6,7 @@
 {% block title %}{% trans "Schedule" %}{% endblock %}
 {% block content %}
     {{ classesByHour|json_script:"ClassesByHour" }}
+    {{ rooms|json_script:"rooms" }}
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -120,6 +121,15 @@
             <input class="button" type="button" onclick="uncheck()" value="{% trans "Uncheck All" %}">
 
     </div>
+    <div class="timetable">
+    <div class="tabContainer">
+        <div id="classes-tab" onclick="classTabClick()" class="tab selectedtab">
+            <h1>Classes</h1>
+        </div>
+        <div id="free-tab" onclick="roomsTabClick()" class="tab">
+            <h1>Free Rooms</h1>
+        </div>
+    </div>
     <div class="table-container">
 <table>
     <tr id="day-row">
@@ -175,6 +185,9 @@
     
 
 </table>
+
+        </div>
+
         </div>
     <style>
     .filterGrade,.teacherFilter{

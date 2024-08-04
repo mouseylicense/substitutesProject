@@ -62,6 +62,8 @@ h1,h2,h3{
     color: white;
 }
 
+
+
 @media screen and (max-width: 800px){
   .topnav a{
       padding:9px 6px !important;
@@ -74,4 +76,42 @@ body,html{
     margin:0;
     width:100%;
     height:100%;
+}
+
+
+
+
+.tabContainer{
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    height:6%;
+}
+
+.tab{
+    transition-duration: 1s;
+    background-color: red;
+    flex-grow:1;
+    margin:0;
+    max-height: 90%;
+}
+
+.tab h1{
+    transition-duration: 0.5s;
+    margin:inherit;
+    text-align: center;
+}
+.selectedtab h1{
+    color:white;
+}
+.selectedtab{
+    color: white;
+    transition: 0.5s ease-in;
+    max-height:100%;
+    background-color: purple;
+}
+.timetable{
+    height: 100%;
+  display: flex;
+  flex-direction: column;
 }

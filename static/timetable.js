@@ -1,6 +1,9 @@
 const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
-    console.log(classesByHour)
-
+const rooms = JSON.parse(document.getElementById("rooms").textContent)
+    console.log(rooms)
+const classesTab = document.getElementById("classes-tab")
+const roomsTab = document.getElementById("free-tab")
+const timeframes = document.getElementsByClassName("timeframe")
     const modalContent = document.getElementById("modal-content")
     const modal = document.getElementById("myModal");
     const span = document.getElementsByClassName("close")[0];
@@ -39,3 +42,33 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
           modal.style.display = "none";
         }
         markClasses()
+
+function classTabClick(){
+        clearAll()
+        markClasses()
+        roomsTab.classList.remove("selectedtab");
+        classesTab.classList.add("selectedtab");
+}
+function roomsTabClick(){
+        classesTab.classList.remove("selectedtab");
+        roomsTab.classList.add("selectedtab");
+        clearAll()
+        for(let i=0; i<timeframes.length; i++){
+            for(let j=0; j<rooms.length;j++){
+                console.log(timeframes[i].id)
+                let new_element = document.createElement("button")
+                new_element.innerText = rooms[j];
+                new_element.className = "class"
+                timeframes[i].appendChild(new_element)
+            }
+        }
+
+}
+
+function clearAll(){
+        for(let i = 0;i<timeframes.length;i++){
+            while (timeframes[i].firstChild){
+                timeframes[i].removeChild(timeframes[i].lastChild)
+            }
+        }
+}
