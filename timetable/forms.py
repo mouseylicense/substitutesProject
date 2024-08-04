@@ -54,7 +54,8 @@ class ScheduleForm(forms.ModelForm):
             "student":HiddenInput(),
         }
     def __init__(self, *args, **kwargs):
-        student= args[0]['student']
+        print(args)
+        student = args[0]['student']
         # student = False
         super().__init__(*args, **kwargs)
         filter_query = {NUMBERS_TO_GRADES[Student.objects.get(pk=student).grade]:True}

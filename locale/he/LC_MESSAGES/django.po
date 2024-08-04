@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: .\templates\thanks.html:25
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-04 13:45+0300\n"
-"PO-Revision-Date: 2024-08-04 13:46+0300\n"
+"POT-Creation-Date: 2024-08-04 21:04+0300\n"
+"PO-Revision-Date: 2024-08-04 21:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -30,13 +31,13 @@ msgstr "אנגלית"
 
 #: .\templates\base.html:3 .\templates\publicBase.html:3
 #: .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
 msgid "en"
 msgstr "he"
 
 #: .\templates\base.html:3 .\templates\publicBase.html:3
 #: .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
 msgid "ltr"
 msgstr "rtl"
 
@@ -121,67 +122,79 @@ msgstr "החלף"
 msgid "No Classes To Sub"
 msgstr "אין שיעורים שצריכים החלפות"
 
-#: .\templates\timetable.html:28 .\timetable\models.py:83
-#: .\timetable\models.py:114
+#: .\templates\set_schedule.html:10
+msgid "Set Your Schedule"
+msgstr "קבע את המערכת שלך"
+
+#: .\templates\set_schedule.html:26
+msgid "Set!"
+msgstr "קבע!"
+
+#: .\templates\thanks.html:20
+msgid "Success!"
+msgstr "הושלם!"
+
+#: .\templates\timetable.html:28 .\timetable\models.py:102
+#: .\timetable\models.py:134
 msgid "First Grade"
 msgstr "כיתה א'"
 
-#: .\templates\timetable.html:35 .\timetable\models.py:84
-#: .\timetable\models.py:115
+#: .\templates\timetable.html:35 .\timetable\models.py:103
+#: .\timetable\models.py:135
 msgid "Second Grade"
 msgstr "כיתה ב'"
 
-#: .\templates\timetable.html:42 .\timetable\models.py:85
-#: .\timetable\models.py:116
+#: .\templates\timetable.html:42 .\timetable\models.py:104
+#: .\timetable\models.py:136
 msgid "Third Grade"
 msgstr "כיתה ג'"
 
-#: .\templates\timetable.html:49 .\timetable\models.py:86
-#: .\timetable\models.py:117
+#: .\templates\timetable.html:49 .\timetable\models.py:105
+#: .\timetable\models.py:137
 msgid "Fourth Grade"
 msgstr "כיתה ד'"
 
-#: .\templates\timetable.html:56 .\timetable\models.py:87
-#: .\timetable\models.py:118
+#: .\templates\timetable.html:56 .\timetable\models.py:106
+#: .\timetable\models.py:138
 msgid "Fifth Grade"
 msgstr "כיתה ה'"
 
-#: .\templates\timetable.html:63 .\timetable\models.py:88
-#: .\timetable\models.py:119
+#: .\templates\timetable.html:63 .\timetable\models.py:107
+#: .\timetable\models.py:139
 msgid "Sixth Grade"
 msgstr "כיתה ו'"
 
-#: .\templates\timetable.html:70 .\timetable\models.py:89
-#: .\timetable\models.py:120
+#: .\templates\timetable.html:70 .\timetable\models.py:108
+#: .\timetable\models.py:140
 msgid "Seventh Grade"
 msgstr "כיתה ז'"
 
-#: .\templates\timetable.html:77 .\timetable\models.py:90
-#: .\timetable\models.py:121
+#: .\templates\timetable.html:77 .\timetable\models.py:109
+#: .\timetable\models.py:141
 msgid "Eighth Grade"
 msgstr "כיתה ח'"
 
-#: .\templates\timetable.html:84 .\timetable\models.py:91
-#: .\timetable\models.py:122
+#: .\templates\timetable.html:84 .\timetable\models.py:110
+#: .\timetable\models.py:142
 msgid "Ninth Grade"
 msgstr "כיתה ט'"
 
-#: .\templates\timetable.html:91 .\timetable\models.py:92
-#: .\timetable\models.py:123
+#: .\templates\timetable.html:91 .\timetable\models.py:111
+#: .\timetable\models.py:143
 msgid "Tenth Grade"
 msgstr "כיתה י'"
 
-#: .\templates\timetable.html:98 .\timetable\models.py:93
-#: .\timetable\models.py:124
+#: .\templates\timetable.html:98 .\timetable\models.py:112
+#: .\timetable\models.py:144
 msgid "Eleventh Grade"
 msgstr "כיתה יא'"
 
-#: .\templates\timetable.html:105 .\timetable\models.py:94
-#: .\timetable\models.py:125
+#: .\templates\timetable.html:105 .\timetable\models.py:113
+#: .\timetable\models.py:145
 msgid "Twelfth Grade"
 msgstr "כיתה יב'"
 
-#: .\templates\timetable.html:113 .\timetable\forms.py:18
+#: .\templates\timetable.html:113 .\timetable\forms.py:32
 msgid "Teacher"
 msgstr "מורה"
 
@@ -197,73 +210,86 @@ msgstr "שיעורים"
 msgid "Free Rooms"
 msgstr "חדרים פנויים"
 
-#: .\templates\timetable.html:137
+#: .\templates\timetable.html:137 .\timetable\models.py:202
+#: .\timetable\models.py:205 .\timetable\models.py:208
+#: .\timetable\models.py:211
 msgid "Sunday"
 msgstr "ראשון"
 
-#: .\templates\timetable.html:138
+#: .\templates\timetable.html:138 .\timetable\models.py:214
+#: .\timetable\models.py:217 .\timetable\models.py:220
+#: .\timetable\models.py:223
 msgid "Monday"
 msgstr "שני"
 
-#: .\templates\timetable.html:139
+#: .\templates\timetable.html:139 .\timetable\models.py:226
+#: .\timetable\models.py:229 .\timetable\models.py:233
+#: .\timetable\models.py:236
 msgid "Tuesday"
 msgstr "שלישי"
 
-#: .\templates\timetable.html:140
+#: .\templates\timetable.html:140 .\timetable\models.py:240
+#: .\timetable\models.py:244 .\timetable\models.py:248
+#: .\timetable\models.py:252
 msgid "Wednesday"
 msgstr "רביעי"
 
-#: .\templates\timetable.html:141
+#: .\templates\timetable.html:141 .\timetable\models.py:256
+#: .\timetable\models.py:260
 msgid "Thursday"
 msgstr "חמישי"
 
-#: .\timetable\forms.py:10
+#: .\timetable\forms.py:24
 msgid "Date"
 msgstr "תאריך"
 
-#: .\timetable\forms.py:11 .\timetable\forms.py:12
+#: .\timetable\forms.py:25 .\timetable\forms.py:26
 msgid "Reason"
 msgstr "סיבה"
 
-#: .\timetable\forms.py:17
+#: .\timetable\forms.py:31
 msgid "Subject"
 msgstr "נושא"
 
-#: .\timetable\forms.py:19
+#: .\timetable\forms.py:33
 msgid "Day"
-msgstr "יוום"
+msgstr "יום"
 
-#: .\timetable\forms.py:20
+#: .\timetable\forms.py:34
 msgid "Hour"
 msgstr "שעה"
 
-#: .\timetable\forms.py:22 .\timetable\models.py:81
+#: .\timetable\forms.py:36 .\timetable\models.py:100
 msgid "Is a Student Teaching?"
 msgstr "תלמידים מלמדים?"
 
-#: .\timetable\forms.py:23 .\timetable\models.py:82
+#: .\timetable\forms.py:37 .\timetable\models.py:101
 msgid "Student Teaching"
 msgstr "תלמיד שמלמד"
 
-#: .\timetable\forms.py:31
+#: .\timetable\forms.py:45
 msgid "Class that needs sub"
 msgstr "שיעור שצריך החלפה"
 
-#: .\timetable\forms.py:37
+#: .\timetable\forms.py:70
 msgid "Password"
 msgstr "סיסמה"
 
-#: .\timetable\forms.py:38
+#: .\timetable\forms.py:71
 msgid "Phone"
 msgstr "מספר טלפון"
 
-#: .\timetable\forms.py:41
+#: .\timetable\forms.py:74
 msgid "Email"
 msgstr "אימייל"
 
 #: .\timetable\views.py:39
 msgid "Absence reported."
 msgstr "היעדרות דווחה."
+
+#: .\timetable\views.py:186
+msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
+msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין שזו תקלה, פנה לצוות מחשבים"
 
 #~ msgid "right"
 #~ msgstr "left"

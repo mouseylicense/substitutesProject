@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .forms import RegistrationForm, ClassForm, ScheduleForm
 from .models import *
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
 from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
@@ -184,7 +184,19 @@ def set_schedule(request,uuid):
         return render(request, "thanks.html" )
     if Schedule.objects.filter(student__uuid=uuid).exists():
         return HttpResponse(_("A Schedule for This Student already Exists,Please Contact T.E.D!"))
-    else:
+    elif Student.objects.filter(uuid=uuid).exists():
         form = ScheduleForm({"student":uuid})
+        return render(request,"set_schedule.html",{"form":form,"name":Student.objects.get(uuid=uuid).name})
 
-    return render(request,"set_schedule.html",{"form":form,"name":Student.objects.get(uuid=uuid).name})
+    return HttpResponse(Http404)
+
+def schedule_manager(request):
+    students = []
+
+    for student in Student.objects.all().order_by('schedule'):
+        if Schedule.objects.filter(student__uuid=student.uuid).exists():
+            students.append({student:True})
+        else:
+            students.append({student:False})
+    print(students)
+    return render(request,"schedule_manager.html",{"students":students})

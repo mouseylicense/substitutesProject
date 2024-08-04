@@ -20,3 +20,13 @@ select {
     border: #D8EFD3 solid 1px;
     border-radius: 3px;
 }
+.field{
+    font-family: helvetica, arial, sans-serif;
+    padding: 10px;
+}
+input[type=submit]{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8f8e8;
+    border: #d2c895 solid 3px;
+}
