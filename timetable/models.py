@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 import datetime
@@ -20,6 +21,36 @@ DAYS_OF_WEEKDAY = [
     ("Wednesday", 'Wednesday'),
     ("Thursday", 'Thursday')
 ]
+GRADES = [
+    (0, 'First Grade'),
+    (1, 'Second Grade'),
+    (2, 'Third Grade'),
+    (3, 'Fourth Grade'),
+    (4, 'Fifth Grade'),
+    (5, 'Sixth Grade'),
+    (6, 'Seventh Grade'),
+    (7, 'Eighth Grade'),
+    (8, 'Ninth Grade'),
+    (9, 'Tenth Grade'),
+    (10, 'Eleventh Grade'),
+    (11, 'Twelfth Grade'),
+    (12, 'Graduate')
+]
+NUMBERS_TO_GRADES = {
+    0:"First Grade",
+    1:"Second Grade",
+    2:"Third Grade",
+    3:"Fourth Grade",
+    4:"Fifth Grade",
+    5:"Sixth Grade",
+    6:"Seventh Grade",
+    7:"Eighth Grade",
+    8:"Ninth Grade",
+    9:"Tenth Grade",
+    10:"Eleventh Grade",
+    11:"Twelfth Grade",
+    12:"Graduate"
+}
 
 
 # Create your models here.
@@ -35,6 +66,8 @@ class Teacher(AbstractUser):
     Tuesday = models.BooleanField(default=True)
     Wednesday = models.BooleanField(default=True)
     Thursday = models.BooleanField(default=True)
+    tutor = models.BooleanField(default=False)
+    shocher = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', 'phone_number']
@@ -92,9 +125,10 @@ class Class(models.Model):
     tenth_grade = models.BooleanField(default=False, verbose_name=_("Tenth Grade"))
     eleventh_grade = models.BooleanField(default=False, verbose_name=_("Eleventh Grade"))
     twelfth_grade = models.BooleanField(default=False, verbose_name=_("Twelfth Grade"))
+
     class Meta:
         permissions = (
-            ('see_classes',"can add classes"),
+            ('see_classes', "can add classes"),
         )
 
     def all_grades(self):
@@ -145,17 +179,38 @@ class Class(models.Model):
         else:
             return str(self.hour)[:5] + " --- " + self.name + " - " + self.student_teaching
 
+
 class ClassNeedsSub(models.Model):
     Class_That_Needs_Sub = models.ForeignKey(Class, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
     substitute_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
+
     class Meta:
         permissions = (
-            ("see_subs","can Set Substitutions"),
+            ("see_subs", "can Set Substitutions"),
         )
+
     def __str__(self):
         if self.substitute_teacher is None:
             return str(self.date) + " - " + str(self.Class_That_Needs_Sub)
         else:
             return "✔ " + str(self.date) + " - " + str(self.Class_That_Needs_Sub.hour) + " " + str(
                 self.Class_That_Needs_Sub.name) + " Sub:" + str(self.substitute_teacher.username)
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=50)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=10)
+    grade = models.IntegerField(max_length=2, choices=GRADES, default="")
+    tutor = models.ForeignKey(Teacher, on_delete=models.CASCADE, limit_choices_to={'tutor': True}, null=True,
+                              blank=True)
+    shacharit = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True,
+                                  limit_choices_to={'shocher': True}, related_name="shacharit")
+    def __str__(self):
+        return self.name
+
+class Schedule(models.Model):
+    Student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    sunday_first = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,limit_choices_to={'day_of_week':"Sunday","hour":datetime.time(8,30),NUMBERS_TO_GRADES[Student.grade]:True})
