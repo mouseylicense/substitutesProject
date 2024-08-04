@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-02 00:34+0300\n"
-"PO-Revision-Date: 2024-08-02 00:37+0300\n"
+"POT-Creation-Date: 2024-08-04 13:45+0300\n"
+"PO-Revision-Date: 2024-08-04 13:46+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -121,87 +121,99 @@ msgstr "החלף"
 msgid "No Classes To Sub"
 msgstr "אין שיעורים שצריכים החלפות"
 
-#: .\templates\timetable.html:27 .\timetable\models.py:83
+#: .\templates\timetable.html:28 .\timetable\models.py:83
 #: .\timetable\models.py:114
 msgid "First Grade"
 msgstr "כיתה א'"
 
-#: .\templates\timetable.html:34 .\timetable\models.py:84
+#: .\templates\timetable.html:35 .\timetable\models.py:84
 #: .\timetable\models.py:115
 msgid "Second Grade"
 msgstr "כיתה ב'"
 
-#: .\templates\timetable.html:41 .\timetable\models.py:85
+#: .\templates\timetable.html:42 .\timetable\models.py:85
 #: .\timetable\models.py:116
 msgid "Third Grade"
 msgstr "כיתה ג'"
 
-#: .\templates\timetable.html:48 .\timetable\models.py:86
+#: .\templates\timetable.html:49 .\timetable\models.py:86
 #: .\timetable\models.py:117
 msgid "Fourth Grade"
 msgstr "כיתה ד'"
 
-#: .\templates\timetable.html:55 .\timetable\models.py:87
+#: .\templates\timetable.html:56 .\timetable\models.py:87
 #: .\timetable\models.py:118
 msgid "Fifth Grade"
 msgstr "כיתה ה'"
 
-#: .\templates\timetable.html:62 .\timetable\models.py:88
+#: .\templates\timetable.html:63 .\timetable\models.py:88
 #: .\timetable\models.py:119
 msgid "Sixth Grade"
 msgstr "כיתה ו'"
 
-#: .\templates\timetable.html:69 .\timetable\models.py:89
+#: .\templates\timetable.html:70 .\timetable\models.py:89
 #: .\timetable\models.py:120
 msgid "Seventh Grade"
 msgstr "כיתה ז'"
 
-#: .\templates\timetable.html:76 .\timetable\models.py:90
+#: .\templates\timetable.html:77 .\timetable\models.py:90
 #: .\timetable\models.py:121
 msgid "Eighth Grade"
 msgstr "כיתה ח'"
 
-#: .\templates\timetable.html:83 .\timetable\models.py:91
+#: .\templates\timetable.html:84 .\timetable\models.py:91
 #: .\timetable\models.py:122
 msgid "Ninth Grade"
 msgstr "כיתה ט'"
 
-#: .\templates\timetable.html:90 .\timetable\models.py:92
+#: .\templates\timetable.html:91 .\timetable\models.py:92
 #: .\timetable\models.py:123
 msgid "Tenth Grade"
 msgstr "כיתה י'"
 
-#: .\templates\timetable.html:97 .\timetable\models.py:93
+#: .\templates\timetable.html:98 .\timetable\models.py:93
 #: .\timetable\models.py:124
 msgid "Eleventh Grade"
 msgstr "כיתה יא'"
 
-#: .\templates\timetable.html:104 .\timetable\models.py:94
+#: .\templates\timetable.html:105 .\timetable\models.py:94
 #: .\timetable\models.py:125
 msgid "Twelfth Grade"
 msgstr "כיתה יב'"
 
-#: .\templates\timetable.html:112
+#: .\templates\timetable.html:113 .\timetable\forms.py:18
+msgid "Teacher"
+msgstr "מורה"
+
+#: .\templates\timetable.html:121
 msgid "Uncheck All"
 msgstr "נקה הכל"
 
-#: .\templates\timetable.html:125
+#: .\templates\timetable.html:127
+msgid "Classes"
+msgstr "שיעורים"
+
+#: .\templates\timetable.html:130
+msgid "Free Rooms"
+msgstr "חדרים פנויים"
+
+#: .\templates\timetable.html:137
 msgid "Sunday"
 msgstr "ראשון"
 
-#: .\templates\timetable.html:126
+#: .\templates\timetable.html:138
 msgid "Monday"
 msgstr "שני"
 
-#: .\templates\timetable.html:127
+#: .\templates\timetable.html:139
 msgid "Tuesday"
 msgstr "שלישי"
 
-#: .\templates\timetable.html:128
+#: .\templates\timetable.html:140
 msgid "Wednesday"
 msgstr "רביעי"
 
-#: .\templates\timetable.html:129
+#: .\templates\timetable.html:141
 msgid "Thursday"
 msgstr "חמישי"
 
@@ -216,10 +228,6 @@ msgstr "סיבה"
 #: .\timetable\forms.py:17
 msgid "Subject"
 msgstr "נושא"
-
-#: .\timetable\forms.py:18
-msgid "Teacher"
-msgstr "מורה"
 
 #: .\timetable\forms.py:19
 msgid "Day"

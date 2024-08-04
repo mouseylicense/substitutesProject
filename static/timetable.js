@@ -1,6 +1,7 @@
 const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
 const rooms = JSON.parse(document.getElementById("rooms").textContent)
     console.log(rooms)
+const filtering = document.getElementsByClassName("filtering")[0]
 const classesTab = document.getElementById("classes-tab")
 const roomsTab = document.getElementById("free-tab")
 const timeframes = document.getElementsByClassName("timeframe")
@@ -44,27 +45,57 @@ const timeframes = document.getElementsByClassName("timeframe")
         markClasses()
 
 function classTabClick(){
+        filtering.style.pointerEvents = "unset";
+        filtering.style.maxWidth = "10%"
         clearAll()
         markClasses()
         roomsTab.classList.remove("selectedtab");
         classesTab.classList.add("selectedtab");
 }
 function roomsTabClick(){
+        uncheck()
         classesTab.classList.remove("selectedtab");
         roomsTab.classList.add("selectedtab");
+        filtering.style.pointerEvents = "none"
+        filtering.style.maxWidth = "1%";
         clearAll()
         for(let i=0; i<timeframes.length; i++){
-            for(let j=0; j<rooms.length;j++){
-                console.log(timeframes[i].id)
-                let new_element = document.createElement("button")
-                new_element.innerText = rooms[j];
-                new_element.className = "class"
-                timeframes[i].appendChild(new_element)
+            const unavailable_rooms = []
+            console.log(timeframes[i].id);
+            if(classesByHour[timeframes[i].id] !== undefined){
+            for(let k=0;k<classesByHour[timeframes[i].id].length;k++){
+                unavailable_rooms.push(classesByHour[timeframes[i].id][k].room);
             }
+            for(let j=0; j<rooms.length;j++){
+                if(!unavailable_rooms.includes(rooms[j])){
+                    let new_element = document.createElement("button")
+                    new_element.innerText = rooms[j];
+                    new_element.className = "class"
+                    timeframes[i].appendChild(new_element)
+            }}}
+            else{
+               for(let j=0; j<rooms.length;j++){
+                    let new_element = document.createElement("button")
+                    new_element.innerText = rooms[j];
+                    new_element.className = "class"
+                    timeframes[i].appendChild(new_element)
+            }
+
         }
 
-}
+}}
 
+function uncheck(){
+    teacher.value=""
+    for(const checkbox of checkboxes){
+        if(checkbox.checked){
+            checkbox.checked=false
+
+        }
+    }
+    filterTeachers()
+    filterGrades()
+}
 function clearAll(){
         for(let i = 0;i<timeframes.length;i++){
             while (timeframes[i].firstChild){
