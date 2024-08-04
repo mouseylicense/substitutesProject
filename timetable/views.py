@@ -1,6 +1,7 @@
 import json
 import logging
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.mail import send_mail
 from django.forms import model_to_dict
 from django.views.decorators.http import require_GET
 from . import forms
@@ -66,7 +67,7 @@ def sub(request):
         else:
             print(form.errors)
     form = forms.SubstituteForm(initial={'substitute_teacher': "None selected"})
-    return render(request, 'setSub.html', {"form": form,"ClassesThatNeedSub":ClassNeedsSub.objects.count()})
+    return render(request, 'setSub.html', {"form": form, "ClassesThatNeedSub": ClassNeedsSub.objects.count()})
 
 
 @login_required
@@ -160,43 +161,63 @@ def timetable(request):
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
             if c.teacher:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                {"name":c.name, "all_grades":grades_all,"grades_display": grades,"teacher":c.teacher.username,"room":c.room.name}]
+                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.teacher.username,
+                     "room": c.room.name}]
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                {"name":c.name,"all_grades":grades_all, "grades_display": grades,"teacher":c.student_teaching,"room":c.room.name}]
+                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.student_teaching,
+                     "room": c.room.name}]
         else:
             if c.teacher:
-                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades_display": grades,"all_grades":grades_all,"teacher":c.teacher.username,"room":c.room.name})
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
+                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.teacher.username,
+                     "room": c.room.name})
             else:
-                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append({"name":c.name, "grades_display": grades,"all_grades":grades_all,"teacher":c.student_teaching,"room":c.room.name})
+                classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
+                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.student_teaching,
+                     "room": c.room.name})
+
+    return render(request, "timetable.html", {"classesByHour": classesByHour, "teachers": teachers, "rooms": rooms})
 
 
-    return render(request, "timetable.html", {"classesByHour": classesByHour,"teachers":teachers,"rooms":rooms})
-
-
-def set_schedule(request,uuid):
+def set_schedule(request, uuid):
     if request.method == "POST":
         form = ScheduleForm(request.POST)
         if form.is_valid():
             form.save()
         else:
             print(form.errors)
-        return render(request, "thanks.html" )
+        return render(request, "thanks.html")
     if Schedule.objects.filter(student__uuid=uuid).exists():
         return HttpResponse(_("A Schedule for This Student already Exists,Please Contact T.E.D!"))
     elif Student.objects.filter(uuid=uuid).exists():
-        form = ScheduleForm({"student":uuid})
-        return render(request,"set_schedule.html",{"form":form,"name":Student.objects.get(uuid=uuid).name})
+        form = ScheduleForm({"student": uuid})
+        return render(request, "set_schedule.html", {"form": form, "name": Student.objects.get(uuid=uuid).name})
 
-    return HttpResponse(Http404)
+    return Http404
 
+
+@permission_required('timetable.see_classes')
 def schedule_manager(request):
-    students = []
+    students = {}
 
     for student in Student.objects.all().order_by('schedule'):
         if Schedule.objects.filter(student__uuid=student.uuid).exists():
-            students.append({student:True})
+            students[student] = [True, student.uuid]
         else:
-            students.append({student:False})
-    print(students)
-    return render(request,"schedule_manager.html",{"students":students})
+            students[student] = [False, student.uuid]
+    return render(request, "schedule_manager.html", {"students": students})
+
+
+@login_required
+def send_email(request):
+    if request.method == "POST":
+        print(request.POST)
+        send_mail(
+            "Subject here",
+            "Here is the message.",
+            "from@example.com",
+            ["nevobloch@gmail.com"],
+            fail_silently=False,
+        )
+    return HttpResponse(200)

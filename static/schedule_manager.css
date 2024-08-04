@@ -1,0 +1,19 @@
+.students-list{
+    display:flex;
+    flex-direction: row;
+}
+.student{
+    display:flex;
+    font-size: xx-large;
+    background-color: mintcream;
+    border: 1px solid lightgray;
+}
+
+.reset-button{
+    background-color: red;
+    padding: 4px;
+    border-radius: 5px;
+    color: white;
+    border:none;
+    float: left;
+}
