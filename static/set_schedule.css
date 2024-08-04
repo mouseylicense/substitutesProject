@@ -1,0 +1,22 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #55AD9B;
+}
+
+.container{
+    margin: 5vh auto;
+    padding: 10px;
+    box-shadow: 10px 15px 15px rgba(0,0,0,0.2);
+    background-color:#F1F8E8;
+    border:#95D2B3 solid 3px;
+    width:fit-content;
+}
+select {
+    background-color: #fcfdf8;
+    padding: 8px 20px 8px 0;
+    border: #D8EFD3 solid 1px;
+    border-radius: 3px;
+}

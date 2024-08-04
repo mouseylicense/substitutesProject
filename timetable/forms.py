@@ -2,10 +2,24 @@ from _ast import Sub
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import *
-from django.forms import DateInput, Select, TextInput
+from django.forms import DateInput, Select, TextInput, HiddenInput
 from django.utils.translation import gettext_lazy as _
 
-
+NUMBERS_TO_GRADES = {
+    0:"first_grade",
+    1:"second_grade",
+    2:"third_grade",
+    3:"fourth_grade",
+    4:"fifth_grade",
+    5:"sixth_grade",
+    6:"seventh_grade",
+    7:"eighth_grade",
+    8:"ninth_grade",
+    9:"tenth_grade",
+    10:"eleventh_grade",
+    11:"twelfth_grade",
+    12:"Graduate"
+}
 class AbsenceForm(forms.Form):
     date = forms.DateField(label=_("Date"), widget=DateInput(attrs={'class': 'datepicker', 'type': 'date'}))
     reason = forms.CharField(label=_("Reason"),
@@ -32,6 +46,25 @@ class SubstituteForm(forms.Form):
         widget=forms.Select(attrs={'id': 'sub'}), empty_label=None)
     substitute_teacher = forms.CharField(widget=forms.Select(attrs={'id': 'teacher'}))
 
+class ScheduleForm(forms.ModelForm):
+    class Meta:
+        model = Schedule
+        fields = "__all__"
+        widgets={
+            "student":HiddenInput(),
+        }
+    def __init__(self, *args, **kwargs):
+        student= args[0]['student']
+        # student = False
+        super().__init__(*args, **kwargs)
+        filter_query = {NUMBERS_TO_GRADES[Student.objects.get(pk=student).grade]:True}
+        if student:
+            excluded_classes = Class.objects.filter(**filter_query)
+            for field_name in self.fields:
+                if field_name.startswith('sunday_') or field_name.startswith('monday_') or \
+                        field_name.startswith('tuesday_') or field_name.startswith('wednesday_') or \
+                        field_name.startswith('thursday_'):
+                    self.fields[field_name].queryset = self.fields[field_name].queryset.filter(**filter_query)
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(label=_('Password'), widget=forms.PasswordInput, min_length=8)

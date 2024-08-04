@@ -7,7 +7,7 @@ from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .forms import RegistrationForm, ClassForm
+from .forms import RegistrationForm, ClassForm, ScheduleForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
@@ -172,3 +172,19 @@ def timetable(request):
 
 
     return render(request, "timetable.html", {"classesByHour": classesByHour,"teachers":teachers,"rooms":rooms})
+
+
+def set_schedule(request,uuid):
+    if request.method == "POST":
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+        return render(request, "thanks.html" )
+    if Schedule.objects.filter(student__uuid=uuid).exists():
+        return HttpResponse(_("A Schedule for This Student already Exists,Please Contact T.E.D!"))
+    else:
+        form = ScheduleForm({"student":uuid})
+
+    return render(request,"set_schedule.html",{"form":form,"name":Student.objects.get(uuid=uuid).name})

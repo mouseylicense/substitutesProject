@@ -1,0 +1,28 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
+<head>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'set_schedule.css' %}">
+    <title>{% trans "Set Your Schedule" %}</title>
+</head>
+<body>
+<div class="container">
+<h1>{{ name }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div>
+                    {{ field.label }}:
+            {{ field }}
+
+        </div>
+    {% endfor %}
+    <input type="submit" value="{% trans "Set!" %}">
+</form>
+</div>
+</body>
+</html>
