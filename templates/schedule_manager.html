@@ -1,28 +1,34 @@
 {% extends "Base.html" %}
+{% load i18n %}
 {% load static %}
 {% block static %}<link rel="stylesheet" type="text/css" href="{% static 'schedule_manager.css' %}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{% endblock %}
+
 {% block title %}Schedule Manager{% endblock %}
 {% block content %}
+        <button type="button" id="reset-all" name="reset-all" onclick="confirm('{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}');sendEmail(a);window.location.reload()" class="btn btn-danger">{% trans "Reset ALL" %}</button>
     <div class="student-list">
     {% csrf_token %}
 {% for student,value in students.items %}
     {% if value.0 %}
     <div class="has_schedule student">
-        {{ student }} {% csrf_token %}<input name="uuid" type="hidden" value="{{ value.1 }}"><button type="submit" class="btn btn-danger" style="margin-right:auto" >Reset Schedule</button
+        {{ student }} - {% trans "Last Invite" %} : {{ value.2 }} <button onclick="sendEmail(this)" id="{{ value.1 }}" name="True" class="btn btn-danger" style="margin-right:auto" >{% trans "Reset Schedule" %}</button>
     </div>
     {% else %}
-        <div class="no_schedule student">{{ student }} {% csrf_token %}<button id="{{ value.1 }}" onclick="sendEmail(this)" style="margin-right: auto" class="btn btn-primary">Send Invite</button></div>
+        <div class="no_schedule student">{{ student }} - {% trans "Last Invite" %} : {{ value.2 }}<button name="False" id="{{ value.1 }}" onclick="alert('This will reload this page');sendEmail(this);window.location.reload()" style="margin-right: auto" class="btn btn-primary">{% trans "Send Invite" %}</button></div>
     {% endif %}
     {% endfor %}
     </div>
 
     <script>
       const url = "{% url "send_email" %}";
-      
+
       async function sendEmail(a) {
            let data = {
             'uuid': a.id,
+            'reset':a.name,
         };
         let csrftoken = getCookie('csrftoken');
         let response = fetch("{% url "send_email" %}", {
@@ -30,8 +36,8 @@
             body: JSON.stringify(data),
             headers: { "X-CSRFToken": csrftoken },
         })
-        
-        // The following function are copying from 
+        console.log(response)
+        // The following function are copying from
         // https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
         function getCookie(name) {
             var cookieValue = null;

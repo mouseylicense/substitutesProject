@@ -3,6 +3,7 @@ import logging
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from django.forms import model_to_dict
+from django.template.defaulttags import url
 from django.views.decorators.http import require_GET
 from . import forms
 from django.contrib import messages
@@ -203,21 +204,36 @@ def schedule_manager(request):
 
     for student in Student.objects.all().order_by('schedule'):
         if Schedule.objects.filter(student__uuid=student.uuid).exists():
-            students[student] = [True, student.uuid]
+            students[student] = [True, student.uuid,student.last_schedule_invite]
         else:
-            students[student] = [False, student.uuid]
+            students[student] = [False, student.uuid,student.last_schedule_invite]
     return render(request, "schedule_manager.html", {"students": students})
 
 
 @login_required
 def send_email(request):
+    print(request.GET)
     if request.method == "POST":
-        print(request.POST)
-        send_mail(
-            "Subject here",
-            "Here is the message.",
-            "from@example.com",
-            ["nevobloch@gmail.com"],
-            fail_silently=False,
-        )
+        payload = json.loads(request.body.decode("utf-8"))
+        student = Student.objects.get(uuid=payload["uuid"])
+        if payload["reset"] == "reset_all":
+            Schedule.objects.all().delete()
+        else:
+            if bool(payload["reset"]):
+                student.schedule.delete()
+                send_mail(
+                    "Schedule Reset",
+                    f'Hello {student.name},Your Schedule has been reset, please set it again at the following link: {request.get_host()}{reverse(set_schedule, args=[student.uuid])}',
+                    "no_reply@emekschool.org",
+                    [student.email],
+                    fail_silently=False,
+                )
+            else:
+                send_mail(
+                    "Set Schedule Invite!",
+                    f'Hello {student.name},please Set your school schedule in the following link {request.get_host()}{reverse(set_schedule,args=[student.uuid])}',
+                    "no_reply@emekschool.org",
+                    [student.email],
+                    fail_silently=False,
+                )
     return HttpResponse(200)

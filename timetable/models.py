@@ -194,6 +194,7 @@ class Student(models.Model):
                               blank=True)
     shacharit = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True,
                                   limit_choices_to={'shocher': True}, related_name="shacharit")
+    last_schedule_invite = models.DateTimeField(default=datetime.datetime.now())
     def __str__(self):
         return self.name
 

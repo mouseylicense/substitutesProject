@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-04 21:04+0300\n"
-"PO-Revision-Date: 2024-08-04 21:06+0300\n"
+"POT-Creation-Date: 2024-08-05 02:13+0300\n"
+"PO-Revision-Date: 2024-08-05 02:14+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -41,23 +41,23 @@ msgstr "he"
 msgid "ltr"
 msgstr "rtl"
 
-#: .\templates\base.html:19 .\templates\mySubs.html:3
+#: .\templates\base.html:20 .\templates\mySubs.html:3
 msgid "My Subs"
 msgstr "ההחלפות שלי"
 
-#: .\templates\base.html:20 .\templates\reportAbsence.html:3
+#: .\templates\base.html:21 .\templates\reportAbsence.html:3
 msgid "Report Absence"
 msgstr "דווח על העדרות"
 
-#: .\templates\base.html:22 .\templates\setSub.html:4
+#: .\templates\base.html:23 .\templates\setSub.html:4
 msgid "Set Substitution"
 msgstr "קבע החלפות"
 
-#: .\templates\base.html:25 .\templates\setClasses.html:4
+#: .\templates\base.html:26 .\templates\setClasses.html:4
 msgid "Set Classes"
 msgstr "קבע שיעורים"
 
-#: .\templates\base.html:46
+#: .\templates\base.html:47
 msgid "Logout"
 msgstr "התנתק"
 
@@ -110,6 +110,18 @@ msgstr "הירשם"
 msgid "Report"
 msgstr "דווח"
 
+#: .\templates\schedule_manager.html:13 .\templates\schedule_manager.html:16
+msgid "Last Invite"
+msgstr "הזמנה אחרונה"
+
+#: .\templates\schedule_manager.html:13
+msgid "Reset Schedule"
+msgstr "מחק מערכת"
+
+#: .\templates\schedule_manager.html:16
+msgid "Send Invite"
+msgstr "שלח הזמנה לקביעת מערכת"
+
 #: .\templates\setClasses.html:88
 msgid "Add Class"
 msgstr "הוסף שיעור"
@@ -126,7 +138,7 @@ msgstr "אין שיעורים שצריכים החלפות"
 msgid "Set Your Schedule"
 msgstr "קבע את המערכת שלך"
 
-#: .\templates\set_schedule.html:26
+#: .\templates\set_schedule.html:25
 msgid "Set!"
 msgstr "קבע!"
 
@@ -210,32 +222,32 @@ msgstr "שיעורים"
 msgid "Free Rooms"
 msgstr "חדרים פנויים"
 
-#: .\templates\timetable.html:137 .\timetable\models.py:202
-#: .\timetable\models.py:205 .\timetable\models.py:208
-#: .\timetable\models.py:211
+#: .\templates\timetable.html:137 .\timetable\models.py:203
+#: .\timetable\models.py:206 .\timetable\models.py:209
+#: .\timetable\models.py:212
 msgid "Sunday"
 msgstr "ראשון"
 
-#: .\templates\timetable.html:138 .\timetable\models.py:214
-#: .\timetable\models.py:217 .\timetable\models.py:220
-#: .\timetable\models.py:223
+#: .\templates\timetable.html:138 .\timetable\models.py:215
+#: .\timetable\models.py:218 .\timetable\models.py:221
+#: .\timetable\models.py:224
 msgid "Monday"
 msgstr "שני"
 
-#: .\templates\timetable.html:139 .\timetable\models.py:226
-#: .\timetable\models.py:229 .\timetable\models.py:233
-#: .\timetable\models.py:236
+#: .\templates\timetable.html:139 .\timetable\models.py:227
+#: .\timetable\models.py:230 .\timetable\models.py:234
+#: .\timetable\models.py:237
 msgid "Tuesday"
 msgstr "שלישי"
 
-#: .\templates\timetable.html:140 .\timetable\models.py:240
-#: .\timetable\models.py:244 .\timetable\models.py:248
-#: .\timetable\models.py:252
+#: .\templates\timetable.html:140 .\timetable\models.py:241
+#: .\timetable\models.py:245 .\timetable\models.py:249
+#: .\timetable\models.py:253
 msgid "Wednesday"
 msgstr "רביעי"
 
-#: .\templates\timetable.html:141 .\timetable\models.py:256
-#: .\timetable\models.py:260
+#: .\templates\timetable.html:141 .\timetable\models.py:257
+#: .\timetable\models.py:261
 msgid "Thursday"
 msgstr "חמישי"
 
@@ -271,25 +283,25 @@ msgstr "תלמיד שמלמד"
 msgid "Class that needs sub"
 msgstr "שיעור שצריך החלפה"
 
-#: .\timetable\forms.py:70
+#: .\timetable\forms.py:71
 msgid "Password"
 msgstr "סיסמה"
 
-#: .\timetable\forms.py:71
+#: .\timetable\forms.py:72
 msgid "Phone"
 msgstr "מספר טלפון"
 
-#: .\timetable\forms.py:74
+#: .\timetable\forms.py:75
 msgid "Email"
 msgstr "אימייל"
 
-#: .\timetable\views.py:39
+#: .\timetable\views.py:41
 msgid "Absence reported."
 msgstr "היעדרות דווחה."
 
-#: .\timetable\views.py:186
+#: .\timetable\views.py:193
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
-msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין שזו תקלה, פנה לצוות מחשבים"
+msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין שזו תקלה, פנה לצוות מחשבים!"
 
 #~ msgid "right"
 #~ msgstr "left"
