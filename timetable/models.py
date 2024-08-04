@@ -213,4 +213,42 @@ class Student(models.Model):
 
 class Schedule(models.Model):
     Student = models.OneToOneField(Student, on_delete=models.CASCADE)
-    sunday_first = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,limit_choices_to={'day_of_week':"Sunday","hour":datetime.time(8,30),NUMBERS_TO_GRADES[Student.grade]:True})
+
+    sunday_first = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(8, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    sunday_second = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(10, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    sunday_third = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                     limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(13, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    sunday_fourth = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(15, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    monday_first = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                     limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(8, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    monday_second = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(10, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    monday_third = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                     limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(13, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    monday_fourth = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(15, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    tuesday_first = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(8, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    tuesday_second = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                       limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(10, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    tuesday_third = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(13, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    tuesday_fourth = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                       limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(15, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    wednesday_first = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                        limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(8, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    wednesday_second = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                         limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(10, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    wednesday_third = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                        limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(13, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    wednesday_fourth = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                         limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(15, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    thursday_first = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                       limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(8, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    thursday_second = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                        limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(10, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    thursday_third = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                       limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(13, 30), NUMBERS_TO_GRADES[Student.grade]: True})
+    thursday_fourth = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True, blank=True,
+                                        limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(15, 30), NUMBERS_TO_GRADES[Student.grade]: True})
