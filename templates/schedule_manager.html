@@ -8,10 +8,11 @@
 
 {% block title %}{% trans "Manage Schedules" %}{% endblock %}
 {% block content %}
+    <div id="alert-box"></div>
     <div class="student-list">
-    <div class="button-div">
-        <button style="margin-bottom: 5px" type="button" id="invite-all" name="invite-all" onclick="confirm('{% trans "Warning, this will send an email to every student with no Schedule" %}');sendEmail(a);window.location.reload()" class="btn btn-warning">{% trans "Invite all" %}</button>
-        <button style="margin-bottom: 5px" type="button" id="reset-all" name="reset-all" onclick="confirm('{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}');sendEmail(a);window.location.reload()" class="btn btn-danger">{% trans "Reset ALL" %}</button>
+    <div style="margin-bottom: 5px" class="button-div">
+        <button type="button" id="invite-all" name="invite-all" onclick="if(confirm('{% trans "Warning, this will send an email to every student with no Schedule" %}')){console.log(sendEmail(this)); }" class="btn btn-warning">{% trans "Invite all" %}</button>
+        <button type="button" id="reset-all" name="reset-all" onclick="if(confirm('{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}')){sendEmail(this);window.location.reload()}" class="btn btn-danger">{% trans "Reset ALL" %}</button>
     </div>
     {% csrf_token %}
 {% for student,value in students.items %}
@@ -40,9 +41,20 @@
             headers: { "X-CSRFToken": csrftoken },
         }).then((response) => response.json())
   .then((data) => {
-      console.log(data["last_invite"])
-      console.log(a.parentElement.querySelector("#last-invite").textContent)
-      a.parentElement.querySelector("#last-invite").textContent = data["last_invite"]
+    if (a.id === "False" || a.id === "True"){
+          console.log(data)
+          console.log(a.parentElement.querySelector("#last-invite").textContent)
+          let new_element = document.createElement("div")
+          new_element.classList.add("alert")
+          new_element.classList.add("alert-success")
+          new_element.textContent = "{% trans "Invited" %}!"
+          document.getElementById("alert-box").appendChild(new_element)
+          a.parentElement.querySelector("#last-invite").textContent = data["last_invite"]
+    }
+    else {
+        window.location.reload()
+    }
+
   })
 
 

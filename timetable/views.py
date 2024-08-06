@@ -218,12 +218,29 @@ def send_email(request):
     print("TEST")
     if request.method == "POST":
         payload = json.loads(request.body.decode("utf-8"))
-        student = Student.objects.get(uuid=payload["uuid"])
-        student.last_schedule_invite = timezone.now()
-        student.save()
-        if payload["reset"] == "reset_all":
+        print(payload['reset'])
+        if payload["reset"] == "reset-all":
             Schedule.objects.all().delete()
+            return HttpResponse(status=200)
+        elif payload["reset"] == "invite-all":
+            students = Student.objects.all().exclude(schedule__isnull=False)
+            for student in students:
+                send_mail(
+                    "Set Schedule Invite!",
+                    f'Hello {student.name},please Set your school schedule in the following link {request.get_host()}{reverse(set_schedule,args=[student.uuid])}',
+                    "no_reply@emekschool.org",
+                    [student.email],
+                    fail_silently=False,
+                )
+                student.last_schedule_invite = timezone.now()
+                student.save()
+            return JsonResponse({"success":True})
+
+
         else:
+            student = Student.objects.get(uuid=payload["uuid"])
+            student.last_schedule_invite = timezone.now()
+            student.save()
             if payload["reset"] == "True":
 
                 student.schedule.delete()
