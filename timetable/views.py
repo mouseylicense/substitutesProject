@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from django.forms import model_to_dict
 from django.template.defaulttags import url
+from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
 from . import forms
 from django.contrib import messages
@@ -16,7 +17,10 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http40
 from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
-
+from dotenv import load_dotenv
+from os import environ
+load_dotenv()
+FROM_EMAIL=environ['FROM_EMAIL']
 DAYS_OF_WEEKDAY = {
     6: 'Sunday',
     0: 'Monday',
@@ -219,6 +223,10 @@ def student_manager(request):
 @require_POST
 @login_required
 def send_email(request):
+    if request.is_secure():
+        method = "https://"
+    else:
+        method = "http://"
     print(request.GET)
     print("TEST")
     if request.method == "POST":
@@ -233,8 +241,11 @@ def send_email(request):
                 send_mail(
                     "Set Schedule Invite!",
                     f'Hello {student.name},please Set your school schedule in the following link {request.get_host()}{reverse(set_schedule,args=[student.uuid])}',
-                    "no_reply@emekschool.org",
+                    FROM_EMAIL,
                     [student.email],
+                    html_message=render_to_string("emails/setSchedule_email.html", {"student": student.name,
+                                                                               "link": method + request.get_host() + reverse(
+                                                                                   set_schedule, args=[student.uuid])}),
                     fail_silently=False,
                 )
                 student.last_schedule_invite = timezone.now()
@@ -253,16 +264,24 @@ def send_email(request):
                 send_mail(
                     "Schedule Reset",
                     f'Hello {student.name},Your Schedule has been reset, please set it again at the following link: {request.get_host()}{reverse(set_schedule, args=[student.uuid])}',
-                    "no_reply@emekschool.org",
-                    [student.email],
+                    FROM_EMAIL,
+                    html_message=render_to_string("emails/setScheduleReset_email.html", {"student": student.name,
+                                                                                    "link": method + request.get_host() + reverse(
+                                                                                        set_schedule,
+                                                                                        args=[student.uuid])}),
+                    recipient_list=[student.email],
                     fail_silently=False,
                 )
             else:
                 send_mail(
                     "Set Schedule Invite!",
                     f'Hello {student.name},please Set your school schedule in the following link {request.get_host()}{reverse(set_schedule,args=[student.uuid])}',
-                    "no_reply@emekschool.org",
+                    FROM_EMAIL,
                     [student.email],
+                    html_message=render_to_string("emails/setSchedule_email.html", {"student": student.name,
+                                                                               "link": method + request.get_host() + reverse(
+                                                                                   set_schedule, args=[student.uuid])}),
+
                     fail_silently=False,
                 )
             return JsonResponse(

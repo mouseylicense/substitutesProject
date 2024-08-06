@@ -29,4 +29,11 @@ input[type=submit]{
     border-radius: 5px;
     background-color: #f8f8e8;
     border: #d2c895 solid 3px;
+    margin-right: 0;
+    margin-left: auto;
+    display: block;
+}
+input[type=submit]:dir(rtl){
+    margin-right: auto;
+    margin-left: 0;
 }
