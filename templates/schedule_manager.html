@@ -8,6 +8,8 @@
 
 {% block title %}{% trans "Manage Schedules" %}{% endblock %}
 {% block content %}
+    <h1>{% trans "Manage Schedules" %}</h1>
+    <p id="stats">{% trans "Students With Schedules" %}: <span id="scheduleCount">{{ scheduleCount }}</span>; {% trans "Students Without" %}: <span id="noScheduleCount">{{ studentWithNoSchedule }}</span>; {% trans "Total Students" %}: <span id="totalStudents">{{ scheduleCount|add:studentWithNoSchedule }}</span>.</p>
     <div id="alert-box"></div>
     <div class="student-list">
     <div style="margin-bottom: 5px" class="button-div">

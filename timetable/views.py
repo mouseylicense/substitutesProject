@@ -178,8 +178,7 @@ def timetable(request):
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
                     {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.student_teaching,
                      "room": c.room.name})
-
-    return render(request, "timetable.html", {"classesByHour": classesByHour, "teachers": teachers, "rooms": rooms})
+        return render(request, "timetable.html", {"classesByHour": classesByHour, "teachers": teachers, "rooms": rooms})
 
 
 def set_schedule(request, uuid):
@@ -208,8 +207,14 @@ def schedule_manager(request):
             students[student] = [True, student.uuid,datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
         else:
             students[student] = [False, student.uuid,datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
-    return render(request, "schedule_manager.html", {"students": students})
+    return render(request, "schedule_manager.html", {"students": students,"scheduleCount":Schedule.objects.count(),
+                                                     "studentWithNoSchedule":(Student.objects.count()-Schedule.objects.count())})
 
+def student_manager(request):
+    students = []
+    for student in Student.objects.all():
+        students.append({student.name:student.uuid})
+    return render(request,"student_manager.html",{"students":students})
 
 @require_POST
 @login_required
@@ -234,6 +239,7 @@ def send_email(request):
                 )
                 student.last_schedule_invite = timezone.now()
                 student.save()
+            #     TODO: possibly get message and display in page, think if needed
             return JsonResponse({"success":True})
 
 

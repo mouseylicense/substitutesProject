@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: .\templates\thanks.html:25
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 12:51+0300\n"
+"POT-Creation-Date: 2024-08-06 16:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,55 +19,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\SubtitutesProject\settings.py:151
+#: .\SubtitutesProject\settings.py:153
 msgid "Hebrew"
 msgstr ""
 
-#: .\SubtitutesProject\settings.py:152
+#: .\SubtitutesProject\settings.py:154
 msgid "English"
 msgstr ""
 
 #: .\templates\base.html:3 .\templates\publicBase.html:3
 #: .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
 msgid "en"
 msgstr ""
 
 #: .\templates\base.html:3 .\templates\publicBase.html:3
 #: .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
 msgid "ltr"
 msgstr ""
 
-#: .\templates\base.html:16 .\templates\mySubs.html:3
+#: .\templates\base.html:20 .\templates\mySubs.html:3
 msgid "My Subs"
 msgstr ""
 
-#: .\templates\base.html:17 .\templates\reportAbsence.html:3
+#: .\templates\base.html:21 .\templates\reportAbsence.html:3
 msgid "Report Absence"
 msgstr ""
 
-#: .\templates\base.html:19 .\templates\setSub.html:4
+#: .\templates\base.html:23 .\templates\setSub.html:4
 msgid "Set Substitution"
 msgstr ""
 
-#: .\templates\base.html:22 .\templates\setClasses.html:4
+#: .\templates\base.html:26 .\templates\setClasses.html:4
 msgid "Set Classes"
 msgstr ""
 
-#: .\templates\base.html:43
+#: .\templates\base.html:27 .\templates\schedule_manager.html:9
+#: .\templates\schedule_manager.html:11
+msgid "Manage Schedules"
+msgstr ""
+
+#: .\templates\base.html:48
 msgid "Logout"
 msgstr ""
 
-#: .\templates\index.html:15
+#: .\templates\index.html:3 .\templates\publicBase.html:19
+msgid "Today's Subs"
+msgstr ""
+
+#: .\templates\index.html:16
 msgid "No Sub Yet"
 msgstr ""
 
-#: .\templates\index.html:17
+#: .\templates\index.html:18
 msgid "Substitute Teacher:"
 msgstr ""
 
-#: .\templates\index.html:29
+#: .\templates\index.html:30
 msgid "No Subs For today!"
 msgstr ""
 
@@ -74,37 +84,79 @@ msgstr ""
 msgid "No Subs"
 msgstr ""
 
-#: .\templates\publicBase.html:15 .\templates\registration\login.html:7
+#: .\templates\publicBase.html:18 .\templates\registration\login.html:12
 msgid "Login"
 msgstr ""
 
-#: .\templates\publicBase.html:16
-msgid "Today's Subs"
-msgstr ""
-
-#: .\templates\publicBase.html:17
+#: .\templates\publicBase.html:20 .\templates\timetable.html:6
 msgid "Schedule"
 msgstr ""
 
-#: .\templates\registration\login.html:34 .\timetable\forms.py:41
+#: .\templates\registration\login.html:39
 msgid "Name"
 msgstr ""
 
-#: .\templates\registration\login.html:42
-#: .\templates\registration\register.html:32
+#: .\templates\registration\login.html:47
+#: .\templates\registration\register.html:36
 msgid "login"
 msgstr ""
 
-#: .\templates\registration\login.html:59
+#: .\templates\registration\login.html:64
 msgid "Lost password?"
 msgstr ""
 
-#: .\templates\registration\register.html:7
+#: .\templates\registration\register.html:11
 msgid "Register"
 msgstr ""
 
 #: .\templates\reportAbsence.html:23
 msgid "Report"
+msgstr ""
+
+#: .\templates\schedule_manager.html:12
+msgid "Students With Schedules"
+msgstr ""
+
+#: .\templates\schedule_manager.html:12
+msgid "Students Without"
+msgstr ""
+
+#: .\templates\schedule_manager.html:12
+msgid "Total Students"
+msgstr ""
+
+#: .\templates\schedule_manager.html:16
+msgid "Warning, this will send an email to every student with no Schedule"
+msgstr ""
+
+#: .\templates\schedule_manager.html:16
+msgid "Invite all"
+msgstr ""
+
+#: .\templates\schedule_manager.html:17
+msgid ""
+"WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS "
+"IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???"
+msgstr ""
+
+#: .\templates\schedule_manager.html:17
+msgid "Reset ALL"
+msgstr ""
+
+#: .\templates\schedule_manager.html:23 .\templates\schedule_manager.html:26
+msgid "Last Invite"
+msgstr ""
+
+#: .\templates\schedule_manager.html:23
+msgid "Reset Schedule"
+msgstr ""
+
+#: .\templates\schedule_manager.html:26
+msgid "Send Invite"
+msgstr ""
+
+#: .\templates\schedule_manager.html:52
+msgid "Invited"
 msgstr ""
 
 #: .\templates\setClasses.html:88
@@ -119,122 +171,171 @@ msgstr ""
 msgid "No Classes To Sub"
 msgstr ""
 
-#: .\templates\timetable.html:27
-msgid "Sunday"
+#: .\templates\set_schedule.html:10
+msgid "Set Your Schedule"
 msgstr ""
 
-#: .\templates\timetable.html:28
-msgid "Monday"
+#: .\templates\set_schedule.html:25
+msgid "Set!"
 msgstr ""
 
-#: .\templates\timetable.html:29
-msgid "Tuesday"
+#: .\templates\thanks.html:20
+msgid "Success!"
 msgstr ""
 
-#: .\templates\timetable.html:30
-msgid "Wednesday"
-msgstr ""
-
-#: .\templates\timetable.html:31
-msgid "Thursday"
-msgstr ""
-
-#: .\timetable\forms.py:10
-msgid "Date"
-msgstr ""
-
-#: .\timetable\forms.py:11 .\timetable\forms.py:12
-msgid "Reason"
-msgstr ""
-
-#: .\timetable\forms.py:17
-msgid "Subject"
-msgstr ""
-
-#: .\timetable\forms.py:18
-msgid "Teacher"
-msgstr ""
-
-#: .\timetable\forms.py:19
-msgid "Day"
-msgstr ""
-
-#: .\timetable\forms.py:20
-msgid "Hour"
-msgstr ""
-
-#: .\timetable\forms.py:22 .\timetable\models.py:81
-msgid "Is a Student Teaching?"
-msgstr ""
-
-#: .\timetable\forms.py:31
-msgid "Class that needs sub"
-msgstr ""
-
-#: .\timetable\forms.py:37
-msgid "Password"
-msgstr ""
-
-#: .\timetable\forms.py:38
-msgid "Phone"
-msgstr ""
-
-#: .\timetable\forms.py:42
-msgid "Email"
-msgstr ""
-
-#: .\timetable\models.py:82
-msgid "Student Teaching"
-msgstr ""
-
-#: .\timetable\models.py:83 .\timetable\models.py:98
+#: .\templates\timetable.html:28 .\timetable\models.py:102
+#: .\timetable\models.py:134
 msgid "First Grade"
 msgstr ""
 
-#: .\timetable\models.py:84 .\timetable\models.py:99
+#: .\templates\timetable.html:35 .\timetable\models.py:103
+#: .\timetable\models.py:135
 msgid "Second Grade"
 msgstr ""
 
-#: .\timetable\models.py:85 .\timetable\models.py:100
+#: .\templates\timetable.html:42 .\timetable\models.py:104
+#: .\timetable\models.py:136
 msgid "Third Grade"
 msgstr ""
 
-#: .\timetable\models.py:86 .\timetable\models.py:101
+#: .\templates\timetable.html:49 .\timetable\models.py:105
+#: .\timetable\models.py:137
 msgid "Fourth Grade"
 msgstr ""
 
-#: .\timetable\models.py:87 .\timetable\models.py:102
+#: .\templates\timetable.html:56 .\timetable\models.py:106
+#: .\timetable\models.py:138
 msgid "Fifth Grade"
 msgstr ""
 
-#: .\timetable\models.py:88 .\timetable\models.py:103
+#: .\templates\timetable.html:63 .\timetable\models.py:107
+#: .\timetable\models.py:139
 msgid "Sixth Grade"
 msgstr ""
 
-#: .\timetable\models.py:89 .\timetable\models.py:104
+#: .\templates\timetable.html:70 .\timetable\models.py:108
+#: .\timetable\models.py:140
 msgid "Seventh Grade"
 msgstr ""
 
-#: .\timetable\models.py:90 .\timetable\models.py:105
+#: .\templates\timetable.html:77 .\timetable\models.py:109
+#: .\timetable\models.py:141
 msgid "Eighth Grade"
 msgstr ""
 
-#: .\timetable\models.py:91 .\timetable\models.py:106
+#: .\templates\timetable.html:84 .\timetable\models.py:110
+#: .\timetable\models.py:142
 msgid "Ninth Grade"
 msgstr ""
 
-#: .\timetable\models.py:92 .\timetable\models.py:107
+#: .\templates\timetable.html:91 .\timetable\models.py:111
+#: .\timetable\models.py:143
 msgid "Tenth Grade"
 msgstr ""
 
-#: .\timetable\models.py:93 .\timetable\models.py:108
+#: .\templates\timetable.html:98 .\timetable\models.py:112
+#: .\timetable\models.py:144
 msgid "Eleventh Grade"
 msgstr ""
 
-#: .\timetable\models.py:94 .\timetable\models.py:109
+#: .\templates\timetable.html:105 .\timetable\models.py:113
+#: .\timetable\models.py:145
 msgid "Twelfth Grade"
 msgstr ""
 
-#: .\timetable\views.py:39
+#: .\templates\timetable.html:113 .\timetable\forms.py:32
+msgid "Teacher"
+msgstr ""
+
+#: .\templates\timetable.html:121
+msgid "Uncheck All"
+msgstr ""
+
+#: .\templates\timetable.html:127
+msgid "Classes"
+msgstr ""
+
+#: .\templates\timetable.html:130
+msgid "Free Rooms"
+msgstr ""
+
+#: .\templates\timetable.html:137 .\timetable\models.py:203
+#: .\timetable\models.py:206 .\timetable\models.py:209
+#: .\timetable\models.py:212
+msgid "Sunday"
+msgstr ""
+
+#: .\templates\timetable.html:138 .\timetable\models.py:215
+#: .\timetable\models.py:218 .\timetable\models.py:221
+#: .\timetable\models.py:224
+msgid "Monday"
+msgstr ""
+
+#: .\templates\timetable.html:139 .\timetable\models.py:227
+#: .\timetable\models.py:230 .\timetable\models.py:234
+#: .\timetable\models.py:237
+msgid "Tuesday"
+msgstr ""
+
+#: .\templates\timetable.html:140 .\timetable\models.py:241
+#: .\timetable\models.py:245 .\timetable\models.py:249
+#: .\timetable\models.py:253
+msgid "Wednesday"
+msgstr ""
+
+#: .\templates\timetable.html:141 .\timetable\models.py:257
+#: .\timetable\models.py:261
+msgid "Thursday"
+msgstr ""
+
+#: .\timetable\forms.py:24
+msgid "Date"
+msgstr ""
+
+#: .\timetable\forms.py:25 .\timetable\forms.py:26
+msgid "Reason"
+msgstr ""
+
+#: .\timetable\forms.py:31
+msgid "Subject"
+msgstr ""
+
+#: .\timetable\forms.py:33
+msgid "Day"
+msgstr ""
+
+#: .\timetable\forms.py:34
+msgid "Hour"
+msgstr ""
+
+#: .\timetable\forms.py:36 .\timetable\models.py:100
+msgid "Is a Student Teaching?"
+msgstr ""
+
+#: .\timetable\forms.py:37 .\timetable\models.py:101
+msgid "Student Teaching"
+msgstr ""
+
+#: .\timetable\forms.py:45
+msgid "Class that needs sub"
+msgstr ""
+
+#: .\timetable\forms.py:71
+msgid "Password"
+msgstr ""
+
+#: .\timetable\forms.py:72
+msgid "Phone"
+msgstr ""
+
+#: .\timetable\forms.py:75
+msgid "Email"
+msgstr ""
+
+#: .\timetable\views.py:42
 msgid "Absence reported."
+msgstr ""
+
+#: .\timetable\views.py:193
+msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr ""

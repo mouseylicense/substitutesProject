@@ -5,10 +5,13 @@
 .student{
     display:flex;
     font-size: x-large;
-    background-color: #fefefe;
+    background-color: rgba(247, 247, 247, 1);
     border-top: 1px solid lightgray;
+    padding:2px;
 }
-
+h1:dir(rtl), p:dir(rtl){
+    text-align: right;
+}
 button:dir(rtl),.button-div:dir(rtl){
     margin-right:auto;
 
@@ -18,4 +21,15 @@ button:dir(ltr),.button-div:dir(ltr){
 
     margin-left:auto;
 }
-
+#stats{
+    font-size:x-large;
+}
+#scheduleCount{
+    color:#0069d9
+}
+#noScheduleCount{
+    color:#c82333
+}
+#totalStudents{
+    color:goldenrod;
+}

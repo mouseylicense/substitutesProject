@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-05 02:13+0300\n"
-"PO-Revision-Date: 2024-08-05 02:14+0300\n"
+"POT-Creation-Date: 2024-08-06 16:39+0300\n"
+"PO-Revision-Date: 2024-08-06 16:43+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -57,7 +57,12 @@ msgstr "קבע החלפות"
 msgid "Set Classes"
 msgstr "קבע שיעורים"
 
-#: .\templates\base.html:47
+#: .\templates\base.html:27 .\templates\schedule_manager.html:9
+#: .\templates\schedule_manager.html:11
+msgid "Manage Schedules"
+msgstr "נהל מערכות תלמידים"
+
+#: .\templates\base.html:48
 msgid "Logout"
 msgstr "התנתק"
 
@@ -110,17 +115,53 @@ msgstr "הירשם"
 msgid "Report"
 msgstr "דווח"
 
-#: .\templates\schedule_manager.html:13 .\templates\schedule_manager.html:16
+#: .\templates\schedule_manager.html:12
+msgid "Students With Schedules"
+msgstr "תלמידים עם מערכת"
+
+#: .\templates\schedule_manager.html:12
+msgid "Students Without"
+msgstr "תלמידים ללא מערכת"
+
+#: .\templates\schedule_manager.html:12
+msgid "Total Students"
+msgstr "תלמידים"
+
+#: .\templates\schedule_manager.html:16
+msgid "Warning, this will send an email to every student with no Schedule"
+msgstr "אזהרה, אתה עומד לשלוח הודעה לכל התלמידים ללא מערכת"
+
+#: .\templates\schedule_manager.html:16
+msgid "Invite all"
+msgstr "שלח הזמנה לכולם"
+
+#: .\templates\schedule_manager.html:17
+msgid ""
+"WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS "
+"IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???"
+msgstr ""
+"**אזהרה**!!! הפעולה תאפס את כל המערכות במערכת!! הפעולה היא בלתי הפיכה!! "
+"האם אתה בטוח שאתה רוצה להמשיך???"
+
+#: .\templates\schedule_manager.html:17
+msgid "Reset ALL"
+msgstr "אפס את כל המערכות"
+
+#: .\templates\schedule_manager.html:23 .\templates\schedule_manager.html:26
 msgid "Last Invite"
 msgstr "הזמנה אחרונה"
 
-#: .\templates\schedule_manager.html:13
+#: .\templates\schedule_manager.html:23
 msgid "Reset Schedule"
 msgstr "מחק מערכת"
 
-#: .\templates\schedule_manager.html:16
+#: .\templates\schedule_manager.html:26
 msgid "Send Invite"
 msgstr "שלח הזמנה לקביעת מערכת"
+
+#: .\templates\schedule_manager.html:52
+msgid "Invited"
+msgstr "הזמנה נשלחה"
 
 #: .\templates\setClasses.html:88
 msgid "Add Class"
@@ -295,7 +336,7 @@ msgstr "מספר טלפון"
 msgid "Email"
 msgstr "אימייל"
 
-#: .\timetable\views.py:41
+#: .\timetable\views.py:42
 msgid "Absence reported."
 msgstr "היעדרות דווחה."
 

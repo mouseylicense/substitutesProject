@@ -128,3 +128,6 @@ button[disabled]{
         display: none;
     }
 }
+a:dir(rtl){
+    text-align:right ;
+}
