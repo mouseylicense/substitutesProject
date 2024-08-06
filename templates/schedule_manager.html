@@ -6,18 +6,21 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 {% endblock %}
 
-{% block title %}Schedule Manager{% endblock %}
+{% block title %}{% trans "Manage Schedules" %}{% endblock %}
 {% block content %}
-        <button type="button" id="reset-all" name="reset-all" onclick="confirm('{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}');sendEmail(a);window.location.reload()" class="btn btn-danger">{% trans "Reset ALL" %}</button>
     <div class="student-list">
+    <div class="button-div">
+        <button style="margin-bottom: 5px" type="button" id="invite-all" name="invite-all" onclick="confirm('{% trans "Warning, this will send an email to every student with no Schedule" %}');sendEmail(a);window.location.reload()" class="btn btn-warning">{% trans "Invite all" %}</button>
+        <button style="margin-bottom: 5px" type="button" id="reset-all" name="reset-all" onclick="confirm('{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}');sendEmail(a);window.location.reload()" class="btn btn-danger">{% trans "Reset ALL" %}</button>
+    </div>
     {% csrf_token %}
 {% for student,value in students.items %}
     {% if value.0 %}
     <div class="has_schedule student">
-        {{ student }} - {% trans "Last Invite" %} : {{ value.2 }} <button onclick="sendEmail(this)" id="{{ value.1 }}" name="True" class="btn btn-danger" style="margin-right:auto" >{% trans "Reset Schedule" %}</button>
+        {{ student }} - {% trans "Last Invite" %} : <p id="last-invite"> {{ value.2 }}</p> <button style="margin-top: 2px; margin-bottom: 2px" onclick="sendEmail(this);alert('Page will reload');window.location.reload()" id="{{ value.1 }}" name="True" class="btn btn-sm btn-danger"  >{% trans "Reset Schedule" %}</button>
     </div>
     {% else %}
-        <div class="no_schedule student">{{ student }} - {% trans "Last Invite" %} : {{ value.2 }}<button name="False" id="{{ value.1 }}" onclick="alert('This will reload this page');sendEmail(this);window.location.reload()" style="margin-right: auto" class="btn btn-primary">{% trans "Send Invite" %}</button></div>
+        <div class="no_schedule student">{{ student }} - {% trans "Last Invite" %} : <p id="last-invite">{{ value.2 }}</p><button style="margin-top: 2px; margin-bottom: 2px" name="False" id="{{ value.1 }}" onclick="sendEmail(this);"  class="btn btn-primary btn-sm">{% trans "Send Invite" %}</button></div>
     {% endif %}
     {% endfor %}
     </div>
@@ -35,8 +38,14 @@
             method: 'POST',
             body: JSON.stringify(data),
             headers: { "X-CSRFToken": csrftoken },
-        })
-        console.log(response)
+        }).then((response) => response.json())
+  .then((data) => {
+      console.log(data["last_invite"])
+      console.log(a.parentElement.querySelector("#last-invite").textContent)
+      a.parentElement.querySelector("#last-invite").textContent = data["last_invite"]
+  })
+
+
         // The following function are copying from
         // https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
         function getCookie(name) {

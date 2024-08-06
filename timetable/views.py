@@ -1,10 +1,11 @@
+import datetime
 import json
 import logging
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from django.forms import model_to_dict
 from django.template.defaulttags import url
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
@@ -204,22 +205,27 @@ def schedule_manager(request):
 
     for student in Student.objects.all().order_by('schedule'):
         if Schedule.objects.filter(student__uuid=student.uuid).exists():
-            students[student] = [True, student.uuid,student.last_schedule_invite]
+            students[student] = [True, student.uuid,datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
         else:
-            students[student] = [False, student.uuid,student.last_schedule_invite]
+            students[student] = [False, student.uuid,datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
     return render(request, "schedule_manager.html", {"students": students})
 
 
+@require_POST
 @login_required
 def send_email(request):
     print(request.GET)
+    print("TEST")
     if request.method == "POST":
         payload = json.loads(request.body.decode("utf-8"))
         student = Student.objects.get(uuid=payload["uuid"])
+        student.last_schedule_invite = timezone.now()
+        student.save()
         if payload["reset"] == "reset_all":
             Schedule.objects.all().delete()
         else:
-            if bool(payload["reset"]):
+            if payload["reset"] == "True":
+
                 student.schedule.delete()
                 send_mail(
                     "Schedule Reset",
@@ -236,4 +242,6 @@ def send_email(request):
                     [student.email],
                     fail_silently=False,
                 )
-    return HttpResponse(200)
+            return JsonResponse(
+                {"last_invite": datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')})
+

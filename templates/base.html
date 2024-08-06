@@ -24,6 +24,7 @@
             {% endif %}
             {% if perms.timetable.see_classes %}
                 <a id="setClasses" class="{% if request.resolver_match.url_name == "setClasses" %}active{% endif %}" href="{% url 'setClasses' %}">{%  trans "Set Classes" %}</a>
+                <a id="manageSchedules" class="{% if request.resolver_match.url_name == "schedule_manager" %}active{% endif %}" href="{% url 'schedule_manager' %}">{%  trans "Manage Schedules" %}</a>
             {% endif %}
 <div style="margin-top: auto">
             {% get_current_language_bidi as LANGUAGE_BIDI %}

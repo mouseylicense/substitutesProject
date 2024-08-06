@@ -30,7 +30,7 @@ admin.site.register(models.Absence)
 admin.site.register(models.ClassNeedsSub)
 admin.site.register(models.Room)
 class StudentAdmin(admin.ModelAdmin):
-    fields = ["uuid","name","email","phone_number","grade","tutor","shacharit"]
+    fields = ["uuid","name","email","phone_number","grade","tutor","shacharit","last_schedule_invite"]
     readonly_fields = ["uuid"]
 admin.site.register(models.Student,StudentAdmin)
 

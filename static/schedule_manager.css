@@ -1,19 +1,21 @@
-.students-list{
+.student-list{
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 .student{
     display:flex;
-    font-size: xx-large;
-    background-color: mintcream;
-    border: 1px solid lightgray;
+    font-size: x-large;
+    background-color: #fefefe;
+    border-top: 1px solid lightgray;
 }
 
-.reset-button{
-    background-color: red;
-    padding: 4px;
-    border-radius: 5px;
-    color: white;
-    border:none;
-    float: left;
+button:dir(rtl),.button-div:dir(rtl){
+    margin-right:auto;
+
 }
+
+button:dir(ltr),.button-div:dir(ltr){
+
+    margin-left:auto;
+}
+
