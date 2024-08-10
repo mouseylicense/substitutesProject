@@ -3,7 +3,6 @@
 {% load static %}
 {% block static %}<link rel="stylesheet" type="text/css" href="{% static 'schedule_manager.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 {% endblock %}
 
 {% block title %}{% trans "Manage Schedules" %}{% endblock %}
@@ -13,69 +12,18 @@
     <div id="alert-box"></div>
     <div class="student-list">
     <div style="margin-bottom: 5px" class="button-div">
-        <button type="button" id="invite-all" name="invite-all" onclick="if(confirm('{% trans "Warning, this will send an email to every student with no Schedule" %}')){console.log(sendEmail(this)); }" class="btn btn-warning">{% trans "Invite all" %}</button>
+        <button type="button" id="invite-all" value="invite-all" hx-confirm="{% trans "Warning, this will send an email to every student with no Schedule" %}" hx-post="{% url "send_email" %}" class="btn btn-warning">{% trans "Invite all" %}</button>
         <button type="button" id="reset-all" name="reset-all" onclick="if(confirm('{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}')){sendEmail(this);window.location.reload()}" class="btn btn-danger">{% trans "Reset ALL" %}</button>
     </div>
     {% csrf_token %}
 {% for student,value in students.items %}
     {% if value.0 %}
     <div class="has_schedule student">
-        {{ student }} - {% trans "Last Invite" %} : <p id="last-invite"> {{ value.2 }}</p> <button style="margin-top: 2px; margin-bottom: 2px" onclick="sendEmail(this);alert('Page will reload');window.location.reload()" id="{{ value.1 }}" name="True" class="btn btn-sm btn-danger"  >{% trans "Reset Schedule" %}</button>
+        {{ student }} - {% trans "Last Invite" %} : <p id="last-invite"> {{ value.2 }}</p> <button name="{{ value.1 }}" value="True" hx-target="previous #last-invite" hx-post="{% url "send_email" %}" style="margin-top: 2px; margin-bottom: 2px" id="{{ value.1 }}" class="btn btn-sm btn-danger"  >{% trans "Reset Schedule" %}</button>
     </div>
     {% else %}
-        <div class="no_schedule student">{{ student }} - {% trans "Last Invite" %} : <p id="last-invite">{{ value.2 }}</p><button style="margin-top: 2px; margin-bottom: 2px" name="False" id="{{ value.1 }}" onclick="sendEmail(this);"  class="btn btn-primary btn-sm">{% trans "Send Invite" %}</button></div>
+        <div class="no_schedule student">{{ student }} - {% trans "Last Invite" %} : <p id="last-invite">{{ value.2 }}</p><button name="{{ value.1 }}" hx-target="previous #last-invite" value="False" hx-post="{% url "send_email" %}" style="margin-top: 2px; margin-bottom: 2px" name="False" id="{{ value.1 }}" class="btn btn-primary btn-sm">{% trans "Send Invite" %}</button></div>
     {% endif %}
     {% endfor %}
     </div>
-
-    <script>
-      const url = "{% url "send_email" %}";
-
-      async function sendEmail(a) {
-           let data = {
-            'uuid': a.id,
-            'reset':a.name,
-        };
-        let csrftoken = getCookie('csrftoken');
-        let response = fetch("{% url "send_email" %}", {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { "X-CSRFToken": csrftoken },
-        }).then((response) => response.json())
-  .then((data) => {
-    if (a.id === "False" || a.id === "True"){
-          console.log(data)
-          console.log(a.parentElement.querySelector("#last-invite").textContent)
-          let new_element = document.createElement("div")
-          new_element.classList.add("alert")
-          new_element.classList.add("alert-success")
-          new_element.textContent = "{% trans "Invited" %}!"
-          document.getElementById("alert-box").appendChild(new_element)
-          a.parentElement.querySelector("#last-invite").textContent = data["last_invite"]
-    }
-    else {
-        window.location.reload()
-    }
-
-  })
-
-
-        // The following function are copying from
-        // https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;}}
-
-    </script>
 {% endblock %}

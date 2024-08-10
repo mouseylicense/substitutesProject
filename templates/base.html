@@ -2,17 +2,18 @@
 <!DOCTYPE html>
 <html lang={% trans "en" %} dir="{% trans "ltr" %}">
 <head>
+    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-<link rel="manifest" href="{% static 'manifest.json' %}">
-  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'sidebar.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
-{% block static %}{% endblock %}
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    {% block static %}{% endblock %}
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
 
     <div class="sidebar">

@@ -227,15 +227,13 @@ def send_email(request):
         method = "https://"
     else:
         method = "http://"
-    print(request.GET)
-    print("TEST")
     if request.method == "POST":
-        payload = json.loads(request.body.decode("utf-8"))
-        print(payload['reset'])
-        if payload["reset"] == "reset-all":
+        payload = request.body.decode("utf-8").split("=")
+
+        if payload[1] == "reset-all":
             Schedule.objects.all().delete()
             return HttpResponse(status=200)
-        elif payload["reset"] == "invite-all":
+        elif payload[1] == "invite-all":
             students = Student.objects.all().exclude(schedule__isnull=False)
             for student in students:
                 send_mail(
@@ -255,10 +253,10 @@ def send_email(request):
 
 
         else:
-            student = Student.objects.get(uuid=payload["uuid"])
+            student = Student.objects.get(uuid=payload[0])
             student.last_schedule_invite = timezone.now()
             student.save()
-            if payload["reset"] == "True":
+            if payload[1] == "True":
 
                 student.schedule.delete()
                 send_mail(
@@ -284,6 +282,5 @@ def send_email(request):
 
                     fail_silently=False,
                 )
-            return JsonResponse(
-                {"last_invite": datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')})
+            return HttpResponse(datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M'))
 
