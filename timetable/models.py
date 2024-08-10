@@ -117,6 +117,10 @@ class Class(models.Model):
             ('see_classes', "can add classes"),
         )
 
+    def who_teaches(self):
+        if self.student_teacher:
+            return self.student_teaching
+        return self.teacher
     def all_grades(self):
         grades = [self.first_grade, self.second_grade, self.third_grade, self.fourth_grade, self.fifth_grade,
                   self.sixth_grade, self.seventh_grade, self.eighth_grade, self.ninth_grade, self.tenth_grade,
@@ -264,3 +268,4 @@ class Schedule(models.Model):
                                         related_name='thursday_second_classes')
     def __str__(self):
         return self.student.name + " Schedule"
+

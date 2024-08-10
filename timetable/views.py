@@ -214,6 +214,10 @@ def schedule_manager(request):
     return render(request, "schedule_manager.html", {"students": students,"scheduleCount":Schedule.objects.count(),
                                                      "studentWithNoSchedule":(Student.objects.count()-Schedule.objects.count())})
 
+def student_details(request,uuid):
+    student = Student.objects.get(uuid=uuid)
+    return render(request,"student_details.html", {"student":student})
+
 def student_manager(request):
     students = []
     for student in Student.objects.all():

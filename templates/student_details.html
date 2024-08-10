@@ -1,0 +1,199 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'student_details.css' %}">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="student_details">
+    <h1 id="student-name">{{ student }}</h1>
+    <h2 id="student-grade">{% trans "Grade" %}: {{ student.grade }} </h2>
+    <h3 id="student-tutor">{% trans "Tutor" %}:{{ student.tutor }}</h3>
+    <h3 id="student-shacharit">{% trans "Shacharit" %}:{{ student.shacharit }} </h3>
+</div>
+<div class="table-container">
+<table>
+    <tr id="day-row">
+        <th id="empty"></th>
+        <th class="day">{% trans "Sunday" %}</th>
+        <th class="day">{% trans "Monday" %}</th>
+        <th class="day">{% trans "Tuesday" %}</th>
+        <th class="day">{% trans "Wednesday" %}</th>
+        <th class="day">{% trans "Thursday" %}</th>
+    </tr>
+
+<tr class="timerow">
+    <th>09:15</th>
+    <td>
+        <div class="class" id="Sunday-09:15">
+            <h1>{{ student.schedule.sunday_first.name }}</h1>
+            {% if student.schedule.sunday_first.room and student.schedule.sunday_first.who_teaches %}
+            <h2>{{ student.schedule.sunday_first.room }} - {{ student.schedule.sunday_first.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Monday-09:15">
+            <h1>{{ student.schedule.monday_first.name }}</h1>
+            {% if student.schedule.monday_first.room and student.schedule.monday_first.who_teaches %}
+            <h2>{{ student.schedule.monday_first.room }} - {{ student.schedule.monday_first.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Tuesday-09:15">
+            <h1>{{ student.schedule.tuesday_first.name }}</h1>
+            {% if student.schedule.tuesday_first.room and student.schedule.tuesday_first.who_teaches %}
+            <h2>{{ student.schedule.tuesday_first.room }} - {{ student.schedule.tuesday_first.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Wednesday-09:15">
+            <h1>{{ student.schedule.wednesday_first.name }}</h1>
+            {% if student.schedule.wednesday_first.room and student.schedule.wednesday_first.who_teaches %}
+            <h2>{{ student.schedule.wednesday_first.room }} - {{ student.schedule.wednesday_first.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Thursday-09:15">
+            <h1>{{ student.schedule.thursday_first.name }}</h1>
+            {% if student.schedule.thursday_first.room and student.schedule.thursday_first.who_teaches %}
+            <h2>{{ student.schedule.thursday_first.room }} - {{ student.schedule.thursday_first.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+</tr>
+
+<tr class="timerow">
+    <th>10:07</th>
+    <td>
+        <div class="class" id="Sunday-10:07">
+            <h1>{{ student.schedule.sunday_second.name }}</h1>
+            {% if student.schedule.sunday_second.room and student.schedule.sunday_second.who_teaches %}
+            <h2>{{ student.schedule.sunday_second.room }} - {{ student.schedule.sunday_second.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Monday-10:07">
+            <h1>{{ student.schedule.monday_second.name }}</h1>
+            {% if student.schedule.monday_second.room and student.schedule.monday_second.who_teaches %}
+            <h2>{{ student.schedule.monday_second.room }} - {{ student.schedule.monday_second.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Tuesday-10:07">
+            <h1>{{ student.schedule.tuesday_second.name }}</h1>
+            {% if student.schedule.tuesday_second.room and student.schedule.tuesday_second.who_teaches %}
+            <h2>{{ student.schedule.tuesday_second.room }} - {{ student.schedule.tuesday_second.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Wednesday-10:07">
+            <h1>{{ student.schedule.wednesday_second.name }}</h1>
+            {% if student.schedule.wednesday_second.room and student.schedule.wednesday_second.who_teaches %}
+            <h2>{{ student.schedule.wednesday_second.room }} - {{ student.schedule.wednesday_second.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Thursday-10:07">
+            <h1>{{ student.schedule.thursday_second.name }}</h1>
+            {% if student.schedule.thursday_second.room and student.schedule.thursday_second.who_teaches %}
+            <h2>{{ student.schedule.thursday_second.room }} - {{ student.schedule.thursday_second.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+</tr>
+
+<tr>
+    <th colspan="6">11:00</th>
+</tr>
+
+<tr class="timerow">
+    <th>11:45</th>
+    <td>
+        <div class="class" id="Sunday-11:45">
+            <h1>{{ student.schedule.sunday_third.name }}</h1>
+            {% if student.schedule.sunday_third.room and student.schedule.sunday_third.who_teaches %}
+            <h2>{{ student.schedule.sunday_third.room }} - {{ student.schedule.sunday_third.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Monday-11:45">
+            <h1>{{ student.schedule.monday_third.name }}</h1>
+            {% if student.schedule.monday_third.room and student.schedule.monday_third.who_teaches %}
+            <h2>{{ student.schedule.monday_third.room }} - {{ student.schedule.monday_third.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Tuesday-11:45">
+            <h1>{{ student.schedule.tuesday_third.name }}</h1>
+            {% if student.schedule.tuesday_third.room and student.schedule.tuesday_third.who_teaches %}
+            <h2>{{ student.schedule.tuesday_third.room }} - {{ student.schedule.tuesday_third.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Wednesday-11:45">
+            <h1>{{ student.schedule.wednesday_third.name }}</h1>
+            {% if student.schedule.wednesday_third.room and student.schedule.wednesday_third.who_teaches %}
+            <h2>{{ student.schedule.wednesday_third.room }} - {{ student.schedule.wednesday_third.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+</tr>
+
+<tr class="timerow">
+    <th>12:45</th>
+    <td>
+        <div class="class" id="Sunday-12:45">
+            <h1>{{ student.schedule.sunday_fourth.name }}</h1>
+            {% if student.schedule.sunday_fourth.room and student.schedule.sunday_fourth.who_teaches %}
+            <h2>{{ student.schedule.sunday_fourth.room }} - {{ student.schedule.sunday_fourth.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Monday-12:45">
+            <h1>{{ student.schedule.monday_fourth.name }}</h1>
+            {% if student.schedule.monday_fourth.room and student.schedule.monday_fourth.who_teaches %}
+            <h2>{{ student.schedule.monday_fourth.room }} - {{ student.schedule.monday_fourth.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Tuesday-12:45">
+            <h1>{{ student.schedule.tuesday_fourth.name }}</h1>
+            {% if student.schedule.tuesday_fourth.room and student.schedule.tuesday_fourth.who_teaches %}
+            <h2>{{ student.schedule.tuesday_fourth.room }} - {{ student.schedule.tuesday_fourth.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+    <td>
+        <div class="class" id="Wednesday-12:45">
+            <h1>{{ student.schedule.wednesday_fourth.name }}</h1>
+            {% if student.schedule.wednesday_fourth.room and student.schedule.wednesday_fourth.who_teaches %}
+            <h2>{{ student.schedule.wednesday_fourth.room }} - {{ student.schedule.wednesday_fourth.who_teaches }}</h2>
+            {% endif %}
+        </div>
+    </td>
+</tr>
+
+</table>
+
+        </div>
+
+
+</body>
+</html>
