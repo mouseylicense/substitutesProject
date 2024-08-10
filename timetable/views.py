@@ -229,10 +229,13 @@ def send_email(request):
         method = "http://"
     if request.method == "POST":
         payload = request.body.decode("utf-8").split("=")
-
+        res = HttpResponse(status=200)
+        res["HX-Refresh"] = "true"
         if payload[1] == "reset-all":
             Schedule.objects.all().delete()
-            return HttpResponse(status=200)
+
+            return res
+
         elif payload[1] == "invite-all":
             students = Student.objects.all().exclude(schedule__isnull=False)
             for student in students:
@@ -248,8 +251,7 @@ def send_email(request):
                 )
                 student.last_schedule_invite = timezone.now()
                 student.save()
-            #     TODO: possibly get message and display in page, think if needed
-            return JsonResponse({"success":True})
+            return res
 
 
         else:
@@ -282,5 +284,7 @@ def send_email(request):
 
                     fail_silently=False,
                 )
-            return HttpResponse(datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M'))
+            test = HttpResponse(datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M'))
+            test["HX-Trigger"] = "alert"
+            return test
 
