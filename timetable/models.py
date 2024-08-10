@@ -62,6 +62,7 @@ class Teacher(AbstractUser):
         return self.username
 
 
+
 class Room(models.Model):
     name = models.CharField(max_length=100)
     has_projector = models.BooleanField(default=True)
@@ -201,6 +202,23 @@ class Student(models.Model):
     last_schedule_invite = models.DateTimeField(default=datetime.datetime.now())
     def __str__(self):
         return self.name
+
+    def str_grades(self):
+        number_to_grade = {
+            1: _("First Grade"),
+            2: _("Second Grade"),
+            3: _("Third Grade"),
+            4: _("Fourth Grade"),
+            5: _("Fifth Grade"),
+            6: _("Sixth Grade"),
+            7: _("Seventh Grade"),
+            8: _("Eighth Grade"),
+            9: _("Ninth Grade"),
+            10: _("Tenth Grade"),
+            11: _("Eleventh Grade"),
+            12: _("Twelfth Grade"),
+        }
+        return number_to_grade[self.grade]
 
 class Schedule(models.Model):
     student = models.OneToOneField(Student, on_delete=models.CASCADE)

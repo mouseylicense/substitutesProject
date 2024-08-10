@@ -6,14 +6,25 @@
     <link rel="stylesheet" type="text/css" href="{% static 'student_details.css' %}">
 
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ student }}</title>
 </head>
 <body>
 <div class="student_details">
     <h1 id="student-name">{{ student }}</h1>
-    <h2 id="student-grade">{% trans "Grade" %}: {{ student.grade }} </h2>
-    <h3 id="student-tutor">{% trans "Tutor" %}:{{ student.tutor }}</h3>
-    <h3 id="student-shacharit">{% trans "Shacharit" %}:{{ student.shacharit }} </h3>
+    <div class="second-row">
+        <table>
+            <tr>
+                <th>{% trans "Grade" %}</th>
+                <th>{% trans "Tutor" %}</th>
+                <th>{% trans "Shacharit" %}</th>
+            </tr>
+            <tr>
+    <td><h2 id="student-grade"> {{ student.str_grades }} </h2></td>
+    <td><h2 id="student-tutor">{{ student.tutor }}</h2></td>
+    <td><h2 id="student-shacharit">{{ student.shacharit }} </h2></td>
+        </tr>
+        </table>
+    </div>
 </div>
 <div class="table-container">
 <table>

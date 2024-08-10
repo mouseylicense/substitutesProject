@@ -216,12 +216,14 @@ def schedule_manager(request):
 
 def student_details(request,uuid):
     student = Student.objects.get(uuid=uuid)
-    return render(request,"student_details.html", {"student":student})
+    res = render(request, "student_details.html", {"student": student})
+    res["HX-Trigger"] = "unfold"
+    return  res
 
 def student_manager(request):
-    students = []
+    students = {}
     for student in Student.objects.all():
-        students.append({student.name:student.uuid})
+        students[student.name] = student.uuid
     return render(request,"student_manager.html",{"students":students})
 
 @require_POST
