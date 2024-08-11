@@ -4,27 +4,70 @@
 {% block static %}
     <link rel="stylesheet" href="{% static 'student_details.css' %}">
     <link rel="stylesheet" href="{%  static 'student_manager.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 {% endblock %}
 {% block content %}
+<h1>{% trans "Manage Schedules" %}</h1>
+    <p id="stats">{% trans "Students With Schedules" %}: <span id="scheduleCount">{{ scheduleCount }}</span>; {% trans "Students Without" %}: <span id="noScheduleCount">{{ studentWithNoSchedule }}</span>; {% trans "Total Students" %}: <span id="totalStudents">{{ scheduleCount|add:studentWithNoSchedule }}</span>.</p>
+
+{# alert box #}
+    <div style="display: none" id="alert-box"><div id="alert" class="alert alert-success" role="alert">
+  {% trans "invited "%}
+  <button onclick="this.parentElement.style.display='none'" type="button" aria-label="Close"></button>
+</div></div>
+
+
+    <div class="student-list">
+
+{# show invite all and reset all buttons if user is super user   #}
+    {% if user.is_superuser %}
+    <div style="margin-bottom: 5px" class="button-div">
+        <button type="button" id="invite-all" name="invite-all" value="invite-all" hx-confirm="{% trans "Warning, this will send an email to every student with no Schedule" %}" hx-post="{% url "send_email" %}" class="btn btn-warning">{% trans "Invite all" %}</button>
+        <button type="button" id="reset-all" name="reset-all" value="reset-all" hx-confirm="{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}" hx-post="{% url "send_email"%}" class="btn btn-danger">{% trans "Reset ALL" %}</button>
+    </div>
+    {% endif %}
+    {% csrf_token %}
+
+        {# filter students    #}
       <input onkeyup="filterList()" type="text" id="text-filter" placeholder="{% trans "Search Student" %}">
 
-    {{ students.0 }}
     <ul class="student-list">
-{% for student,uuid in students.items %}
+{% for student,values in students.items %}
     <li>
+    {# if student has a schedule   #}
+    {% if values.1 %}
     <div  class="student">
-    <div hx-get="{% url 'student_details' uuid %}" hx-target="next .details"  style="display:flex;flex-direction: row">
-        <p class="student-name"> {{ student }}</p><p id="arrow" ><i class="arrow down"></i></p>
+    <div   style="display:flex;flex-direction: row">
+        <p class="student-name"> {{ student }}</p>
+        <p hx-get="{% url 'student_details' values.0 %}" hx-target="next .details" id="arrow" ><i class="arrow down"></i></p>
+    <button style="margin:0;" name="{{ values.0 }}" value="True"  hx-post="{% url "send_email" %}" style="margin-top: 2px; margin-bottom: 2px" id="{{ values.0 }}" class="btn btn-sm btn-danger"  >{% trans "Reset Schedule" %}</button>
+    </div>
+        <div class="details"></div>
+    </div>
+    {# if student dosent have a schedule #}
+    {% else %}
+    <div  class="student">
+    <div style="display:flex;flex-direction: row">
+        <p class="student-name"> {{ student }} - {% trans "Last Invite" %} : </p><p class="last-invite" id="last-invite">{{ values.2 }}</p><button name="{{ values.0 }}" hx-target="previous #last-invite" value="False" hx-post="{% url "send_email" %}" style="margin-top: 2px; margin-bottom: 2px" name="False" id="{{ values.0 }}" class="btn btn-primary btn-sm">{% trans "Send Invite" %}</button>
         </div>
         <div class="details"></div>
     </div>
+    {% endif %}
 </li>
     {% endfor %}
     </ul>
+</div>
 
     <script>
+        const alert = document.getElementById("alert-box")
+        document.body.addEventListener("alert",function(evt){
+            console.log("test")
+            alert.style.display = "block"
+    })
+    </script>
+    <script>
     document.body.addEventListener("unfold",function(evt){
-
         let details = evt.target.parentElement.parentElement.querySelector(".details");
         let arrow = evt.target.parentElement.querySelector("#arrow .arrow")
 

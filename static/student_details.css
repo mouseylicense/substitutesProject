@@ -38,7 +38,8 @@ table {
 }
 th{
     padding: 10px 20px;
-    text-align: center;
+    text-align: center !important;
+    box-sizing: unset !important;
 }
 
 th:dir(ltr) {

@@ -234,12 +234,17 @@ def student_manager(request):
     user = request.user
     if user.is_superuser:
         student_pool = Student.objects.all()
+        scheduleCount = Schedule.objects.count()
+        studentWithNoSchedule = Student.objects.count()-Schedule.objects.count()
     else:
         student_pool = Student.objects.filter(tutor=user)
+        scheduleCount = Schedule.objects.filter(student__tutor=user).count()
+        studentWithNoSchedule = Student.objects.filter(tutor=user).count()-Schedule.objects.filter(student__tutor=user).count()
     students = {}
     for student in student_pool:
-        students[student.name] = student.uuid
-    return render(request,"student_manager.html",{"students":students})
+        students[student.name] = [student.uuid,Schedule.objects.filter(student=student).exists(),datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
+    return render(request,"student_manager.html",{"students":students,"scheduleCount":scheduleCount,
+                                                     "studentWithNoSchedule":studentWithNoSchedule})
 
 @require_POST
 @login_required
@@ -293,6 +298,7 @@ def send_email(request):
                     recipient_list=[student.email],
                     fail_silently=False,
                 )
+                return res
             else:
                 send_mail(
                     "Set Schedule Invite!",
@@ -305,7 +311,7 @@ def send_email(request):
 
                     fail_silently=False,
                 )
-            test = HttpResponse(datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M'))
-            test["HX-Trigger"] = "alert"
-            return test
+                test = HttpResponse(datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M'))
+                test["HX-Trigger"] = "alert"
+                return test
 
