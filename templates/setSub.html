@@ -4,7 +4,7 @@
 {% block title %}{% trans "Set Substitution" %}{% endblock %}
 {% block content %}
 <div class="container">
-{% if ClassThatNeedsSub > 0 %}
+{% if ClassesThatNeedSub > 0 %}
     <form method="post">
         {% csrf_token %}
         {% for field in form %}

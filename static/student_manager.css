@@ -12,6 +12,7 @@
     list-style: none;
 }
 .student{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     display:flex;
     font-size: x-large;
     background-color: rgba(247, 247, 247, 1);
@@ -22,6 +23,7 @@
 .student-name{
     display:inline;
     margin: 0;
+    padding:5px
 }
 .arrow {
   border: solid rgba(0, 0, 0, 0.68);
@@ -39,4 +41,10 @@
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+#arrow:dir(rtl){
+    margin: 0 auto 0 5px;
+}
+#arrow:dir(ltr){
+    margin: 0 5px 0 auto;
 }

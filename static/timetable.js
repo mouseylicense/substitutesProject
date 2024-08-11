@@ -1,6 +1,7 @@
 const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
 const rooms = JSON.parse(document.getElementById("rooms").textContent)
     console.log(rooms)
+console.log(classesByHour)
 const filtering = document.getElementsByClassName("filtering")[0]
 const classesTab = document.getElementById("classes-tab")
 const roomsTab = document.getElementById("free-tab")

@@ -13,8 +13,8 @@
 {% for student,uuid in students.items %}
     <li>
     <div  class="student">
-    <div hx-get="{% url 'student_details' uuid %}" hx-target=".details"  style="display:flex;flex-direction: row">
-        <p class="student-name"> {{ student }}</p><p id="arrow" style="margin:0;margin-right: auto;"><i class="arrow down"></i></p>
+    <div hx-get="{% url 'student_details' uuid %}" hx-target="next .details"  style="display:flex;flex-direction: row">
+        <p class="student-name"> {{ student }}</p><p id="arrow" ><i class="arrow down"></i></p>
         </div>
         <div class="details"></div>
     </div>

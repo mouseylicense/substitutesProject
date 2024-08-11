@@ -41,22 +41,25 @@ def reportAbsence(request):
     if request.method == 'POST':
         form = forms.AbsenceForm(request.POST)
         if form.is_valid():
-            absence = Absence(teacher=request.user, date=form.cleaned_data['date'], reason=form.cleaned_data['reason'])
-            absence.save()
-            messages.success(request, _("Absence reported."))
-            q = Class.objects.filter(teacher=request.user,
-                                     day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
+            if not Absence.objects.filter(teacher=request.user,date=form.cleaned_data['date']).exists():
+                absence = Absence(teacher=request.user, date=form.cleaned_data['date'], reason=form.cleaned_data['reason'])
+                absence.save()
+                messages.success(request, _("Absence reported."))
+                q = Class.objects.filter(teacher=request.user,
+                                         day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
 
-            for c in q:
-                newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'])
-                newClass.save()
+                for c in q:
+                    newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'])
+                    newClass.save()
+            else:
+                messages.error(request, _("Absence already reported."))
             return HttpResponseRedirect(reverse('reportAbsence'))
         else:
             return HttpResponse("error")
     return render(request, "reportAbsence.html", {"form": form})
 
 
-@permission_required('timetable.see_subs', login_url='/user/login/')
+@permission_required('timetable.see_subs')
 def sub(request):
     if request.method == 'POST':
         form = forms.SubstituteForm(request.POST)
@@ -78,6 +81,11 @@ def sub(request):
 
 @login_required
 def mySubs(request):
+    for a in Absence.objects.all():
+        print(a.date)
+        print(timezone.now().date())
+        if a.date < timezone.now().date():
+            a.delete()
     mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
     return render(request, "mySubs.html", {"mySubs": mySubs})
 
@@ -182,7 +190,8 @@ def timetable(request):
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
                     {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.student_teaching,
                      "room": c.room.name})
-        return render(request, "timetable.html", {"classesByHour": classesByHour, "teachers": teachers, "rooms": rooms})
+
+    return render(request, "timetable.html", {"classesByHour": classesByHour, "teachers": teachers, "rooms": rooms})
 
 
 def set_schedule(request, uuid):
@@ -220,9 +229,15 @@ def student_details(request,uuid):
     res["HX-Trigger"] = "unfold"
     return  res
 
+@login_required
 def student_manager(request):
+    user = request.user
+    if user.is_superuser:
+        student_pool = Student.objects.all()
+    else:
+        student_pool = Student.objects.filter(tutor=user)
     students = {}
-    for student in Student.objects.all():
+    for student in student_pool:
         students[student.name] = student.uuid
     return render(request,"student_manager.html",{"students":students})
 
