@@ -81,12 +81,15 @@ tr{
 #day-row{
     display: block;
 }
-#empty{
-    width: 40.9333333px;
-    height: 20px;
+#empty,th{
+    width: 61.4px;
+    height: 30px;
 }
 .day{
     height: 40px;
     padding:0;
     width: 200px;
+}
+#student-grade,#student-tutor,#student-shacharit{
+    font-size: large;
 }

@@ -2,5 +2,41 @@
     width:100%;
     max-height:0;
     overflow:hidden;
-    transition-duration: 2s;
+    transition:max-height 1s ease-in-out;
+    height: 1000px;
+    background-color: white;
+}
+.student-list{
+    padding:0;
+    margin: 0;
+    list-style: none;
+}
+.student{
+    display:flex;
+    font-size: x-large;
+    background-color: rgba(247, 247, 247, 1);
+    border-top: 1px solid lightgray;
+    padding:2px;
+    flex-direction: column;
+}
+.student-name{
+    display:inline;
+    margin: 0;
+}
+.arrow {
+  border: solid rgba(0, 0, 0, 0.68);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 5px;
+    margin: 3px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }

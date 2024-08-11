@@ -1,16 +1,7 @@
 {% load static %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'student_details.css' %}">
 
-    <meta charset="UTF-8">
-    <title>{{ student }}</title>
-</head>
-<body>
 <div class="student_details">
-    <h1 id="student-name">{{ student }}</h1>
     <div class="second-row">
         <table>
             <tr>
@@ -204,7 +195,3 @@
 </table>
 
         </div>
-
-
-</body>
-</html>

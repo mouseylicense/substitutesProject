@@ -1,24 +1,82 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block static %}
     <link rel="stylesheet" href="{% static 'student_details.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{%  static 'student_manager.css' %}">
 {% endblock %}
 {% block content %}
-    {{ students.0 }}
-{% for student,uuid in students.items %}
-    <div  class="student">
+      <input onkeyup="filterList()" type="text" id="text-filter" placeholder="{% trans "Search Student" %}">
 
-        <h1 hx-get="{% url 'student_details' uuid %}" hx-target=".details">{{ student }}</h1>
+    {{ students.0 }}
+    <ul class="student-list">
+{% for student,uuid in students.items %}
+    <li>
+    <div  class="student">
+    <div hx-get="{% url 'student_details' uuid %}" hx-target=".details"  style="display:flex;flex-direction: row">
+        <p class="student-name"> {{ student }}</p><p id="arrow" style="margin:0;margin-right: auto;"><i class="arrow down"></i></p>
+        </div>
         <div class="details"></div>
     </div>
-
+</li>
     {% endfor %}
+    </ul>
+
     <script>
     document.body.addEventListener("unfold",function(evt){
-        console.log(evt.target.parentElement.querySelector(".details").style.maxHeight = "100%")
+
+        let details = evt.target.parentElement.parentElement.querySelector(".details");
+        let arrow = evt.target.parentElement.querySelector("#arrow .arrow")
+
+        if(details.style.maxHeight==="500px"){
+            arrow.classList.remove("up")
+            arrow.classList.add("down")
+            details.style.maxHeight = "0"
+        } else{
+            arrow.classList.remove("down")
+            arrow.classList.add("up")
+            details.style.maxHeight="500px"
+        }
     })
 
 </script>
+    <script>
+function filterList() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('text-filter');
+    filter = input.value.toUpperCase();
+    ul = document.getElementsByClassName("student-list")[0];
+    li = ul.getElementsByTagName('li');
+
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByClassName("student")[0];
+      txtValue = a.textContent || a.innerText;
+
+      // split filter by spaces, gives ["app", "MN"] in your example
+      let filters = filter.split(" ")
+
+      // remove the empty filters (if your filter string
+      // starts or ends by a space) since they are source of errors
+
+      // Array.filter takes in parameter a function returning a boolean
+      // it create a new array containing only element where
+      // the function returned truthy value
+
+      // here we return the length of the string which is falsy (== 0) for ""
+      // and truthy for every other string (!= 0)
+      filters = filters.filter(f => f.length)
+
+      let shouldDisplay = true
+      // test each filter and store true only if string contains all filter
+      filters.forEach(filt => {
+        shouldDisplay = shouldDisplay && txtValue.toUpperCase().includes(filt)
+      })
+
+      // update visibility
+      // set visible if the string include all filters
+      // or if there is no filter
+      li[i].style.display = (shouldDisplay || filters.length === 0) ? "" : "none";
+    }
+  }
+    </script>
 {% endblock %}
