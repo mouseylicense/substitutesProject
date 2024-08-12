@@ -2,4 +2,4 @@
 readme.md
 .venv/
 docker-compose.yaml
-static_output/nano
+static_output/
