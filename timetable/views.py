@@ -96,7 +96,7 @@ def register(request):
         if form.is_valid():
             teacher = form.save()
             teacher.save()
-            return HttpResponseRedirect("/user/login/")
+            return HttpResponseRedirect(reverse("login"))
         else:
             return render(request, 'registration/register.html', {"form": form})
     form = forms.RegistrationForm()
