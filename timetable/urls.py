@@ -15,6 +15,5 @@ urlpatterns = [
     path('getClasses/<int:n>',views.get_teacher_classes,name='get_classes'),
     path('timetable/',views.timetable,name='timetable'),
     path('schedule/set_schedule/<slug:uuid>',views.set_schedule,name='schedule'),
-    path('schedule/manage_schedules',views.schedule_manager, name='schedule_manager'),
     path('send_email/',views.send_email,name='send_email'),
 ]

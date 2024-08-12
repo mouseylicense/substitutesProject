@@ -19,7 +19,7 @@ NUMBERS_TO_GRADES = {
 
 
 class ClassAdmin(admin.ModelAdmin):
-    fields = ['name',('day_of_week','hour'),'room','teacher',('student_teacher','student_teaching'),('first_grade','second_grade','third_grade','fourth_grade','fifth_grade','sixth_grade','seventh_grade','eighth_grade','ninth_grade','tenth_grade','eleventh_grade','twelfth_grade')]
+    fields = [('name','description'),('day_of_week','hour'),'room','teacher',('student_teacher','student_teaching'),('first_grade','second_grade','third_grade','fourth_grade','fifth_grade','sixth_grade','seventh_grade','eighth_grade','ninth_grade','tenth_grade','eleventh_grade','twelfth_grade')]
 
 
 class TeacherAdmin(admin.ModelAdmin):
@@ -29,9 +29,21 @@ admin.site.register(models.Class,ClassAdmin)
 admin.site.register(models.Absence)
 admin.site.register(models.ClassNeedsSub)
 admin.site.register(models.Room)
+
+
+
+@admin.action(description='Change Student grade and remove Graduates')
+def grow_grade(modeladmin, request, queryset):
+    for c in queryset:
+        c.increment_grade()
+
+
 class StudentAdmin(admin.ModelAdmin):
     fields = ["uuid","name","email","phone_number","grade","tutor","shacharit","last_schedule_invite"]
     readonly_fields = ["uuid"]
+    actions = [grow_grade]
+
+
 admin.site.register(models.Student,StudentAdmin)
 
 

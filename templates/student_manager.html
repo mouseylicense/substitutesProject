@@ -40,16 +40,24 @@
     <div  class="student">
     <div   style="display:flex;flex-direction: row">
         <p class="student-name"> {{ student }}</p>
-        <p hx-get="{% url 'student_details' values.0 %}" hx-target="next .details" id="arrow" ><i class="arrow down"></i></p>
-    <button style="margin:0;" name="{{ values.0 }}" value="True"  hx-post="{% url "send_email" %}" style="margin-top: 2px; margin-bottom: 2px" id="{{ values.0 }}" class="btn btn-sm btn-danger"  >{% trans "Reset Schedule" %}</button>
+        <div class="button-div">
+        <p style="display: inline" hx-get="{% url 'student_details' values.0 %}" hx-target="next .details" id="arrow" ><i class="arrow down"></i></p>
+    <button  name="{{ values.0 }}" value="True"  hx-post="{% url "send_email" %}" id="{{ values.0 }}" class="btn btn-danger"  >{% trans "Reset Schedule" %}</button>
     </div>
+        </div>
         <div class="details"></div>
     </div>
     {# if student dosent have a schedule #}
     {% else %}
     <div  class="student">
     <div style="display:flex;flex-direction: row">
-        <p class="student-name"> {{ student }} - {% trans "Last Invite" %} : </p><p class="last-invite" id="last-invite">{{ values.2 }}</p><button name="{{ values.0 }}" hx-target="previous #last-invite" value="False" hx-post="{% url "send_email" %}" style="margin-top: 2px; margin-bottom: 2px" name="False" id="{{ values.0 }}" class="btn btn-primary btn-sm">{% trans "Send Invite" %}</button>
+        <p class="student-name"> {{ student }} - {% trans "Last Invite" %} : </p><p class="last-invite" id="last-invite">{{ values.2 }}</p>
+        <div class="button-div">
+
+        <button name="{{ values.0 }}" hx-target="previous #last-invite" value="False" hx-post="{% url "send_email" %}" name="False" id="{{ values.0 }}" class="btn btn-info">{% trans "Send Invite" %}</button>
+        <a  href="{% url "schedule" values.0 %}"  role="Button" class="btn btn-primary">{% trans "Set Schedule" %}</a>
+
+        </div>
         </div>
         <div class="details"></div>
     </div>
@@ -68,7 +76,7 @@
     </script>
     <script>
     document.body.addEventListener("unfold",function(evt){
-        let details = evt.target.parentElement.parentElement.querySelector(".details");
+        let details = evt.target.parentElement.parentElement.parentElement.querySelector(".details");
         let arrow = evt.target.parentElement.querySelector("#arrow .arrow")
 
         if(details.style.maxHeight==="500px"){

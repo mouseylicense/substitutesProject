@@ -20,13 +20,13 @@
         {% block sidebar %}
               <a class="{% if request.resolver_match.url_name == "mySubs" %}active{% endif %}" href="{% url 'mySubs' %}">{% trans "My Subs" %}</a>
               <a class="{% if request.resolver_match.url_name == "reportAbsence" %}active{% endif %}" href="{% url 'reportAbsence' %}">{%  trans "Report Absence" %}</a>
-              <a class="{% if request.resolver_match.url_name == "student_manager" %}active{% endif %}" href="{% url 'student_manager' %}">{%  trans "Student Information" %}</a>
             {% if perms.timetable.see_subs %}
                 <a class="{% if request.resolver_match.url_name == "sub" %}active{% endif %}" href="{% url 'sub' %}">{%  trans "Set Substitution" %}</a>
             {% endif %}
+              <a class="{% if request.resolver_match.url_name == "student_manager" %}active{% endif %}" href="{% url 'student_manager' %}">{%  trans "Manage Students" %}</a>
+            
             {% if perms.timetable.see_classes %}
                 <a id="setClasses" class="{% if request.resolver_match.url_name == "setClasses" %}active{% endif %}" href="{% url 'setClasses' %}">{%  trans "Set Classes" %}</a>
-                <a id="manageSchedules" class="{% if request.resolver_match.url_name == "schedule_manager" %}active{% endif %}" href="{% url 'schedule_manager' %}">{%  trans "Manage Schedules" %}</a>
             {% endif %}
 <div style="margin-top: auto">
             {% get_current_language_bidi as LANGUAGE_BIDI %}

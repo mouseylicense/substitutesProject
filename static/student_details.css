@@ -16,7 +16,7 @@ body {
     padding: 5px;
 }
 .class h1 {
-    text-align: center;
+    text-align: center !important;
     font-size: medium;
     color: #343a40;
     padding: 0;

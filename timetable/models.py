@@ -34,7 +34,6 @@ GRADES = [
     (9, 'Tenth Grade'),
     (10, 'Eleventh Grade'),
     (11, 'Twelfth Grade'),
-    (12, 'Graduate')
 ]
 
 
@@ -95,6 +94,7 @@ class Class(models.Model):
                  (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45"),
                  (datetime.time(13, 45), "13:45")])
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
+    description = models.TextField(max_length=300, null=True, blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
     student_teacher = models.BooleanField(default=False, verbose_name=_("Is a Student Teaching?"))
     student_teaching = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Student Teaching"))
@@ -200,6 +200,12 @@ class Student(models.Model):
     last_schedule_invite = models.DateTimeField(default=datetime.datetime.now())
     def __str__(self):
         return self.name
+    def increment_grade(self):
+        if self.grade == 11:
+            self.delete()
+        else:
+            self.grade = self.grade + 1
+            self.save()
 
     def str_grades(self):
         number_to_grade = {

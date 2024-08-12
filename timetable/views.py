@@ -211,23 +211,11 @@ def set_schedule(request, uuid):
     return Http404
 
 
-@permission_required('timetable.see_classes')
-def schedule_manager(request):
-    students = {}
-
-    for student in Student.objects.all().order_by('schedule'):
-        if Schedule.objects.filter(student__uuid=student.uuid).exists():
-            students[student] = [True, student.uuid,datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
-        else:
-            students[student] = [False, student.uuid,datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
-    return render(request, "schedule_manager.html", {"students": students,"scheduleCount":Schedule.objects.count(),
-                                                     "studentWithNoSchedule":(Student.objects.count()-Schedule.objects.count())})
-
 def student_details(request,uuid):
     student = Student.objects.get(uuid=uuid)
     res = render(request, "student_details.html", {"student": student})
     res["HX-Trigger"] = "unfold"
-    return  res
+    return res
 
 @login_required
 def student_manager(request):

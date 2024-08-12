@@ -16,11 +16,12 @@
 }
 /* Sidebar links */
 .sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
-  text-decoration: none;
-  font-family: helvetica, arial, sans-serif;
+  display: block !important;
+  color: black ;
+  padding: 16px !important;
+  text-decoration: none !important;
+  font-family: helvetica, arial, sans-serif !important;
+  line-height: 1 !important;
 }
 
 /* Active/current link */
