@@ -21,6 +21,7 @@ const timeframes = document.getElementsByClassName("timeframe")
                 new_element.dataset.teacher = classesByHour[key][i]["teacher"];
                 new_element.dataset.grades = classesByHour[key][i]["grades_display"];
                 new_element.dataset.hour = key.slice(-5)
+                new_element.dataset.description = classesByHour[key][i]["description"]
                 new_element.dataset.all_grades = classesByHour[key][i]["all_grades"];
                 new_element.setAttribute("onclick","setModalContent(this);")
                 div.append(new_element)
@@ -34,6 +35,7 @@ const timeframes = document.getElementsByClassName("timeframe")
             modalContent.querySelector("#teacher").innerText = element.dataset.teacher
             modalContent.querySelector("#room").innerText = element.dataset.room
             modalContent.querySelector("#hour").innerText = element.dataset.hour
+            modalContent.querySelector("#description").innerText = element.dataset.description
             modal.style.display = "block";
         }
 

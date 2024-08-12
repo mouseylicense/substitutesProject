@@ -38,6 +38,9 @@ class ClassForm(forms.ModelForm):
     class Meta:
         model = Class
         fields = "__all__"
+        widgets= {
+            "description":forms.Textarea(attrs={'placeholder':_("Description")+"...",'style':'flex-grow:1'}),
+        }
 
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(
