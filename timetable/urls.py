@@ -16,4 +16,5 @@ urlpatterns = [
     path('timetable/',views.timetable,name='timetable'),
     path('schedule/set_schedule/<slug:uuid>',views.set_schedule,name='schedule'),
     path('send_email/',views.send_email,name='send_email'),
+    path("test/",views.generate_day_pdf,name="generate_pdf")
 ]

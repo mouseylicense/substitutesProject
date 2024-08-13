@@ -1,10 +1,8 @@
-import datetime
-import json
-import logging
+import os
+
+import reportlab
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
-from django.forms import model_to_dict
-from django.template.defaulttags import url
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
 from . import forms
@@ -13,12 +11,16 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .forms import RegistrationForm, ClassForm, ScheduleForm
 from .models import *
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404 ,FileResponse
 from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
+import io
 from dotenv import load_dotenv
 from os import environ
+from fpdf import FPDF
+
+
 load_dotenv()
 FROM_EMAIL=environ['FROM_EMAIL']
 DAYS_OF_WEEKDAY = {
@@ -28,7 +30,6 @@ DAYS_OF_WEEKDAY = {
     2: 'Wednesday',
     3: 'Thursday'
 }
-
 
 def index(request):
     Subs = ClassNeedsSub.objects.filter(date=timezone.now().today())
@@ -302,4 +303,38 @@ def send_email(request):
                 test = HttpResponse(datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M'))
                 test["HX-Trigger"] = "alert"
                 return test
+
+def generate_day_pdf(request):
+    day = request.GET.get("day")
+    classes = Class.objects.filter(day_of_week=day).all().order_by("hour")
+    buffer = io.BytesIO()
+    table = []
+    for c in classes:
+        table.append((c.name,c.teacher,str(c.room).encode("utf-8"),u'ניסיוון'.encode("utf-8"),))
+        print(c.name,c.teacher,c.room,c.str_grades())
+
+    pdf = FPDF()
+    pdf.add_page()
+
+    # Add a DejaVu Unicode font (uses UTF-8)
+    # Supports more than 200 languages. For a coverage status see:
+    # http://dejavu.svn.sourceforge.net/viewvc/dejavu/trunk/dejavu-fonts/langcover.txt
+    pdf.add_font('DejaVu', '', "D:\\Users\\Nevo\\Desktop\\Subtituteproject\\timetable\\DejaVuSansCondensed.ttf", uni=True)
+    pdf.set_font('DejaVu', '', 14)
+
+    text = u"""
+    English: Hello World
+    Greek: Γειά σου κόσμος
+    Polish: Witaj świecie
+    Portuguese: Olá mundo
+    Russian: Здравствуй, Мир
+    Vietnamese: Xin chào thế giớia
+    Arabic: مرحبا العالم
+    Hebrew: שלום עולם
+    """
+    buffer.seek(0)
+    pdf.write(0, text)
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = "attachment; filename='file_name.pdf'"
+    return response
 
