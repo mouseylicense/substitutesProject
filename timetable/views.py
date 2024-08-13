@@ -1,10 +1,9 @@
-import os
-
-import reportlab
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import Table, TableStyle
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
@@ -16,10 +15,15 @@ from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
 import io
+import datetime
 from dotenv import load_dotenv
+from bidi.algorithm import get_display
 from os import environ
-from fpdf import FPDF
-
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from django.conf import settings
+pdfmetrics.registerFont(TTFont('DejaVuSansCondensed', str(settings.BASE_DIR) + '\\reportlab_extra_fonts\\DejaVuSansCondensed.ttf'))
 
 load_dotenv()
 FROM_EMAIL=environ['FROM_EMAIL']
@@ -305,36 +309,50 @@ def send_email(request):
                 return test
 
 def generate_day_pdf(request):
+
     day = request.GET.get("day")
     classes = Class.objects.filter(day_of_week=day).all().order_by("hour")
     buffer = io.BytesIO()
-    table = []
+    i = 1
+    table = [(get_display(_(day)),)]
+    p = canvas.Canvas(buffer,pagesize=A4)
+    p.setFont("DejaVuSansCondensed", 14)
+    c_by_hour = {}
+    count = {}
     for c in classes:
-        table.append((c.name,c.teacher,str(c.room).encode("utf-8"),u'ניסיוון'.encode("utf-8"),))
-        print(c.name,c.teacher,c.room,c.str_grades())
+        if c_by_hour.get(c.hour):
+            count[c.hour] += 1
+            c_by_hour[c.hour].append(c)
+        else:
+            count[c.hour] = 1
+            c_by_hour[c.hour] = [c]
 
-    pdf = FPDF()
-    pdf.add_page()
 
-    # Add a DejaVu Unicode font (uses UTF-8)
-    # Supports more than 200 languages. For a coverage status see:
-    # http://dejavu.svn.sourceforge.net/viewvc/dejavu/trunk/dejavu-fonts/langcover.txt
-    pdf.add_font('DejaVu', '', "D:\\Users\\Nevo\\Desktop\\Subtituteproject\\timetable\\DejaVuSansCondensed.ttf", uni=True)
-    pdf.set_font('DejaVu', '', 14)
-
-    text = u"""
-    English: Hello World
-    Greek: Γειά σου κόσμος
-    Polish: Witaj świecie
-    Portuguese: Olá mundo
-    Russian: Здравствуй, Мир
-    Vietnamese: Xin chào thế giớia
-    Arabic: مرحبا العالم
-    Hebrew: שלום עולם
-    """
+    for hour,ch in c_by_hour.items():
+        table.append((str(hour)[:5],))
+        count[hour] = i
+        i +=1
+        for c in ch:
+            i += 1
+            table.append((get_display(c.str_grades()),get_display(c.room.name),get_display(str(c.who_teaches())),get_display(c.name)))
+    print(count)
+    tablestyle = TableStyle([
+        ('SPAN',(0,0),(-1,0)),
+        ('SPAN',(0,count[datetime.time(9,15)]),(-1,count[datetime.time(9,15)])),
+        ('SPAN',(0,count[datetime.time(10,7)]),(-1,count[datetime.time(10,7)])),
+        ('SPAN',(0,count[datetime.time(11,45)]),(-1,count[datetime.time(11,45)])),
+        ('SPAN',(0,count[datetime.time(12,45)]),(-1,count[datetime.time(12,45)])),
+        ('TEXTCOLOR',(0,0),(-1,0),"#124213"),
+        ('FONTNAME',(0,0),(-1,-1),'DejaVuSansCondensed'),
+        ('INNERGRID',(0,0),(-1,-1),0.5,"#000000"),
+        ('BOX', (0,0), (-1,-1), 0.25, "#000000")])
+    t = Table(table,style=tablestyle)
+    t.wrapOn(p,0,0)
+    t.drawOn(p,100,100)
+    p.showPage()
+    p.save()
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
     buffer.seek(0)
-    pdf.write(0, text)
-    response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = "attachment; filename='file_name.pdf'"
-    return response
 
+    return FileResponse(buffer, as_attachment=True,filename="hello.pdf")
