@@ -90,9 +90,8 @@ class Class(models.Model):
     name = models.CharField(max_length=100)
     day_of_week = models.CharField(default="", max_length=100, choices=DAYS_OF_WEEKDAY)
     hour = models.fields.TimeField(
-        choices=[(datetime.time(8, 30), "08:30"), (datetime.time(9, 15), "09:15"), (datetime.time(10, 7), "10:07"),
-                 (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45"),
-                 (datetime.time(13, 45), "13:45")])
+        choices=[ (datetime.time(9, 15), "09:15"), (datetime.time(10, 7), "10:07"),
+                 (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45")])
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(max_length=300, null=True, blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)

@@ -308,13 +308,15 @@ def send_email(request):
                 test["HX-Trigger"] = "alert"
                 return test
 
-def print(request):
-    day = request.GET.get("day")
+def printable(request):
+    day = DAYS_OF_WEEKDAY[timezone.now().weekday()]
     classes = Class.objects.filter(day_of_week=day).order_by('hour').all()
     classes_by_hour = {}
     for c in classes:
         if classes_by_hour.get(str(c.hour)[:5]):
             classes_by_hour[str(c.hour)[:5]].append(c)
         else:
+            if str(c.hour)[:5] == "11:45":
+                classes_by_hour["11:00"] = []
             classes_by_hour[str(c.hour)[:5]] = [c]
     return render(request,"day_schedule.html",{"day":_(day),"classes":classes_by_hour})

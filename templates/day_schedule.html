@@ -13,7 +13,12 @@
         <th colspan="4"><h1>{{ day }}</h1></th>
     </tr>
     {% for h,cl in classes.items %}
+        {% if h == "11:00" %}
+
+        <tr><td id="break" class="hour-row" colspan="4"><h4>{{ h }}</h4></td></tr>
+        {% else %}
         <tr><td class="hour-row" colspan="4"><h4>{{ h }}</h4></td></tr>
+        {% endif %}
         {% for c in cl %}
         <tr>
             <td>{{ c.name }}</td>
@@ -26,6 +31,9 @@
     {% endfor %}
 </table>
 
-<script>window.print()</script>
+<script>
+    window.print();
+    window.close()
+</script>
 </body>
 </html>

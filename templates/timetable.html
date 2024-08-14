@@ -107,6 +107,7 @@
         <input value="12" id="twelfth-grade" type="checkbox" class="grades-checkboxes" onClick="filterGrades()">
         <span class="checkmark"></span>
     </label>
+
 </div>
 
 
@@ -120,6 +121,7 @@
         </select>
         </label>
             <input class="button" type="button" onclick="uncheck()" value="{% trans "Uncheck All" %}">
+        <input type="button" class="button"  onclick="window.open('{% url "print" %}');" value="{% trans "Print Today's Schedule" %}">
 
     </div>
     <div class="timetable">
@@ -141,15 +143,16 @@
         <th class="day">{% trans "Wednesday" %}</th>
         <th class="day">{% trans "Thursday" %}</th>
     </tr>
-    <tr class="timerow">
-
-        <th>08:30</th>
-        <td><div class=timeframe  id="Sunday-08:30" ></div></td>
-        <td><div class=timeframe  id="Monday-08:30" ></div></td>
-        <td><div class=timeframe  id="Tuesday-08:30" ></div></td>
-        <td><div class=timeframe  id="Wednesday-08:30" ></div></td>
-        <td><div class=timeframe  id="Thursday-08:30" ></div></td>
-    </tr>
+{#  if needed to add 08:30, just uncomment this  #}
+{#    <tr class="timerow">#}
+{##}
+{#        <th>08:30</th>#}
+{#        <td><div class=timeframe  id="Sunday-08:30" ></div></td>#}
+{#        <td><div class=timeframe  id="Monday-08:30" ></div></td>#}
+{#        <td><div class=timeframe  id="Tuesday-08:30" ></div></td>#}
+{#        <td><div class=timeframe  id="Wednesday-08:30" ></div></td>#}
+{#        <td><div class=timeframe  id="Thursday-08:30" ></div></td>#}
+{#    </tr>#}
     <tr class="timerow">
         <th>09:15</th>
         <td><div class=timeframe  id="Sunday-09:15" ></div></td>
@@ -190,11 +193,13 @@
         </div>
 
         </div>
+
     <style>
     .filterGrade,.teacherFilter{
         display:none;
     }
     </style>
-<script type="text/javascript" src="{% static 'timetable.js' %}"></script>
-<script type="text/javascript" src="{% static 'filters.js' %}"></script>
+
+<script type="application/javascript" src="{% static 'timetable.js' %}"></script>
+<script type="application/javascript" src="{% static 'filters.js' %}"></script>
 {% endblock %}
