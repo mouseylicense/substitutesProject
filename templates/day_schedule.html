@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ day }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "printable_timetable.css" %}">
+</head>
+<body>
+<table>
+    <tr >
+        <th colspan="4"><h1>{{ day }}</h1></th>
+    </tr>
+    {% for h,cl in classes.items %}
+        <tr><td class="hour-row" colspan="4"><h4>{{ h }}</h4></td></tr>
+        {% for c in cl %}
+        <tr>
+            <td>{{ c.name }}</td>
+            <td >{{ c.room }}</td>
+            <td >{{ c.who_teaches }}</td>
+            <td>{{ c.str_grades }}</td>
+
+        </tr>
+        {% endfor %}
+    {% endfor %}
+</table>
+
+<script>window.print()</script>
+</body>
+</html>

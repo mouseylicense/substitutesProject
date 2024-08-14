@@ -308,51 +308,13 @@ def send_email(request):
                 test["HX-Trigger"] = "alert"
                 return test
 
-def generate_day_pdf(request):
-
+def print(request):
     day = request.GET.get("day")
-    classes = Class.objects.filter(day_of_week=day).all().order_by("hour")
-    buffer = io.BytesIO()
-    i = 1
-    table = [(get_display(_(day)),)]
-    p = canvas.Canvas(buffer,pagesize=A4)
-    p.setFont("DejaVuSansCondensed", 14)
-    c_by_hour = {}
-    count = {}
+    classes = Class.objects.filter(day_of_week=day).order_by('hour').all()
+    classes_by_hour = {}
     for c in classes:
-        if c_by_hour.get(c.hour):
-            count[c.hour] += 1
-            c_by_hour[c.hour].append(c)
+        if classes_by_hour.get(str(c.hour)[:5]):
+            classes_by_hour[str(c.hour)[:5]].append(c)
         else:
-            count[c.hour] = 1
-            c_by_hour[c.hour] = [c]
-
-
-    for hour,ch in c_by_hour.items():
-        table.append((str(hour)[:5],))
-        count[hour] = i
-        i +=1
-        for c in ch:
-            i += 1
-            table.append((get_display(c.str_grades()),get_display(c.room.name),get_display(str(c.who_teaches())),get_display(c.name)))
-    print(count)
-    tablestyle = TableStyle([
-        ('SPAN',(0,0),(-1,0)),
-        ('SPAN',(0,count[datetime.time(9,15)]),(-1,count[datetime.time(9,15)])),
-        ('SPAN',(0,count[datetime.time(10,7)]),(-1,count[datetime.time(10,7)])),
-        ('SPAN',(0,count[datetime.time(11,45)]),(-1,count[datetime.time(11,45)])),
-        ('SPAN',(0,count[datetime.time(12,45)]),(-1,count[datetime.time(12,45)])),
-        ('TEXTCOLOR',(0,0),(-1,0),"#124213"),
-        ('FONTNAME',(0,0),(-1,-1),'DejaVuSansCondensed'),
-        ('INNERGRID',(0,0),(-1,-1),0.5,"#000000"),
-        ('BOX', (0,0), (-1,-1), 0.25, "#000000")])
-    t = Table(table,style=tablestyle)
-    t.wrapOn(p,0,0)
-    t.drawOn(p,100,100)
-    p.showPage()
-    p.save()
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
-    buffer.seek(0)
-
-    return FileResponse(buffer, as_attachment=True,filename="hello.pdf")
+            classes_by_hour[str(c.hour)[:5]] = [c]
+    return render(request,"day_schedule.html",{"day":_(day),"classes":classes_by_hour})
