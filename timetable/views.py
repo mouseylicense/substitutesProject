@@ -6,7 +6,7 @@ from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .forms import RegistrationForm, ClassForm, ScheduleForm
+from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404 ,FileResponse
 from django.utils import timezone
@@ -212,6 +212,22 @@ def student_details(request,uuid):
     res = render(request, "student_details.html", {"student": student})
     res["HX-Trigger"] = "unfold"
     return res
+
+def teacher_manager(request):
+    if request.method == "POST":
+        form = TeacherForm(request.POST)
+        form.instance = Teacher.objects.get(username = form["username"].value())
+        print(form)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+        return HtmlReponse({"form": form})
+    teachers = Teacher.objects.all()
+    teachers_and_forms = {}
+    for teacher in teachers:
+        teachers_and_forms[teacher.username] = TeacherForm(instance=teacher)
+    return render(request, "teacher_manager.html", {"teachers": teachers_and_forms})
 
 @login_required
 def student_manager(request):

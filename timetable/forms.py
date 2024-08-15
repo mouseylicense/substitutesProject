@@ -91,3 +91,10 @@ class RegistrationForm(forms.ModelForm):
 
         return user
 
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ("username","Sunday","Monday","Tuesday","Wednesday","Thursday","tutor","shocher")
+        widgets = {
+            "username":forms.HiddenInput(),
+        }
