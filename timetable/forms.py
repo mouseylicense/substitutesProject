@@ -94,7 +94,18 @@ class RegistrationForm(forms.ModelForm):
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ("username","Sunday","Monday","Tuesday","Wednesday","Thursday","tutor","shocher")
+        fields = ("username","Sunday","Monday","Tuesday","Wednesday","Thursday","tutor","shocher",
+                  "can_substitute","manage_subs","manage_schedule")
         widgets = {
             "username":forms.HiddenInput(),
+        }
+        labels = {
+            "Sunday":_("Sunday"),
+            "Monday":_("Monday"),
+            "Tuesday":_("Tuesday"),
+            "Wednesday":_("Wednesday"),
+            "Thursday":_("Thursday"),
+            "tutor":_("Tutor"),
+            "shocher":_("Shocher"),
+            "can_substitute":_("Substitutes?"),
         }

@@ -1,7 +1,9 @@
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
+from docutils.examples import html_body
+
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
@@ -55,7 +57,7 @@ def reportAbsence(request):
     return render(request, "reportAbsence.html", {"form": form})
 
 
-@permission_required('timetable.see_subs')
+@user_passes_test(lambda u: u.manage_subs or u.is_superuser)
 def sub(request):
     if request.method == 'POST':
         form = forms.SubstituteForm(request.POST)
@@ -98,8 +100,8 @@ def register(request):
     form = forms.RegistrationForm()
     return render(request, 'registration/register.html', {"form": form})
 
-
-@permission_required('timetable.see_classes')
+@login_required()
+@user_passes_test(lambda u: u.manage_schedule or u.is_superuser)
 def setClasses(request):
     if request.method == 'POST':
         form = ClassForm(request.POST)
@@ -213,16 +215,15 @@ def student_details(request,uuid):
     res["HX-Trigger"] = "unfold"
     return res
 
+@user_passes_test(lambda u: u.is_superuser)
 def teacher_manager(request):
     if request.method == "POST":
         form = TeacherForm(request.POST)
         form.instance = Teacher.objects.get(username = form["username"].value())
-        print(form)
         if form.is_valid():
             form.save()
         else:
             print(form.errors)
-        return HtmlReponse({"form": form})
     teachers = Teacher.objects.all()
     teachers_and_forms = {}
     for teacher in teachers:

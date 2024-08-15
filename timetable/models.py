@@ -53,6 +53,8 @@ class Teacher(AbstractUser):
     Thursday = models.BooleanField(default=True)
     tutor = models.BooleanField(default=False)
     shocher = models.BooleanField(default=False)
+    manage_subs = models.BooleanField(default=False)
+    manage_schedule = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', 'phone_number']

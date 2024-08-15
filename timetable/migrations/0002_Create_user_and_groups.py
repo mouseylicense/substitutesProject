@@ -4,25 +4,6 @@ from django.db import migrations
 from django.contrib.auth.hashers import make_password
 
 
-def create_super_Teacher_group(apps, schema_editor):
-    if not apps.get_model('auth', 'Group').objects.filter(name="Super teacher").exists():
-        Group = apps.get_model('auth', 'Group')
-        permission = apps.get_model('auth', 'Permission').objects.get(codename="see_subs")
-        g = Group.objects.create()
-        g.name = "Super teacher"
-        g.permissions.add(permission)
-        g.save()
-
-
-def create_schedule_group(apps, schema_editor):
-    if not apps.get_model('auth', 'Group').objects.filter(name="Schedule").exists():
-        Group = apps.get_model('auth', 'Group')
-        permission = apps.get_model('auth', 'Permission').objects.get(codename="see_classes")
-        g = Group.objects.create(name="Schedule")
-        g.permissions.add(permission)
-        g.save()
-
-
 def create_super_user(apps, schema_editor):
     if not apps.get_model('timetable', 'teacher').objects.filter(username="Delete_Me").exists():
         user = apps.get_model('timetable', 'teacher').objects.create()
@@ -43,6 +24,4 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(create_super_user),
-        migrations.RunPython(create_super_Teacher_group),
-        migrations.RunPython(create_schedule_group),
     ]
