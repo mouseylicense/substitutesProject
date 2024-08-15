@@ -2,8 +2,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
-from reportlab.lib.pagesizes import A4
-from reportlab.platypus import Table, TableStyle
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
@@ -14,16 +12,9 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http40
 from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
-import io
 import datetime
 from dotenv import load_dotenv
-from bidi.algorithm import get_display
 from os import environ
-from reportlab.pdfgen import canvas
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from django.conf import settings
-pdfmetrics.registerFont(TTFont('DejaVuSansCondensed', str(settings.BASE_DIR) + '\\reportlab_extra_fonts\\DejaVuSansCondensed.ttf'))
 
 load_dotenv()
 FROM_EMAIL=environ['FROM_EMAIL']
