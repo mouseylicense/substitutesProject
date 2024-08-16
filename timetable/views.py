@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
 from docutils.examples import html_body
@@ -218,12 +220,10 @@ def student_details(request,uuid):
 @user_passes_test(lambda u: u.is_superuser)
 def teacher_manager(request):
     if request.method == "POST":
-        print(request.body.decode("utf-8"))
         if request.body.decode("utf-8").split("=")[0] == "Delete":
             Teacher.objects.get(uuid=request.body.decode("utf-8").split("=")[1]).delete()
             return HttpResponse("")
         else:
-            print("form")
             form = TeacherForm(request.POST)
             form.instance = Teacher.objects.get(uuid=form["uuid"].value())
             if form.is_valid():
@@ -334,10 +334,25 @@ def printable(request):
                 classes_by_hour["11:00"] = []
             classes_by_hour[str(c.hour)[:5]] = [c]
     return render(request,"day_schedule.html",{"day":_(day),"classes":classes_by_hour})
+@require_POST
+@user_passes_test(lambda u: u.is_superuser)
+def create_teacher(request):
+    if request.is_secure():
+        method = "https://"
+    else:
+        method = "http://"
+    email = request.headers["HX-Prompt"]
+    try:
+        validate_email(email)
+    except ValidationError as e:
+        return HttpResponse(str(e))
+    else:
+        if not Teacher.objects.filter(email=email).exists():
+            teacher = Teacher(email=email)
+            teacher.save()
+        else:
+            teacher = Teacher.objects.get(email=email)
 
-def create_teacher(request,email):
-    if not Teacher.objects.filter(email=email).exists():
-        teacher = Teacher(email=email)
-        teacher.save()
-        url = reverse("register",args=[teacher.uuid])
+        url = method + request.get_host() + reverse("register", args=[teacher.uuid])
         return HttpResponse(url)
+

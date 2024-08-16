@@ -47,8 +47,8 @@ h1:dir(rtl), p:dir(rtl){
 {% block title %}{% trans "Manage Teachers" %}{% endblock %}
 {% block content %}
 <h1>{% trans "Manage Teachers" %}</h1>
-
-
+<button class="btn btn-success" hx-target="#response #link" hx-on::after-request="document.getElementById('response').style.display = 'block'" hx-swap="innerHTML" name="test" value="r" hx-prompt="{% trans "Teacher's Email" %}" hx-post="{% url "create_teacher" %}">{% trans "Add Teacher / Generate Teacher Form" %}</button>
+    <div style="display: none" id="response" class="alert alert-primary" onclick="copyToClipboard(this)">{% trans "Click To Copy: " %}<span id="link"></span></div>
 
     <div class="teacher-list">
 {# show invite all and reset all buttons if user is super user   #}
@@ -72,7 +72,7 @@ h1:dir(rtl), p:dir(rtl){
 
         </form>
         {% if user.uuid != teacher.uuid %}
-                    <button hx-target=".teacher" hx-swap="delete" hx-post="{% url "teacher_manager"%}" name="Delete" value="{{ teacher.uuid }}" class="btn btn-danger">Delete</button>
+                    <button hx-target="closest .teacher" hx-swap="delete" hx-post="{% url "teacher_manager"%}" name="Delete" value="{{ teacher.uuid }}" class="btn btn-danger">{% trans "Delete" %}</button>
         {% endif %}
         </div>
     </div>
@@ -120,4 +120,17 @@ function filterList() {
     }
   }
     </script>
+    <script>
+
+  function copyToClipboard(a) {
+      a.style.display = "block"
+      const textToCopy = a.querySelector("#link").innerText; // or .textContent if you want to copy raw text
+      navigator.clipboard.writeText(textToCopy).then(function() {
+      alert('Copied to clipboard!');
+      a.style.display = "none"
+      }, function(err) {
+          console.error('Could not copy text: ', err);
+      });
+      }
+</script>
 {% endblock %}

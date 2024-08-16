@@ -113,4 +113,6 @@ class TeacherForm(forms.ModelForm):
             "tutor":_("Tutor"),
             "shocher":_("Shocher"),
             "can_substitute":_("Substitutes?"),
+            "manage_subs":_("Manages Subs"),
+            "manage_schedule":_("Manages Schedule")
         }
