@@ -40,11 +40,12 @@ GRADES = [
 
 # Create your models here.
 class Teacher(AbstractUser):
-    first_name = None
-    last_name = None
-    username = models.CharField(max_length=100, unique=True, verbose_name="name")
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    username = None
     phone_number = models.CharField(max_length=10)
-    email = models.EmailField(max_length=100)
+    email = models.EmailField(max_length=100, unique=True)
     can_substitute = models.BooleanField(default=True)
     Sunday = models.BooleanField(default=True)
     Monday = models.BooleanField(default=True)
@@ -56,11 +57,11 @@ class Teacher(AbstractUser):
     manage_subs = models.BooleanField(default=False)
     manage_schedule = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'phone_number']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name','last_name', 'phone_number']
 
     def __str__(self):
-        return self.username
+        return self.first_name + " " + self.last_name
 
 
 

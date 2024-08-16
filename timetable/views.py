@@ -218,16 +218,22 @@ def student_details(request,uuid):
 @user_passes_test(lambda u: u.is_superuser)
 def teacher_manager(request):
     if request.method == "POST":
-        form = TeacherForm(request.POST)
-        form.instance = Teacher.objects.get(username = form["username"].value())
-        if form.is_valid():
-            form.save()
+        print(request.body.decode("utf-8"))
+        if request.body.decode("utf-8").split("=")[0] == "Delete":
+            Teacher.objects.get(uuid=request.body.decode("utf-8").split("=")[1]).delete()
+            return HttpResponse("")
         else:
-            print(form.errors)
+            print("form")
+            form = TeacherForm(request.POST)
+            form.instance = Teacher.objects.get(uuid=form["uuid"].value())
+            if form.is_valid():
+                form.save()
+            else:
+                return HttpResponse(form.errors)
     teachers = Teacher.objects.all()
     teachers_and_forms = {}
     for teacher in teachers:
-        teachers_and_forms[teacher.username] = TeacherForm(instance=teacher)
+        teachers_and_forms[teacher] = TeacherForm(instance=teacher,initial={"uuid":teacher.uuid})
     return render(request, "teacher_manager.html", {"teachers": teachers_and_forms})
 
 @login_required

@@ -138,6 +138,10 @@ LOGIN_REDIRECT_URL = "/teacher/mySubs"
 LOGIN_URL = '/teacher/user/login'
 AUTH_USER_MODEL = 'timetable.Teacher'
 LOGOUT_REDIRECT_URL = '/teacher/user/login'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

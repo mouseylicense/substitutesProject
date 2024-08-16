@@ -78,7 +78,7 @@ class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(label=_("Email"))
     class Meta:
         model = Teacher
-        fields = ('username', 'email', 'phone_number', 'password')
+        fields = ('first_name','last_name', 'email', 'phone_number', 'password')
 
     def save(self, commit=True):
         # Save the provided password in hashed format
@@ -92,13 +92,13 @@ class RegistrationForm(forms.ModelForm):
         return user
 
 class TeacherForm(forms.ModelForm):
+    uuid = forms.UUIDField(widget=forms.HiddenInput())
+
     class Meta:
         model = Teacher
-        fields = ("username","Sunday","Monday","Tuesday","Wednesday","Thursday","tutor","shocher",
+        fields = ("Sunday","Monday","Tuesday","Wednesday","Thursday","tutor","shocher",
                   "can_substitute","manage_subs","manage_schedule")
-        widgets = {
-            "username":forms.HiddenInput(),
-        }
+
         labels = {
             "Sunday":_("Sunday"),
             "Monday":_("Monday"),
