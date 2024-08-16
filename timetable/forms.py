@@ -75,11 +75,16 @@ class RegistrationForm(forms.ModelForm):
     phone_number = forms.CharField(label=_('Phone'),
                                    widget=forms.TextInput(attrs={'type': 'tel', "pattern": "[0-9]{10}"}),
                                    min_length=10, max_length=10)
-    email = forms.EmailField(label=_("Email"))
     class Meta:
         model = Teacher
-        fields = ('first_name','last_name', 'email', 'phone_number', 'password')
-
+        fields = ('first_name','last_name', 'phone_number', 'password','Sunday','Monday','Tuesday','Wednesday','Thursday')
+        labels = {
+            "Sunday":_("Sunday"),
+            "Monday":_("Monday"),
+            "Tuesday":_("Tuesday"),
+            "Wednesday":_("Wednesday"),
+            "Thursday":_("Thursday"),
+        }
     def save(self, commit=True):
         # Save the provided password in hashed format
 

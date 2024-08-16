@@ -88,16 +88,16 @@ def mySubs(request):
     return render(request, "mySubs.html", {"mySubs": mySubs})
 
 
-def register(request):
+def register(request,uuid):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST,instance=Teacher.objects.get(uuid=uuid))
         if form.is_valid():
             teacher = form.save()
             teacher.save()
             return HttpResponseRedirect(reverse("login"))
         else:
             return render(request, 'registration/register.html', {"form": form})
-    form = forms.RegistrationForm()
+    form = forms.RegistrationForm(instance=Teacher.objects.get(uuid=uuid))
     return render(request, 'registration/register.html', {"form": form})
 
 @login_required()
@@ -334,3 +334,10 @@ def printable(request):
                 classes_by_hour["11:00"] = []
             classes_by_hour[str(c.hour)[:5]] = [c]
     return render(request,"day_schedule.html",{"day":_(day),"classes":classes_by_hour})
+
+def create_teacher(request,email):
+    if not Teacher.objects.filter(email=email).exists():
+        teacher = Teacher(email=email)
+        teacher.save()
+        url = reverse("register",args=[teacher.uuid])
+        return HttpResponse(url)

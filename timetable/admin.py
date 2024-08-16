@@ -23,7 +23,7 @@ class ClassAdmin(admin.ModelAdmin):
 
 
 class TeacherAdmin(admin.ModelAdmin):
-    fields = ['username',('email','phone_number'),('can_substitute','tutor','shocher'),('Sunday','Monday','Tuesday','Wednesday','Thursday'),('user_permissions','groups','is_superuser','password','is_staff')]
+    fields = [('first_name','last_name'),('email','phone_number'),('can_substitute','tutor','shocher'),('Sunday','Monday','Tuesday','Wednesday','Thursday'),('user_permissions','groups','is_superuser','password','is_staff')]
 admin.site.register(models.Teacher,TeacherAdmin)
 admin.site.register(models.Class,ClassAdmin)
 admin.site.register(models.Absence)

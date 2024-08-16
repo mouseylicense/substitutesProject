@@ -1,4 +1,6 @@
 import uuid
+
+from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 import datetime
@@ -6,6 +8,8 @@ from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+from pygments.lexer import default
+from spacy import blank
 
 DAYS_OF_WEEKDAY_DICT = {
     6: 'Sunday',
@@ -36,9 +40,29 @@ GRADES = [
     (11, 'Twelfth Grade'),
 ]
 
+class TeacherManager(BaseUserManager):
+    def create_user(self, email, first_name, last_name, password=None,**extra_fields):
 
+        if not email:
+            raise ValueError('Email must be set')
+        if not first_name:
+            raise ValueError('First Name must be set')
+        if not last_name:
+            raise ValueError('Last Name must be set')
+        teacher = Teacher(email=email,first_name=first_name,last_name=last_name, **extra_fields)
+        if password:
+            teacher.set_password(password)
+        else:
+            teacher.set_unusable_password()
+        teacher.save(using=self._db)
+        return teacher
 
-# Create your models here.
+    def create_superuser(self,email,first_name,last_name,password,**extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        teacher = self.create_user(email,first_name,last_name,password,**extra_fields)
+        return teacher
+
 class Teacher(AbstractUser):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=100)
@@ -57,11 +81,14 @@ class Teacher(AbstractUser):
     manage_subs = models.BooleanField(default=False)
     manage_schedule = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
+    objects = TeacherManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name','last_name', 'phone_number']
+    REQUIRED_FIELDS = ['first_name','last_name']
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+
 
 
 
@@ -199,7 +226,7 @@ class Student(models.Model):
                               blank=True)
     shacharit = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True,
                                   limit_choices_to={'shocher': True}, related_name="shacharit")
-    last_schedule_invite = models.DateTimeField(default=datetime.datetime.now())
+    last_schedule_invite = models.DateTimeField(null=True,blank=True)
     def __str__(self):
         return self.name
     def increment_grade(self):

@@ -8,7 +8,7 @@ urlpatterns = [
     path('teacher/report/',views.reportAbsence,name='reportAbsence'),
     path('teacher/setSub/',views.sub,name='sub'),
     path('get/<int:n>/',views.get_possible_subs,name='possible subs'),
-    path('teacher/user/register', views.register, name='register'),
+    path('teacher/user/details/<uuid:uuid>', views.register, name='register'),
     path('teacher/mySubs/',views.mySubs,name='mySubs'),
     path('schedule/setClasses/',views.setClasses,name='setClasses'),
     path('getRoom/',views.get_possible_rooms,name='possible_rooms'),
@@ -18,4 +18,5 @@ urlpatterns = [
     path('send_email/',views.send_email,name='send_email'),
     path('print/',views.printable,name='print'),
     path('managment/teachers',views.teacher_manager, name='teacher_manager'),
+    path('managment/invite_teacher/<str:email>',views.create_teacher,name='create_teacher'),
 ]

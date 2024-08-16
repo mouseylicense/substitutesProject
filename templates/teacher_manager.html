@@ -71,8 +71,9 @@ h1:dir(rtl), p:dir(rtl){
 </div>
 
         </form>
+        {% if user.uuid != teacher.uuid %}
                     <button hx-target=".teacher" hx-swap="delete" hx-post="{% url "teacher_manager"%}" name="Delete" value="{{ teacher.uuid }}" class="btn btn-danger">Delete</button>
-
+        {% endif %}
         </div>
     </div>
 </li>
