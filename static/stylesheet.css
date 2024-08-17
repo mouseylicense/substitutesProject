@@ -61,7 +61,7 @@ input[type=text],input[type=password]{
     margin: 8px 0;
     box-sizing: border-box;
 }
-body{
+body,html{
     background-color: #fdfefb ;
     width:100%;
     height: 100%;
