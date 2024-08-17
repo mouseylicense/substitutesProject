@@ -78,6 +78,9 @@ class RegistrationForm(forms.ModelForm):
     class Meta:
         model = Teacher
         fields = ('first_name','last_name', 'phone_number', 'password','Sunday','Monday','Tuesday','Wednesday','Thursday')
+        widgets = {
+            "first_name":forms.TextInput(attrs={'placeholder': _('First Name')}),
+        }
         labels = {
             "Sunday":_("Sunday"),
             "Monday":_("Monday"),

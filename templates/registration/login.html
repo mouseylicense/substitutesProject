@@ -8,22 +8,23 @@
  {% load static %}
       <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'new_styling.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login_and_register.css' %}">
     <meta charset="UTF-8">
     <title>{% trans "Sign-in" %}</title>
 </head>
 <body>
 
 <div id="login-container">
-    <div class="form-container">
+    <div class="login-container">
   <form id="login-form" method="post" action="{% url 'login' %}">
               <h1>{% trans "Sign-in" %}</h1>
 
     {% csrf_token %}
-    {% for field in form %}
+    
+      {% for field in form %}
       {{ field }}
       {% endfor %}
-
+  
     <input type="submit" value="{% trans "login"%}">
     <input type="hidden" name="next" value="{{ next }}">
   <a id="forgot-password" href="{% url 'password_reset' %}">{% trans "Lost password?"%}</a>
@@ -31,7 +32,7 @@
   </form>
 </div>
 <div>
-    <img style="width: 100%;height: 100%" src="{% static "img/login-background.jpg"%}">
+    <img style="width: 100%;height: 100%" src="{% static "img/login-image.jpg"%}">
 
 </div>
 </div>
