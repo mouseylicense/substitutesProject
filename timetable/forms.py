@@ -1,8 +1,8 @@
 from _ast import Sub
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from .models import *
-from django.forms import DateInput, Select, TextInput, HiddenInput
+from django.forms import DateInput, Select, TextInput, HiddenInput, PasswordInput
 from django.utils.translation import gettext_lazy as _
 
 NUMBERS_TO_GRADES = {
@@ -71,15 +71,15 @@ class ScheduleForm(forms.ModelForm):
                     self.fields[field_name].queryset = self.fields[field_name].queryset.filter(**filter_query)
 
 class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(label=_('Password'), widget=forms.PasswordInput, min_length=8)
-    phone_number = forms.CharField(label=_('Phone'),
-                                   widget=forms.TextInput(attrs={'type': 'tel', "pattern": "[0-9]{10}"}),
-                                   min_length=10, max_length=10)
     class Meta:
         model = Teacher
         fields = ('first_name','last_name', 'phone_number', 'password','Sunday','Monday','Tuesday','Wednesday','Thursday')
         widgets = {
             "first_name":forms.TextInput(attrs={'placeholder': _('First Name')}),
+            "last_name":forms.TextInput(attrs={'placeholder':_('Last Name')}),
+            "password":forms.PasswordInput(attrs={'placeholder':_('Password'),"min_length":"8"}),
+            "phone_number":forms.TextInput(attrs={'placeholder':_('Phone Number'),'type':'tel', "pattern": "[0-9]{10}","min_length":"10","max_length":"10"}),
+
         }
         labels = {
             "Sunday":_("Sunday"),
@@ -87,6 +87,10 @@ class RegistrationForm(forms.ModelForm):
             "Tuesday":_("Tuesday"),
             "Wednesday":_("Wednesday"),
             "Thursday":_("Thursday"),
+            "phone_number":_("Phone Number"),
+            "password":_("Password"),
+            "first_name":_("First Name"),
+            "last_name":_("Last Name"),
         }
     def save(self, commit=True):
         # Save the provided password in hashed format
@@ -119,3 +123,8 @@ class TeacherForm(forms.ModelForm):
             "manage_subs":_("Manages Subs"),
             "manage_schedule":_("Manages Schedule")
         }
+
+
+class CustomAuthForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput(attrs={'class':'validate','placeholder': 'Email'}))
+    password = forms.CharField(widget=PasswordInput(attrs={'placeholder':'Password'}))

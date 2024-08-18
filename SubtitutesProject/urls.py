@@ -20,14 +20,20 @@ from django.conf import settings
 from django.views.static import serve
 from django.urls import include, path,re_path
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib.auth import views as auth_views
+
+import timetable.forms
+
 urlpatterns = [
     # Needed for locale change
     path('i18n/', include('django.conf.urls.i18n')),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-]
+    ]
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('timetable.urls')),
     path('teacher/user/', include('django.contrib.auth.urls')),
+    re_path('teacher/user/login', auth_views.LoginView.as_view(template_name='registration/login.html', authentication_form=timetable.forms.CustomAuthForm),
+         name='login')
 
 )
