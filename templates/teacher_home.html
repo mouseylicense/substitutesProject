@@ -4,6 +4,23 @@
 {% block static %}<link type="text/css" rel="stylesheet" href="{% static 'styles/teacher_home.css' %}">{% endblock %}
 {% block title %}{% trans "My Subs" %}{% endblock %}
 {% block content %}
+    <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span onclick="this.parentElement.parentElement.style.display = 'none'" class="close">&times;</span>
+    <form hx-target="body" hx-post="{% url "teacher_home" %}">
+      {% for field in form %}
+        <div class="field">
+        <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+        {{ field }}
+        </div>
+    {% endfor %}
+        <input type="submit" value="{% trans "Report Absence" %}">
+    </form>
+  </div>
+
+</div>
 <div class="mother-container">
 <div class="subs-container">
     <h1>{% trans "My Substitutions" %}</h1>
@@ -26,14 +43,30 @@
         {% for absence in myAbsence %}
         <li>
             <div class="absence">
+                <div>
                 <h2>{{ absence.date }}</h2>
                 <h3 class="hour">{{ absence.reason }}</h3>
+                </div>
+                <button style="all:unset; cursor: pointer " hx-target="closest .absence" hx-swap="delete" hx-post="{% url "delete_absence" %}" name="{{ absence.teacher.uuid }}" value="{{ absence.date_str }}" >
+                    <i class="fa-solid fa-trash fa-flip-horizontal fa-2xl" style="color: #002f1a;"></i>
+                </button>
             </div>
         </li>
+
         {% endfor %}
+        <li id="add-button-container">
+            <button onclick="document.getElementById('myModal').style.display = 'block'" id="add-button">
+                <i class="fa-solid fa-plus fa-2xl" style="color: #002f1a;" > </i>
+            </button>
+            </li>
     </ul>
 </div>
 
 </div>
-
+<script>
+    window.onclick = function(event) {
+  if (event.target === document.getElementById("myModal")) {
+    document.getElementById("myModal").style.display = "none";
+  }
+} </script>
 {% endblock %}

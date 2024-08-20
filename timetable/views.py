@@ -78,7 +78,6 @@ def sub(request):
 
 @login_required()
 def teacher_home(request):
-    form = forms.AbsenceForm()
     if request.method == 'POST':
         form = forms.AbsenceForm(request.POST)
         if form.is_valid():
@@ -95,12 +94,12 @@ def teacher_home(request):
                     newClass.save()
             else:
                 messages.error(request, _("Absence already reported."))
-            return HttpResponseRedirect(reverse('reportAbsence'))
         else:
             return HttpResponse("error")
     for a in Absence.objects.all():
         if a.date < timezone.now().date():
             a.delete()
+    form = forms.AbsenceForm()
     mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
     myAbsences = Absence.objects.filter(teacher=request.user).order_by('date')
     return render(request, "teacher_home.html", {"mySubs": mySubs,"form":form,"myAbsence":myAbsences})
@@ -382,3 +381,11 @@ def create_teacher(request):
         url = method + request.get_host() + reverse("register", args=[teacher.uuid])
         return HttpResponse(url)
 
+
+def delete_absence(request):
+    payload = request.body.decode("utf-8").split("=")
+    print(payload)
+    if Absence.objects.filter(teacher__uuid=payload[0],date=payload[1]).exists():
+        Absence.objects.filter(teacher__uuid=payload[0],date=payload[1]).delete()
+        return HttpResponse(200)
+    return HttpResponse(404)

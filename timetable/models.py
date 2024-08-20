@@ -103,9 +103,10 @@ class Absence(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     date = models.DateField()
     reason = models.CharField(max_length=100)
-
+    def date_str(self):
+        return str(self.date)
     def __str__(self):
-        return self.teacher.username + " - " + str(self.date)
+        return self.teacher.first_name + " - " + str(self.date)
 
 
 # removes classes that needs sub if absence is deleted
@@ -212,7 +213,7 @@ class ClassNeedsSub(models.Model):
             return str(self.date) + " - " + str(self.Class_That_Needs_Sub)
         else:
             return "✔ " + str(self.date) + " - " + str(self.Class_That_Needs_Sub.hour) + " " + str(
-                self.Class_That_Needs_Sub.name) + " Sub:" + str(self.substitute_teacher.username)
+                self.Class_That_Needs_Sub.name) + " Sub:" + str(self.substitute_teacher.first_name)
 
 
 class Student(models.Model):

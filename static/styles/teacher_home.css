@@ -37,7 +37,77 @@ ul{
     padding: 5px;
     background: #d8efd3;
 }
+.absence{
+    display: flex;
+}
 html *{
     font-family: Inter, helvetica, sans-serif;
 
+}
+#add-button{
+    margin: auto;
+    border:none;
+    width:60px;
+    background:#bfe6b7;
+    border-radius: 15px;
+    height: 60px;
+    text-decoration: none !important;
+    font-family: helvetica, arial, sans-serif !important;
+}
+#add-button:hover{
+      background-color: #91d57f;
+}
+#add-button-container{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.absence button:dir(ltr){
+    margin-left: auto !important;
+}
+.absence button:dir(rtl){
+    margin-right: auto !important;
+}
+
+ /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    margin:15% auto;
+    padding: 5px;
+    font-family: helvetica, arial, sans-serif;
+    display: block;
+    border: #55AD9B solid 3px;
+    background-color: #F1F8E8;
+    width: 15%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
