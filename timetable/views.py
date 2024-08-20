@@ -33,30 +33,6 @@ def index(request):
     return render(request, 'index.html', {"Subs": Subs})
 
 
-@login_required
-def reportAbsence(request):
-    form = forms.AbsenceForm()
-    if request.method == 'POST':
-        form = forms.AbsenceForm(request.POST)
-        if form.is_valid():
-            if not Absence.objects.filter(teacher=request.user,date=form.cleaned_data['date']).exists():
-                absence = Absence(teacher=request.user, date=form.cleaned_data['date'], reason=form.cleaned_data['reason'])
-                absence.save()
-                messages.success(request, _("Absence reported."))
-                q = Class.objects.filter(teacher=request.user,
-                                         day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
-
-                for c in q:
-                    newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'])
-                    newClass.save()
-            else:
-                messages.error(request, _("Absence already reported."))
-            return HttpResponseRedirect(reverse('reportAbsence'))
-        else:
-            return HttpResponse("error")
-    return render(request, "reportAbsence.html", {"form": form})
-
-
 @user_passes_test(lambda u: u.manage_subs or u.is_superuser)
 def sub(request):
     if request.method == 'POST':
@@ -103,18 +79,6 @@ def teacher_home(request):
     mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
     myAbsences = Absence.objects.filter(teacher=request.user).order_by('date')
     return render(request, "teacher_home.html", {"mySubs": mySubs,"form":form,"myAbsence":myAbsences})
-
-
-@login_required
-def mySubs(request):
-    for a in Absence.objects.all():
-        print(a.date)
-        print(timezone.now().date())
-        if a.date < timezone.now().date():
-            a.delete()
-    mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
-    return render(request, "mySubs.html", {"mySubs": mySubs})
-
 
 def register(request,uuid):
     if request.method == 'POST':

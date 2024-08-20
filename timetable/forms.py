@@ -44,7 +44,7 @@ class ClassForm(forms.ModelForm):
 
 class SubstituteForm(forms.Form):
     class_that_needs_sub = forms.ModelChoiceField(
-        ClassNeedsSub.objects.order_by('substitute_teacher__username', 'date'),
+        ClassNeedsSub.objects.order_by('substitute_teacher__first_name', 'date'),
         label=_("Class that needs sub"),
         widget=forms.Select(attrs={'id': 'sub'}), empty_label=None)
     substitute_teacher = forms.CharField(widget=forms.Select(attrs={'id': 'teacher'}))

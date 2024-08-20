@@ -145,3 +145,20 @@ textarea{
 i{
     color: rgba(73, 69, 79, 0.6);
 }
+#lang-select{
+    padding: 0;
+    border:none;
+    bottom:10px;
+    left: 5px;
+    position: absolute;
+    width:60px;
+    background:#ead3ef;
+    border-radius: 15px;
+    height: 60px;
+}
+#lang-select:hover{
+    background: #dfb5e7;
+}
+#lang-select:dir(ltr){
+    right: 5px;
+}

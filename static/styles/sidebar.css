@@ -1,17 +1,23 @@
 /* The side navigation menu */
 .sidebar {
-  padding:15px 5px;
+  box-sizing: unset !important;
+  padding:15px 5px 15px 5px;
   gap: 5px;
   width: 60px;
   background-color: #D8EFD3;
   position: fixed;
-  height: 100%;
+  height: 97%;
   overflow: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 #logout{
+    display: block !important;
+  width:60px;
+  border-radius: 15px;
+  height: 60px;
+  font-family: helvetica, arial, sans-serif !important;
   margin-top: auto;
   background-color: #95D2B3;
 }
