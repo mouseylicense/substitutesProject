@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block static %}<link type="text/css" rel="stylesheet" href="{% static 'styles/teacher_home.css' %}">{% endblock %}
+{% block title %}{% trans "My Subs" %}{% endblock %}
+{% block content %}
+<div class="mother-container">
+<div class="subs-container">
+    <h1>{% trans "My Substitutions" %}</h1>
+    <ul>
+        {% for sub in mySubs %}
+        <li>
+            <div class="substitution">
+                <p class="date">{{ sub.date }}</p>
+                <h2>{{ sub.Class_That_Needs_Sub.name }} - {{ sub.Class_That_Needs_Sub.room }}</h2>
+                <h3 class="hour">{{ sub.Class_That_Needs_Sub.hour }}</h3>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="absence-container">
+    <h1>{% trans "My Absences" %}</h1>
+
+    <ul>
+        {% for absence in myAbsence %}
+        <li>
+            <div class="absence">
+                <h2>{{ absence.date }}</h2>
+                <h3 class="hour">{{ absence.reason }}</h3>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+</div>
+
+{% endblock %}

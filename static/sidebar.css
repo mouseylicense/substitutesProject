@@ -1,13 +1,14 @@
 /* The side navigation menu */
 .sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
+  padding:15px 5px;
+  gap: 5px;
+  width: 60px;
   background-color: #D8EFD3;
   position: fixed;
   height: 100%;
   overflow: auto;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 #logout{
@@ -18,7 +19,10 @@
 .sidebar a {
   display: block !important;
   color: black ;
-  padding: 16px !important;
+  width:60px;
+  background:#bfe6b7;
+  border-radius: 15px;
+  height: 60px;
   text-decoration: none !important;
   font-family: helvetica, arial, sans-serif !important;
   line-height: 1 !important;
@@ -26,25 +30,25 @@
 
 /* Active/current link */
 .sidebar a.active {
-  background-color: #55AD9B;
+  background-color: #a5dd98;
   color: white;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active),#logout:hover:not(.active) {
-  background-color: #366e63;
+  background-color: #91d57f;
   color: white;
 }
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
+  margin-left: 70px;
+  height: 100%;
 }
 .content:dir(rtl){
   margin-left: 0;
-  margin-right: 200px;
+  margin-right: 70px;
+  height: 100%;
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */

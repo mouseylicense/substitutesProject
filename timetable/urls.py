@@ -19,4 +19,5 @@ urlpatterns = [
     path('print/',views.printable,name='print'),
     path('managment/teachers',views.teacher_manager, name='teacher_manager'),
     path('managment/invite_teacher/',views.create_teacher,name='create_teacher'),
+    path('teacher/home/',views.teacher_home,name="teacher_home")
 ]

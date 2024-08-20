@@ -1,0 +1,43 @@
+.mother-container{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: stretch;
+    height: 96%;
+    padding: 1%;
+}
+.subs-container,.absence-container{
+    background: #eff9ed;
+    flex-grow:1 ;
+    border-radius: 25px;
+}
+h1{
+    color: #002f1a;
+    margin:15px;
+}
+ul{
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+}
+.substitution h2,.hour,.date,.absence h2{
+    color: #002f1a;
+    margin:0;
+}
+.date{
+    font-size:x-small;
+    font-weight: bolder;
+}
+.hour{
+    font-size: small;
+    font-weight: lighter;
+}
+.substitution,.absence{
+    height: 6vh;
+    padding: 5px;
+    background: #d8efd3;
+}
+html *{
+    font-family: Inter, helvetica, sans-serif;
+
+}

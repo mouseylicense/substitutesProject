@@ -4,8 +4,6 @@ from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
-from docutils.examples import html_body
-
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
@@ -78,6 +76,35 @@ def sub(request):
     form = forms.SubstituteForm(initial={'substitute_teacher': "None selected"})
     return render(request, 'setSub.html', {"form": form, "ClassesThatNeedSub": ClassNeedsSub.objects.count()})
 
+@login_required()
+def teacher_home(request):
+    form = forms.AbsenceForm()
+    if request.method == 'POST':
+        form = forms.AbsenceForm(request.POST)
+        if form.is_valid():
+            if not Absence.objects.filter(teacher=request.user, date=form.cleaned_data['date']).exists():
+                absence = Absence(teacher=request.user, date=form.cleaned_data['date'],
+                                  reason=form.cleaned_data['reason'])
+                absence.save()
+                messages.success(request, _("Absence reported."))
+                q = Class.objects.filter(teacher=request.user,
+                                         day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
+
+                for c in q:
+                    newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'])
+                    newClass.save()
+            else:
+                messages.error(request, _("Absence already reported."))
+            return HttpResponseRedirect(reverse('reportAbsence'))
+        else:
+            return HttpResponse("error")
+    for a in Absence.objects.all():
+        if a.date < timezone.now().date():
+            a.delete()
+    mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
+    myAbsences = Absence.objects.filter(teacher=request.user).order_by('date')
+    return render(request, "teacher_home.html", {"mySubs": mySubs,"form":form,"myAbsence":myAbsences})
+
 
 @login_required
 def mySubs(request):
@@ -94,8 +121,7 @@ def register(request,uuid):
     if request.method == 'POST':
         form = RegistrationForm(request.POST,instance=Teacher.objects.get(uuid=uuid))
         if form.is_valid():
-            teacher = form.save()
-            teacher.save()
+            form.save()
             return HttpResponseRedirect(reverse("login"))
         else:
             return render(request, 'registration/register.html', {"form": form})

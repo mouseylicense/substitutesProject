@@ -8,8 +8,6 @@ from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from pygments.lexer import default
-from spacy import blank
 
 DAYS_OF_WEEKDAY_DICT = {
     6: 'Sunday',
@@ -194,7 +192,7 @@ class Class(models.Model):
 
     def __str__(self):
         if self.teacher:
-            return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.username
+            return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.first_name
         else:
             return str(self.hour)[:5] + " --- " + self.name + " - " + self.student_teaching
 
