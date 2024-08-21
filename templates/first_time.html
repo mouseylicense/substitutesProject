@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load i18n %}
+    <link type="text/css" rel="stylesheet" href="{% static "styles/firsttime.css" %}">
+    <meta charset="UTF-8">
+    <title>ClassCover</title>
+
+</head>
+<body>
+<div class="container">
+    <h1>{% trans "Hi There!" %}</h1>
+    <p>
+        {% trans "It Looks like this is the first time you are Using ClassCover! First things first, were gonna need to create a User, This user will be your Administrator user, and is very important! (P.S:Remember These Credentials!)" %}
+    </p>
+    <form target="{% url "index"%}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="{% trans "Create User and Get Started!" %}">
+    </form>
+</div>
+</body>
+</html>

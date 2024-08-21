@@ -3,25 +3,10 @@
 from django.db import migrations
 from django.contrib.auth.hashers import make_password
 
-
-def create_super_user(apps, schema_editor):
-    if not apps.get_model('timetable', 'teacher').objects.filter(username="Delete_Me").exists():
-        user = apps.get_model('timetable', 'teacher').objects.create()
-        user.username = "Delete_Me"
-        user.is_superuser = True
-        user.is_active = True
-        user.is_staff = True
-        user.email = "example@example.org"
-        user.phone_number = "1234567890"
-        user.password = make_password("example")
-        user.save()
-
-
 class Migration(migrations.Migration):
     dependencies = [
         ('timetable', '0001_initial'),
     ]
 
     operations = [
-        migrations.RunPython(create_super_user),
     ]

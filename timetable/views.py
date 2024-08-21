@@ -8,7 +8,7 @@ from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm
+from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm, SuperuserCreationForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404 ,FileResponse
 from django.utils import timezone
@@ -29,9 +29,17 @@ DAYS_OF_WEEKDAY = {
 }
 
 def index(request):
+    if not Teacher.objects.exists():
+        if request.method == 'POST':
+            form = SuperuserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return form.errors
+        return render(request, 'first_time.html',{"form":SuperuserCreationForm})
     Subs = ClassNeedsSub.objects.filter(date=timezone.now().today())
     return render(request, 'index.html', {"Subs": Subs})
-
 
 @user_passes_test(lambda u: u.manage_subs or u.is_superuser)
 def sub(request):

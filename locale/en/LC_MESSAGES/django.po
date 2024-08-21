@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-21 00:24+0300\n"
+"POT-Creation-Date: 2024-08-21 16:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,21 @@ msgstr ""
 #: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
 #: .\templates\student_details.html:4
 msgid "ltr"
+msgstr ""
+
+#: .\templates\first_time.html:13
+msgid "Hi There!"
+msgstr ""
+
+#: .\templates\first_time.html:15
+msgid ""
+"It Looks like this is the first time you are Using ClassCover! First things "
+"first, were gonna need to create a User, This user will be your "
+"Administrator user, and is very important! (P.S:Remember These Credentials!)"
+msgstr ""
+
+#: .\templates\first_time.html:20
+msgid "Create User and Get Started!"
 msgstr ""
 
 #: .\templates\index.html:3 .\templates\publicBase.html:19
@@ -86,7 +101,7 @@ msgstr ""
 
 #: .\templates\registration\register.html:28
 #: .\templates\student_details.html:25 .\templates\timetable.html:140
-#: .\timetable\forms.py:85 .\timetable\forms.py:115 .\timetable\models.py:258
+#: .\timetable\forms.py:86 .\timetable\forms.py:116 .\timetable\models.py:258
 #: .\timetable\models.py:261 .\timetable\models.py:264
 #: .\timetable\models.py:267
 msgid "Sunday"
@@ -94,7 +109,7 @@ msgstr ""
 
 #: .\templates\registration\register.html:29
 #: .\templates\student_details.html:26 .\templates\timetable.html:141
-#: .\timetable\forms.py:86 .\timetable\forms.py:116 .\timetable\models.py:270
+#: .\timetable\forms.py:87 .\timetable\forms.py:117 .\timetable\models.py:270
 #: .\timetable\models.py:273 .\timetable\models.py:276
 #: .\timetable\models.py:279
 msgid "Monday"
@@ -102,7 +117,7 @@ msgstr ""
 
 #: .\templates\registration\register.html:30
 #: .\templates\student_details.html:27 .\templates\timetable.html:142
-#: .\timetable\forms.py:87 .\timetable\forms.py:117 .\timetable\models.py:282
+#: .\timetable\forms.py:88 .\timetable\forms.py:118 .\timetable\models.py:282
 #: .\timetable\models.py:285 .\timetable\models.py:289
 #: .\timetable\models.py:292
 msgid "Tuesday"
@@ -110,7 +125,7 @@ msgstr ""
 
 #: .\templates\registration\register.html:31
 #: .\templates\student_details.html:28 .\templates\timetable.html:143
-#: .\timetable\forms.py:88 .\timetable\forms.py:118 .\timetable\models.py:296
+#: .\timetable\forms.py:89 .\timetable\forms.py:119 .\timetable\models.py:296
 #: .\timetable\models.py:300 .\timetable\models.py:304
 #: .\timetable\models.py:308
 msgid "Wednesday"
@@ -118,7 +133,7 @@ msgstr ""
 
 #: .\templates\registration\register.html:32
 #: .\templates\student_details.html:29 .\templates\timetable.html:144
-#: .\timetable\forms.py:89 .\timetable\forms.py:119 .\timetable\models.py:312
+#: .\timetable\forms.py:90 .\timetable\forms.py:120 .\timetable\models.py:312
 #: .\timetable\models.py:316
 msgid "Thursday"
 msgstr ""
@@ -155,7 +170,7 @@ msgstr ""
 msgid "Grade"
 msgstr ""
 
-#: .\templates\student_details.html:10 .\timetable\forms.py:120
+#: .\templates\student_details.html:10 .\timetable\forms.py:121
 msgid "Tutor"
 msgstr ""
 
@@ -269,7 +284,7 @@ msgstr ""
 msgid "Success!"
 msgstr ""
 
-#: .\templates\timetable.html:20 .\timetable\forms.py:42
+#: .\templates\timetable.html:20 .\timetable\forms.py:44
 msgid "Description"
 msgstr ""
 
@@ -333,7 +348,7 @@ msgstr ""
 msgid "Twelfth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:115 .\timetable\forms.py:32
+#: .\templates\timetable.html:115 .\timetable\forms.py:34
 msgid "Teacher"
 msgstr ""
 
@@ -353,78 +368,83 @@ msgstr ""
 msgid "Free Rooms"
 msgstr ""
 
-#: .\timetable\forms.py:24
+#: .\timetable\forms.py:26
 msgid "Date"
 msgstr ""
 
-#: .\timetable\forms.py:25 .\timetable\forms.py:26
+#: .\timetable\forms.py:27 .\timetable\forms.py:28
 msgid "Reason"
 msgstr ""
 
-#: .\timetable\forms.py:31
+#: .\timetable\forms.py:33
 msgid "Subject"
 msgstr ""
 
-#: .\timetable\forms.py:33
+#: .\timetable\forms.py:35
 msgid "Day"
 msgstr ""
 
-#: .\timetable\forms.py:34
+#: .\timetable\forms.py:36
 msgid "Hour"
 msgstr ""
 
-#: .\timetable\forms.py:36 .\timetable\models.py:128
+#: .\timetable\forms.py:38 .\timetable\models.py:128
 msgid "Is a Student Teaching?"
 msgstr ""
 
-#: .\timetable\forms.py:37 .\timetable\models.py:129
+#: .\timetable\forms.py:39 .\timetable\models.py:129
 msgid "Student Teaching"
 msgstr ""
 
-#: .\timetable\forms.py:48
+#: .\timetable\forms.py:50
 msgid "Class that needs sub"
 msgstr ""
 
-#: .\timetable\forms.py:78 .\timetable\forms.py:92
+#: .\timetable\forms.py:80 .\timetable\forms.py:93 .\timetable\forms.py:138
 msgid "First Name"
 msgstr ""
 
-#: .\timetable\forms.py:79 .\timetable\forms.py:93
+#: .\timetable\forms.py:81 .\timetable\forms.py:94 .\timetable\forms.py:139
 msgid "Last Name"
 msgstr ""
 
-#: .\timetable\forms.py:80 .\timetable\forms.py:91
+#: .\timetable\forms.py:82 .\timetable\forms.py:92 .\timetable\forms.py:131
+#: .\timetable\forms.py:141
 msgid "Password"
 msgstr ""
 
-#: .\timetable\forms.py:81 .\timetable\forms.py:90
+#: .\timetable\forms.py:83 .\timetable\forms.py:91 .\timetable\forms.py:143
 msgid "Phone Number"
 msgstr ""
 
-#: .\timetable\forms.py:121
+#: .\timetable\forms.py:122
 msgid "Shocher"
 msgstr ""
 
-#: .\timetable\forms.py:122
+#: .\timetable\forms.py:123
 msgid "Substitutes?"
 msgstr ""
 
-#: .\timetable\forms.py:123
+#: .\timetable\forms.py:124
 msgid "Manages Subs"
 msgstr ""
 
-#: .\timetable\forms.py:124
+#: .\timetable\forms.py:125
 msgid "Manages Schedule"
 msgstr ""
 
-#: .\timetable\views.py:64
-msgid "Absence reported."
+#: .\timetable\forms.py:130 .\timetable\forms.py:140
+msgid "Email"
 msgstr ""
 
 #: .\timetable\views.py:72
+msgid "Absence reported."
+msgstr ""
+
+#: .\timetable\views.py:80
 msgid "Absence already reported."
 msgstr ""
 
-#: .\timetable\views.py:195
+#: .\timetable\views.py:202
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr ""
