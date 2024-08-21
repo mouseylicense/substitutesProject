@@ -72,12 +72,10 @@ def teacher_home(request):
                 messages.error(request, _("Absence already reported."))
         else:
             return HttpResponse("error")
-    for a in Absence.objects.all():
-        if a.date < timezone.now().date():
-            a.delete()
+    Absence.objects.filter(date__lt=timezone.now().date()).delete()
     form = forms.AbsenceForm()
-    mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date')
-    myAbsences = Absence.objects.filter(teacher=request.user).order_by('date')
+    mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date').values("Class_That_Needs_Sub__room","Class_That_Needs_Sub__name","date","Class_That_Needs_Sub__hour")
+    myAbsences = Absence.objects.filter(teacher=request.user).order_by('date').values("date","reason")
     return render(request, "teacher_home.html", {"mySubs": mySubs,"form":form,"myAbsence":myAbsences})
 
 def register(request,uuid):
@@ -142,10 +140,11 @@ def get_possible_subs(request, n):
                                              Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
         ~Q(absence__date=c.date),
         can_substitute=True,
-        **filter_dict)
+        **filter_dict).values("pk","first_name")
     availableTeachers = []
     for teacher in teacherQuery:
-        availableTeachers.append({'id': teacher.pk, 'name': teacher.username})
+        print(teacher)
+        availableTeachers.append({'id': teacher['pk'], 'name': teacher['first_name']})
     return JsonResponse({"availableTeachers": availableTeachers})
 
 
@@ -156,7 +155,7 @@ def timetable(request):
     classes = Class.objects.all()
     teachers = []
     for t in Teacher.objects.all():
-        teachers.append(t.username)
+        teachers.append(t.first_name)
     classesByHour = {}
     for c in classes:
         grades = str(c.str_grades())
@@ -164,7 +163,7 @@ def timetable(request):
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
             if c.teacher:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.teacher.username,
+                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.teacher.first_name,
                      "room": c.room.name,"description":c.description}]
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
@@ -173,7 +172,7 @@ def timetable(request):
         else:
             if c.teacher:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
-                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.teacher.username,
+                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.teacher.first_name,
                      "room": c.room.name,"description":c.description})
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(

@@ -134,7 +134,7 @@ STATIC_ROOT = 'static_output'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = "/teacher/mySubs"
+LOGIN_REDIRECT_URL = "/teacher/home"
 LOGIN_URL = '/teacher/user/login'
 AUTH_USER_MODEL = 'timetable.Teacher'
 LOGOUT_REDIRECT_URL = '/teacher/user/login'
@@ -162,3 +162,27 @@ LOCALE_PATHS = [
 ]
 CSRF_TRUSTED_ORIGINS = json.loads(environ["CSRF_TRUSTED_ORIGINS"])
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+if DEBUG:
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+    INSTALLED_APPS += ("debug_toolbar",)
+    MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+    DEBUG_TOOLBAR_PANELS = [
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ]
+
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+    }

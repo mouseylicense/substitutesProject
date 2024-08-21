@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from debug_toolbar.toolbar import debug_toolbar_urls
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
@@ -29,6 +30,8 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     ]
+if settings.DEBUG:
+    urlpatterns += debug_toolbar_urls()
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('timetable.urls')),
