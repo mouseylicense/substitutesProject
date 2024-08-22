@@ -234,6 +234,12 @@ i{
   text-decoration: none;
   cursor: pointer;
 }
-input[type=submit]:disabled{
-    background-color: grey;
+#danger-button:disabled{
+    background-color: #390101;
+    border: none;
+}
+#danger-button{
+    background-color: darkred;
+    border: 2px solid darkred;
+    color: white;
 }

@@ -366,4 +366,20 @@ def delete_absence(request):
 @login_required()
 @user_passes_test(lambda u: u.is_superuser)
 def danger_zone(request):
+    if request.method == "POST":
+        payload = request.body.decode("utf-8").split("=")
+        if payload[3] == 'delete-schedules':
+            Schedule.objects.all().delete()
+        if payload[3] == 'increase-grades':
+            for s in Student.objects.all():
+                s.increase_grade()
+        if payload[3] == 'delete-tutors':
+            for s in Student.objects.all():
+                s.tutor = None
+                s.save()
+        if payload[3] == 'delete-shachariot':
+            for s in Student.objects.all():
+                s.shachariot = None
+                s.save()
+
     return render(request,"dangerzone.html")
