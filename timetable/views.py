@@ -41,6 +41,7 @@ def index(request):
     Subs = ClassNeedsSub.objects.filter(date=timezone.now().today())
     return render(request, 'index.html', {"Subs": Subs})
 
+@login_required()
 @user_passes_test(lambda u: u.manage_subs or u.is_superuser)
 def sub(request):
     if request.method == 'POST':
@@ -212,7 +213,7 @@ def student_details(request,uuid):
     res = render(request, "student_details.html", {"student": student})
     res["HX-Trigger"] = "unfold"
     return res
-
+@login_required()
 @user_passes_test(lambda u: u.is_superuser)
 def teacher_manager(request):
     if request.method == "POST":
@@ -331,6 +332,7 @@ def printable(request):
             classes_by_hour[str(c.hour)[:5]] = [c]
     return render(request,"day_schedule.html",{"day":_(day),"classes":classes_by_hour})
 @require_POST
+@login_required()
 @user_passes_test(lambda u: u.is_superuser)
 def create_teacher(request):
     if request.is_secure():
@@ -352,11 +354,16 @@ def create_teacher(request):
         url = method + request.get_host() + reverse("register", args=[teacher.uuid])
         return HttpResponse(url)
 
-
+@require_POST
+@login_required()
 def delete_absence(request):
     payload = request.body.decode("utf-8").split("=")
-    print(payload)
     if Absence.objects.filter(teacher__uuid=payload[0],date=payload[1]).exists():
         Absence.objects.filter(teacher__uuid=payload[0],date=payload[1]).delete()
         return HttpResponse(200)
     return HttpResponse(404)
+
+@login_required()
+@user_passes_test(lambda u: u.is_superuser)
+def danger_zone(request):
+    return render(request,"dangerzone.html")

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <h1 style="padding: 15px">Danger Zone</h1>
+    <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span onclick="this.parentElement.parentElement.style.display = 'none'" class="close">&times;</span>
+    <form id="form" method="post">
+        {% csrf_token %}
+        <input value="" disabled style=" font-size: medium;text-align: center;width: 100%;border: none;background-color: transparent;" id="match">
+        <input value="" type="hidden" name="action" id="action">
+        <input value="" style="text-align: center" placeholder="{% trans "Repeat Value Above" %}" onkeyup="checkInput(this)" type="text">
+        <input disabled value="{% trans "Preform Action" %}" id="submit" type="submit">
+    </form>
+  </div>
+
+</div>
+    <div class="danger-div">
+    	<div class="danger-field"><h2>Delete All Schedules</h2><button onclick="showModal('delete-schedules','Delete Schedules')" class="danger-button">Delete All Schedules</button></div>
+        <div class="danger-field"><h2>Increase Grades For All Students</h2><button class="danger-button">Increase Grade For All Students</button></div>
+        <div class="danger-field"><h2>Delete All Tutor - Student Relations</h2><button class="danger-button">Delete All Tutor - Student Relations</button></div>
+        <div class="danger-field"><h2>Delete All Shocher -Student Relations</h2><button class="danger-button">Delete All Shocher - Student Relations</button></div>
+    </div>
+<script>
+    const form = document.getElementById("form")
+    const action_field = document.getElementById("action")
+    const modal = document.getElementById("myModal")
+    const match_field = document.getElementById("match")
+
+    function showModal(action,match){
+        Array.from(form.elements).forEach((input) => {
+            if(input.type!=='submit'){
+            input.value = ""}
+        })
+        action_field.value = action;
+        match_field.value =match
+        modal.style.display = "block";
+    }
+    function checkInput(a){
+        console.log(a.value)
+        console.log(action_field)
+        if (a.value === match_field.value){
+            document.getElementById("submit").disabled = false
+        }
+        else{
+            document.getElementById("submit").disabled = true
+        }
+    }
+
+</script>
+
+
+
+
+{% endblock %}

@@ -50,6 +50,7 @@
 div.content {
   margin-left: 70px;
   height: 100%;
+  overflow: auto;
 }
 .content:dir(rtl){
   margin-left: 0;
