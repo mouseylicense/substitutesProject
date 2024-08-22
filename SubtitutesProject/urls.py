@@ -36,7 +36,7 @@ urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('timetable.urls')),
     path('teacher/user/', include('django.contrib.auth.urls')),
-    re_path('teacher/user/login', auth_views.LoginView.as_view(template_name='registration/login.html', authentication_form=timetable.forms.CustomAuthForm),
+    re_path('teacher/user/login', auth_views.LoginView.as_view(template_name='registration/login.html', authentication_form=timetable.forms.CustomAuthForm,redirect_authenticated_user=True),
          name='login')
 
 )

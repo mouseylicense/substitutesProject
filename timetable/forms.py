@@ -1,8 +1,6 @@
 from _ast import Sub
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
-from pygments.lexer import default
-
 from .models import *
 from django.forms import DateInput, Select, TextInput, HiddenInput, PasswordInput
 from django.utils.translation import gettext_lazy as _
@@ -157,6 +155,8 @@ class SuperuserCreationForm(forms.ModelForm):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password"])
         user.is_superuser = True
+        user.is_staff = True
+        user.is_active = True
         if commit:
             user.save()
 

@@ -3,3 +3,4 @@ readme.md
 .venv/
 docker-compose.yaml
 static_output/
+docs/
