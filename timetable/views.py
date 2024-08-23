@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm, SuperuserCreationForm, \
-    StudentRegistrationForm
+    StudentRegistrationForm, DescriptionChangeForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404 ,FileResponse
 from django.utils import timezone
@@ -21,6 +21,12 @@ from os import environ
 
 load_dotenv()
 FROM_EMAIL=environ['FROM_EMAIL']
+HOUR_TO_NUMBER_OF_CLASS = {
+    datetime.time(9,15):"first",
+    datetime.time(10,7):"second",
+    datetime.time(11,45):"third",
+    datetime.time(12,45):"fourth",
+}
 DAYS_OF_WEEKDAY = {
     6: 'Sunday',
     0: 'Monday',
@@ -398,3 +404,11 @@ def register_student(request,):
             print(form.errors)
     form = StudentRegistrationForm()
     return render(request,"studentregister.html",{"form":form})
+
+def class_manager(request):
+    classes_and_students = {}
+    for c in Class.objects.all():
+        classes_and_students[c.name] = Schedule.objects.filter(**{c.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[c.hour]:c}).count()
+    form = DescriptionChangeForm()
+
+    return render(request,"class_manager.html",{"classes":classes_and_students,"DescriptionForm":form})

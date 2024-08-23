@@ -21,4 +21,5 @@ urlpatterns = [
     path('teacher/home/',views.teacher_home,name="teacher_home"),
     path('delete_absence/',views.delete_absence,name='delete_absence'),
     path('managment/danger_zone/',views.danger_zone,name='danger_zone'),
+    path('teacher/classes_manager/',views.class_manager,name='class_manager'),
 ]

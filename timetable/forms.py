@@ -1,4 +1,5 @@
 from _ast import Sub
+
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from .models import *
@@ -173,4 +174,13 @@ class StudentRegistrationForm(forms.ModelForm):
             "phone_number": forms.TextInput(
                 attrs={'placeholder': _('Phone Number'), 'type': 'tel', "pattern": "[0-9]{10}", "min_length": "10",
                        "max_length": "10"}),
+        }
+
+class DescriptionChangeForm(forms.ModelForm):
+    class Meta:
+        model = Class
+        fields = ('description',"name")
+        widgets = {
+            "name":forms.HiddenInput(attrs={'id':"name"}),
+            'description': forms.Textarea(attrs={'placeholder': _('Description')})
         }

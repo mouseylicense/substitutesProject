@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block static %}
+    <link type="text/css" rel="stylesheet" href="{% static "styles/bootstrap.min.css" %}">
+
+{% endblock %}
+
+{% block title %}{% trans "Manage Classes" %}{% endblock %}
+{% block content %}
+    <style>
+    body *{
+    font-family: Inter, helvetica, sans-serif;
+}
+.class-list{
+    padding:0;
+    margin: 0;
+    list-style: none;
+}
+.Class{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display:flex;
+    font-size: x-large;
+    background-color: rgba(247, 247, 247, 1);
+    border-top: 1px solid lightgray;
+    padding:2px;
+    flex-direction: column;
+}
+.class-name,#last-invite{
+    display:inline;
+    margin: 0;
+    padding:5px
+}
+.class-list{
+    display:flex;
+    flex-direction: column;
+}
+.Class{
+    display:flex;
+    font-size: x-large;
+    background-color: rgba(247, 247, 247, 1);
+    border-top: 1px solid lightgray;
+    padding:2px;
+}
+h1:dir(rtl), p:dir(rtl){
+    text-align: right;
+}
+button:dir(rtl),.button-div:dir(rtl){
+    margin-right:auto;
+
+}
+
+button:dir(ltr),.button-div:dir(ltr){
+
+    margin-left:auto;
+}
+
+</style>
+<h1>{% trans "Manage Classes" %}</h1>
+<button class="btn btn-success" >{% trans "Create New Class" %}</button>
+    <div class="class-list">
+    <div id="DescriptionModal" class="modal" style="display: block ">
+
+  <!-- Modal content -->
+  <div class="modal-content" >
+    <span onclick="this.parentElement.parentElement.style.display = 'none';" class="close">&times;</span>
+    <form id="DescriptionForm" method="post">
+        {% csrf_token %}
+        {{ DescriptionForm }}
+    </form>
+  </div>
+    </div>
+
+        {# filter teacher    #}
+      <input onkeyup="filterList()" type="text" id="text-filter" placeholder="{% trans "Search Classes" %}...">
+
+    <ul class="class-list">
+{% for class,students in classes.items %}
+    <li>
+    <div  class="Class">
+
+    <div   style="display:flex;flex-direction: row">
+
+        <p class="class-name"> {{ class }} -  {{ students }}</p>
+        <button onclick="showDescriptionForm(this)" class="btn btn-info">{% trans "Change Description" %}</button>
+        </div>
+    </div>
+</li>
+    {% endfor %}
+    </ul>
+</div>
+
+    <script>
+    const DescriptionModal = document.getElementById("DescriptionModal")
+    function showDescriptionForm(a){
+        DescriptionModal.style.display = "block"
+
+    }
+
+function filterList() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('text-filter');
+    filter = input.value.toUpperCase();
+    ul = document.getElementsByClassName("class-list")[0];
+    li = ul.getElementsByTagName('li');
+
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByClassName("Class")[0];
+      txtValue = a.textContent || a.innerText;
+
+      // split filter by spaces, gives ["app", "MN"] in your example
+      let filters = filter.split(" ")
+
+      // remove the empty filters (if your filter string
+      // starts or ends by a space) since they are source of errors
+
+      // Array.filter takes in parameter a function returning a boolean
+      // it create a new array containing only element where
+      // the function returned truthy value
+
+      // here we return the length of the string which is falsy (== 0) for ""
+      // and truthy for every other string (!= 0)
+      filters = filters.filter(f => f.length)
+
+      let shouldDisplay = true
+      // test each filter and store true only if string contains all filter
+      filters.forEach(filt => {
+        shouldDisplay = shouldDisplay && txtValue.toUpperCase().includes(filt)
+      })
+
+      // update visibility
+      // set visible if the string include all filters
+      // or if there is no filter
+      li[i].style.display = (shouldDisplay || filters.length === 0) ? "" : "none";
+    }
+  }
+    </script>
+    <script>
+
+  function copyToClipboard(a) {
+      a.style.display = "block"
+      const textToCopy = a.querySelector("#link").innerText; // or .textContent if you want to copy raw text
+      navigator.clipboard.writeText(textToCopy).then(function() {
+      alert('Copied to clipboard!');
+      a.style.display = "none"
+      }, function(err) {
+          console.error('Could not copy text: ', err);
+      });
+      }
+</script>
+{% endblock %}
