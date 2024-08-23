@@ -42,7 +42,7 @@
         <p class="student-name"> {{ student }}</p>
         <div class="button-div">
         <p style="display: inline" hx-get="{% url 'student_details' values.0 %}" hx-target="next .details" id="arrow" ><i class="arrow down"></i></p>
-            <a class="btn btn-secondary" href="{% url "student_details" values.0%}">{% trans "Open Details in new page" %}</a>
+            <a class="btn btn-secondary" href="{% url "student_details" values.0%}">{% trans "Open in new page" %}</a>
     <button  name="{{ values.0 }}" value="True"  hx-post="{% url "send_email" %}" id="{{ values.0 }}" class="btn btn-danger"  >{% trans "Reset Schedule" %}</button>
     </div>
         </div>

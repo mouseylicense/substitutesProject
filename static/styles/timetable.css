@@ -243,3 +243,8 @@
     text-align: center;
 }
 
+@media screen and (max-width: 800px) {
+    .filtering{
+        display: none !important;
+    }
+}

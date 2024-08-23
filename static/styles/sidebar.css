@@ -61,18 +61,25 @@ div.content {
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 700px) {
   .sidebar {
+    box-sizing: unset !important;
+    overflow-y: hidden;
     width: 100%;
     height: auto;
     position: relative;
     flex-direction: row;
+    justify-content: space-evenly;
   }
   .sidebar a {
+    box-sizing: unset !important;
     flex-shrink: 1;
     float: left;
     padding:8px;
-    width: 25%;
   }
   div.content {margin-left: 0;}
+
+  #danger-zone,#manage-teachers,#logout,#setClasses{
+    display: none !important;
+  }
 }
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */

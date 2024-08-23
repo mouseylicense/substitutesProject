@@ -88,3 +88,11 @@ button:dir(ltr),.button-div:dir(ltr){
 #totalStudents{
     color:goldenrod;
 }
+@media screen and (max-width: 800px) {
+ #arrow{
+     display: none !important;
+ }
+    .btn{
+        padding: 3px !important;
+    }
+}

@@ -71,3 +71,11 @@ html *{
 .absence button:dir(rtl){
     margin-right: auto !important;
 }
+@media screen and (max-width: 800px) {
+  .mother-container{
+      flex-direction: column;
+  }
+    .modal-content{
+        width: 80%;
+    }
+}

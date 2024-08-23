@@ -102,3 +102,12 @@ img{
     height: 100%;
     object-fit: cover;
 }
+@media screen and (max-width: 800px) {
+  img,#img-div{
+      display: none;
+  }
+
+    #login-container{
+        grid-template-columns: 100%;
+    }
+}

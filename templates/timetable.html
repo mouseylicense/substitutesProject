@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block static %}    <link rel="stylesheet" type="text/css" href="{% static 'styles/timetable.css' %}">{% endblock %}
+{% block static %}<link rel="stylesheet" type="text/css" href="{% static 'styles/timetable.css' %}">{% endblock %}
 {% block title %}{% trans "Schedule" %}{% endblock %}
 {% block content %}
     {{ classesByHour|json_script:"ClassesByHour" }}

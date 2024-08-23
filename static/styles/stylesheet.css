@@ -249,3 +249,6 @@ i{
 td,tr{
     line-height: 1 !important;
 }
+@media screen and (max-width: 800px) {
+
+}
