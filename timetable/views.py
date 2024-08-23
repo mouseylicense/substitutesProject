@@ -8,7 +8,8 @@ from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm, SuperuserCreationForm
+from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm, SuperuserCreationForm, \
+    StudentRegistrationForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404 ,FileResponse
 from django.utils import timezone
@@ -386,3 +387,14 @@ def danger_zone(request):
                 s.save()
 
     return render(request,"dangerzone.html")
+
+
+def register_student(request,):
+    if request.method == "POST":
+        form = StudentRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+    form = StudentRegistrationForm()
+    return render(request,"studentregister.html",{"form":form})

@@ -4,6 +4,7 @@ from django.urls import path, include
 urlpatterns = [
     path('', views.index, name='index'),
     path('student/details/<slug:uuid>',views.student_details, name='student_details'),
+    path('student/register/',views.register_student, name='register_student'),
     path('teacher/manage_students/',views.student_manager, name='student_manager'),
     path('teacher/setSub/',views.sub,name='sub'),
     path('get/<int:n>/',views.get_possible_subs,name='possible subs'),

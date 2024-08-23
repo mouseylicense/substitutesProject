@@ -30,7 +30,7 @@ html,body{
     border-radius: 15px;
     background-color: #fefefe;
 }
-#login-form input[type=text],#login-form input[type=password],#login-form input[type=tel] {
+#login-form input[type=text],#login-form input[type=password],#login-form input[type=tel],#login-form input[type=email],#login-form select {
     font-size: medium;
     border:none;
     width: 80%;
@@ -110,4 +110,7 @@ img{
     #login-container{
         grid-template-columns: 100%;
     }
+}
+#id_phone_number:lang("he"){
+    text-align: right !important;
 }

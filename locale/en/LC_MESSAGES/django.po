@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-23 14:54+0300\n"
+"POT-Creation-Date: 2024-08-23 18:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,46 +30,46 @@ msgstr ""
 #: .\templates\base.html:3 .\templates\day_schedule.html:4
 #: .\templates\publicBase.html:3 .\templates\registration\login.html:3
 #: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4
+#: .\templates\student_details.html:4 .\templates\studentregister.html:3
 msgid "en"
 msgstr ""
 
 #: .\templates\base.html:3 .\templates\day_schedule.html:4
 #: .\templates\publicBase.html:3 .\templates\registration\login.html:3
 #: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4
+#: .\templates\student_details.html:4 .\templates\studentregister.html:3
 msgid "ltr"
 msgstr ""
 
-#: .\templates\dangerzone.html:4 .\templates\dangerzone.html:7
+#: .\templates\dangerzone.html:4 .\templates\dangerzone.html:8
 msgid "Danger Zone"
 msgstr ""
 
-#: .\templates\dangerzone.html:17
+#: .\templates\dangerzone.html:18
 msgid "Repeat Value Above"
 msgstr ""
 
-#: .\templates\dangerzone.html:18
+#: .\templates\dangerzone.html:19
 msgid "Perform Action"
 msgstr ""
 
-#: .\templates\dangerzone.html:24 .\templates\dangerzone.html:25
+#: .\templates\dangerzone.html:25 .\templates\dangerzone.html:26
 msgid "Delete All Schedules"
 msgstr ""
 
-#: .\templates\dangerzone.html:26 .\templates\dangerzone.html:27
+#: .\templates\dangerzone.html:27 .\templates\dangerzone.html:28
 msgid "Increase Grade For All Students"
 msgstr ""
 
-#: .\templates\dangerzone.html:28 .\templates\dangerzone.html:29
+#: .\templates\dangerzone.html:29 .\templates\dangerzone.html:30
 msgid "Delete All Tutor - Student Relations"
 msgstr ""
 
-#: .\templates\dangerzone.html:30 .\templates\dangerzone.html:31
+#: .\templates\dangerzone.html:31 .\templates\dangerzone.html:32
 msgid "Delete All Shachariot"
 msgstr ""
 
-#: .\templates\dangerzone.html:32
+#: .\templates\dangerzone.html:33
 msgid "Delete All Classes"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Create User and Get Started!"
 msgstr ""
 
-#: .\templates\index.html:3 .\templates\publicBase.html:19
+#: .\templates\index.html:3 .\templates\publicBase.html:21
 msgid "Today's Subs"
 msgstr ""
 
@@ -104,11 +104,11 @@ msgstr ""
 msgid "No Subs For today!"
 msgstr ""
 
-#: .\templates\publicBase.html:18
+#: .\templates\publicBase.html:20
 msgid "Login"
 msgstr ""
 
-#: .\templates\publicBase.html:20 .\templates\timetable.html:6
+#: .\templates\publicBase.html:22 .\templates\timetable.html:6
 msgid "Schedule"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgstr ""
 msgid "Set Classes"
 msgstr ""
 
-#: .\templates\setClasses.html:91
+#: .\templates\setClasses.html:83
 msgid "Add Class"
 msgstr ""
 
@@ -253,7 +253,7 @@ msgid "Search Student"
 msgstr ""
 
 #: .\templates\student_manager.html:45
-msgid "Open Details in new page"
+msgid "Open in new page"
 msgstr ""
 
 #: .\templates\student_manager.html:46
@@ -270,6 +270,11 @@ msgstr ""
 
 #: .\templates\student_manager.html:59
 msgid "Set Schedule"
+msgstr ""
+
+#: .\templates\studentregister.html:13 .\templates\studentregister.html:20
+#: .\templates\studentregister.html:27
+msgid "Register Student"
 msgstr ""
 
 #: .\templates\teacher_home.html:5
@@ -320,63 +325,75 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\templates\timetable.html:29 .\timetable\models.py:130
-#: .\timetable\models.py:166 .\timetable\models.py:241
+#: .\templates\timetable.html:29 .\timetable\models.py:27
+#: .\timetable\models.py:130 .\timetable\models.py:166
+#: .\timetable\models.py:241
 msgid "First Grade"
 msgstr ""
 
-#: .\templates\timetable.html:36 .\timetable\models.py:131
-#: .\timetable\models.py:167 .\timetable\models.py:242
+#: .\templates\timetable.html:36 .\timetable\models.py:28
+#: .\timetable\models.py:131 .\timetable\models.py:167
+#: .\timetable\models.py:242
 msgid "Second Grade"
 msgstr ""
 
-#: .\templates\timetable.html:43 .\timetable\models.py:132
-#: .\timetable\models.py:168 .\timetable\models.py:243
+#: .\templates\timetable.html:43 .\timetable\models.py:29
+#: .\timetable\models.py:132 .\timetable\models.py:168
+#: .\timetable\models.py:243
 msgid "Third Grade"
 msgstr ""
 
-#: .\templates\timetable.html:50 .\timetable\models.py:133
-#: .\timetable\models.py:169 .\timetable\models.py:244
+#: .\templates\timetable.html:50 .\timetable\models.py:30
+#: .\timetable\models.py:133 .\timetable\models.py:169
+#: .\timetable\models.py:244
 msgid "Fourth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:57 .\timetable\models.py:134
-#: .\timetable\models.py:170 .\timetable\models.py:245
+#: .\templates\timetable.html:57 .\timetable\models.py:31
+#: .\timetable\models.py:134 .\timetable\models.py:170
+#: .\timetable\models.py:245
 msgid "Fifth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:64 .\timetable\models.py:135
-#: .\timetable\models.py:171 .\timetable\models.py:246
+#: .\templates\timetable.html:64 .\timetable\models.py:32
+#: .\timetable\models.py:135 .\timetable\models.py:171
+#: .\timetable\models.py:246
 msgid "Sixth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:71 .\timetable\models.py:136
-#: .\timetable\models.py:172 .\timetable\models.py:247
+#: .\templates\timetable.html:71 .\timetable\models.py:33
+#: .\timetable\models.py:136 .\timetable\models.py:172
+#: .\timetable\models.py:247
 msgid "Seventh Grade"
 msgstr ""
 
-#: .\templates\timetable.html:78 .\timetable\models.py:137
-#: .\timetable\models.py:173 .\timetable\models.py:248
+#: .\templates\timetable.html:78 .\timetable\models.py:34
+#: .\timetable\models.py:137 .\timetable\models.py:173
+#: .\timetable\models.py:248
 msgid "Eighth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:85 .\timetable\models.py:138
-#: .\timetable\models.py:174 .\timetable\models.py:249
+#: .\templates\timetable.html:85 .\timetable\models.py:35
+#: .\timetable\models.py:138 .\timetable\models.py:174
+#: .\timetable\models.py:249
 msgid "Ninth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:92 .\timetable\models.py:139
-#: .\timetable\models.py:175 .\timetable\models.py:250
+#: .\templates\timetable.html:92 .\timetable\models.py:36
+#: .\timetable\models.py:139 .\timetable\models.py:175
+#: .\timetable\models.py:250
 msgid "Tenth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:99 .\timetable\models.py:140
-#: .\timetable\models.py:176 .\timetable\models.py:251
+#: .\templates\timetable.html:99 .\timetable\models.py:37
+#: .\timetable\models.py:140 .\timetable\models.py:176
+#: .\timetable\models.py:251
 msgid "Eleventh Grade"
 msgstr ""
 
-#: .\templates\timetable.html:106 .\timetable\models.py:141
-#: .\timetable\models.py:177 .\timetable\models.py:252
+#: .\templates\timetable.html:106 .\timetable\models.py:38
+#: .\timetable\models.py:141 .\timetable\models.py:177
+#: .\timetable\models.py:252
 msgid "Twelfth Grade"
 msgstr ""
 
@@ -437,6 +454,7 @@ msgid "First Name"
 msgstr ""
 
 #: .\timetable\forms.py:79 .\timetable\forms.py:92 .\timetable\forms.py:137
+#: .\timetable\forms.py:171
 msgid "Last Name"
 msgstr ""
 
@@ -446,6 +464,7 @@ msgid "Password"
 msgstr ""
 
 #: .\timetable\forms.py:81 .\timetable\forms.py:89 .\timetable\forms.py:141
+#: .\timetable\forms.py:174
 msgid "Phone Number"
 msgstr ""
 
@@ -465,18 +484,18 @@ msgstr ""
 msgid "Manages Schedule"
 msgstr ""
 
-#: .\timetable\forms.py:128 .\timetable\forms.py:138
+#: .\timetable\forms.py:128 .\timetable\forms.py:138 .\timetable\forms.py:172
 msgid "Email"
 msgstr ""
 
-#: .\timetable\views.py:73
+#: .\timetable\views.py:74
 msgid "Absence reported."
 msgstr ""
 
-#: .\timetable\views.py:81
+#: .\timetable\views.py:82
 msgid "Absence already reported."
 msgstr ""
 
-#: .\timetable\views.py:203
+#: .\timetable\views.py:204
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr ""

@@ -1,0 +1,58 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{% trans "en" %}" dir="{% trans "ltr" %}">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ {% load static %}
+      <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/login_and_register.css' %}">
+    <meta charset="UTF-8">
+    <title>{% trans "Register Student" %}</title>
+</head>
+<body>
+
+<div id="login-container">
+    <div class="register-container">
+<form id="login-form" method="post" action="{% url 'register' form.instance.uuid %}">
+              <h1>{% trans "Register Student" %}</h1>
+    {% csrf_token %}
+
+    <div class="form-two-fields">{{ form.name }}</div>
+        {{ form.email }}
+        {{ form.grade }}
+      {{ form.phone_number }}
+    <input type="submit" value="{% trans "Register Student"%}">
+    <input type="hidden" name="next" value="{{ next }}">
+
+  </form>
+</div>
+<div>
+    <img src="{% static "img/register-image.png" %}">
+
+</div>
+</div>
+
+
+  {% if form.errors %}
+      <div class="alert">
+    <p>Your username and password didn't match. Please try again.</p>
+      </div>
+  {% endif %}
+
+  {% if next %}
+      <div class="alert">
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+      </div>
+  {% endif %}
+
+
+</body>
+</html>

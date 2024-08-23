@@ -24,18 +24,18 @@ DAYS_OF_WEEKDAY = [
     ("Thursday", 'Thursday')
 ]
 GRADES = [
-    (0, 'First Grade'),
-    (1, 'Second Grade'),
-    (2, 'Third Grade'),
-    (3, 'Fourth Grade'),
-    (4, 'Fifth Grade'),
-    (5, 'Sixth Grade'),
-    (6, 'Seventh Grade'),
-    (7, 'Eighth Grade'),
-    (8, 'Ninth Grade'),
-    (9, 'Tenth Grade'),
-    (10, 'Eleventh Grade'),
-    (11, 'Twelfth Grade'),
+    (0, _('First Grade')),
+    (1, _('Second Grade')),
+    (2, _('Third Grade')),
+    (3, _('Fourth Grade')),
+    (4, _('Fifth Grade')),
+    (5, _('Sixth Grade')),
+    (6, _('Seventh Grade')),
+    (7, _('Eighth Grade')),
+    (8, _('Ninth Grade')),
+    (9, _('Tenth Grade')),
+    (10, _('Eleventh Grade')),
+    (11, _('Twelfth Grade')),
 ]
 
 class TeacherManager(BaseUserManager):
