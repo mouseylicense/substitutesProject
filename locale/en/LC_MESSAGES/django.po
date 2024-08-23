@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-22 22:53+0300\n"
+"POT-Creation-Date: 2024-08-23 14:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,12 +41,36 @@ msgstr ""
 msgid "ltr"
 msgstr ""
 
-#: .\templates\dangerzone.html:14
+#: .\templates\dangerzone.html:4 .\templates\dangerzone.html:7
+msgid "Danger Zone"
+msgstr ""
+
+#: .\templates\dangerzone.html:17
 msgid "Repeat Value Above"
 msgstr ""
 
-#: .\templates\dangerzone.html:15
+#: .\templates\dangerzone.html:18
 msgid "Perform Action"
+msgstr ""
+
+#: .\templates\dangerzone.html:24 .\templates\dangerzone.html:25
+msgid "Delete All Schedules"
+msgstr ""
+
+#: .\templates\dangerzone.html:26 .\templates\dangerzone.html:27
+msgid "Increase Grade For All Students"
+msgstr ""
+
+#: .\templates\dangerzone.html:28 .\templates\dangerzone.html:29
+msgid "Delete All Tutor - Student Relations"
+msgstr ""
+
+#: .\templates\dangerzone.html:30 .\templates\dangerzone.html:31
+msgid "Delete All Shachariot"
+msgstr ""
+
+#: .\templates\dangerzone.html:32
+msgid "Delete All Classes"
 msgstr ""
 
 #: .\templates\first_time.html:13

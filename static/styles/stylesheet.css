@@ -1,3 +1,6 @@
+body:dir(rtl){
+    text-align: start;
+}
 .datepicker{
     background-color: #fcfdf8;
     padding: 8px 20px 8px 0;
@@ -242,4 +245,7 @@ i{
     background-color: darkred;
     border: 2px solid darkred;
     color: white;
+}
+td,tr{
+    line-height: 1 !important;
 }

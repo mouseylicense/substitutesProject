@@ -5,11 +5,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+
     {% load static %}
-    {% block static %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/stylesheet.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}">
+    {% block static %}{% endblock %}
+
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
 </head>

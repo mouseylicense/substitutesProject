@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-22 22:53+0300\n"
-"PO-Revision-Date: 2024-08-22 22:53+0300\n"
+"POT-Creation-Date: 2024-08-23 14:54+0300\n"
+"PO-Revision-Date: 2024-08-23 14:55+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -43,13 +43,37 @@ msgstr "he"
 msgid "ltr"
 msgstr "rtl"
 
-#: .\templates\dangerzone.html:14
+#: .\templates\dangerzone.html:4 .\templates\dangerzone.html:7
+msgid "Danger Zone"
+msgstr "אזור הסכנה"
+
+#: .\templates\dangerzone.html:17
 msgid "Repeat Value Above"
 msgstr "חזור על הערך למעלה"
 
-#: .\templates\dangerzone.html:15
+#: .\templates\dangerzone.html:18
 msgid "Perform Action"
 msgstr "בצע פעולה"
+
+#: .\templates\dangerzone.html:24 .\templates\dangerzone.html:25
+msgid "Delete All Schedules"
+msgstr "מחק את כל המערכות"
+
+#: .\templates\dangerzone.html:26 .\templates\dangerzone.html:27
+msgid "Increase Grade For All Students"
+msgstr "העלאת כיתה לכל התלמידים"
+
+#: .\templates\dangerzone.html:28 .\templates\dangerzone.html:29
+msgid "Delete All Tutor - Student Relations"
+msgstr "מחק את כל קשרי תלמיד - חונך"
+
+#: .\templates\dangerzone.html:30 .\templates\dangerzone.html:31
+msgid "Delete All Shachariot"
+msgstr "מחק את כל השחריות"
+
+#: .\templates\dangerzone.html:32
+msgid "Delete All Classes"
+msgstr "מחק את כל השיעורים"
 
 #: .\templates\first_time.html:13
 msgid "Hi There!"

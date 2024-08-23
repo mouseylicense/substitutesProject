@@ -8,7 +8,7 @@
     <div class="container">
     <form action="{% url "setClasses" %}" method="post">
         {% csrf_token %}
-        {{ form.student_teacher }}{{ form.student_teacher.label }}
+        {{ form.student_teacher }}<label>{{ form.student_teacher.label }}</label>
         <div class="two-fields">
             {{ form.name }}
             {{ form.teacher }}
@@ -18,14 +18,6 @@
                     {{ form.description }}
 </div>
         <table>
-    <tr>
-        <th>08:30</th>
-        <td><button disabled type="button" id="Sunday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button disabled type="button" id="Monday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button disabled type="button" id="Tuesday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button disabled type="button" id="Wednesday-08:30" onClick="ButtonClick(this)"></button></td>
-        <td><button disabled type="button" id="Thursday-08:30" onClick="ButtonClick(this)"></button></td>
-    </tr>
     <tr>
         <th>09:15</th>
         <td><button disabled type="button" id="Sunday-09:15" onClick="ButtonClick(this)"></button></td>

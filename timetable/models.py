@@ -238,18 +238,18 @@ class Student(models.Model):
 
     def str_grades(self):
         number_to_grade = {
-            1: _("First Grade"),
-            2: _("Second Grade"),
-            3: _("Third Grade"),
-            4: _("Fourth Grade"),
-            5: _("Fifth Grade"),
-            6: _("Sixth Grade"),
-            7: _("Seventh Grade"),
-            8: _("Eighth Grade"),
-            9: _("Ninth Grade"),
-            10: _("Tenth Grade"),
-            11: _("Eleventh Grade"),
-            12: _("Twelfth Grade"),
+            0: _("First Grade"),
+            1: _("Second Grade"),
+            2: _("Third Grade"),
+            3: _("Fourth Grade"),
+            4: _("Fifth Grade"),
+            5: _("Sixth Grade"),
+            6: _("Seventh Grade"),
+            7: _("Eighth Grade"),
+            8: _("Ninth Grade"),
+            9: _("Tenth Grade"),
+            10: _("Eleventh Grade"),
+            11: _("Twelfth Grade"),
         }
         return number_to_grade[self.grade]
 

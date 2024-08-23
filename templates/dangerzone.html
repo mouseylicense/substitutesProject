@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
+{% block title %}{% trans "Danger Zone" %}{% endblock %}
+{% block static %}    <link type="text/css" rel="stylesheet" href="{% static "styles/bootstrap.min.css"%}">
+{% endblock %}
 {% block content %}
     <h1 style="padding: 15px">{% trans "Danger Zone"%}</h1>
     <div id="myModal" class="modal" style="display: block ">
@@ -18,10 +22,15 @@
 
 </div>
     <div class="danger-div">
-    	<div class="danger-field"><h2>{%trans "Delete All Schedules"%}</h2><button onclick="showModal('delete-schedules','Delete Schedules')" class="danger-button">Delete All Schedules</button></div>
-        <div class="danger-field"><h2> {% trans "Increase Grades For All Students"%}</h2><button onclick="showModal('increase-grades','Increase Grades')" class="danger-button">Increase Grade For All Students</button></div>
-        <div class="danger-field"><h2>{% trans "Delete All Tutor - Student Relations"%}</h2><button onclick="showModal('delete-tutors','Delete Tutors')" class="danger-button">Delete All Tutor - Student Relations</button></div>
-        <div class="danger-field"><h2>{% trans "Delete All Shocher -Student Relations"%}</h2><button class="danger-button" onclick="showModal('delete-shachariot ','Delete Shachariot')">Delete All Shachariot</button></div>
+    	<div class="danger-field"><label>{%trans "Delete All Schedules"%}</label><button onclick="showModal('delete-schedules','Delete Schedules')" class="btn btn-danger">
+            {% trans "Delete All Schedules" %}</button></div>
+        <div class="danger-field"><label> {% trans "Increase Grade For All Students"%}</label><button onclick="showModal('increase-grades','Increase Grades')" class="btn btn-danger">
+            {% trans "Increase Grade For All Students" %}</button></div>
+        <div class="danger-field"><label>{% trans "Delete All Tutor - Student Relations"%}</label><button onclick="showModal('delete-tutors','Delete Tutors')" class="btn btn-danger">
+            {% trans "Delete All Tutor - Student Relations"%}</button></div>
+        <div class="danger-field"><label>{% trans "Delete All Shachariot"%}</label><button class="btn btn-danger" onclick="showModal('delete-shachariot','Delete Shachariot')">
+            {% trans "Delete All Shachariot" %}</button></div>
+        <div class="danger-field"><label>{% trans "Delete All Classes"%}</label><button class="btn btn-danger" onclick="showModal('delete-classes','Delete Classes')">{% trans "Delete All Classes"%}</button></div>
     </div>
 <script>
     const form = document.getElementById("form")

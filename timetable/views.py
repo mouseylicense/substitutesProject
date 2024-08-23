@@ -368,16 +368,19 @@ def delete_absence(request):
 def danger_zone(request):
     if request.method == "POST":
         payload = request.body.decode("utf-8").split("=")
-        if payload[3] == 'delete-schedules':
+        print(payload)
+        if payload[2] == 'delete-schedules':
             Schedule.objects.all().delete()
-        if payload[3] == 'increase-grades':
+        if payload[2] == 'increase-grades':
             for s in Student.objects.all():
                 s.increase_grade()
-        if payload[3] == 'delete-tutors':
+        if payload[2] == 'delete-tutors':
             for s in Student.objects.all():
                 s.tutor = None
                 s.save()
-        if payload[3] == 'delete-shachariot':
+        if payload[2] == 'delete-classes':
+            Class.objects.all().delete()
+        if payload[2] == 'delete-shachariot':
             for s in Student.objects.all():
                 s.shachariot = None
                 s.save()
