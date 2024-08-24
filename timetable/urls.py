@@ -1,6 +1,8 @@
 from timetable import views
 from django.urls import path, include
 
+from timetable.views import get_student_list
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('student/details/<slug:uuid>',views.student_details, name='student_details'),
@@ -24,4 +26,5 @@ urlpatterns = [
     path('teacher/classes_manager/',views.class_manager,name='class_manager'),
     path('managment/import/',views.import_page,name='import'),
     path('getDecriptionForm',views.editDescription,name='editDescription'),
+    path('getStudents/<slug:id>',views.get_student_list,name='get_student_list')
 ]

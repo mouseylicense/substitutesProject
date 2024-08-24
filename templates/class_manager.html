@@ -9,6 +9,42 @@
 {% block title %}{% trans "Manage Classes" %}{% endblock %}
 {% block content %}
     <style>
+    .details{
+    width:100%;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 1s ease-in-out;
+    height: 500px;
+    background-color: white;
+}
+    ul{
+        columns: 6 auto;
+    }
+    .arrow {
+  border: solid rgba(0, 0, 0, 0.68);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 5px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+#arrow:dir(rtl){
+    margin: 0 auto 0 5px;
+}
+#arrow:dir(ltr){
+    margin: 0 5px 0 auto;
+}
+
     body *{
     font-family: Inter, helvetica, sans-serif;
 }
@@ -26,7 +62,7 @@
     padding:2px;
     flex-direction: column;
 }
-.class-name,#last-invite{
+.class-name{
     display:inline;
     margin: 0;
     padding:5px
@@ -62,12 +98,12 @@ button:dir(ltr),.button-div:dir(ltr){
     <div id="DescriptionModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content" >
+  <div style="width:fit-content" class="modal-content" >
     <span onclick="this.parentElement.parentElement.style.display = 'none';" class="close" >&times;</span>
     <form hx-post="{% url "editDescription" %}" id="DescriptionForm" hx-swap="none">
         {% csrf_token %}
         <div id="inner-form"></div>
-        <button onclick="this.parentElement.parentElement.parentElement.style.display = 'none'" type="submit"></button>
+        <button onclick="this.parentElement.parentElement.parentElement.style.display = 'none'" type="submit">{% trans "Edit Description" %}</button>
     </form>
   </div>
     </div>
@@ -79,7 +115,7 @@ button:dir(ltr),.button-div:dir(ltr){
     {{ classesByHour|json_script:"ClassesByHour" }}
 
     <div class="container">
-    <form action="{% url "setClasses" %}" method="post">
+    <form action="{% url "class_manager" %}" method="post">
         {% csrf_token %}
         {{ form.student_teacher }}<label>{{ form.student_teacher.label }}</label>
         <div class="two-fields">
@@ -204,15 +240,34 @@ button:dir(ltr),.button-div:dir(ltr){
 
     <div   style="display:flex;flex-direction: row">
 
-        <p class="class-name"> {{ class }} -  {{ values.0 }}</p>
-        <button hx-on::after-request="document.getElementById('DescriptionModal').style.display = 'block'" hx-get="{% url "editDescription" %}" name="id" value="{{ values.1 }}" hx-target="#inner-form" class="btn btn-info">{% trans "Change Description" %}</button>
+        <p class="class-name"> {{ class }} -  {{ values.0 }} {% trans "Students" %}</p>
+        <p style="display: inline" hx-get="{% url 'get_student_list' values.1 %}" hx-target="next .details" id="arrow" ><i class="arrow down"></i></p>
+        <button style="margin: 0" hx-on::after-request="document.getElementById('DescriptionModal').style.display = 'block'" hx-get="{% url "editDescription" %}" name="id" value="{{ values.1 }}" hx-target="#inner-form" class="btn btn-info">{% trans "Change Description" %}</button>
         </div>
+                <div class="details"></div>
+
     </div>
 </li>
     {% endfor %}
     </ul>
 </div>
+    <script>
+    document.body.addEventListener("unfold",function(evt){
+        let details = evt.target.parentElement.parentElement.parentElement.querySelector(".details");
+        let arrow = evt.target.parentElement.querySelector("#arrow .arrow")
 
+        if(details.style.maxHeight==="500px"){
+            arrow.classList.remove("up")
+            arrow.classList.add("down")
+            details.style.maxHeight = "0"
+        } else{
+            arrow.classList.remove("down")
+            arrow.classList.add("up")
+            details.style.maxHeight="500px"
+        }
+    })
+
+</script>
     <script>
 function filterList() {
     var input, filter, ul, li, a, i, txtValue;

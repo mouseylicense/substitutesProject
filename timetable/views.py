@@ -5,6 +5,8 @@ from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
+from html5lib.treeadapters.sax import prefix
+
 from SubtitutesProject.settings import BASE_DIR
 from . import forms
 from django.contrib import messages
@@ -272,15 +274,22 @@ def teacher_manager(request):
             return HttpResponse("")
         else:
             form = TeacherForm(request.POST)
-            form.instance = Teacher.objects.get(uuid=form["uuid"].value())
+            for key in request.POST:
+                if key.endswith("uuid"):
+                    prefix = key[:-len("uuid") - 1]
+            form.instance = Teacher.objects.get(uuid=form.data[f"{prefix}-uuid"])
+            form.prefix = prefix
+            print(form.is_valid())
             if form.is_valid():
                 form.save()
             else:
                 return HttpResponse(form.errors)
     teachers = Teacher.objects.all()
     teachers_and_forms = {}
+    i= 0
     for teacher in teachers:
-        teachers_and_forms[teacher] = TeacherForm(instance=teacher,initial={"uuid":teacher.uuid})
+        teachers_and_forms[teacher] = TeacherForm(instance=teacher,initial={"uuid":teacher.uuid},prefix=("form" + str(i)))
+        i+=1
     return render(request, "teacher_manager.html", {"teachers": teachers_and_forms})
 
 @login_required
@@ -470,8 +479,18 @@ def register_student(request):
         return HttpResponse("Registering Students is currently disabled")
 
 def class_manager(request):
+    if request.method == 'POST':
+        form = ClassForm(request.POST)
+        if form.is_valid:
+            form.save()
+        else:
+            print(form.errors)
     classes_and_students = {}
-    for c in Class.objects.all():
+    if request.user.is_superuser or request.user.manage_schedule:
+        class_pool = Class.objects.all()
+    else:
+        class_pool = Class.objects.filter(teacher=request.user)
+    for c in class_pool:
         classes_and_students[c.name] = [Schedule.objects.filter(**{c.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[c.hour]:c}).count(),c.id]
     form = forms.ClassForm
     classes = Class.objects.all()
@@ -483,6 +502,20 @@ def class_manager(request):
             classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] += 1
     return render(request,"class_manager.html",{"classes":classes_and_students,"form": form, "classesByHour": classesByHour})
 
+@require_GET
+@login_required()
+def get_student_list(request,id):
+    c = Class.objects.get(pk=id)
+    html = """
+    <ul>
+    
+    """
+    for s in Schedule.objects.filter(**{c.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[c.hour]:c}):
+        html+=f"<li>{s.student.name}</li>"
+    html+="</ul"
+    res = HttpResponse(html)
+    res["HX-Trigger"] = "unfold"
+    return res
 @login_required()
 def editDescription(request):
     if request.method == "POST":
