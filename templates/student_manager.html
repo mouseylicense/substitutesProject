@@ -23,14 +23,15 @@
 {# show invite all and reset all buttons if user is super user   #}
     {% if user.is_superuser %}
     <div style="margin-bottom: 5px" class="button-div">
-        <button type="button" id="invite-all" name="invite-all" value="invite-all" hx-confirm="{% trans "Warning, this will send an email to every student with no Schedule" %}" hx-post="{% url "send_email" %}" class="btn btn-warning">{% trans "Invite all" %}</button>
-        <button type="button" id="reset-all" name="reset-all" value="reset-all" hx-confirm="{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}" hx-post="{% url "send_email"%}" class="btn btn-danger">{% trans "Reset ALL" %}</button>
         <form style="display: inline">
         <label>
             {% trans "Student Creation Form" %}:
             <input name="userCreation" type="checkbox" hx-post="{% url "student_manager" %}" {% if creationEnabled %} checked {% endif %}>
         </label>
         </form>
+        <button type="button" id="invite-all" name="invite-all" value="invite-all" hx-confirm="{% trans "Warning, this will send an email to every student with no Schedule" %}" hx-post="{% url "send_email" %}" class="btn btn-warning">{% trans "Invite all" %}</button>
+        <button type="button" id="reset-all" name="reset-all" value="reset-all" hx-confirm="{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}" hx-post="{% url "send_email"%}" class="btn btn-danger">{% trans "Reset ALL" %}</button>
+
     </div>
     {% endif %}
     {% csrf_token %}
@@ -50,7 +51,9 @@
         <p style="display: inline" hx-get="{% url 'student_details' values.0 %}" hx-target="next .details" id="arrow" ><i class="arrow down"></i></p>
             <a class="btn btn-secondary" href="{% url "student_details" values.0%}">{% trans "Open in new page" %}</a>
     <button  name="{{ values.0 }}" value="True"  hx-post="{% url "send_email" %}" id="{{ values.0 }}" class="btn btn-danger"  >{% trans "Reset Schedule" %}</button>
-    </div>
+        <button class="btn btn-dark" onclick="navigator.clipboard.writeText(('{{ request.get_host }}' + '{% url "register_student" %}' + '?uuid=' + '{{ values.0 }}'));window.alert('{% trans "Copied Link To Clipboard" %}' + '...')">{% trans "Update Details" %}</button>
+
+        </div>
         </div>
         <div class="details"></div>
     </div>
@@ -63,7 +66,7 @@
 
         <button name="{{ values.0 }}" hx-target="previous #last-invite" value="False" hx-post="{% url "send_email" %}" name="False" id="{{ values.0 }}" class="btn btn-info">{% trans "Send Invite" %}</button>
         <a  href="{% url "schedule" values.0 %}"  role="Button" class="btn btn-primary">{% trans "Set Schedule" %}</a>
-
+        <button class="btn btn-dark" onclick="navigator.clipboard.writeText(('{{ request.get_host }}' + '{% url "register_student" %}' + '?uuid=' + '{{ values.0 }}'));window.alert('{% trans "Copied Link To Clipboard" %}' + '...')">{% trans "Update Details" %}</button>
         </div>
         </div>
         <div class="details"></div>

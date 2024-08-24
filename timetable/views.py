@@ -1,4 +1,6 @@
 import csv
+from tempfile import template
+
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -271,7 +273,6 @@ def teacher_manager(request):
 @login_required
 def student_manager(request):
     if request.method == "POST":
-        print(request.POST)
         payload = request.POST.get("userCreation")
         if payload == "on":
             config.ADDING_STUDENTS = True
@@ -431,17 +432,27 @@ def danger_zone(request):
     return render(request,"dangerzone.html")
 
 
-def register_student(request,):
-    if config.ADDING_STUDENTS:
-        if request.method == "POST":
-            form = StudentRegistrationForm(request.POST)
+def register_student(request):
+    if request.method == "POST":
+        form = StudentRegistrationForm(request.POST)
+        if Student.objects.filter(uuid=form.data['uuid']).exists():
+            form.instance = Student.objects.get(uuid=form.data['uuid'])
+        if Student.objects.filter(uuid=form.data['uuid']).exists() or config.ADDING_STUDENTS:
             if form.is_valid():
                 form.save()
+                return render(request,"thanks.html")
             else:
                 print(form.errors)
-        form = StudentRegistrationForm()
-        return render(request,"studentregister.html",{"form":form})
-    return HttpResponse("Registering Students is currently disabled")
+
+    try:
+        uuid = request.GET.dict()['uuid']
+        form = StudentRegistrationForm(instance=Student.objects.get(uuid=uuid),initial={"uuid":uuid})
+        return render(request, "studentregister.html", {"form": form})
+    except KeyError:
+        if config.ADDING_STUDENTS:
+            form = StudentRegistrationForm()
+            return render(request,"studentregister.html",{"form":form})
+        return HttpResponse("Registering Students is currently disabled")
 
 def class_manager(request):
     classes_and_students = {}

@@ -16,10 +16,10 @@
 
 <div id="login-container">
     <div class="register-container">
-<form id="login-form" method="post" action="{% url 'register' form.instance.uuid %}">
+<form id="login-form" method="post" action="{% url 'register_student' %}">
               <h1>{% trans "Register Student" %}</h1>
     {% csrf_token %}
-
+    {{ form.uuid }}
     <div class="form-two-fields">{{ form.name }}</div>
         {{ form.email }}
         {{ form.grade }}

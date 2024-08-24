@@ -165,6 +165,7 @@ class SuperuserCreationForm(forms.ModelForm):
 
 
 class StudentRegistrationForm(forms.ModelForm):
+    uuid = forms.UUIDField(widget=forms.HiddenInput(),initial=uuid.uuid4())
     class Meta:
         model = Student
         fields = ("name","email","phone_number","grade")
