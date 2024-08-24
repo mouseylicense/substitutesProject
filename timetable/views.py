@@ -1,9 +1,11 @@
+import csv
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
+from SubtitutesProject.settings import BASE_DIR
 from . import forms
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
@@ -18,6 +20,7 @@ from django.utils.translation import gettext_lazy as _
 import datetime
 from dotenv import load_dotenv
 from os import environ
+from constance import config
 
 load_dotenv()
 FROM_EMAIL=environ['FROM_EMAIL']
@@ -34,6 +37,31 @@ DAYS_OF_WEEKDAY = {
     2: 'Wednesday',
     3: 'Thursday'
 }
+HEBREW_GRADES_TO_GRADES= {
+    'א':0,
+    'ב':1,
+    'ג':2,
+    'ד':3,
+    'ה':4,
+    'ו':5,
+    'ז':6,
+    'ח':7,
+    'ט':8,
+    'י':9,
+    'יא':10,
+    'יב':11,
+}
+
+def importCsv(path):
+    with open(path,encoding='utf-8') as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            _,created = Student.objects.get_or_create(
+                name=row[1] + " " + row[0],
+                grade=HEBREW_GRADES_TO_GRADES[row[4]]
+
+            )
 
 def index(request):
     if not Teacher.objects.exists():
@@ -242,6 +270,14 @@ def teacher_manager(request):
 
 @login_required
 def student_manager(request):
+    if request.method == "POST":
+        print(request.POST)
+        payload = request.POST.get("userCreation")
+        if payload == "on":
+            config.ADDING_STUDENTS = True
+
+        if payload is None:
+            config.ADDING_STUDENTS = False
     user = request.user
     if user.is_superuser:
         student_pool = Student.objects.all()
@@ -255,7 +291,7 @@ def student_manager(request):
     for student in student_pool:
         students[student.name] = [student.uuid,Schedule.objects.filter(student=student).exists(),datetime.datetime.strftime(timezone.localtime(student.last_schedule_invite), '%d/%m/%Y %H:%M')]
     return render(request,"student_manager.html",{"students":students,"scheduleCount":scheduleCount,
-                                                     "studentWithNoSchedule":studentWithNoSchedule})
+                                                     "studentWithNoSchedule":studentWithNoSchedule,"creationEnabled":config.ADDING_STUDENTS})
 
 @require_POST
 @login_required
@@ -380,7 +416,7 @@ def danger_zone(request):
             Schedule.objects.all().delete()
         if payload[2] == 'increase-grades':
             for s in Student.objects.all():
-                s.increase_grade()
+                s.increment_grade()
         if payload[2] == 'delete-tutors':
             for s in Student.objects.all():
                 s.tutor = None
@@ -396,14 +432,16 @@ def danger_zone(request):
 
 
 def register_student(request,):
-    if request.method == "POST":
-        form = StudentRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            print(form.errors)
-    form = StudentRegistrationForm()
-    return render(request,"studentregister.html",{"form":form})
+    if config.ADDING_STUDENTS:
+        if request.method == "POST":
+            form = StudentRegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                print(form.errors)
+        form = StudentRegistrationForm()
+        return render(request,"studentregister.html",{"form":form})
+    return HttpResponse("Registering Students is currently disabled")
 
 def class_manager(request):
     classes_and_students = {}
@@ -412,3 +450,4 @@ def class_manager(request):
     form = DescriptionChangeForm()
 
     return render(request,"class_manager.html",{"classes":classes_and_students,"DescriptionForm":form})
+

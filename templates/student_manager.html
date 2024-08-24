@@ -8,7 +8,7 @@
 {% endblock %}
 {% block title %}{% trans "Manage Students" %}{% endblock %}
 {% block content %}
-<h1>{% trans "Manage Students" %}</h1>
+    <h1>{% trans "Manage Students" %}</h1>
     <p id="stats">{% trans "Students With Schedules" %}: <span id="scheduleCount">{{ scheduleCount }}</span>; {% trans "Students Without" %}: <span id="noScheduleCount">{{ studentWithNoSchedule }}</span>; {% trans "Total Students" %}: <span id="totalStudents">{{ scheduleCount|add:studentWithNoSchedule }}</span>.</p>
 
 {# alert box #}
@@ -25,6 +25,12 @@
     <div style="margin-bottom: 5px" class="button-div">
         <button type="button" id="invite-all" name="invite-all" value="invite-all" hx-confirm="{% trans "Warning, this will send an email to every student with no Schedule" %}" hx-post="{% url "send_email" %}" class="btn btn-warning">{% trans "Invite all" %}</button>
         <button type="button" id="reset-all" name="reset-all" value="reset-all" hx-confirm="{% trans "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???" %}" hx-post="{% url "send_email"%}" class="btn btn-danger">{% trans "Reset ALL" %}</button>
+        <form style="display: inline">
+        <label>
+            {% trans "Student Creation Form" %}:
+            <input name="userCreation" type="checkbox" hx-post="{% url "student_manager" %}" {% if creationEnabled %} checked {% endif %}>
+        </label>
+        </form>
     </div>
     {% endif %}
     {% csrf_token %}

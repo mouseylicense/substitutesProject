@@ -33,9 +33,13 @@ DEVELOPMENT_MODE = False
 # DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
 # Application definition
 
 INSTALLED_APPS = [
+    'constance',
     'timetable.apps.TimetableConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,6 +60,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
+
+CONSTANCE_CONFIG = {
+    'ADDING_STUDENTS':(False,"Weather Student Creation is enabled or disabled",bool),
+}
+
 ROOT_URLCONF = 'SubtitutesProject.urls'
 
 STATICFILES_DIRS = [
