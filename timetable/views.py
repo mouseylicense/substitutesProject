@@ -1,7 +1,4 @@
 import csv
-from tempfile import template
-
-from IPython.core.magic_arguments import defaults
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -75,10 +72,12 @@ def import_teachers(path):
         reader = csv.reader(f)
         next(reader)
         for row in reader:
-            _,teacher = Teacher.objects.get_or_create(
-                email=row[1] + " " + row[5],
-
-            )
+            if row[6] != "":
+                _,teacher = Teacher.objects.get_or_create(
+                    email=row[6],
+                    phone_number=row[3].replace("-",""),
+                    defaults = {"first_name":row[1],"last_name":row[2]}
+                )
 
 def index(request):
     if not Teacher.objects.exists():
@@ -98,7 +97,6 @@ def index(request):
 def sub(request):
     if request.method == 'POST':
         form = forms.SubstituteForm(request.POST)
-        print(form.data)
         if form.is_valid():
             sub = form.cleaned_data['class_that_needs_sub']
             sub.substitute_teacher = Teacher.objects.filter(pk=form['substitute_teacher'].data).get()
@@ -443,6 +441,8 @@ def danger_zone(request):
             for s in Student.objects.all():
                 s.shachariot = None
                 s.save()
+        if payload[2] == 'delete-students':
+            Student.objects.all().delete()
 
     return render(request,"dangerzone.html")
 
@@ -472,10 +472,29 @@ def register_student(request):
 def class_manager(request):
     classes_and_students = {}
     for c in Class.objects.all():
-        classes_and_students[c.name] = Schedule.objects.filter(**{c.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[c.hour]:c}).count()
-    form = DescriptionChangeForm()
+        classes_and_students[c.name] = [Schedule.objects.filter(**{c.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[c.hour]:c}).count(),c.id]
+    form = forms.ClassForm
+    classes = Class.objects.all()
+    classesByHour = {}
+    for c in classes:
+        if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = 1
+        else:
+            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] += 1
+    return render(request,"class_manager.html",{"classes":classes_and_students,"form": form, "classesByHour": classesByHour})
 
-    return render(request,"class_manager.html",{"classes":classes_and_students,"DescriptionForm":form})
+@login_required()
+def editDescription(request):
+    if request.method == "POST":
+        form = DescriptionChangeForm(request.POST)
+        form.instance = Class.objects.get(pk=int(form.data['id']))
+        if form.is_valid():
+            form.save()
+            return HttpResponse("success")
+        else:
+            print(form.errors)
+    form = DescriptionChangeForm(instance=Class.objects.get(id=int(request.GET.dict()["id"])),initial={"id":request.GET.dict()["id"]})
+    return HttpResponse(form)
 
 @login_required()
 @user_passes_test(lambda u: u.is_superuser)
@@ -491,7 +510,9 @@ def import_page(request):
                 return HttpResponseRedirect(reverse("student_manager"))
             if int(form.data['fileFor'])==0:
                 save_file(request.FILES['file'], "teachers")
+                import_teachers(str(BASE_DIR) + "/csvs/teachers.csv")
                 return HttpResponseRedirect(reverse("teacher_manager"))
+
         else:
             print(form.errors)
             return HttpResponse(form.errors)

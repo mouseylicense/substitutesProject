@@ -13,7 +13,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
         for(let k=0;k<buttons.length;k++){
             buttons[k].disabled = reset
             buttons[k].style.background = ""
-            buttons[k].className = ""
+            buttons[k].classList.remove("selected")
         }
         hour.value = ""
         day.value = ""
@@ -54,13 +54,13 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
         RoomSelect.disabled=false;
         buttons = document.getElementsByTagName("button")
         for(let i=0;i<buttons.length;i++){
-            buttons[i].className = ""
+            buttons[i].classList.remove("selected")
         }
         for (let i = 0; i < options.length; i++) {
             options[i].hidden = false
         }
         RoomSelect.selectedIndex = 0
-        test.className = "selected";
+        test.classList.add("selected");
         [day , hour] = test.id.split("-")
         hourField.value = hour
         dayField.value = day

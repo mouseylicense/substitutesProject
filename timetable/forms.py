@@ -178,11 +178,11 @@ class StudentRegistrationForm(forms.ModelForm):
         }
 
 class DescriptionChangeForm(forms.ModelForm):
+    id = forms.CharField(widget=forms.HiddenInput())
     class Meta:
         model = Class
-        fields = ('description',"name")
+        fields = ('description',)
         widgets = {
-            "name":forms.HiddenInput(attrs={'id':"name"}),
             'description': forms.Textarea(attrs={'placeholder': _('Description')})
         }
 

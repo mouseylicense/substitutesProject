@@ -57,17 +57,140 @@ button:dir(ltr),.button-div:dir(ltr){
 
 </style>
 <h1>{% trans "Manage Classes" %}</h1>
-<button class="btn btn-success" >{% trans "Create New Class" %}</button>
+<button onclick="document.getElementById('CreateClassModal').style.display = 'block'" class="btn btn-success" >{% trans "Create New Class" %}</button>
     <div class="class-list">
-    <div id="DescriptionModal" class="modal" style="display: block ">
+    <div id="DescriptionModal" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content" >
-    <span onclick="this.parentElement.parentElement.style.display = 'none';" class="close">&times;</span>
-    <form id="DescriptionForm" method="post">
+    <span onclick="this.parentElement.parentElement.style.display = 'none';" class="close" >&times;</span>
+    <form hx-post="{% url "editDescription" %}" id="DescriptionForm" hx-swap="none">
         {% csrf_token %}
-        {{ DescriptionForm }}
+        <div id="inner-form"></div>
+        <button onclick="this.parentElement.parentElement.parentElement.style.display = 'none'" type="submit"></button>
     </form>
+  </div>
+    </div>
+ <div id="CreateClassModal" class="modal" >
+
+  <!-- Modal content -->
+  <div class="modal-content" style="margin-top: 1%;width: fit-content" >
+    <span onclick="this.parentElement.parentElement.style.display = 'none';" class="close" >&times;</span>
+    {{ classesByHour|json_script:"ClassesByHour" }}
+
+    <div class="container">
+    <form action="{% url "setClasses" %}" method="post">
+        {% csrf_token %}
+        {{ form.student_teacher }}<label>{{ form.student_teacher.label }}</label>
+        <div class="two-fields">
+            {{ form.name }}
+            {{ form.teacher }}
+            {{ form.student_teaching }}
+        </div>
+        <div class="two-fields">
+                    {{ form.description }}
+</div>
+        <table>
+    <tr>
+        <th>09:15</th>
+        <td><button disabled class="timeframe" type="button" id="Sunday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Monday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Tuesday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Wednesday-09:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Thursday-09:15" onClick="ButtonClick(this)"></button></td>
+    </tr>
+    <tr>
+        <th>10:07</th>
+        <td><button disabled class="timeframe" type="button" id="Sunday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Monday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Tuesday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Wednesday-10:07" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Thursday-10:07" onClick="ButtonClick(this)"></button></td>
+    </tr>
+    <tr>
+        <th colspan="6">11:00</th>
+    </tr>
+    <tr>
+        <th>11:45</th>
+        <td><button disabled class="timeframe" type="button" id="Sunday-11:45" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Monday-11:45" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Tuesday-11:45" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Wednesday-11:45" onClick="ButtonClick(this)"></button></td>
+    </tr>
+    <tr>
+        <th>12:45</th>
+        <td><button disabled class="timeframe" type="button" id="Sunday-12:45" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Monday-12:45" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Tuesday-12:45" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Wednesday-12:45" onClick="ButtonClick(this)"></button></td>
+    </tr>
+</table>
+
+        <div class="two-fields">{{ form.day_of_week }}{{ form.hour }}</div>
+
+        {{ form.room }}
+        {{ form.first_grade }}
+        {{ form.first_grade.label }}
+        {{ form.second_grade }}
+        {{ form.second_grade.label }}
+        {{ form.third_grade }}
+        {{ form.third_grade.label }}
+        {{ form.fourth_grade }}
+        {{ form.fourth_grade.label }}
+        {{ form.fifth_grade }}
+        {{ form.fifth_grade.label }}
+        {{ form.sixth_grade }}
+        {{ form.sixth_grade.label }}
+        {{ form.seventh_grade }}
+        {{ form.seventh_grade.label }}
+        {{ form.eighth_grade }}
+        {{ form.eighth_grade.label }}
+        {{ form.ninth_grade }}
+        {{ form.ninth_grade.label }}
+        {{ form.tenth_grade }}
+        {{ form.tenth_grade.label }}
+        {{ form.eleventh_grade }}
+        {{ form.eleventh_grade.label }}
+        {{ form.twelfth_grade }}
+        {{ form.twelfth_grade.label }}
+        <input type="submit"  value="{% trans "Add Class" %}">
+    </form>
+{#    a script to act when the teacher field is changed and get hours where teacher cant teach#}
+    <script type="text/javascript" src="{% static "setClasses.js" %}"></script>
+        <style>
+        .selected{
+            background-color: rebeccapurple !important;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 2px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th{
+            border: 1px solid #dee2e6;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .timeframe{
+            border: 1px solid #dee2e6;
+            width: 100px;
+            height: 40px;
+            {#padding: 20px 50px;#}
+            text-align: center;
+            background-color: white;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #343a40;
+        }
+        td{
+            padding: 0;
+        }
+    </style>
+
+    </div>
   </div>
     </div>
 
@@ -75,14 +198,14 @@ button:dir(ltr),.button-div:dir(ltr){
       <input onkeyup="filterList()" type="text" id="text-filter" placeholder="{% trans "Search Classes" %}...">
 
     <ul class="class-list">
-{% for class,students in classes.items %}
+{% for class,values in classes.items %}
     <li>
-    <div  class="Class">
+    <div id="{{ values.1 }}" class="Class">
 
     <div   style="display:flex;flex-direction: row">
 
-        <p class="class-name"> {{ class }} -  {{ students }}</p>
-        <button onclick="showDescriptionForm(this)" class="btn btn-info">{% trans "Change Description" %}</button>
+        <p class="class-name"> {{ class }} -  {{ values.0 }}</p>
+        <button hx-on::after-request="document.getElementById('DescriptionModal').style.display = 'block'" hx-get="{% url "editDescription" %}" name="id" value="{{ values.1 }}" hx-target="#inner-form" class="btn btn-info">{% trans "Change Description" %}</button>
         </div>
     </div>
 </li>
@@ -91,12 +214,6 @@ button:dir(ltr),.button-div:dir(ltr){
 </div>
 
     <script>
-    const DescriptionModal = document.getElementById("DescriptionModal")
-    function showDescriptionForm(a){
-        DescriptionModal.style.display = "block"
-
-    }
-
 function filterList() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('text-filter');

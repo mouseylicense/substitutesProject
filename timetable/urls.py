@@ -22,5 +22,6 @@ urlpatterns = [
     path('delete_absence/',views.delete_absence,name='delete_absence'),
     path('managment/danger_zone/',views.danger_zone,name='danger_zone'),
     path('teacher/classes_manager/',views.class_manager,name='class_manager'),
-    path('managment/import/',views.import_page,name='import')
+    path('managment/import/',views.import_page,name='import'),
+    path('getDecriptionForm',views.editDescription,name='editDescription'),
 ]
