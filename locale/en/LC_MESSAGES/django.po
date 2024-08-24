@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-24 13:45+0300\n"
+"POT-Creation-Date: 2024-08-24 16:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,19 +41,31 @@ msgstr ""
 msgid "ltr"
 msgstr ""
 
-#: .\templates\class_manager.html:9 .\templates\class_manager.html:59
+#: .\templates\class_manager.html:9 .\templates\class_manager.html:95
 msgid "Manage Classes"
 msgstr ""
 
-#: .\templates\class_manager.html:60
+#: .\templates\class_manager.html:96
 msgid "Create New Class"
 msgstr ""
 
-#: .\templates\class_manager.html:75
+#: .\templates\class_manager.html:106
+msgid "Edit Description"
+msgstr ""
+
+#: .\templates\class_manager.html:192 .\templates\setClasses.html:83
+msgid "Add Class"
+msgstr ""
+
+#: .\templates\class_manager.html:234
 msgid "Search Classes"
 msgstr ""
 
-#: .\templates\class_manager.html:85
+#: .\templates\class_manager.html:243
+msgid "Students"
+msgstr ""
+
+#: .\templates\class_manager.html:245
 msgid "Change Description"
 msgstr ""
 
@@ -89,6 +101,10 @@ msgstr ""
 msgid "Delete All Classes"
 msgstr ""
 
+#: .\templates\dangerzone.html:34
+msgid "Delete All Students"
+msgstr ""
+
 #: .\templates\first_time.html:13
 msgid "Hi There!"
 msgstr ""
@@ -104,26 +120,30 @@ msgstr ""
 msgid "Create User and Get Started!"
 msgstr ""
 
-#: .\templates\import_page.html:5
-msgid "Import Students From CSV"
+#: .\templates\import_page.html:3
+msgid "Import"
 msgstr ""
 
 #: .\templates\import_page.html:6
+msgid "Import Students From CSV"
+msgstr ""
+
+#: .\templates\import_page.html:7
 msgid ""
 "The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
 "Creates A Student For Each row, regardless of if a Student with this name "
 "exists"
 msgstr ""
 
-#: .\templates\import_page.html:10 .\templates\import_page.html:18
+#: .\templates\import_page.html:11 .\templates\import_page.html:19
 msgid "import"
 msgstr ""
 
-#: .\templates\import_page.html:13
+#: .\templates\import_page.html:14
 msgid "Import Teachers From CSV"
 msgstr ""
 
-#: .\templates\import_page.html:14
+#: .\templates\import_page.html:15
 msgid ""
 "The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
 "Creates A Teacher For Each row, regardless of if a Teacher with this name "
@@ -214,10 +234,6 @@ msgstr ""
 
 #: .\templates\setClasses.html:4
 msgid "Set Classes"
-msgstr ""
-
-#: .\templates\setClasses.html:83
-msgid "Add Class"
 msgstr ""
 
 #: .\templates\setSub.html:4
@@ -547,14 +563,14 @@ msgstr ""
 msgid "Select a file"
 msgstr ""
 
-#: .\timetable\views.py:116
+#: .\timetable\views.py:125
 msgid "Absence reported."
 msgstr ""
 
-#: .\timetable\views.py:124
+#: .\timetable\views.py:133
 msgid "Absence already reported."
 msgstr ""
 
-#: .\timetable\views.py:246
+#: .\timetable\views.py:235
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr ""

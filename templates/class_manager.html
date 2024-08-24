@@ -93,7 +93,7 @@ button:dir(ltr),.button-div:dir(ltr){
 
 </style>
 <h1>{% trans "Manage Classes" %}</h1>
-<button onclick="document.getElementById('CreateClassModal').style.display = 'block'" class="btn btn-success" >{% trans "Create New Class" %}</button>
+{% if user.manage_schedule or user.is_superuser %}<button onclick="document.getElementById('CreateClassModal').style.display = 'block'" class="btn btn-success" >{% trans "Create New Class" %}</button>{% endif %}
     <div class="class-list">
     <div id="DescriptionModal" class="modal">
 

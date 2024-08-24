@@ -66,7 +66,7 @@ h1:dir(rtl), p:dir(rtl){
     <div   style="display:flex;flex-direction: row">
 
         <p class="teacher-name"> {{ teacher }}</p>
-        <form hx-trigger="change" hx-swap="none" hx-target="next .form-fields" hx-post="{% url "teacher_manager" %}" class="button-div">
+        <form hx-trigger="change" hx-swap="none" hx-target=".form-fields" hx-post="{% url "teacher_manager" %}" class="button-div">
             <div class="form-fields">{{ form }}
 </div>
 

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-24 13:45+0300\n"
-"PO-Revision-Date: 2024-08-24 13:48+0300\n"
+"POT-Creation-Date: 2024-08-24 16:38+0300\n"
+"PO-Revision-Date: 2024-08-24 16:40+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -43,19 +43,31 @@ msgstr "he"
 msgid "ltr"
 msgstr "rtl"
 
-#: .\templates\class_manager.html:9 .\templates\class_manager.html:59
+#: .\templates\class_manager.html:9 .\templates\class_manager.html:95
 msgid "Manage Classes"
 msgstr "ניהול שיעורים"
 
-#: .\templates\class_manager.html:60
+#: .\templates\class_manager.html:96
 msgid "Create New Class"
-msgstr "צור שיעור חדשה"
+msgstr "צור שיעור חדש"
 
-#: .\templates\class_manager.html:75
+#: .\templates\class_manager.html:106
+msgid "Edit Description"
+msgstr "ערוך תיאור"
+
+#: .\templates\class_manager.html:192 .\templates\setClasses.html:83
+msgid "Add Class"
+msgstr "הוסף שיעור"
+
+#: .\templates\class_manager.html:234
 msgid "Search Classes"
 msgstr "חפש שיעור"
 
-#: .\templates\class_manager.html:85
+#: .\templates\class_manager.html:243
+msgid "Students"
+msgstr "תלמידים"
+
+#: .\templates\class_manager.html:245
 msgid "Change Description"
 msgstr "ערוך תיאור"
 
@@ -91,6 +103,10 @@ msgstr "מחק את כל השחריות"
 msgid "Delete All Classes"
 msgstr "מחק את כל השיעורים"
 
+#: .\templates\dangerzone.html:34
+msgid "Delete All Students"
+msgstr "מחק את כל התלמידים"
+
 #: .\templates\first_time.html:13
 msgid "Hi There!"
 msgstr "שלום!"
@@ -108,11 +124,15 @@ msgstr ""
 msgid "Create User and Get Started!"
 msgstr "צור משתמש והתחל!"
 
-#: .\templates\import_page.html:5
+#: .\templates\import_page.html:3
+msgid "Import"
+msgstr "ייבא"
+
+#: .\templates\import_page.html:6
 msgid "Import Students From CSV"
 msgstr "ייבוא תלמידים מ-CSV"
 
-#: .\templates\import_page.html:6
+#: .\templates\import_page.html:7
 msgid ""
 "The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
 "Creates A Student For Each row, regardless of if a Student with this name "
@@ -121,15 +141,15 @@ msgstr ""
 "ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר, שימ/י לב: פעולה זו תיצור "
 "תלמיד לכל שורה בקובץ, גם אם תלמיד  בשם זה כבר קיים"
 
-#: .\templates\import_page.html:10 .\templates\import_page.html:18
+#: .\templates\import_page.html:11 .\templates\import_page.html:19
 msgid "import"
 msgstr "ייבא"
 
-#: .\templates\import_page.html:13
+#: .\templates\import_page.html:14
 msgid "Import Teachers From CSV"
 msgstr "ייבוא מורים מ-CSV"
 
-#: .\templates\import_page.html:14
+#: .\templates\import_page.html:15
 msgid ""
 "The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
 "Creates A Teacher For Each row, regardless of if a Teacher with this name "
@@ -223,10 +243,6 @@ msgstr "חמישי"
 #: .\templates\setClasses.html:4
 msgid "Set Classes"
 msgstr "קבע שיעורים"
-
-#: .\templates\setClasses.html:83
-msgid "Add Class"
-msgstr "הוסף שיעור"
 
 #: .\templates\setSub.html:4
 msgid "Set Substitution"
@@ -557,15 +573,15 @@ msgstr "אימייל"
 msgid "Select a file"
 msgstr "בחירת קובץ"
 
-#: .\timetable\views.py:116
+#: .\timetable\views.py:125
 msgid "Absence reported."
 msgstr "היעדרות דווחה."
 
-#: .\timetable\views.py:124
+#: .\timetable\views.py:133
 msgid "Absence already reported."
 msgstr "היעדרות כבר דווחה."
 
-#: .\timetable\views.py:246
+#: .\timetable\views.py:235
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין שזו תקלה, פנה לחונך."
 

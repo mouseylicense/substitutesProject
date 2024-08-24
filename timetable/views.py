@@ -1,21 +1,19 @@
 import csv
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET, require_POST
-from html5lib.treeadapters.sax import prefix
-
 from SubtitutesProject.settings import BASE_DIR
 from . import forms
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.urls import reverse
 from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm, SuperuserCreationForm, \
     StudentRegistrationForm, DescriptionChangeForm, UploadFileForm
 from .models import *
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404 ,FileResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
 from django.utils import timezone
 from django.db.models import Q, Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
@@ -136,7 +134,7 @@ def teacher_home(request):
     Absence.objects.filter(date__lt=timezone.now().date()).delete()
     form = forms.AbsenceForm()
     mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date').values("Class_That_Needs_Sub__room","Class_That_Needs_Sub__name","date","Class_That_Needs_Sub__hour")
-    myAbsences = Absence.objects.filter(teacher=request.user).order_by('date').values("date","reason")
+    myAbsences = Absence.objects.filter(teacher=request.user).order_by('date')
     return render(request, "teacher_home.html", {"mySubs": mySubs,"form":form,"myAbsence":myAbsences})
 
 def register(request,uuid):
@@ -149,26 +147,6 @@ def register(request,uuid):
             return render(request, 'registration/register.html', {"form": form})
     form = forms.RegistrationForm(instance=Teacher.objects.get(uuid=uuid))
     return render(request, 'registration/register.html', {"form": form})
-
-@login_required()
-@user_passes_test(lambda u: u.manage_schedule or u.is_superuser)
-def setClasses(request):
-    if request.method == 'POST':
-        form = ClassForm(request.POST)
-        if form.is_valid:
-            form.save()
-        else:
-            print(form.errors)
-    form = forms.ClassForm
-    classes = Class.objects.all()
-    classesByHour = {}
-    for c in classes:
-        if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = 1
-        else:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] += 1
-    return render(request, "setClasses.html", {"form": form, "classesByHour": classesByHour})
-
 
 @require_GET
 def get_possible_rooms(request):
@@ -274,6 +252,7 @@ def teacher_manager(request):
             return HttpResponse("")
         else:
             form = TeacherForm(request.POST)
+            prefix = ""
             for key in request.POST:
                 if key.endswith("uuid"):
                     prefix = key[:-len("uuid") - 1]
