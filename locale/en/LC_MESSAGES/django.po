@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-24 12:27+0300\n"
+"POT-Creation-Date: 2024-08-24 13:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,6 +102,32 @@ msgstr ""
 
 #: .\templates\first_time.html:20
 msgid "Create User and Get Started!"
+msgstr ""
+
+#: .\templates\import_page.html:5
+msgid "Import Students From CSV"
+msgstr ""
+
+#: .\templates\import_page.html:6
+msgid ""
+"The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
+"Creates A Student For Each row, regardless of if a Student with this name "
+"exists"
+msgstr ""
+
+#: .\templates\import_page.html:10 .\templates\import_page.html:18
+msgid "import"
+msgstr ""
+
+#: .\templates\import_page.html:13
+msgid "Import Teachers From CSV"
+msgstr ""
+
+#: .\templates\import_page.html:14
+msgid ""
+"The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
+"Creates A Teacher For Each row, regardless of if a Teacher with this name "
+"exists"
 msgstr ""
 
 #: .\templates\index.html:3 .\templates\publicBase.html:21
@@ -246,58 +272,58 @@ msgstr ""
 msgid "invited "
 msgstr ""
 
-#: .\templates\student_manager.html:26
+#: .\templates\student_manager.html:28
+msgid "Student Creation Form"
+msgstr ""
+
+#: .\templates\student_manager.html:32
 msgid "Warning, this will send an email to every student with no Schedule"
 msgstr ""
 
-#: .\templates\student_manager.html:26
+#: .\templates\student_manager.html:32
 msgid "Invite all"
 msgstr ""
 
-#: .\templates\student_manager.html:27
+#: .\templates\student_manager.html:33
 msgid ""
 "WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS "
 "IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???"
 msgstr ""
 
-#: .\templates\student_manager.html:27
+#: .\templates\student_manager.html:33
 msgid "Reset ALL"
 msgstr ""
 
-#: .\templates\student_manager.html:30
-msgid "Student Creation Form"
-msgstr ""
-
-#: .\templates\student_manager.html:39
+#: .\templates\student_manager.html:40
 msgid "Search Student"
 msgstr ""
 
-#: .\templates\student_manager.html:51
+#: .\templates\student_manager.html:52
 msgid "Open in new page"
 msgstr ""
 
-#: .\templates\student_manager.html:52
+#: .\templates\student_manager.html:53
 msgid "Reset Schedule"
 msgstr ""
 
-#: .\templates\student_manager.html:61
-msgid "Last Invite"
-msgstr ""
-
-#: .\templates\student_manager.html:64
-msgid "Send Invite"
-msgstr ""
-
-#: .\templates\student_manager.html:65
-msgid "Set Schedule"
-msgstr ""
-
-#: .\templates\student_manager.html:66
+#: .\templates\student_manager.html:54 .\templates\student_manager.html:69
 msgid "Copied Link To Clipboard"
 msgstr ""
 
-#: .\templates\student_manager.html:66
+#: .\templates\student_manager.html:54 .\templates\student_manager.html:69
 msgid "Update Details"
+msgstr ""
+
+#: .\templates\student_manager.html:64
+msgid "Last Invite"
+msgstr ""
+
+#: .\templates\student_manager.html:67
+msgid "Send Invite"
+msgstr ""
+
+#: .\templates\student_manager.html:68
+msgid "Set Schedule"
 msgstr ""
 
 #: .\templates\studentregister.html:13 .\templates\studentregister.html:20
@@ -517,14 +543,18 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: .\timetable\views.py:110
+#: .\timetable\forms.py:191
+msgid "Select a file"
+msgstr ""
+
+#: .\timetable\views.py:116
 msgid "Absence reported."
 msgstr ""
 
-#: .\timetable\views.py:118
+#: .\timetable\views.py:124
 msgid "Absence already reported."
 msgstr ""
 
-#: .\timetable\views.py:240
+#: .\timetable\views.py:246
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr ""

@@ -185,3 +185,7 @@ class DescriptionChangeForm(forms.ModelForm):
             "name":forms.HiddenInput(attrs={'id':"name"}),
             'description': forms.Textarea(attrs={'placeholder': _('Description')})
         }
+
+class UploadFileForm(forms.Form):
+    fileFor = forms.ChoiceField(choices=[(0,'teachers'),(1,"students")],widget=forms.HiddenInput())
+    file = forms.FileField(label=_('Select a file'))

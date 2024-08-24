@@ -1,6 +1,7 @@
 import csv
 from tempfile import template
 
+from IPython.core.magic_arguments import defaults
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -13,7 +14,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm, SuperuserCreationForm, \
-    StudentRegistrationForm, DescriptionChangeForm
+    StudentRegistrationForm, DescriptionChangeForm, UploadFileForm
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404 ,FileResponse
 from django.utils import timezone
@@ -53,15 +54,29 @@ HEBREW_GRADES_TO_GRADES= {
     'יא':10,
     'יב':11,
 }
-
-def importCsv(path):
+def save_file(f,name):
+    with open(str(BASE_DIR) + f"/csvs/{name}.csv", "wb+") as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+def import_students(path):
     with open(path,encoding='utf-8') as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:
-            _,created = Student.objects.get_or_create(
+            Student.objects.create(
                 name=row[1] + " " + row[0],
-                grade=HEBREW_GRADES_TO_GRADES[row[4]]
+                grade=HEBREW_GRADES_TO_GRADES[row[4]],
+                phone_number=row[7].replace("-",""),
+                email=row[10],
+
+            )
+def import_teachers(path):
+    with open(path,encoding='utf-8') as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            _,teacher = Teacher.objects.get_or_create(
+                email=row[1] + " " + row[5],
 
             )
 
@@ -462,3 +477,24 @@ def class_manager(request):
 
     return render(request,"class_manager.html",{"classes":classes_and_students,"DescriptionForm":form})
 
+@login_required()
+@user_passes_test(lambda u: u.is_superuser)
+def import_page(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST,request.FILES)
+        print(request.FILES)
+        print(form.data)
+        if form.is_valid():
+            if int(form.data['fileFor'])==1:
+                save_file(request.FILES['file'], "students")
+                import_students(str(BASE_DIR) + "/csvs/students.csv")
+                return HttpResponseRedirect(reverse("student_manager"))
+            if int(form.data['fileFor'])==0:
+                save_file(request.FILES['file'], "teachers")
+                return HttpResponseRedirect(reverse("teacher_manager"))
+        else:
+            print(form.errors)
+            return HttpResponse(form.errors)
+    studentsForm = UploadFileForm(initial={"fileFor":1})
+    teacherForm = UploadFileForm(initial={"fileFor":0})
+    return render(request,"import_page.html",{"studentsForm":studentsForm,"teacherForm":teacherForm})
