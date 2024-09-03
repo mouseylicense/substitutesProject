@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-24 16:38+0300\n"
-"PO-Revision-Date: 2024-08-24 16:40+0300\n"
+"POT-Creation-Date: 2024-09-03 21:56+0300\n"
+"PO-Revision-Date: 2024-09-03 21:56+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -55,7 +55,7 @@ msgstr "צור שיעור חדש"
 msgid "Edit Description"
 msgstr "ערוך תיאור"
 
-#: .\templates\class_manager.html:192 .\templates\setClasses.html:83
+#: .\templates\class_manager.html:192
 msgid "Add Class"
 msgstr "הוסף שיעור"
 
@@ -67,7 +67,7 @@ msgstr "חפש שיעור"
 msgid "Students"
 msgstr "תלמידים"
 
-#: .\templates\class_manager.html:245
+#: .\templates\class_manager.html:246 .\templates\class_manager.html:248
 msgid "Change Description"
 msgstr "ערוך תיאור"
 
@@ -240,10 +240,6 @@ msgstr "רביעי"
 msgid "Thursday"
 msgstr "חמישי"
 
-#: .\templates\setClasses.html:4
-msgid "Set Classes"
-msgstr "קבע שיעורים"
-
 #: .\templates\setSub.html:4
 msgid "Set Substitution"
 msgstr "קבע החלפות"
@@ -344,7 +340,7 @@ msgstr "עדכן פרטים"
 msgid "Last Invite"
 msgstr "הזמנה אחרונה"
 
-#: .\templates\student_manager.html:67
+#: .\templates\student_manager.html:67 .\templates\teacher_manager.html:75
 msgid "Send Invite"
 msgstr "שלח הזמנה לקביעת מערכת"
 
@@ -358,8 +354,8 @@ msgid "Register Student"
 msgstr "רשום תלמיד"
 
 #: .\templates\teacher_home.html:5
-msgid "My Subs"
-msgstr "ההחלפות שלי"
+msgid "Home"
+msgstr "דף הבית"
 
 #: .\templates\teacher_home.html:19
 msgid "Report Absence"
@@ -393,7 +389,7 @@ msgstr "לחץ כדי להעתיק: "
 msgid "Search Teachers"
 msgstr "חפש מורה"
 
-#: .\templates\teacher_manager.html:75
+#: .\templates\teacher_manager.html:76
 msgid "Delete"
 msgstr "מחק"
 
@@ -535,7 +531,6 @@ msgid "First Name"
 msgstr "שם פרטי"
 
 #: .\timetable\forms.py:80 .\timetable\forms.py:93 .\timetable\forms.py:138
-#: .\timetable\forms.py:173
 msgid "Last Name"
 msgstr "שם משפחה"
 
@@ -569,21 +564,35 @@ msgstr "מנהל מערכת"
 msgid "Email"
 msgstr "אימייל"
 
+#: .\timetable\forms.py:173
+msgid "Name"
+msgstr "שם מלא"
+
 #: .\timetable\forms.py:191
 msgid "Select a file"
 msgstr "בחירת קובץ"
 
-#: .\timetable\views.py:125
+#: .\timetable\views.py:132
 msgid "Absence reported."
 msgstr "היעדרות דווחה."
 
-#: .\timetable\views.py:133
+#: .\timetable\views.py:140
 msgid "Absence already reported."
 msgstr "היעדרות כבר דווחה."
 
-#: .\timetable\views.py:235
+#: .\timetable\views.py:242
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין שזו תקלה, פנה לחונך."
+
+#: .\timetable\views.py:567
+msgid "Successfully sent!"
+msgstr "נשלח בהצלחה!"
+
+#~ msgid "Set Classes"
+#~ msgstr "קבע שיעורים"
+
+#~ msgid "My Subs"
+#~ msgstr "ההחלפות שלי"
 
 #~ msgid "Logout"
 #~ msgstr "התנתק"

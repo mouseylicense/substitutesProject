@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-24 16:38+0300\n"
+"POT-Creation-Date: 2024-09-03 21:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Edit Description"
 msgstr ""
 
-#: .\templates\class_manager.html:192 .\templates\setClasses.html:83
+#: .\templates\class_manager.html:192
 msgid "Add Class"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Students"
 msgstr ""
 
-#: .\templates\class_manager.html:245
+#: .\templates\class_manager.html:246 .\templates\class_manager.html:248
 msgid "Change Description"
 msgstr ""
 
@@ -232,10 +232,6 @@ msgstr ""
 msgid "Thursday"
 msgstr ""
 
-#: .\templates\setClasses.html:4
-msgid "Set Classes"
-msgstr ""
-
 #: .\templates\setSub.html:4
 msgid "Set Substitution"
 msgstr ""
@@ -334,7 +330,7 @@ msgstr ""
 msgid "Last Invite"
 msgstr ""
 
-#: .\templates\student_manager.html:67
+#: .\templates\student_manager.html:67 .\templates\teacher_manager.html:75
 msgid "Send Invite"
 msgstr ""
 
@@ -348,7 +344,7 @@ msgid "Register Student"
 msgstr ""
 
 #: .\templates\teacher_home.html:5
-msgid "My Subs"
+msgid "Home"
 msgstr ""
 
 #: .\templates\teacher_home.html:19
@@ -383,7 +379,7 @@ msgstr ""
 msgid "Search Teachers"
 msgstr ""
 
-#: .\templates\teacher_manager.html:75
+#: .\templates\teacher_manager.html:76
 msgid "Delete"
 msgstr ""
 
@@ -525,7 +521,6 @@ msgid "First Name"
 msgstr ""
 
 #: .\timetable\forms.py:80 .\timetable\forms.py:93 .\timetable\forms.py:138
-#: .\timetable\forms.py:173
 msgid "Last Name"
 msgstr ""
 
@@ -559,18 +554,26 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+#: .\timetable\forms.py:173
+msgid "Name"
+msgstr ""
+
 #: .\timetable\forms.py:191
 msgid "Select a file"
 msgstr ""
 
-#: .\timetable\views.py:125
+#: .\timetable\views.py:132
 msgid "Absence reported."
 msgstr ""
 
-#: .\timetable\views.py:133
+#: .\timetable\views.py:140
 msgid "Absence already reported."
 msgstr ""
 
-#: .\timetable\views.py:235
+#: .\timetable\views.py:242
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
+msgstr ""
+
+#: .\timetable\views.py:567
+msgid "Successfully sent!"
 msgstr ""

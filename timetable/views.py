@@ -94,10 +94,10 @@ def index(request):
             form = SuperuserCreationForm(request.POST)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect(reverse('index'))
             else:
                 return form.errors
-        return render(request, 'first_time.html',{"form":SuperuserCreationForm})
+        else:
+            return render(request, 'first_time.html',{"form":SuperuserCreationForm})
     Subs = ClassNeedsSub.objects.filter(date=timezone.now().today())
     return render(request, 'index.html', {"Subs": Subs})
 
@@ -564,4 +564,4 @@ def send_register_email(request):
         html_message=render_to_string("emails/teacherInvite_email.html",
                                       {"teacher": teacher, "link": method+ request.get_host() + reverse("register", args=[teacher.uuid])}),
     )
-    return HttpResponse("Successfully sent!")
+    return HttpResponse(_("Successfully sent!"))

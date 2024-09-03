@@ -170,7 +170,7 @@ class StudentRegistrationForm(forms.ModelForm):
         model = Student
         fields = ("name","email","phone_number","grade")
         widgets = {
-            "name": forms.TextInput(attrs={'placeholder': _('Last Name')}),
+            "name": forms.TextInput(attrs={'placeholder': _('Name')}),
             "email": forms.EmailInput(attrs={'placeholder': _('Email')}),
             "phone_number": forms.TextInput(
                 attrs={'placeholder': _('Phone Number'), 'type': 'tel', "pattern": "[0-9]{10}", "min_length": "10",

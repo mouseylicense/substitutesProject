@@ -72,8 +72,8 @@ h1:dir(rtl), p:dir(rtl){
 
         </form>
         {% if user.uuid != teacher.uuid %}
-            <button class="btn btn-primary"  hx-post="{% url "invite_teacher" %}" name="teacher" value="{{ teacher.uuid }}">{% trans "Send Invite" %}</button>
-            <button hx-target="closest .teacher" hx-swap="delete" hx-post="{% url "teacher_manager"%}" name="Delete" value="{{ teacher.uuid }}" class="btn btn-danger">{% trans "Delete" %}</button>
+            <button class="btn btn-primary mr-1"  hx-post="{% url "invite_teacher" %}" name="teacher" value="{{ teacher.uuid }}">{% trans "Send Invite" %}</button>
+            <button hx-target="closest .teacher" hx-swap="delete" hx-post="{% url "teacher_manager"%}" name="Delete" value="{{ teacher.uuid }}" class="mr-1 btn btn-danger">{% trans "Delete" %}</button>
         {% endif %}
         </div>
     </div>
