@@ -123,7 +123,7 @@ class Class(models.Model):
         choices=[ (datetime.time(9, 15), "09:15"), (datetime.time(10, 7), "10:07"),
                  (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45")])
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
-    description = models.TextField(max_length=300, null=True, blank=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
     student_teacher = models.BooleanField(default=False, verbose_name=_("Is a Student Teaching?"))
     student_teaching = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Student Teaching"))
@@ -222,7 +222,7 @@ class Student(models.Model):
     email = models.EmailField()
     phone_number = models.CharField(max_length=10)
     grade = models.IntegerField(choices=GRADES, default="")
-    tutor = models.ForeignKey(Teacher, on_delete=models.CASCADE, limit_choices_to={'tutor': True}, null=True,
+    tutor = models.ForeignKey(Teacher, on_delete=models.SET_NULL, limit_choices_to={'tutor': True}, null=True,
                               blank=True)
     shacharit = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True,
                                   limit_choices_to={'shocher': True}, related_name="shacharit")

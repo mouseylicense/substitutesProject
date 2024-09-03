@@ -67,7 +67,7 @@ def import_students(path):
                 email=row[10],
 
             )
-def import_teachers(path):
+def import_teachers(path,link):
     with open(path,encoding='utf-8') as f:
         reader = csv.reader(f)
         next(reader)
@@ -85,8 +85,7 @@ def import_teachers(path):
                         from_email=FROM_EMAIL,
                         recipient_list=[teacher.email],
                         message="",
-                        html_message=render_to_string("emails/teacherInvite_email.html",{"teacher":teacher,"link": method + request.get_host() + reverse(
-                                                                                   set_schedule}),
+                        html_message=render_to_string("emails/teacherInvite_email.html",{"teacher":teacher,"link":link + reverse("register",args=[teacher.uuid])}),
                     )
 
 def index(request):
@@ -521,6 +520,10 @@ def editDescription(request):
 @login_required()
 @user_passes_test(lambda u: u.is_superuser)
 def import_page(request):
+    if request.is_secure():
+        method = "https://"
+    else:
+        method = "http://"
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
         print(request.FILES)
@@ -532,7 +535,7 @@ def import_page(request):
                 return HttpResponseRedirect(reverse("student_manager"))
             if int(form.data['fileFor'])==0:
                 save_file(request.FILES['file'], "teachers")
-                import_teachers(str(BASE_DIR) + "/csvs/teachers.csv")
+                import_teachers(str(BASE_DIR) + "/csvs/teachers.csv",method + request.get_host())
                 return HttpResponseRedirect(reverse("teacher_manager"))
 
         else:
@@ -541,3 +544,24 @@ def import_page(request):
     studentsForm = UploadFileForm(initial={"fileFor":1})
     teacherForm = UploadFileForm(initial={"fileFor":0})
     return render(request,"import_page.html",{"studentsForm":studentsForm,"teacherForm":teacherForm})
+
+@require_POST
+@login_required()
+@user_passes_test(lambda u: u.is_superuser)
+def send_register_email(request):
+    payload = request.body.decode("utf-8").split("=")
+    if request.is_secure():
+        method = "https://"
+    else:
+        method = "http://"
+    teacher = Teacher.objects.get(uuid=payload[1])
+
+    send_mail(
+        subject="Substitutes System Invite",
+        from_email=FROM_EMAIL,
+        recipient_list=[teacher.email],
+        message="",
+        html_message=render_to_string("emails/teacherInvite_email.html",
+                                      {"teacher": teacher, "link": method+ request.get_host() + reverse("register", args=[teacher.uuid])}),
+    )
+    return HttpResponse("Successfully sent!")

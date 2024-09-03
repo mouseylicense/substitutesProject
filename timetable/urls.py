@@ -24,5 +24,6 @@ urlpatterns = [
     path('teacher/classes_manager/',views.class_manager,name='class_manager'),
     path('managment/import/',views.import_page,name='import'),
     path('getDecriptionForm',views.editDescription,name='editDescription'),
-    path('getStudents/<slug:id>',views.get_student_list,name='get_student_list')
+    path('getStudents/<slug:id>',views.get_student_list,name='get_student_list'),
+    path('invite_teacher/',views.send_register_email,name='invite_teacher')
 ]
