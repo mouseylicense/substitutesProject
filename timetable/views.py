@@ -73,11 +73,21 @@ def import_teachers(path):
         next(reader)
         for row in reader:
             if row[6] != "":
-                _,teacher = Teacher.objects.get_or_create(
+                teacher,_ = Teacher.objects.get_or_create(
                     email=row[6],
                     phone_number=row[3].replace("-",""),
                     defaults = {"first_name":row[1],"last_name":row[2]}
                 )
+                if _:
+                    print(teacher)
+                    send_mail(
+                        subject="Substitutes System Invite",
+                        from_email=FROM_EMAIL,
+                        recipient_list=[teacher.email],
+                        message="",
+                        html_message=render_to_string("emails/teacherInvite_email.html",{"teacher":teacher,"link": method + request.get_host() + reverse(
+                                                                                   set_schedule}),
+                    )
 
 def index(request):
     if not Teacher.objects.exists():

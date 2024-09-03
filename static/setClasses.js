@@ -2,7 +2,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
         function markClasses(){
         Object.keys(classesByHour).forEach(function(key) {
            let button = document.getElementById(key)
-            button.style.background = `rgba(195, 201, 83,${classesByHour[key]/7.5})`;
+            button.style.background = `rgba(195, 201, 83,${classesByHour[key]/14.5})`;
             button.innerText = classesByHour[key]
         });
         }
