@@ -39,7 +39,7 @@ html,body{
     border-radius: 25px;
     background-color: rgba(0, 0, 0, 0.05);
 }
-#login-form input[type=submit]{
+    #login-form input[type=submit]{
     background-color:#55AD9B;
     color: white;
     border:none;
@@ -110,6 +110,9 @@ img{
     #login-container{
         grid-template-columns: 100%;
     }
+}
+#login-form{
+    height: 65% !important;
 }
 #id_phone_number:lang("he"){
     text-align: right !important;

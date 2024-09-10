@@ -24,6 +24,7 @@
       {{ form.password }}
       {{ form.phone_number }}
        <table>
+           <tr><th colspan="5">{% trans "Working Days:" %}</th></tr>
             <tr>
                 <th>{% trans "Sunday" %}</th>
                 <th>{% trans "Monday" %}</th>
@@ -44,7 +45,7 @@
 
   </form>
 </div>
-<div>
+<div id="img-div">
     <img src="{% static "img/register-image.png"%}">
 
 </div>

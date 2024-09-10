@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-03 21:56+0300\n"
-"PO-Revision-Date: 2024-09-03 21:56+0300\n"
+"POT-Creation-Date: 2024-09-10 11:38+0300\n"
+"PO-Revision-Date: 2024-09-10 11:39+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -197,11 +197,15 @@ msgstr "שכחת סיסמא?"
 
 #: .\templates\registration\register.html:13
 #: .\templates\registration\register.html:20
-#: .\templates\registration\register.html:42
+#: .\templates\registration\register.html:43
 msgid "Register"
 msgstr "הירשם"
 
-#: .\templates\registration\register.html:28
+#: .\templates\registration\register.html:27
+msgid "Working Days:"
+msgstr "ימי עבודה:"
+
+#: .\templates\registration\register.html:29
 #: .\templates\student_details.html:25 .\templates\timetable.html:140
 #: .\timetable\forms.py:85 .\timetable\forms.py:115 .\timetable\models.py:258
 #: .\timetable\models.py:261 .\timetable\models.py:264
@@ -209,7 +213,7 @@ msgstr "הירשם"
 msgid "Sunday"
 msgstr "ראשון"
 
-#: .\templates\registration\register.html:29
+#: .\templates\registration\register.html:30
 #: .\templates\student_details.html:26 .\templates\timetable.html:141
 #: .\timetable\forms.py:86 .\timetable\forms.py:116 .\timetable\models.py:270
 #: .\timetable\models.py:273 .\timetable\models.py:276
@@ -217,7 +221,7 @@ msgstr "ראשון"
 msgid "Monday"
 msgstr "שני"
 
-#: .\templates\registration\register.html:30
+#: .\templates\registration\register.html:31
 #: .\templates\student_details.html:27 .\templates\timetable.html:142
 #: .\timetable\forms.py:87 .\timetable\forms.py:117 .\timetable\models.py:282
 #: .\timetable\models.py:285 .\timetable\models.py:289
@@ -225,7 +229,7 @@ msgstr "שני"
 msgid "Tuesday"
 msgstr "שלישי"
 
-#: .\templates\registration\register.html:31
+#: .\templates\registration\register.html:32
 #: .\templates\student_details.html:28 .\templates\timetable.html:143
 #: .\timetable\forms.py:88 .\timetable\forms.py:118 .\timetable\models.py:296
 #: .\timetable\models.py:300 .\timetable\models.py:304
@@ -233,7 +237,7 @@ msgstr "שלישי"
 msgid "Wednesday"
 msgstr "רביעי"
 
-#: .\templates\registration\register.html:32
+#: .\templates\registration\register.html:33
 #: .\templates\student_details.html:29 .\templates\timetable.html:144
 #: .\timetable\forms.py:89 .\timetable\forms.py:119 .\timetable\models.py:312
 #: .\timetable\models.py:316
