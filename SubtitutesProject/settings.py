@@ -41,6 +41,7 @@ CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 INSTALLED_APPS = [
     'constance',
     'timetable.apps.TimetableConfig',
+    'LaptopLoaning.apps.LaptoploaningConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
