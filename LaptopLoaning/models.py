@@ -1,5 +1,6 @@
 from random import randint
 
+from django.core.validators import MinValueValidator
 from django.db import models
 
 import timetable.models
@@ -12,3 +13,5 @@ class LaptopPin(models.Model):
     Teacher = models.ForeignKey(timetable.models.Teacher, on_delete=models.CASCADE)
     PIN = models.CharField(max_length=4, default=generate_pin, unique=True)
     date = models.DateField()
+    uses = models.IntegerField(default=2)
+    numberOfLaptops = models.IntegerField(default=1,validators=[MinValueValidator(1)])
