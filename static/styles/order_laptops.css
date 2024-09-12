@@ -1,0 +1,36 @@
+body,html{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+body{
+    background-color: #311B92;
+}
+form{
+    display:flex;
+    background-color: #f3f3f3;
+    width: 50%;
+    margin: auto;
+    flex-direction: column;
+    gap: 5px;
+}
+form input[type=date],form input[type=number]{
+    font-size: medium;
+    border:none;
+    width: 80%;
+    height: 7%;
+    padding: 2% 3%;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+form button[type=submit]{
+    background-color:#55AD9B;
+    color: white;
+    border:none;
+    width: 85%;
+    height: 10%;
+    padding: 2% 3%;
+    border-radius: 25px;
+    font-size: medium;
+    font-family: Inter, helvetica, sans-serif;
+}

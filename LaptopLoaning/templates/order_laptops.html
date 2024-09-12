@@ -1,0 +1,17 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/order_laptops.css' %}">
+    <title>{% trans "Order Laptops" %}</title>
+</head>
+<body>
+<form action="{% url "order_laptop" %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">{% trans "Order" %}</button>
+</form>
+</body>
+</html>
