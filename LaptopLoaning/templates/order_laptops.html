@@ -8,10 +8,41 @@
     <title>{% trans "Order Laptops" %}</title>
 </head>
 <body>
-<form action="{% url "order_laptop" %}" method="post">
+<div id="myModal" class="modal">
+<div class="modal-content">
+    <span onclick="this.parentElement.parentElement.style.display = 'none'" class="close">&times;</span>
+
+    <form action="{% url "order_laptop" %}" method="post">
     {% csrf_token %}
-    {{ form }}
+    {% for field in form %}
+        {{ field }}
+    {% endfor %}
     <button type="submit">{% trans "Order" %}</button>
 </form>
+</div>
+</div>
+<div class="mother-container">
+    <h1>{% trans "My pins" %}</h1>
+
+    <ul>
+        {% for pin in myPins %}
+        <li>
+            <div class="pin">
+                <div>
+                <h2>{{ pin.PIN }}</h2>
+                <h3 class="hour">{{ pin.date }}</h3>
+                <h3 class="hour">{{ pin.uses }}</h3>
+                </div>
+            </div>
+        </li>
+
+        {% endfor %}
+        <li id="add-button-container">
+            <button onclick="document.getElementById('myModal').style.display = 'block'" id="add-button">
+<svg xmlns="http://www.w3.org/2000/svg" height="32" width="28" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#651c43" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>            </button>
+            </li>
+    </ul>
+</div>
+
 </body>
 </html>

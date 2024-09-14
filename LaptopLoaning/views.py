@@ -24,4 +24,4 @@ def order_laptops(request):
         if form.is_valid():
             form.save()
     user = request.user
-    return render(request,"order_laptops.html",{"form":LaptopLoaningForm(initial={"Teacher":user})})
+    return render(request,"order_laptops.html",{"form":LaptopLoaningForm(initial={"Teacher":user}),"myPins":LaptopPin.objects.filter(Teacher=user).all().order_by("date").values()})
