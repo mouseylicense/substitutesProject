@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block static %}<link rel="stylesheet" type="text/css" href="{% static 'styles/timetable.css' %}">{% endblock %}
+{% block static %}<link rel="stylesheet" type="text/css" href="{% static 'timetable/styles/timetable.css' %}">{% endblock %}
 {% block title %}{% trans "Schedule" %}{% endblock %}
 {% block content %}
     {{ classesByHour|json_script:"ClassesByHour" }}
@@ -200,6 +200,6 @@
     }
     </style>
 
-<script type="application/javascript" src="{% static 'timetable.js' %}"></script>
-<script type="application/javascript" src="{% static 'filters.js' %}"></script>
+<script type="application/javascript" src="{% static 'timetable/timetable.js' %}"></script>
+<script type="application/javascript" src="{% static 'timetable/filters.js' %}"></script>
 {% endblock %}

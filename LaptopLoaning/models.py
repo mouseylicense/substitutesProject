@@ -17,7 +17,7 @@ class LaptopPin(models.Model):
     date = models.DateField()
     uses = models.IntegerField(default=2)
     numberOfLaptops = models.IntegerField(default=1, validators=[MinValueValidator(1)])
-
+    granted = models.BooleanField(default=False)
     def use(self):
         self.uses = self.uses - 1
         if self.uses <= 0:

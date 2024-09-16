@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% block static %}
-    <link type="text/css" rel="stylesheet" href="{% static "styles/bootstrap.min.css" %}">
+    <link type="text/css" rel="stylesheet" href="{% static "timetable/styles/bootstrap.min.css" %}">
 
 {% endblock %}
 
@@ -192,7 +192,7 @@ button:dir(ltr),.button-div:dir(ltr){
         <input type="submit"  value="{% trans "Add Class" %}">
     </form>
 {#    a script to act when the teacher field is changed and get hours where teacher cant teach#}
-    <script type="text/javascript" src="{% static "setClasses.js" %}"></script>
+    <script type="text/javascript" src="{% static "timetable/setClasses.js" %}"></script>
         <style>
         .selected{
             background-color: rebeccapurple !important;

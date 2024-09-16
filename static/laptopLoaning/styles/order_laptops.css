@@ -74,8 +74,8 @@ html *{
     padding: 5px;
     font-family: helvetica, arial, sans-serif;
     display: block;
-    border: #55AD9B solid 3px;
-    background-color: #F1F8E8;
+    border: #fc9ac1 solid 3px;
+    background-color: #fde7f0;
     width: 15%; /* Could be more or less, depending on screen size */
 }
 
@@ -108,7 +108,7 @@ form input[type=date],form input[type=number]{
     background-color: rgba(0, 0, 0, 0.05);
 }
 form button[type=submit]{
-    background-color:#55AD9B;
+    background:#fc9ac1;
     color: white;
     border:none;
     height: 10%;
@@ -116,4 +116,7 @@ form button[type=submit]{
     border-radius: 25px;
     font-size: medium;
     font-family: Inter, helvetica, sans-serif;
+}
+form button[type=submit]:hover{
+      background-color: #962964;
 }
