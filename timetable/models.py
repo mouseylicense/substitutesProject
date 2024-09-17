@@ -79,6 +79,7 @@ class Teacher(AbstractUser):
     manage_subs = models.BooleanField(default=False)
     manage_schedule = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
+    type = models.IntegerField(choices=[(0,"Teacher"),(1,"TED"),(2,"Management")],default=0)
     objects = TeacherManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
@@ -93,8 +94,7 @@ class Teacher(AbstractUser):
 
 class Room(models.Model):
     name = models.CharField(max_length=100)
-    has_projector = models.BooleanField(default=True)
-
+    show_as_possible = models.BooleanField(default=True)
     def __str__(self):
         return self.name
 
@@ -193,7 +193,7 @@ class Class(models.Model):
 
     def __str__(self):
         if self.teacher:
-            return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.first_name
+            return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.first_name + " " + self.teacher.last_name
         else:
             return str(self.hour)[:5] + " --- " + self.name + " - " + self.student_teaching
 

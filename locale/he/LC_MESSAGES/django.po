@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-10 11:38+0300\n"
-"PO-Revision-Date: 2024-09-10 11:39+0300\n"
+"POT-Creation-Date: 2024-09-17 11:38+0300\n"
+"PO-Revision-Date: 2024-09-17 12:41+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -21,11 +21,44 @@ msgstr ""
 "2 : 3);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: .\SubtitutesProject\settings.py:166
+#: .\LaptopLoaning\forms.py:10 .\templates\timetable.html:115
+#: .\timetable\forms.py:33
+msgid "Teacher"
+msgstr "מורה"
+
+#: .\LaptopLoaning\forms.py:11 .\timetable\forms.py:25
+msgid "Date"
+msgstr "תאריך"
+
+#: .\LaptopLoaning\forms.py:12
+msgid "Number Of Laptops"
+msgstr "מספר מחשבים"
+
+#: .\LaptopLoaning\templates\order_laptops.html:8
+msgid "Order Laptops"
+msgstr "הזמנת מחשבים"
+
+#: .\LaptopLoaning\templates\order_laptops.html:21
+msgid "Order"
+msgstr "הזמן"
+
+#: .\LaptopLoaning\templates\order_laptops.html:26
+msgid "My pins"
+msgstr "הקודים שלי"
+
+#: .\LaptopLoaning\templates\order_laptops.html:30
+msgid "PINs granted"
+msgstr "קודים שאושרו"
+
+#: .\LaptopLoaning\templates\order_laptops.html:47
+msgid "PINs Pending"
+msgstr "קודים שמחכים לאישור"
+
+#: .\SubtitutesProject\settings.py:165
 msgid "Hebrew"
 msgstr "עברית"
 
-#: .\SubtitutesProject\settings.py:167
+#: .\SubtitutesProject\settings.py:166
 msgid "English"
 msgstr "אנגלית"
 
@@ -133,8 +166,13 @@ msgid "Import Students From CSV"
 msgstr "ייבוא תלמידים מ-CSV"
 
 #: .\templates\import_page.html:7
+#, fuzzy
+#| msgid ""
+#| "The CSV Should be Formatted as The Schools Contant Sheet, Beware That "
+#| "This Creates A Student For Each row, regardless of if a Student with this "
+#| "name exists"
 msgid ""
-"The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
+"The CSV Should be Formatted as The Schools Contact Sheet, Beware That This "
 "Creates A Student For Each row, regardless of if a Student with this name "
 "exists"
 msgstr ""
@@ -150,13 +188,8 @@ msgid "Import Teachers From CSV"
 msgstr "ייבוא מורים מ-CSV"
 
 #: .\templates\import_page.html:15
-msgid ""
-"The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
-"Creates A Teacher For Each row, regardless of if a Teacher with this name "
-"exists"
-msgstr ""
-"ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר, שימ/י לב: פעולה זו תיצור "
-"מורה לכל שורה בקובץ, גם אם מורה בשם זה כבר קיים"
+msgid "The CSV Should be Formatted as The Schools Contact Sheet"
+msgstr "ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר"
 
 #: .\templates\index.html:3 .\templates\publicBase.html:21
 msgid "Today's Subs"
@@ -344,7 +377,7 @@ msgstr "עדכן פרטים"
 msgid "Last Invite"
 msgstr "הזמנה אחרונה"
 
-#: .\templates\student_manager.html:67 .\templates\teacher_manager.html:75
+#: .\templates\student_manager.html:67
 msgid "Send Invite"
 msgstr "שלח הזמנה לקביעת מערכת"
 
@@ -373,27 +406,31 @@ msgstr "ההחלפות שלי"
 msgid "My Absences"
 msgstr "ההיעדרויות שלי"
 
-#: .\templates\teacher_manager.html:47 .\templates\teacher_manager.html:49
+#: .\templates\teacher_manager.html:50 .\templates\teacher_manager.html:52
 msgid "Manage Teachers"
 msgstr "ניהול מורים"
 
-#: .\templates\teacher_manager.html:50
+#: .\templates\teacher_manager.html:53
 msgid "Teacher's Email"
 msgstr "אימייל של המורה"
 
-#: .\templates\teacher_manager.html:50
+#: .\templates\teacher_manager.html:53
 msgid "Add Teacher / Generate Teacher Form"
 msgstr "הוסף מורה / צור טופס של מורה"
 
-#: .\templates\teacher_manager.html:51
+#: .\templates\teacher_manager.html:54
 msgid "Click To Copy: "
 msgstr "לחץ כדי להעתיק: "
 
-#: .\templates\teacher_manager.html:59
+#: .\templates\teacher_manager.html:62
 msgid "Search Teachers"
 msgstr "חפש מורה"
 
-#: .\templates\teacher_manager.html:76
+#: .\templates\teacher_manager.html:78
+msgid "Invite Teacher"
+msgstr "הזמן מורה"
+
+#: .\templates\teacher_manager.html:79
 msgid "Delete"
 msgstr "מחק"
 
@@ -478,10 +515,6 @@ msgstr "כיתה יא'"
 msgid "Twelfth Grade"
 msgstr "כיתה יב'"
 
-#: .\templates\timetable.html:115 .\timetable\forms.py:33
-msgid "Teacher"
-msgstr "מורה"
-
 #: .\templates\timetable.html:123
 msgid "Uncheck All"
 msgstr "נקה הכל"
@@ -497,10 +530,6 @@ msgstr "שיעורים"
 #: .\templates\timetable.html:133
 msgid "Free Rooms"
 msgstr "חדרים פנויים"
-
-#: .\timetable\forms.py:25
-msgid "Date"
-msgstr "תאריך"
 
 #: .\timetable\forms.py:26 .\timetable\forms.py:27
 msgid "Reason"
@@ -591,6 +620,14 @@ msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין �
 #: .\timetable\views.py:567
 msgid "Successfully sent!"
 msgstr "נשלח בהצלחה!"
+
+#~ msgid ""
+#~ "The CSV Should be Formatted as The Schools Contant Sheet, Beware That "
+#~ "This Creates A Teacher For Each row, regardless of if a Teacher with this "
+#~ "name exists"
+#~ msgstr ""
+#~ "ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר, שימ/י לב: פעולה זו תיצור "
+#~ "מורה לכל שורה בקובץ, גם אם מורה בשם זה כבר קיים"
 
 #~ msgid "Set Classes"
 #~ msgstr "קבע שיעורים"

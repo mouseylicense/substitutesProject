@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-10 11:38+0300\n"
+"POT-Creation-Date: 2024-09-17 11:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\SubtitutesProject\settings.py:166
+#: .\LaptopLoaning\forms.py:10 .\templates\timetable.html:115
+#: .\timetable\forms.py:33
+msgid "Teacher"
+msgstr ""
+
+#: .\LaptopLoaning\forms.py:11 .\timetable\forms.py:25
+msgid "Date"
+msgstr ""
+
+#: .\LaptopLoaning\forms.py:12
+msgid "Number Of Laptops"
+msgstr ""
+
+#: .\LaptopLoaning\templates\order_laptops.html:8
+msgid "Order Laptops"
+msgstr ""
+
+#: .\LaptopLoaning\templates\order_laptops.html:21
+msgid "Order"
+msgstr ""
+
+#: .\LaptopLoaning\templates\order_laptops.html:26
+msgid "My pins"
+msgstr ""
+
+#: .\LaptopLoaning\templates\order_laptops.html:30
+msgid "PINs granted"
+msgstr ""
+
+#: .\LaptopLoaning\templates\order_laptops.html:47
+msgid "PINs Pending"
+msgstr ""
+
+#: .\SubtitutesProject\settings.py:165
 msgid "Hebrew"
 msgstr ""
 
-#: .\SubtitutesProject\settings.py:167
+#: .\SubtitutesProject\settings.py:166
 msgid "English"
 msgstr ""
 
@@ -130,7 +163,7 @@ msgstr ""
 
 #: .\templates\import_page.html:7
 msgid ""
-"The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
+"The CSV Should be Formatted as The Schools Contact Sheet, Beware That This "
 "Creates A Student For Each row, regardless of if a Student with this name "
 "exists"
 msgstr ""
@@ -144,10 +177,7 @@ msgid "Import Teachers From CSV"
 msgstr ""
 
 #: .\templates\import_page.html:15
-msgid ""
-"The CSV Should be Formatted as The Schools Contant Sheet, Beware That This "
-"Creates A Teacher For Each row, regardless of if a Teacher with this name "
-"exists"
+msgid "The CSV Should be Formatted as The Schools Contact Sheet"
 msgstr ""
 
 #: .\templates\index.html:3 .\templates\publicBase.html:21
@@ -334,7 +364,7 @@ msgstr ""
 msgid "Last Invite"
 msgstr ""
 
-#: .\templates\student_manager.html:67 .\templates\teacher_manager.html:75
+#: .\templates\student_manager.html:67
 msgid "Send Invite"
 msgstr ""
 
@@ -363,27 +393,31 @@ msgstr ""
 msgid "My Absences"
 msgstr ""
 
-#: .\templates\teacher_manager.html:47 .\templates\teacher_manager.html:49
+#: .\templates\teacher_manager.html:50 .\templates\teacher_manager.html:52
 msgid "Manage Teachers"
 msgstr ""
 
-#: .\templates\teacher_manager.html:50
+#: .\templates\teacher_manager.html:53
 msgid "Teacher's Email"
 msgstr ""
 
-#: .\templates\teacher_manager.html:50
+#: .\templates\teacher_manager.html:53
 msgid "Add Teacher / Generate Teacher Form"
 msgstr ""
 
-#: .\templates\teacher_manager.html:51
+#: .\templates\teacher_manager.html:54
 msgid "Click To Copy: "
 msgstr ""
 
-#: .\templates\teacher_manager.html:59
+#: .\templates\teacher_manager.html:62
 msgid "Search Teachers"
 msgstr ""
 
-#: .\templates\teacher_manager.html:76
+#: .\templates\teacher_manager.html:78
+msgid "Invite Teacher"
+msgstr ""
+
+#: .\templates\teacher_manager.html:79
 msgid "Delete"
 msgstr ""
 
@@ -468,10 +502,6 @@ msgstr ""
 msgid "Twelfth Grade"
 msgstr ""
 
-#: .\templates\timetable.html:115 .\timetable\forms.py:33
-msgid "Teacher"
-msgstr ""
-
 #: .\templates\timetable.html:123
 msgid "Uncheck All"
 msgstr ""
@@ -486,10 +516,6 @@ msgstr ""
 
 #: .\templates\timetable.html:133
 msgid "Free Rooms"
-msgstr ""
-
-#: .\timetable\forms.py:25
-msgid "Date"
 msgstr ""
 
 #: .\timetable\forms.py:26 .\timetable\forms.py:27

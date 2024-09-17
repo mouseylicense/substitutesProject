@@ -161,7 +161,7 @@ def register(request,uuid):
 def get_possible_rooms(request):
     time = request.GET.get('hour')
     day = request.GET.get('day')
-    rooms = Room.objects.filter(Exists(Class.objects.filter(room=OuterRef("pk"), hour=time, day_of_week=day)))
+    rooms = Room.objects.filter(Exists(Class.objects.filter(room=OuterRef("pk"), hour=time, day_of_week=day)),show_as_possible=True)
     availableRooms = []
     for room in rooms:
         availableRooms.append({'id': room.pk, 'name': room.name})
@@ -198,12 +198,12 @@ def get_possible_subs(request, n):
 
 def timetable(request):
     rooms = []
-    for room in Room.objects.all():
+    for room in Room.objects.filter(show_as_possible=True):
         rooms.append(room.name)
     classes = Class.objects.all()
     teachers = []
-    for t in Teacher.objects.all():
-        teachers.append(t.first_name)
+    for t in Teacher.objects.filter(type=0):
+        teachers.append(t)
     classesByHour = {}
     for c in classes:
         grades = str(c.str_grades())
@@ -211,7 +211,7 @@ def timetable(request):
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
             if c.teacher:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.teacher.first_name,
+                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.teacher.first_name + " " + c.teacher.last_name,
                      "room": c.room.name,"description":c.description}]
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
@@ -220,7 +220,7 @@ def timetable(request):
         else:
             if c.teacher:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
-                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.teacher.first_name,
+                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.teacher.first_name + " " + c.teacher.last_name,
                      "room": c.room.name,"description":c.description})
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
@@ -272,7 +272,7 @@ def teacher_manager(request):
                 form.save()
             else:
                 return HttpResponse(form.errors)
-    teachers = Teacher.objects.all()
+    teachers = Teacher.objects.filter(type=0)
     teachers_and_forms = {}
     i= 0
     for teacher in teachers:

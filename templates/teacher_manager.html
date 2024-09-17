@@ -42,6 +42,9 @@ h1:dir(rtl), p:dir(rtl){
 
     margin-left:auto;
 }
+.no-password{
+    background-color: rgba(205, 92, 92, 0.24);
+}
     </style>
 {% endblock %}
 {% block title %}{% trans "Manage Teachers" %}{% endblock %}
@@ -61,7 +64,7 @@ h1:dir(rtl), p:dir(rtl){
     <ul class="teacher-list">
 {% for teacher,form in teachers.items %}
     <li>
-    <div  class="teacher">
+    <div  class="teacher {% if teacher.password == '' %}no-password{% endif %}">
 
     <div   style="display:flex;flex-direction: row">
 
@@ -72,7 +75,7 @@ h1:dir(rtl), p:dir(rtl){
 
         </form>
         {% if user.uuid != teacher.uuid %}
-            <button class="btn btn-primary mr-1"  hx-post="{% url "invite_teacher" %}" name="teacher" value="{{ teacher.uuid }}">{% trans "Send Invite" %}</button>
+            <button class="btn btn-primary mr-1"  hx-post="{% url "invite_teacher" %}" name="teacher" value="{{ teacher.uuid }}">{% trans "Invite Teacher" %}</button>
             <button hx-target="closest .teacher" hx-swap="delete" hx-post="{% url "teacher_manager"%}" name="Delete" value="{{ teacher.uuid }}" class="mr-1 btn btn-danger">{% trans "Delete" %}</button>
         {% endif %}
         </div>

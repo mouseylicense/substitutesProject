@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 from .forms import LaptopLoaningForm
 from .models import LaptopPin
-
+from django.conf import settings
 # Create your views here.
 
 def check_pin(request):
@@ -19,6 +19,8 @@ def check_pin(request):
 
 @login_required
 def laptops_home(request):
+    print(settings.LAPTOPS_ENABLED)
+    print(type(settings.LAPTOPS_ENABLED))
     if request.method == 'POST':
         form = LaptopLoaningForm(request.POST)
         if form.is_valid():

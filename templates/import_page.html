@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container">
     <h4>{% trans "Import Students From CSV" %}</h4>
-    <p style="text-wrap: wrap">{%  trans "The CSV Should be Formatted as The Schools Contant Sheet, Beware That This Creates A Student For Each row, regardless of if a Student with this name exists" %} </p>
+    <p style="text-wrap: wrap">{%  trans "The CSV Should be Formatted as The Schools Contact Sheet, Beware That This Creates A Student For Each row, regardless of if a Student with this name exists" %} </p>
     <form method="post" enctype="multipart/form-data" action="{% url "import" %}">
     {% csrf_token %}
     {{ studentsForm }}
@@ -12,7 +12,7 @@
 </form>
 </div><div class="container">
     <h4>{% trans "Import Teachers From CSV" %}</h4>
-    <p style="text-wrap: wrap">{%  trans "The CSV Should be Formatted as The Schools Contant Sheet, Beware That This Creates A Teacher For Each row, regardless of if a Teacher with this name exists" %} </p>
+    <p style="text-wrap: wrap">{%  trans "The CSV Should be Formatted as The Schools Contact Sheet" %} </p>
     <form method="post" enctype="multipart/form-data" action="{% url "import" %}">
     {% csrf_token %}
     {{ teacherForm }}

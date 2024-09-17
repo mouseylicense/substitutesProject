@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import json
-
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 from dotenv import load_dotenv
@@ -41,7 +40,6 @@ CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 INSTALLED_APPS = [
     'constance',
     'timetable.apps.TimetableConfig',
-    'LaptopLoaning.apps.LaptoploaningConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -196,3 +194,11 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
     }
+
+LAPTOPS_ENABLED = environ.get('LAPTOPS_ENABLED', False)
+if LAPTOPS_ENABLED == "True":
+    LAPTOPS_ENABLED=True
+else:
+    LAPTOPS_ENABLED = False
+if LAPTOPS_ENABLED:
+    INSTALLED_APPS += 'LaptopLoaning.apps.LaptoploaningConfig',
