@@ -196,6 +196,7 @@ if DEBUG:
     }
 
 LAPTOPS_ENABLED = environ.get('LAPTOPS_ENABLED', False)
+print(LAPTOPS_ENABLED)
 if LAPTOPS_ENABLED == "True":
     LAPTOPS_ENABLED=True
 else:
