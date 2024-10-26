@@ -170,10 +170,11 @@ def get_possible_rooms(request):
 
 @require_GET
 def get_teacher_classes(request, n):
-    classes = Class.objects.filter(teacher__pk=n)
+    classes = Class.objects.filter(teachers__pk=n)
     classesTimes = []
     for c in classes:
         classesTimes.append({'day': c.day_of_week, "hour": str(c.hour)[:5]})
+    print(classesTimes)
     return JsonResponse({"classesTimes": classesTimes})
 
 
@@ -208,10 +209,11 @@ def timetable(request):
     for c in classes:
         grades = str(c.str_grades())
         grades_all = str(c.all_grades())
+        print(c.teachers)
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
-            if c.teacher:
+            if c.teachers:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.teacher.first_name + " " + c.teacher.last_name,
+                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
                      "room": c.room.name,"description":c.description}]
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
@@ -220,7 +222,7 @@ def timetable(request):
         else:
             if c.teacher:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
-                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.teacher.first_name + " " + c.teacher.last_name,
+                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
                      "room": c.room.name,"description":c.description})
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(

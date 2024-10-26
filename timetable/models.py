@@ -124,7 +124,7 @@ class Class(models.Model):
                  (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45")])
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
+    teachers = models.ManyToManyField(Teacher, null=True, blank=True)
     student_teacher = models.BooleanField(default=False, verbose_name=_("Is a Student Teaching?"))
     student_teaching = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Student Teaching"))
     first_grade = models.BooleanField(default=False, verbose_name=_("First Grade"))
@@ -148,7 +148,10 @@ class Class(models.Model):
     def who_teaches(self):
         if self.student_teacher:
             return self.student_teaching
-        return self.teacher
+        teachers_str = ""
+        for teacher in self.teachers.all():
+            teachers_str = teachers_str + teacher.__str__() + ","
+        return teachers_str[:-1] +"."
     def all_grades(self):
         grades = [self.first_grade, self.second_grade, self.third_grade, self.fourth_grade, self.fifth_grade,
                   self.sixth_grade, self.seventh_grade, self.eighth_grade, self.ninth_grade, self.tenth_grade,
@@ -192,11 +195,13 @@ class Class(models.Model):
         return None
 
     def __str__(self):
-        if self.teacher:
-            return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.first_name + " " + self.teacher.last_name
+        if self.teachers.all().exists():
+            teachers_str = ""
+            for teacher in self.teachers.all():
+                teachers_str = teachers_str + teacher.__str__() + ","
+            return str(self.hour)[:5] + " --- " + self.name + " - " + teachers_str[:-1] + "."
         else:
             return str(self.hour)[:5] + " --- " + self.name + " - " + self.student_teaching
-
 
 class ClassNeedsSub(models.Model):
     Class_That_Needs_Sub = models.ForeignKey(Class, on_delete=models.CASCADE)

@@ -30,7 +30,7 @@ class AbsenceForm(forms.Form):
 
 class ClassForm(forms.ModelForm):
     name = forms.CharField(label=_("Subject"),widget=forms.TextInput(attrs={'class': 'subject-input', 'placeholder': _('Subject')}))
-    teacher = forms.ModelChoiceField(Teacher.objects,required=False,label=_("Teacher"),widget=forms.Select(attrs={"style":"flex-grow:1",'class': 'select','id':'teacher'}))
+    teachers = forms.ModelMultipleChoiceField(Teacher.objects,required=False,label=_("Teacher"),widget=forms.Select(attrs={'multiple':'','class': 'select form-select selectpicker','id':'teacher'}))
     day_of_week = forms.CharField(label=_("Day"),widget=forms.TextInput(attrs={"required":"","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;","id":"day"}))
     hour = forms.CharField(label=_("Hour"),widget=forms.TextInput(attrs={"required":"","id":"hour","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;"}))
     room = forms.ModelChoiceField(Room.objects,widget=forms.Select(attrs={'id': 'room',"disabled":""}))

@@ -1,3 +1,19 @@
+// Return an array of the selected option values in the control.
+// Select is an HTML select element.
+function getSelectValues(select) {
+  var result = [];
+  var options = select && select.options;
+  var opt;
+
+  for (var i=0, iLen=options.length; i<iLen; i++) {
+    opt = options[i];
+
+    if (opt.selected) {
+      result.push(opt.value || opt.text);
+    }
+  }
+  return result;
+}
 const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textContent)
         function markClasses(){
         Object.keys(classesByHour).forEach(function(key) {
@@ -21,7 +37,9 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
     const TeacherSelect = document.getElementById("teacher")
     function changeTimetable(){
         const selectedClass = TeacherSelect;
-        const url = `/getClasses/${selectedClass.value}`;
+        console.log(getSelectValues(selectedClass))
+        getSelectValues(selectedClass).forEach((element) => {
+        const url = `/getClasses/${element}`;
         console.log(selectedClass)
         fetch(url)
         .then(response => response.json())
@@ -31,7 +49,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
             const doc = document.getElementById(branch.day + "-" + branch.hour)
             doc.disabled = true
             doc.style.background = "lightgrey";
-        })})}
+        })})})}
         markClasses()
     TeacherSelect.addEventListener('change', (event) => resetBoard(false))
     TeacherSelect.addEventListener('change', (event) => markClasses())

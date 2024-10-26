@@ -7,8 +7,8 @@ function filterTeachers(){
     console.log(teacher.value);
     if(!(teacher.value === '')){
     for(let i=0; i < classes.length; i++) {
-
-        if (!(classes[i].dataset.teacher === teacher.value)) {
+        console.log(classes[i].dataset.teacher.includes(teacher.value))
+        if (!(classes[i].dataset.teacher.includes(teacher.value))) {
             classes[i].classList.add("teacherFilter");
         } else {
             classes[i].classList.remove('teacherFilter');
