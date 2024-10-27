@@ -1,14 +1,8 @@
+{% extends 'laptops_base.html' %}
 {% load static %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'laptopLoaning/styles/laptops_stylesheet.css' %}">
-    <title>{% trans "Order Laptops" %}</title>
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-</head>
-<body>
+{% block title %}{% trans "Order Laptops" %}{% endblock %}
+{% block content %}
 <div id="myModal" class="modal">
 <div class="modal-content">
     <span onclick="this.parentElement.parentElement.style.display = 'none'" class="close">&times;</span>
@@ -67,5 +61,4 @@
             </li>
 </div>
 </div>
-</body>
-</html>
+{% endblock %}

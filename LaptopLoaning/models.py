@@ -15,6 +15,7 @@ class LaptopPin(models.Model):
     Teacher = models.ForeignKey(timetable.models.Teacher, on_delete=models.CASCADE)
     PIN = models.CharField(max_length=4, default=generate_pin, unique=True)
     date = models.DateField()
+    room = models.ForeignKey(timetable.models.Room, on_delete=models.CASCADE)
     uses = models.IntegerField(default=2)
     numberOfLaptops = models.IntegerField(default=1, validators=[MinValueValidator(1)])
     granted = models.BooleanField(default=False)

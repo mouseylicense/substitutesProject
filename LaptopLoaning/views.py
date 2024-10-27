@@ -19,7 +19,7 @@ def check_pin(request):
     return HttpResponseNotFound(404)
 
 @login_required
-def laptops_home(request):
+def home(request):
     LaptopPin.objects.filter(date__lt=timezone.now().date()).delete()
     print(settings.LAPTOPS_ENABLED)
     print(type(settings.LAPTOPS_ENABLED))
@@ -29,3 +29,7 @@ def laptops_home(request):
             form.save()
     user = request.user
     return render(request,"laptops_home.html",{"form":LaptopLoaningForm(initial={"Teacher":user}),"grantedPins":LaptopPin.objects.filter(Teacher=user,granted=True).all().order_by("date").values(),"nonGrantedPins":LaptopPin.objects.filter(Teacher=user,granted=False).all().order_by("date").values()})
+
+
+def pin_manager(request):
+    return render(request,"laptops_pin_manager.html",{"pins":LaptopPin.objects.all()})

@@ -1,0 +1,31 @@
+{% extends 'laptops_base.html' %}
+{% load static %}
+{% load i18n %}
+{% block static%}
+    <link rel="stylesheet" href="{% static "laptopLoaning/styles/bootstrap.min.css" %}">
+{% endblock %}
+{% block title %}Pin Manager{% endblock %}
+{% block content %}
+    <table class="table table-bordered table-responsive-sm">
+    <thead>
+        <tr>
+            <th>{% trans "Teacher" %}</th>
+            <th>{% trans "PIN" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Uses" %}</th>
+            <th>{% trans "Laptops" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for pin in pins %}
+        <tr {% if pin.granted %}class="table-success"{% else %}class="table-danger"{% endif %}>
+            <td>{{ pin.Teacher }}</td>
+            <td>{{ pin.pin }}</td>
+            <td>{{ pin.date }}</td>
+            <td>{{ pin.uses }}</td>
+            <td>{{ pin.numberOfLaptops }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
