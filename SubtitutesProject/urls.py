@@ -40,4 +40,4 @@ urlpatterns += i18n_patterns(
 
 )
 if settings.LAPTOPS_ENABLED:
-    urlpatterns += path('laptops/', include('LaptopLoaning.urls')),
+    urlpatterns += i18n_patterns(path('laptops/', include('LaptopLoaning.urls')))

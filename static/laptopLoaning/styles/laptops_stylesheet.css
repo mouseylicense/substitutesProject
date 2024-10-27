@@ -104,7 +104,7 @@ form{
     flex-direction: column;
     gap: 15px;
 }
-form input[type=date],form input[type=number]{
+form input[type=date],form input[type=number],form select{
     font-size: medium;
     border:none;
     height: 7%;
@@ -126,11 +126,17 @@ form button[type=submit]:hover{
       background-color: #962964;
 }
 .container{
-    height: 100%;
-    padding: 5px;
+    height: 98vh;
+    padding: 1vh;
     display: flex;
 }
 td:dir(rtl),th:dir(rtl){
     text-align: right;
     direction: rtl;
+}
+.content{
+    background-color: #fbf8fa
+}
+.btn{
+    margin:0 !important;
 }

@@ -11,19 +11,37 @@
         <tr>
             <th>{% trans "Teacher" %}</th>
             <th>{% trans "PIN" %}</th>
-            <th>{% trans "Date" %}</th>
+            <th>{% trans "Date And Time" %}</th>
             <th>{% trans "Uses" %}</th>
+            <th>{% trans "Room" %}</th>
             <th>{% trans "Laptops" %}</th>
+            <th>{% trans "Actions" %}</th>
         </tr>
     </thead>
     <tbody>
     {% for pin in pins %}
-        <tr {% if pin.granted %}class="table-success"{% else %}class="table-danger"{% endif %}>
+        <tr {% if pin.granted %}class="table-success pin-row"{% else %}class="table-danger pin-row"{% endif %}>
             <td>{{ pin.Teacher }}</td>
-            <td>{{ pin.pin }}</td>
+            <td>{{ pin.PIN }}</td>
             <td>{{ pin.date }}</td>
             <td>{{ pin.uses }}</td>
+            <td>{{ pin.room }}</td>
             <td>{{ pin.numberOfLaptops }}</td>
+            <td>
+                {% if not pin.granted %}
+                <form class="form form-inline">
+                    {% csrf_token %}
+                    <button name="deny" hx-target="closest .pin-row" hx-swap="delete" value="{{ pin.id }}" hx-post="{% url 'pin_manager' %}" class="btn btn-danger">{% trans 'Deny' %}</button>
+                    <button name="grant" hx-target="closest .pin-row" hx-swap="outerHTML" value="{{ pin.id }}" hx-post="{% url 'pin_manager' %}" class="btn btn-success">{%trans 'Grant' %}</button>
+                </form>
+                {% else %}
+                    <form>
+                        {% csrf_token %}
+                        <button name="deny" hx-confirm='{%  trans "Are You Sure You Want To Delete This PIN?" %}' hx-target="closest .pin-row" hx-swap="delete" value="{{ pin.id }}" hx-post="{% url 'pin_manager' %}" class="btn btn-danger">
+                            {% trans "Delete" %}</button>
+                    </form>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
     </tbody>
