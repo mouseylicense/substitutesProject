@@ -202,4 +202,5 @@ if LAPTOPS_ENABLED == "True":
 else:
     LAPTOPS_ENABLED = False
 if LAPTOPS_ENABLED:
+    CONSTANCE_CONFIG['LAPTOPS'] = (0,"Number Of Laptops Available (CHANGING THIS REQUIRES RESTARTING)",int)
     INSTALLED_APPS += 'LaptopLoaning.apps.LaptoploaningConfig',

@@ -4,6 +4,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 import datetime
+
+from django.template.defaultfilters import first
 from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
@@ -88,7 +90,8 @@ class Teacher(AbstractUser):
         if self.first_name and self.last_name:
             return self.first_name + " " + self.last_name
         return self.email
-
+    def name(self):
+        return self.first_name + " " + self.last_name
 
 
 

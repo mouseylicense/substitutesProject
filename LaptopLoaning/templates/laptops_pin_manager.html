@@ -11,10 +11,12 @@
         <tr>
             <th>{% trans "Teacher" %}</th>
             <th>{% trans "PIN" %}</th>
-            <th>{% trans "Date And Time" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Time" %}</th>
             <th>{% trans "Uses" %}</th>
             <th>{% trans "Room" %}</th>
             <th>{% trans "Laptops" %}</th>
+            <th>{% trans "For" %}</th>
             <th>{% trans "Actions" %}</th>
         </tr>
     </thead>
@@ -24,9 +26,11 @@
             <td>{{ pin.Teacher }}</td>
             <td>{{ pin.PIN }}</td>
             <td>{{ pin.date }}</td>
+            <td>{{ pin.taking_time }}  - {{ pin.returning_time }}</td>
             <td>{{ pin.uses }}</td>
             <td>{{ pin.room }}</td>
             <td>{{ pin.numberOfLaptops }}</td>
+            <td>{{ pin.reason }}</td>
             <td>
                 {% if not pin.granted %}
                 <form class="form form-inline">

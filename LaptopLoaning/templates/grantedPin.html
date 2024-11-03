@@ -1,12 +1,14 @@
 {% load i18n %}
 
 <tr class="table-success pin-row">
-    <td>{{ pin.Teacher }}</td>
-    <td>{{ pin.PIN }}</td>
-    <td>{{ pin.date }}</td>
-    <td>{{ pin.uses }}</td>
-    <td>{{ pin.room }}</td>
-    <td>{{ pin.numberOfLaptops }}</td>
+            <td>{{ pin.Teacher }}</td>
+            <td>{{ pin.PIN }}</td>
+            <td>{{ pin.date }}</td>
+            <td>{{ pin.taking_time }}  - {{ pin.returning_time }}</td>
+            <td>{{ pin.uses }}</td>
+            <td>{{ pin.room }}</td>
+            <td>{{ pin.numberOfLaptops }}</td>
+            <td>{{ pin.reason }}</td>
     <td>
         <form>
             {% csrf_token %}

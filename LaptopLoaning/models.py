@@ -1,10 +1,10 @@
+import datetime
 from random import randint
 
 from django.core.validators import MinValueValidator
 from django.db import models
 
 import timetable.models
-
 
 def generate_pin():
     return ''.join(str(randint(0, 9)) for _ in range(4))
@@ -14,15 +14,20 @@ def generate_pin():
 class LaptopPin(models.Model):
     Teacher = models.ForeignKey(timetable.models.Teacher, on_delete=models.CASCADE)
     PIN = models.CharField(max_length=4, default=generate_pin, unique=True)
-    date = models.DateTimeField()
+    reason = models.CharField(max_length=255, default='')
+    date = models.DateField()
+    taking_time = models.TimeField()
+    returning_time = models.TimeField()
     room = models.ForeignKey(timetable.models.Room, on_delete=models.CASCADE)
     uses = models.IntegerField(default=2)
     numberOfLaptops = models.IntegerField(default=1, validators=[MinValueValidator(1)])
     granted = models.BooleanField(default=False)
+    expired = models.BooleanField(default=False)
     def use(self):
         self.uses = self.uses - 1
         if self.uses <= 0:
-            self.delete()
+            self.expired = True
+            self.save()
         else:
             self.save()
 

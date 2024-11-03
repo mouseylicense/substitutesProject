@@ -1,0 +1,91 @@
+{% extends 'laptops_base.html' %}
+{% load i18n %}
+{% block static %}<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>{% endblock %}
+{% block content %}
+    <div class="stats-container">
+        <div class="stat">
+            <h2>{% trans "Total Number Of Requests Granted:" %}</h2>
+            <h3>{{ pins_granted }}</h3>
+        </div>
+        <div class="stat">
+            <h2>{% trans "Total Number Of Laptops Granted:" %}</h2>
+            <h3>{{ total_laptops }}</h3>
+        </div>
+        <div class="stat">
+            <h2>{% trans "Time Laptops Were Used:" %}</h2>
+            <h3>{{ total_time }}</h3>
+        </div>
+    </div>
+    <div class="graph-container">
+        <canvas style="width:50px;height: 50px" id="myChart"></canvas>
+        <canvas  style="width: 50px;height: 50px" id="myChart2"></canvas>
+    </div>
+
+<script>
+    const pins_per_teacher = JSON.parse('{{ pins_by_teacher|safe }}')
+    const ctx = document.getElementById('myChart');
+    const PinsPerMonthChart = document.getElementById('myChart2');
+    var granted = []
+    var not_granted = []
+    for(let i = 0;i<Object.values(pins_per_teacher).length;i++){
+      granted.push(Object.values(Object.values(pins_per_teacher)[i])[0])
+      not_granted.push(Object.values(Object.values(pins_per_teacher)[i])[1])
+    }
+
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(pins_per_teacher),
+      datasets: [{
+        label: '# {% trans "Of Pins Granted" %}',
+        data: granted,
+        borderWidth: 1
+      },
+      {
+        label: '# {% trans "Of Pins Not Granted" %}',
+        data: not_granted,
+        borderWidth: 1
+      }
+      ]
+    },
+    options: {
+      responsive:true,
+      scales: {
+        x: {
+            stacked:true,
+        },
+        y: {
+            stacked:true,
+            beginAtZero: true
+        }
+      }
+    }
+    });
+    new Chart(PinsPerMonthChart, {
+    type: 'line',
+    data: {
+      labels: ['{% trans "September" %}', '{% trans "October" %}','{% trans "November" %}','{% trans "December"%}','{% trans "January" %}', '{% trans "February" %}','{% trans "March" %}', '{% trans "April" %}','{% trans "May" %}', '{% trans "June" %}'],
+      datasets: [
+          {% for year,data in pins_by_month.items %}
+          {
+        label: '{{ year }}',
+        data: {{ data }},
+        tension: 0.1
+      },
+          {% endfor %}
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+    });
+</script>
+
+
+
+
+{% endblock %}

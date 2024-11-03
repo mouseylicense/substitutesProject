@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 11:38+0300\n"
+"POT-Creation-Date: 2024-11-01 02:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,37 +19,128 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\LaptopLoaning\forms.py:10 .\templates\timetable.html:115
-#: .\timetable\forms.py:33
+#: .\LaptopLoaning\forms.py:11
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:12
+#: .\templates\timetable.html:115 .\timetable\forms.py:33
 msgid "Teacher"
 msgstr ""
 
-#: .\LaptopLoaning\forms.py:11 .\timetable\forms.py:25
+#: .\LaptopLoaning\forms.py:12
+msgid "For?"
+msgstr ""
+
+#: .\LaptopLoaning\forms.py:13
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:14
+#: .\timetable\forms.py:25
 msgid "Date"
 msgstr ""
 
-#: .\LaptopLoaning\forms.py:12
+#: .\LaptopLoaning\forms.py:14
 msgid "Number Of Laptops"
 msgstr ""
 
-#: .\LaptopLoaning\templates\order_laptops.html:8
+#: .\LaptopLoaning\forms.py:15
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:17
+msgid "Room"
+msgstr ""
+
+#: .\LaptopLoaning\forms.py:16
+msgid "From"
+msgstr ""
+
+#: .\LaptopLoaning\forms.py:17
+msgid "Until"
+msgstr ""
+
+#: .\LaptopLoaning\forms.py:20 .\timetable\forms.py:26 .\timetable\forms.py:27
+msgid "Reason"
+msgstr ""
+
+#: .\LaptopLoaning\templates\grantedPin.html:15
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:44
+msgid "Are You Sure You Want To Delete This PIN?"
+msgstr ""
+
+#: .\LaptopLoaning\templates\grantedPin.html:16
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:45
+#: .\templates\teacher_manager.html:79
+msgid "Delete"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_base.html:3 .\templates\base.html:3
+#: .\templates\day_schedule.html:4 .\templates\publicBase.html:3
+#: .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
+#: .\templates\student_details.html:4 .\templates\studentregister.html:3
+msgid "en"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_base.html:3 .\templates\base.html:3
+#: .\templates\day_schedule.html:4 .\templates\publicBase.html:3
+#: .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
+#: .\templates\student_details.html:4 .\templates\studentregister.html:3
+msgid "ltr"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_home.html:4
 msgid "Order Laptops"
 msgstr ""
 
-#: .\LaptopLoaning\templates\order_laptops.html:21
+#: .\LaptopLoaning\templates\laptops_home.html:15
+msgid "Number of Laptops:"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_home.html:19
 msgid "Order"
 msgstr ""
 
-#: .\LaptopLoaning\templates\order_laptops.html:26
+#: .\LaptopLoaning\templates\laptops_home.html:26
 msgid "My pins"
 msgstr ""
 
-#: .\LaptopLoaning\templates\order_laptops.html:30
+#: .\LaptopLoaning\templates\laptops_home.html:30
 msgid "PINs granted"
 msgstr ""
 
-#: .\LaptopLoaning\templates\order_laptops.html:47
+#: .\LaptopLoaning\templates\laptops_home.html:38
+msgid "Remaining Uses: "
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_home.html:47
 msgid "PINs Pending"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:13
+msgid "PIN"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:15
+msgid "Time"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:16
+msgid "Uses"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:18
+msgid "Laptops"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:19
+msgid "For"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:20
+msgid "Actions"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:38
+msgid "Deny"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:39
+msgid "Grant"
 msgstr ""
 
 #: .\SubtitutesProject\settings.py:165
@@ -58,20 +149,6 @@ msgstr ""
 
 #: .\SubtitutesProject\settings.py:166
 msgid "English"
-msgstr ""
-
-#: .\templates\base.html:3 .\templates\day_schedule.html:4
-#: .\templates\publicBase.html:3 .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4 .\templates\studentregister.html:3
-msgid "en"
-msgstr ""
-
-#: .\templates\base.html:3 .\templates\day_schedule.html:4
-#: .\templates\publicBase.html:3 .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4 .\templates\studentregister.html:3
-msgid "ltr"
 msgstr ""
 
 #: .\templates\class_manager.html:9 .\templates\class_manager.html:95
@@ -417,10 +494,6 @@ msgstr ""
 msgid "Invite Teacher"
 msgstr ""
 
-#: .\templates\teacher_manager.html:79
-msgid "Delete"
-msgstr ""
-
 #: .\templates\thanks.html:20
 msgid "Success!"
 msgstr ""
@@ -516,10 +589,6 @@ msgstr ""
 
 #: .\templates\timetable.html:133
 msgid "Free Rooms"
-msgstr ""
-
-#: .\timetable\forms.py:26 .\timetable\forms.py:27
-msgid "Reason"
 msgstr ""
 
 #: .\timetable\forms.py:32

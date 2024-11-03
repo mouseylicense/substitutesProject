@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 11:38+0300\n"
-"PO-Revision-Date: 2024-09-17 12:41+0300\n"
+"POT-Creation-Date: 2024-11-01 02:01+0200\n"
+"PO-Revision-Date: 2024-11-01 02:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -21,38 +21,129 @@ msgstr ""
 "2 : 3);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: .\LaptopLoaning\forms.py:10 .\templates\timetable.html:115
-#: .\timetable\forms.py:33
+#: .\LaptopLoaning\forms.py:11
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:12
+#: .\templates\timetable.html:115 .\timetable\forms.py:33
 msgid "Teacher"
 msgstr "מורה"
 
-#: .\LaptopLoaning\forms.py:11 .\timetable\forms.py:25
+#: .\LaptopLoaning\forms.py:12
+msgid "For?"
+msgstr "עֲבוּר?"
+
+#: .\LaptopLoaning\forms.py:13
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:14
+#: .\timetable\forms.py:25
 msgid "Date"
 msgstr "תאריך"
 
-#: .\LaptopLoaning\forms.py:12
+#: .\LaptopLoaning\forms.py:14
 msgid "Number Of Laptops"
 msgstr "מספר מחשבים"
 
-#: .\LaptopLoaning\templates\order_laptops.html:8
+#: .\LaptopLoaning\forms.py:15
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:17
+msgid "Room"
+msgstr "חדר"
+
+#: .\LaptopLoaning\forms.py:16
+msgid "From"
+msgstr "מ"
+
+#: .\LaptopLoaning\forms.py:17
+msgid "Until"
+msgstr "עד"
+
+#: .\LaptopLoaning\forms.py:20 .\timetable\forms.py:26 .\timetable\forms.py:27
+msgid "Reason"
+msgstr "סיבה"
+
+#: .\LaptopLoaning\templates\grantedPin.html:15
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:44
+msgid "Are You Sure You Want To Delete This PIN?"
+msgstr "האם אתה בטוח שאתה רוצה למחוק את ה-PIN הזה?"
+
+#: .\LaptopLoaning\templates\grantedPin.html:16
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:45
+#: .\templates\teacher_manager.html:79
+msgid "Delete"
+msgstr "מחק"
+
+#: .\LaptopLoaning\templates\laptops_base.html:3 .\templates\base.html:3
+#: .\templates\day_schedule.html:4 .\templates\publicBase.html:3
+#: .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
+#: .\templates\student_details.html:4 .\templates\studentregister.html:3
+msgid "en"
+msgstr "he"
+
+#: .\LaptopLoaning\templates\laptops_base.html:3 .\templates\base.html:3
+#: .\templates\day_schedule.html:4 .\templates\publicBase.html:3
+#: .\templates\registration\login.html:3
+#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
+#: .\templates\student_details.html:4 .\templates\studentregister.html:3
+msgid "ltr"
+msgstr "rtl"
+
+#: .\LaptopLoaning\templates\laptops_home.html:4
 msgid "Order Laptops"
 msgstr "הזמנת מחשבים"
 
-#: .\LaptopLoaning\templates\order_laptops.html:21
+#: .\LaptopLoaning\templates\laptops_home.html:15
+msgid "Number of Laptops:"
+msgstr "מספר מחשבים:"
+
+#: .\LaptopLoaning\templates\laptops_home.html:19
 msgid "Order"
 msgstr "הזמן"
 
-#: .\LaptopLoaning\templates\order_laptops.html:26
+#: .\LaptopLoaning\templates\laptops_home.html:26
 msgid "My pins"
 msgstr "הקודים שלי"
 
-#: .\LaptopLoaning\templates\order_laptops.html:30
+#: .\LaptopLoaning\templates\laptops_home.html:30
 msgid "PINs granted"
 msgstr "קודים שאושרו"
 
-#: .\LaptopLoaning\templates\order_laptops.html:47
+#: .\LaptopLoaning\templates\laptops_home.html:38
+msgid "Remaining Uses: "
+msgstr "שימושים שנותרו: "
+
+#: .\LaptopLoaning\templates\laptops_home.html:47
 msgid "PINs Pending"
 msgstr "קודים שמחכים לאישור"
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:13
+msgid "PIN"
+msgstr ""
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:15
+msgid "Time"
+msgstr "זמן"
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:16
+msgid "Uses"
+msgstr "שימושים"
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:18
+msgid "Laptops"
+msgstr "מספר מחשבים"
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:19
+msgid "For"
+msgstr "עבור"
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:20
+msgid "Actions"
+msgstr "פעולות"
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:38
+msgid "Deny"
+msgstr "דחה"
+
+#: .\LaptopLoaning\templates\laptops_pin_manager.html:39
+msgid "Grant"
+msgstr "אשר"
 
 #: .\SubtitutesProject\settings.py:165
 msgid "Hebrew"
@@ -61,20 +152,6 @@ msgstr "עברית"
 #: .\SubtitutesProject\settings.py:166
 msgid "English"
 msgstr "אנגלית"
-
-#: .\templates\base.html:3 .\templates\day_schedule.html:4
-#: .\templates\publicBase.html:3 .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4 .\templates\studentregister.html:3
-msgid "en"
-msgstr "he"
-
-#: .\templates\base.html:3 .\templates\day_schedule.html:4
-#: .\templates\publicBase.html:3 .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4 .\templates\studentregister.html:3
-msgid "ltr"
-msgstr "rtl"
 
 #: .\templates\class_manager.html:9 .\templates\class_manager.html:95
 msgid "Manage Classes"
@@ -166,18 +243,13 @@ msgid "Import Students From CSV"
 msgstr "ייבוא תלמידים מ-CSV"
 
 #: .\templates\import_page.html:7
-#, fuzzy
-#| msgid ""
-#| "The CSV Should be Formatted as The Schools Contant Sheet, Beware That "
-#| "This Creates A Student For Each row, regardless of if a Student with this "
-#| "name exists"
 msgid ""
 "The CSV Should be Formatted as The Schools Contact Sheet, Beware That This "
 "Creates A Student For Each row, regardless of if a Student with this name "
 "exists"
 msgstr ""
 "ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר, שימ/י לב: פעולה זו תיצור "
-"תלמיד לכל שורה בקובץ, גם אם תלמיד  בשם זה כבר קיים"
+"תלמיד לכל שורה בקובץ, גם אם תלמיד בשם זה כבר קיים"
 
 #: .\templates\import_page.html:11 .\templates\import_page.html:19
 msgid "import"
@@ -430,10 +502,6 @@ msgstr "חפש מורה"
 msgid "Invite Teacher"
 msgstr "הזמן מורה"
 
-#: .\templates\teacher_manager.html:79
-msgid "Delete"
-msgstr "מחק"
-
 #: .\templates\thanks.html:20
 msgid "Success!"
 msgstr "הושלם!"
@@ -530,10 +598,6 @@ msgstr "שיעורים"
 #: .\templates\timetable.html:133
 msgid "Free Rooms"
 msgstr "חדרים פנויים"
-
-#: .\timetable\forms.py:26 .\timetable\forms.py:27
-msgid "Reason"
-msgstr "סיבה"
 
 #: .\timetable\forms.py:32
 msgid "Subject"
