@@ -27,11 +27,13 @@ ul{
     font-weight: bolder;
 }
 .hour{
+    max-height: 2vh;
     font-size: small;
     font-weight: lighter;
 }
 .pin{
-    height: 6vh;
+    min-height:fit-content;
+    height: 8vh;
     padding: 5px;
     background: #fcc2d9;
 }
@@ -154,6 +156,7 @@ td:dir(rtl),th:dir(rtl){
     display:flex
 }
 canvas{
+    margin:5px;
     width:50% !important;
     height: 500px !important;
   /*flex-shrink: 1!important;*/

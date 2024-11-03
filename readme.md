@@ -14,23 +14,24 @@ This project Is Not Done, and is in Constant Development. Planned features can b
 
 some environment variables need to be defined in an .env file:
 
-| Key                 | Description                                                         |  
-|---------------------|---------------------------------------------------------------------|
-| EMAIL_HOST          | The host for the SMTP server                                        |
-| EMAIL_USE_TLS       | Choose if SMTP should use TLS                                       |
-| EMAIL_PORT          | SMTP Port                                                           |
-| EMAIL_HOST_USER     | ------                                                              |
-| EMAIL_HOST_PASSWORD | ------                                                              |
-| DEFAULT_FROM_EMAIL  | Email Sender                                                        |
-| DB_USER             | Database Username                                                   |
-| DB_PASSWORD         | Database password                                                   |
-| DB_HOST             | Database Host IP                                                    |
-| DB_PORT             | Database Host Port, Also needs to be changed in docker-compose.yaml |
-| DB_ROOT_PASSWORD    | Database Root Password                                              |
-| DJANGO_SECRET_KEY   | The Django Secret Key (optional)                                    |
-| DJANGO_DEBUG        | True or False, Choose if django should run in debug mode (optional) |
- |CSRF_TRUSTED_ORIGINS| a List containing Trusted domains|
-| FROM_EMAIL | an email address from which emails will be sent|
+| Key                  | Description                                                         |  
+|----------------------|---------------------------------------------------------------------|
+| EMAIL_HOST           | The host for the SMTP server                                        |
+| EMAIL_USE_TLS        | Choose if SMTP should use TLS                                       |
+| EMAIL_PORT           | SMTP Port                                                           |
+| EMAIL_HOST_USER      | ------                                                              |
+| EMAIL_HOST_PASSWORD  | ------                                                              |
+| DEFAULT_FROM_EMAIL   | Email Sender                                                        |
+| DB_USER              | Database Username                                                   |
+| DB_PASSWORD          | Database password                                                   |
+| DB_HOST              | Database Host IP                                                    |
+| DB_PORT              | Database Host Port, Also needs to be changed in docker-compose.yaml |
+| DB_ROOT_PASSWORD     | Database Root Password                                              |
+| DJANGO_SECRET_KEY    | The Django Secret Key (optional)                                    |
+| DJANGO_DEBUG         | True or False, Choose if django should run in debug mode (optional) |
+ | CSRF_TRUSTED_ORIGINS | a List containing Trusted domains                                   |
+| FROM_EMAIL           | an email address from which emails will be sent                     |
+| LAPTOPS_ENABLED      | True/False, whether the laptops feature should be enabled           |
  ### Pictures:
 |                              |                              |
 |------------------------------|------------------------------|
