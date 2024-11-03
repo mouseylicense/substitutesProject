@@ -10,7 +10,7 @@ In school, we allow teacher to "loan" laptops for classes, in case they need the
 **This is problematic:** 
 * For starters , it creates work for the IT team, as we need to bring the laptops to the classes, _we don't like extra work_.
 * Secondly, there have been times, where we (the IT team) simply forgot to bring the laptops, meaning the teachers did not have computers for their classes.
-* We **really** do not like extra (and boring) work
+* We **really** do not like extra (boring) work
 
 ### The Solution
 This caused me (as head of IT) to search for a solution, the first that came to mind was a box that will house the key for the laptops cabinet, The box will open when you enter a PIN you get when filling a form, this is the solution we went with, and we built it.
@@ -39,6 +39,7 @@ they are really quite simple:
 Follow The guide in the main readme, in the .env file, you should have:
 
 ``LAPTOPS_ENABLED = 'True'``
+navigate to /laptops/home
 
 ## Pictures:
 |                                                                                     |                                                                                     |
