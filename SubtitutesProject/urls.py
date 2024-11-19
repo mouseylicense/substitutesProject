@@ -32,7 +32,6 @@ if settings.DEBUG:
     urlpatterns += debug_toolbar_urls()
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
-
     path('', include('timetable.urls')),
     path('teacher/user/', include('django.contrib.auth.urls')),
     re_path('teacher/user/login', auth_views.LoginView.as_view(template_name='registration/login.html', authentication_form=timetable.forms.CustomAuthForm,redirect_authenticated_user=True),
@@ -41,3 +40,5 @@ urlpatterns += i18n_patterns(
 )
 if settings.LAPTOPS_ENABLED:
     urlpatterns += i18n_patterns(path('laptops/', include('LaptopLoaning.urls')))
+if settings.DASHBOARD_ENABLED:
+    urlpatterns += i18n_patterns(path('dashboard/', include('dashboard.urls')))

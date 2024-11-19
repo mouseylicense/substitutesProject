@@ -204,3 +204,12 @@ else:
 if LAPTOPS_ENABLED:
     CONSTANCE_CONFIG['LAPTOPS'] = (0,"Number Of Laptops Available (CHANGING THIS REQUIRES RESTARTING)",int)
     INSTALLED_APPS += 'LaptopLoaning.apps.LaptoploaningConfig',
+
+
+DASHBOARD_ENABLED = environ.get('DASHBOARD_ENABLED', False)
+if DASHBOARD_ENABLED == "True":
+    DASHBOARD_ENABLED =True
+else:
+    DASHBOARD_ENABLED = False
+if DASHBOARD_ENABLED:
+    INSTALLED_APPS += 'dashboard',

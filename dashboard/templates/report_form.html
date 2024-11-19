@@ -1,0 +1,32 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>{% trans "Report A Problem" %}</title>
+    <link rel="stylesheet" href="{% static 'dashboard/styles/report_form.css' %}">
+</head>
+<body>
+        <form method="post" action="{% url "report" %}">
+            {% csrf_token %}
+            {{ form }}
+            <span id="value"></span>
+            <input type="submit" value="{% trans "Report" %}">
+        </form>
+    <script>
+    var slider = document.getElementById("slider");
+    var output = document.getElementById("value");
+    output.innerHTML = slider.value;
+    const states =["{% trans "Take Your Time" %}","{% trans "Urgent"  %}","{% trans "COME RIGHT NOW!" %}"];
+    slider.oninput = function() {
+        output.innerHTML = states[this.value];
+    }
+    output.innerHTML = states[slider.value];
+
+    </script>
+
+</body>
+</html>
