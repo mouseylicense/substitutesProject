@@ -1,5 +1,6 @@
 import json
 
+from django.http import JsonResponse
 from django.shortcuts import render
 
 import timetable.models
@@ -18,9 +19,13 @@ def report(request):
     return render(request,'report_form.html',{"form":ProblemForm(initial={"reporter": user})})
 
 
-def test(request):
-    return render(request, 'edit.html',context={"rooms":timetable.models.Room.objects.all(),"problems":problem.objects.all()})
+def dashboard(request):
+    return render(request, 'dashboard.html',context={"rooms":timetable.models.Room.objects.all(),"problems":problem.objects.all()})
 
+def data(request):
+    rooms = timetable.models.Room.objects.all()
+
+    return JsonResponse()
 
 def stats(request):
     prob_by_teacher = {}
