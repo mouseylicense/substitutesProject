@@ -1,15 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 
-<link rel="stylesheet" href="../static/styles.css">
+<link rel="stylesheet" href="{% static "dashboard/styles/dashboard_style.css"%}">
 </head>
 <body>
   <header>
@@ -20,38 +19,11 @@
   <h1 id="loading">loading data...</h1>
 </div>
 <script>
-  //get message
-  function fetchmessage(){
-  $.ajax({
-   url: '/message',
-   type: 'post',
-   success: function(response){
-    console.log(response)
-    if (response == undefined){
-      document.getElementById("message").innerHTML = ""}
-    else{
-      document.getElementById("message").innerHTML = response}
-    }
-    
-    
-    });
- }
- 
- $(document).ready(function(){
-  fetchmessage()
-  setInterval(fetchmessage,5000);
-  
- });
-</script>
-
-
-
-<script>
   //get problems
   function fetchdata(){
   $.ajax({
-   url: '/data',
-   type: 'post',
+   url: '/dashboard/data',
+   type: 'get',
    success: function(response){
     document.getElementById("container").innerHTML = "<h1 id='loading'>No Data</h1>"
     if (response != undefined){
@@ -60,14 +32,14 @@
     }
     // Perform operation on the return value
     for(const property in response){
-
+    console.log(response)
     room = property
     var problemsList = ""
-    if (response[room]["problems"][0]){
+    if (response[room]['problems'][0]){
       
       var img = `<img src="{% static "dashboard/xMark.png" %}" alt="problem" width="150" height="100">`
-      for(let i=0;i<response[room]["problems"].length;i++){
-        problemsList += `<div class="problem"><p>${response[room]["problems"][i]}</p></div>`
+      for(let i=0;i<response[room]['problems'].length;i++){
+        problemsList += `<div class="problem"><p>${response[room]['problems'][i]}</p></div>`
 
       }
     } else {
@@ -92,13 +64,10 @@
  
  $(document).ready(function(){
   fetchdata()
-  setInterval(fetchdata,5000);
+  setInterval(fetchdata,900000);
   
  });
 </script>
-<footer>
-  <button class="login" onclick="window.location.href = '/login';">Log in</button>
-</footer>
 </body>
 </html>
 

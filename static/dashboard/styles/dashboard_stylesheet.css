@@ -4,13 +4,20 @@ html,body{
     padding: 0;
     width: 100%;
 }
+h1{
+    margin-top: 0 !important;
+}
+.problem h2{
+    margin: 0;
+}
 .mother-container{
-    background: #fde7f0;
-    flex-grow:1 ;
+    background: #efe1f8;
+    margin: 5px;
+    height: 96%;
     border-radius: 25px;
 }
 h1{
-    color: #43122c;
+    color: #161b33;
     margin:15px;
 }
 ul{
@@ -19,113 +26,41 @@ ul{
     padding: 0;
 }
 .hour,.date,.pin h2{
-    color: #47142f;
+    color: #161b33;
     margin:0;
 }
 .date{
     font-size:x-small;
     font-weight: bolder;
 }
-.hour{
+.date{
     max-height: 2vh;
     font-size: small;
     font-weight: lighter;
 }
-.pin{
+.button{
+    height: fit-content;
+    align-self: center;
+    margin-left: auto;
+}
+.button:dir(rtl){
+    margin-right: auto;
+    margin-left: 0;
+}
+.icon:hover{
+    fill: #161b33;
+}
+.problem{
+    display:flex;
+    flex-direction: row;
     min-height:fit-content;
     height: 8vh;
     padding: 5px;
-    background: #fcc2d9;
-}
-.pin{
-    display: flex;
+    background: #cdd5ff;
 }
 html *{
     font-family: Inter, helvetica, sans-serif;
 
-}
-#add-button{
-    margin: auto;
-    border:none;
-    width:60px;
-    background:#fc9ac1;
-    border-radius: 15px;
-    height: 60px;
-    text-decoration: none !important;
-    font-family: helvetica, arial, sans-serif !important;
-}
-#add-button:hover{
-      background-color: #962964;
-}
-#add-button-container{
-    padding: 5px;
-    display: flex;
-    align-items: center;
-}
- /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    margin:10%   auto auto;
-    padding: 5px;
-    font-family: helvetica, arial, sans-serif;
-    display: block;
-    border: #fc9ac1 solid 3px;
-    background-color: #fde7f0;
-    width: 15%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-form{
-    display:flex;
-    flex-direction: column;
-    gap: 15px;
-}
-form input[type=date],form input[type=number],form select,form input[type=time],form input[type=text]{
-    font-size: medium;
-    border:none;
-    height: 7%;
-    padding: 2% 3%;
-    border-radius: 25px;
-    background-color: rgba(0, 0, 0, 0.05);
-}
-form button[type=submit]{
-    background:#fc9ac1;
-    color: white;
-    border:none;
-    height: 10%;
-    padding: 2% 3%;
-    border-radius: 25px;
-    font-size: medium;
-    font-family: Inter, helvetica, sans-serif;
-}
-form button[type=submit]:hover{
-      background-color: #962964;
 }
 .container{
     height: 98vh;

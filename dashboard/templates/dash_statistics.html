@@ -1,19 +1,19 @@
-{% extends 'laptops_base.html' %}
+{% extends 'dashboard_base.html' %}
 {% load i18n %}
 {% block static %}<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>{% endblock %}
 {% block content %}
     <div class="stats-container">
         <div class="stat">
-            <h2>{% trans "Total Number Of Requests Granted:" %}</h2>
-            <h3>{{ pins_granted }}</h3>
+            <h2>{% trans "Total Number Of Problems Resolved:" %}</h2>
+            <h3>{{ problems_resolved }}</h3>
         </div>
         <div class="stat">
-            <h2>{% trans "Total Number Of Laptops Granted:" %}</h2>
-            <h3>{{ total_laptops }}</h3>
+            <h2>{% trans "Total Number Of Problems:" %}</h2>
+            <h3>{{ total_problems }}</h3>
         </div>
         <div class="stat">
-            <h2>{% trans "Time Laptops Were Used:" %}</h2>
-            <h3>{{ total_time }}</h3>
+            <h2>{% trans "Best Fixer:" %}</h2>
+            <h3>{{ fixed_the_most }}</h3>
         </div>
     </div>
     <div class="graph-container">
@@ -25,28 +25,29 @@
     var isRightToLeft
     if(document.dir === "rtl")
         {isRightToLeft = true}
-    const pins_per_teacher = JSON.parse('{{ pins_by_teacher|safe }}')
+    const problems_by_teacher = JSON.parse('{{ problems_by_teacher|safe }}');
     const ctx = document.getElementById('myChart');
+    console.log(problems_by_teacher)
     const PinsPerMonthChart = document.getElementById('myChart2');
-    var granted = []
-    var not_granted = []
-    for(let i = 0;i<Object.values(pins_per_teacher).length;i++){
-      granted.push(Object.values(Object.values(pins_per_teacher)[i])[0])
-      not_granted.push(Object.values(Object.values(pins_per_teacher)[i])[1])
+    var resolved = []
+    var not_resolved = []
+    for(let i = 0;i<Object.values(problems_by_teacher).length;i++){
+      resolved.push(Object.values(Object.values(problems_by_teacher)[i])[0])
+      not_resolved.push(Object.values(Object.values(problems_by_teacher)[i])[1])
     }
 
     var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: Object.keys(pins_per_teacher),
+      labels: Object.keys(problems_by_teacher),
       datasets: [{
-        label: '# {% trans "Of Pins Granted" %}',
-        data: granted,
+        label: '# {% trans "Of Problems Resolved" %}',
+        data: resolved,
         borderWidth: 1
       },
       {
-        label: '# {% trans "Of Pins Not Granted" %}',
-        data: not_granted,
+        label: '# {% trans "Of Pins Not Resolved" %}',
+        data: not_resolved,
         borderWidth: 1
       }
       ]
@@ -73,7 +74,7 @@
     data: {
       labels: ['{% trans "September" %}', '{% trans "October" %}','{% trans "November" %}','{% trans "December"%}','{% trans "January" %}', '{% trans "February" %}','{% trans "March" %}', '{% trans "April" %}','{% trans "May" %}', '{% trans "June" %}'],
       datasets: [
-          {% for year,data in pins_by_month.items %}
+          {% for year,data in problems_by_month.items %}
           {
         label: '{{ year }}',
         data: {{ data }},

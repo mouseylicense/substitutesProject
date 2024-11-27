@@ -100,8 +100,11 @@ class Room(models.Model):
     show_as_possible = models.BooleanField(default=True)
     def __str__(self):
         return self.name
-
-
+    def get_class(self,time,day):
+            t = self.class_set.filter(day_of_week=day,hour__in=['9:15', '10:07', '11:00', '11:45', '12:45', '13:45'],hour__lte=time).order_by('-hour').first()
+            if t == None:
+                return _("Empty")
+            return t.name
 class Absence(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     date = models.DateField()
