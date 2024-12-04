@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 import datetime
 
+from django.db.models import Exists, OuterRef, Q
 from django.template.defaultfilters import first
 from django.utils import timezone
 from django.db.models.signals import post_delete
@@ -145,7 +146,7 @@ class Class(models.Model):
     tenth_grade = models.BooleanField(default=False, verbose_name=_("Tenth Grade"))
     eleventh_grade = models.BooleanField(default=False, verbose_name=_("Eleventh Grade"))
     twelfth_grade = models.BooleanField(default=False, verbose_name=_("Twelfth Grade"))
-
+    visible = models.BooleanField(default=True, verbose_name=_("Visible"))
     class Meta:
         permissions = (
             ('see_classes', "can add classes"),
@@ -205,15 +206,29 @@ class Class(models.Model):
 
 
 class ClassNeedsSub(models.Model):
+    related_absence = models.ForeignKey(Absence,null=True,blank=True, on_delete=models.CASCADE)
     Class_That_Needs_Sub = models.ForeignKey(Class, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
     substitute_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
-
     class Meta:
         permissions = (
             ("see_subs", "can Set Substitutions"),
         )
-
+    def possible_subs(self):
+        c = self
+        filter_dict = {DAYS_OF_WEEKDAY_DICT[c.date.weekday()]: True}
+        teacherQuery = Teacher.objects.filter(
+            ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY_DICT[c.date.weekday()],
+                                         hour=c.Class_That_Needs_Sub.hour)),
+            ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"), date=c.date,
+                                                 Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
+            ~Q(absence__date=c.date),
+            can_substitute=True,
+            **filter_dict).values("pk", "first_name")
+        availableTeachers = []
+        for teacher in teacherQuery:
+            availableTeachers.append({'id': teacher['pk'], 'name': teacher['first_name']})
+        return availableTeachers
     def __str__(self):
         if self.substitute_teacher is None:
             return str(self.date) + " - " + str(self.Class_That_Needs_Sub)

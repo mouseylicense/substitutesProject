@@ -103,22 +103,31 @@ def index(request):
 
 @login_required()
 @user_passes_test(lambda u: u.manage_subs or u.is_superuser)
+def log(request):
+
+    return render(request, 'log.html',{"classes":ClassNeedsSub.objects.filter(substitute_teacher__isnull=False).order_by("date")})
+
+
+
+
+@login_required()
+@user_passes_test(lambda u: u.manage_subs or u.is_superuser)
 def sub(request):
     if request.method == 'POST':
-        form = forms.SubstituteForm(request.POST)
-        if form.is_valid():
-            sub = form.cleaned_data['class_that_needs_sub']
-            sub.substitute_teacher = Teacher.objects.filter(pk=form['substitute_teacher'].data).get()
-            teacher = Teacher.objects.get(pk=form['substitute_teacher'].data)
-            teacher.last_sub = form.cleaned_data['class_that_needs_sub'].date
+        class_needs_sub = ClassNeedsSub.objects.get(pk=request.POST.get("class"))
+
+        if request.POST.get("sub") != 'none':
+            teacher = Teacher.objects.get(pk=request.POST.get("sub"))
+            teacher.last_sub = class_needs_sub.date
             teacher.save()
-            sub.save()
-
-
         else:
-            print(form.errors)
-    form = forms.SubstituteForm(initial={'substitute_teacher': "None selected"})
-    return render(request, 'setSub.html', {"form": form, "ClassesThatNeedSub": ClassNeedsSub.objects.count()})
+            teacher = None
+        class_needs_sub.substitute_teacher =teacher
+        class_needs_sub.save()
+        r = HttpResponse(202)
+        r["HX-Refresh"] = "true"
+        return r
+    return render(request, 'setSub.html', {"subbed_classes":ClassNeedsSub.objects.filter(substitute_teacher__isnull=False,date__gte=timezone.now().today()), "ClassesThatNeedSub": ClassNeedsSub.objects.filter(substitute_teacher__isnull=True,date__gte=timezone.now().today())})
 
 @login_required()
 def teacher_home(request):
@@ -134,7 +143,7 @@ def teacher_home(request):
                                          day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
 
                 for c in q:
-                    newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'])
+                    newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'],related_absence=absence)
                     newClass.save()
             else:
                 messages.error(request, _("Absence already reported."))
@@ -177,30 +186,11 @@ def get_teacher_classes(request, n):
     return JsonResponse({"classesTimes": classesTimes})
 
 
-@require_GET
-def get_possible_subs(request, n):
-    c = ClassNeedsSub.objects.get(pk=n)
-    filter_dict = {DAYS_OF_WEEKDAY[c.date.weekday()]: True}
-    teacherQuery = Teacher.objects.filter(
-        ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY[c.date.weekday()],
-                                     hour=c.Class_That_Needs_Sub.hour)),
-        ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"), date=c.date,
-                                             Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
-        ~Q(absence__date=c.date),
-        can_substitute=True,
-        **filter_dict).values("pk","first_name")
-    availableTeachers = []
-    for teacher in teacherQuery:
-        print(teacher)
-        availableTeachers.append({'id': teacher['pk'], 'name': teacher['first_name']})
-    return JsonResponse({"availableTeachers": availableTeachers})
-
-
 def timetable(request):
     rooms = []
     for room in Room.objects.filter(show_as_possible=True):
         rooms.append(room.name)
-    classes = Class.objects.all()
+    classes = Class.objects.filter(visible=True)
     teachers = []
     for t in Teacher.objects.filter(type=0):
         teachers.append(t)

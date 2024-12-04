@@ -19,11 +19,11 @@ NUMBERS_TO_GRADES = {
 
 
 class ClassAdmin(admin.ModelAdmin):
-    fields = [('name','description'),('day_of_week','hour'),'room','teacher',('student_teacher','student_teaching'),('first_grade','second_grade','third_grade','fourth_grade','fifth_grade','sixth_grade','seventh_grade','eighth_grade','ninth_grade','tenth_grade','eleventh_grade','twelfth_grade')]
+    fields = [('name','description'),('day_of_week','hour'),'room','teacher',('student_teacher','student_teaching'),('first_grade','second_grade','third_grade','fourth_grade','fifth_grade','sixth_grade','seventh_grade','eighth_grade','ninth_grade','tenth_grade','eleventh_grade','twelfth_grade'),('visible',)]
 
 
 class TeacherAdmin(admin.ModelAdmin):
-    fields = [('first_name','last_name'),('email','phone_number'),('can_substitute','tutor','shocher'),('Sunday','Monday','Tuesday','Wednesday','Thursday'),('user_permissions','groups','is_superuser','password','is_staff','manage_schedule','manage_subs','type')]
+    fields = [('first_name','last_name'),('email','phone_number'),('can_substitute','tutor','shocher'),('Sunday','Monday','Tuesday','Wednesday','Thursday'),('user_permissions','groups','is_superuser','password','is_staff','manage_schedule','manage_subs','type','last_sub')]
 admin.site.register(models.Teacher,TeacherAdmin)
 admin.site.register(models.Class,ClassAdmin)
 admin.site.register(models.Absence)

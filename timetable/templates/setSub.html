@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block static%}
+    <link rel="stylesheet" href="{% static "timetable/styles/bootstrap.min.css" %}">
+{% endblock %}
+{% block title %}Pin Manager{% endblock %}
+{% block content %}
+    <table class="table table-bordered table-responsive-sm">
+    <thead>
+        <tr>
+            <th>{% trans "Date And Time" %}</th>
+            <th>{% trans "Class" %}</th>
+            <th>{% trans "Original Teacher" %}</th>
+            <th>{% trans "Room" %}</th>
+            <th>{% trans "Subbing Teacher" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for class in ClassesThatNeedSub %}
+        <tr class="table-danger">
+            <td>{{ class.date }} - {{ class.Class_That_Needs_Sub.hour }}</td>
+            <td>{{ class.Class_That_Needs_Sub.name }}</td>
+            <td>{{ class.Class_That_Needs_Sub.teacher }}</td>
+            <td>{{ class.Class_That_Needs_Sub.room }}</td>
+            <td>
+
+                    <form hx-swap="none"  hx-post="{% url "sub" %}">
+                        <input name="class" type="hidden" value="{{ class.id }}">
+                        <select>
+                            <option value="none" selected>-----</option>
+                            {% for i in class.possible_subs %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endfor %}
+                        </select>
+                    <button   hx-swap="none" class="btn btn-success">Change</button>
+                    </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <h2>{% trans "Classes that already have a substitution:" %}</h2>
+    <table class="table table-bordered table-responsive-sm">
+    <thead>
+        <tr>
+            <th>{% trans "Date And Time" %}</th>
+            <th>{% trans "Class" %}</th>
+            <th>{% trans "Original Teacher" %}</th>
+            <th>{% trans "Room" %}</th>
+            <th>{% trans "Subbing Teacher" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for class in subbed_classes %}
+        <tr class="table-success">
+            <td>{{ class.date }} - {{ class.Class_That_Needs_Sub.hour }}</td>
+            <td>{{ class.Class_That_Needs_Sub.name }}</td>
+            <td>{{ class.Class_That_Needs_Sub.teacher }}</td>
+            <td>{{ class.Class_That_Needs_Sub.room }}</td>
+            <td>
+
+                    <form hx-swap="none"  hx-post="{% url "sub" %}">
+                        <input name="class" type="hidden" value="{{ class.id }}">
+                        <select name="sub">
+                            <option selected value="{{ class.substitute_teacher.id }}">{{ class.substitute_teacher.first_name }}</option>
+                            {% for i in class.possible_subs %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endfor %}
+                        </select>
+                    <button   hx-swap="none" hx-target="closest .pin-row" class="btn btn-success">Change</button>
+                    </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}

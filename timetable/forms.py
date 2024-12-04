@@ -43,13 +43,6 @@ class ClassForm(forms.ModelForm):
             "description":forms.Textarea(attrs={'placeholder':_("Description")+"...",'style':'flex-grow:1'}),
         }
 
-class SubstituteForm(forms.Form):
-    class_that_needs_sub = forms.ModelChoiceField(
-        ClassNeedsSub.objects.order_by('substitute_teacher__first_name', 'date'),
-        label=_("Class that needs sub"),
-        widget=forms.Select(attrs={'id': 'sub'}), empty_label=None)
-    substitute_teacher = forms.CharField(widget=forms.Select(attrs={'id': 'teacher'}))
-
 class ScheduleForm(forms.ModelForm):
     class Meta:
         model = Schedule

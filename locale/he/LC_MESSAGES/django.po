@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: .\templates\thanks.html:25
+#: .\timetable\templates\thanks.html:25
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 20:29+0200\n"
-"PO-Revision-Date: 2024-11-03 20:38+0200\n"
+"POT-Creation-Date: 2024-12-04 13:43+0200\n"
+"PO-Revision-Date: 2024-12-04 13:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: .\LaptopLoaning\forms.py:11
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:12
-#: .\templates\timetable.html:115 .\timetable\forms.py:33
+#: .\timetable\forms.py:33 .\timetable\templates\timetable.html:115
 msgid "Teacher"
 msgstr "מורה"
 
@@ -43,6 +43,8 @@ msgstr "מספר מחשבים"
 
 #: .\LaptopLoaning\forms.py:15
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:17
+#: .\dashboard\forms.py:15 .\timetable\templates\log.html:14
+#: .\timetable\templates\setSub.html:15 .\timetable\templates\setSub.html:50
 msgid "Room"
 msgstr "חדר"
 
@@ -65,23 +67,31 @@ msgstr "האם אתה בטוח שאתה רוצה למחוק את ה-PIN הזה?"
 
 #: .\LaptopLoaning\templates\grantedPin.html:16
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:45
-#: .\templates\teacher_manager.html:79
+#: .\timetable\templates\teacher_manager.html:79
 msgid "Delete"
 msgstr "מחק"
 
-#: .\LaptopLoaning\templates\laptops_base.html:3 .\templates\base.html:3
-#: .\templates\day_schedule.html:4 .\templates\publicBase.html:3
+#: .\LaptopLoaning\templates\laptops_base.html:3
+#: .\dashboard\templates\dashboard_base.html:3
 #: .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4 .\templates\studentregister.html:3
+#: .\templates\registration\register.html:3 .\timetable\templates\base.html:3
+#: .\timetable\templates\day_schedule.html:4
+#: .\timetable\templates\publicBase.html:3
+#: .\timetable\templates\set_schedule.html:4
+#: .\timetable\templates\student_details.html:4
+#: .\timetable\templates\studentregister.html:3
 msgid "en"
 msgstr "he"
 
-#: .\LaptopLoaning\templates\laptops_base.html:3 .\templates\base.html:3
-#: .\templates\day_schedule.html:4 .\templates\publicBase.html:3
+#: .\LaptopLoaning\templates\laptops_base.html:3
+#: .\dashboard\templates\dashboard_base.html:3
 #: .\templates\registration\login.html:3
-#: .\templates\registration\register.html:3 .\templates\set_schedule.html:4
-#: .\templates\student_details.html:4 .\templates\studentregister.html:3
+#: .\templates\registration\register.html:3 .\timetable\templates\base.html:3
+#: .\timetable\templates\day_schedule.html:4
+#: .\timetable\templates\publicBase.html:3
+#: .\timetable\templates\set_schedule.html:4
+#: .\timetable\templates\student_details.html:4
+#: .\timetable\templates\studentregister.html:3
 msgid "ltr"
 msgstr "rtl"
 
@@ -157,51 +167,61 @@ msgstr "מספר המחשבים שאושרו:"
 msgid "Time Laptops Were Used:"
 msgstr "זמן בו מחשבים היו בשימוש:"
 
-#: .\LaptopLoaning\templates\statistics.html:42
+#: .\LaptopLoaning\templates\statistics.html:43
 msgid "Of Pins Granted"
 msgstr "קודים שאושרו"
 
-#: .\LaptopLoaning\templates\statistics.html:47
+#: .\LaptopLoaning\templates\statistics.html:48
 msgid "Of Pins Not Granted"
 msgstr "קודים שנדחו"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "September"
 msgstr "ספטמבר"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "October"
 msgstr "אוקטובר"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "November"
 msgstr "נובמבר"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "December"
 msgstr "דצמבר"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "January"
 msgstr "ינואר"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "February"
 msgstr "פברואר"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "March"
 msgstr "מרץ"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "April"
 msgstr "אפריל"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "May"
 msgstr "מאי"
 
-#: .\LaptopLoaning\templates\statistics.html:73
+#: .\LaptopLoaning\templates\statistics.html:74
+#: .\dashboard\templates\dash_statistics.html:75
 msgid "June"
 msgstr "יוני"
 
@@ -213,139 +233,62 @@ msgstr "עברית"
 msgid "English"
 msgstr "אנגלית"
 
-#: .\templates\class_manager.html:9 .\templates\class_manager.html:95
-msgid "Manage Classes"
-msgstr "ניהול שיעורים"
+#: .\dashboard\forms.py:14
+msgid "Problem"
+msgstr "בעיה"
 
-#: .\templates\class_manager.html:96
-msgid "Create New Class"
-msgstr "צור שיעור חדש"
+#: .\dashboard\forms.py:16
+msgid "Urgency"
+msgstr "דְחִיפוּת"
 
-#: .\templates\class_manager.html:106
-msgid "Edit Description"
-msgstr "ערוך תיאור"
+#: .\dashboard\models.py:19 .\dashboard\templates\report_form.html:23
+msgid "Take Your Time"
+msgstr "קחו את הזמן שלך"
 
-#: .\templates\class_manager.html:192
-msgid "Add Class"
-msgstr "הוסף שיעור"
+#: .\dashboard\models.py:19 .\dashboard\templates\report_form.html:23
+msgid "Urgent"
+msgstr "דחוף"
 
-#: .\templates\class_manager.html:234
-msgid "Search Classes"
-msgstr "חפש שיעור"
+#: .\dashboard\models.py:19 .\dashboard\templates\report_form.html:23
+msgid "COME RIGHT NOW!"
+msgstr "צריך עזרה מיד!"
 
-#: .\templates\class_manager.html:243
-msgid "Students"
-msgstr "תלמידים"
+#: .\dashboard\templates\dash_statistics.html:7
+msgid "Total Number Of Problems Resolved:"
+msgstr "מספר הבעיות שנפתרו:"
 
-#: .\templates\class_manager.html:246 .\templates\class_manager.html:248
-msgid "Change Description"
-msgstr "ערוך תיאור"
+#: .\dashboard\templates\dash_statistics.html:11
+msgid "Total Number Of Problems:"
+msgstr "מספר של בעיות:"
 
-#: .\templates\dangerzone.html:4 .\templates\dangerzone.html:8
-msgid "Danger Zone"
-msgstr "אזור הסכנה"
+#: .\dashboard\templates\dash_statistics.html:15
+msgid "Best Fixer:"
+msgstr "המתקן הטוב ביותר:"
 
-#: .\templates\dangerzone.html:18
-msgid "Repeat Value Above"
-msgstr "חזור על הערך למעלה"
+#: .\dashboard\templates\dash_statistics.html:44
+msgid "Of Problems Resolved"
+msgstr "מספר הבעיות שנפתרו"
 
-#: .\templates\dangerzone.html:19
-msgid "Perform Action"
-msgstr "בצע פעולה"
+#: .\dashboard\templates\dash_statistics.html:49
+msgid "Of Problems Not Resolved"
+msgstr "מספר הבעיות שלא נפתרו"
 
-#: .\templates\dangerzone.html:25 .\templates\dangerzone.html:26
-msgid "Delete All Schedules"
-msgstr "מחק את כל המערכות"
+#: .\dashboard\templates\dashboard_home.html:4
+#: .\timetable\templates\teacher_home.html:5
+msgid "Home"
+msgstr "דף הבית"
 
-#: .\templates\dangerzone.html:27 .\templates\dangerzone.html:28
-msgid "Increase Grade For All Students"
-msgstr "העלאת כיתה לכל התלמידים"
+#: .\dashboard\templates\dashboard_home.html:8
+msgid "My Assigned Problems"
+msgstr "התקלות שלי"
 
-#: .\templates\dangerzone.html:29 .\templates\dangerzone.html:30
-msgid "Delete All Tutor - Student Relations"
-msgstr "מחק את כל קשרי תלמיד - חונך"
+#: .\dashboard\templates\report_form.html:9
+msgid "Report A Problem"
+msgstr "דווח על תקלה"
 
-#: .\templates\dangerzone.html:31 .\templates\dangerzone.html:32
-msgid "Delete All Shachariot"
-msgstr "מחק את כל השחריות"
-
-#: .\templates\dangerzone.html:33
-msgid "Delete All Classes"
-msgstr "מחק את כל השיעורים"
-
-#: .\templates\dangerzone.html:34
-msgid "Delete All Students"
-msgstr "מחק את כל התלמידים"
-
-#: .\templates\first_time.html:13
-msgid "Hi There!"
-msgstr "שלום!"
-
-#: .\templates\first_time.html:15
-msgid ""
-"It Looks like this is the first time you are Using ClassCover! First things "
-"first, were gonna need to create a User, This user will be your "
-"Administrator user, and is very important! (P.S:Remember These Credentials!)"
-msgstr ""
-"נראה שזו הפעם הראשונה שאתה משתמש ב-ClassCover! דבר ראשון, בוא ניצור משתמש, "
-"משתמש זה יהיה המשתמש המנהל שלך, והוא מאוד חשוב! (נ.ב: זכור את הפרטים שלך!)"
-
-#: .\templates\first_time.html:20
-msgid "Create User and Get Started!"
-msgstr "צור משתמש והתחל!"
-
-#: .\templates\import_page.html:3
-msgid "Import"
-msgstr "ייבא"
-
-#: .\templates\import_page.html:6
-msgid "Import Students From CSV"
-msgstr "ייבוא תלמידים מ-CSV"
-
-#: .\templates\import_page.html:7
-msgid ""
-"The CSV Should be Formatted as The Schools Contact Sheet, Beware That This "
-"Creates A Student For Each row, regardless of if a Student with this name "
-"exists"
-msgstr ""
-"ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר, שימ/י לב: פעולה זו תיצור "
-"תלמיד לכל שורה בקובץ, גם אם תלמיד בשם זה כבר קיים"
-
-#: .\templates\import_page.html:11 .\templates\import_page.html:19
-msgid "import"
-msgstr "ייבא"
-
-#: .\templates\import_page.html:14
-msgid "Import Teachers From CSV"
-msgstr "ייבוא מורים מ-CSV"
-
-#: .\templates\import_page.html:15
-msgid "The CSV Should be Formatted as The Schools Contact Sheet"
-msgstr "ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר"
-
-#: .\templates\index.html:3 .\templates\publicBase.html:21
-msgid "Today's Subs"
-msgstr "ההחלפות היום"
-
-#: .\templates\index.html:16
-msgid "No Sub Yet"
-msgstr "טרם נקבע מחליף"
-
-#: .\templates\index.html:18
-msgid "Substitute Teacher:"
-msgstr "מורה מחליף:"
-
-#: .\templates\index.html:30
-msgid "No Subs For today!"
-msgstr "אין החלפות להיום!"
-
-#: .\templates\publicBase.html:20
-msgid "Login"
-msgstr "התחבר"
-
-#: .\templates\publicBase.html:22 .\templates\timetable.html:6
-msgid "Schedule"
-msgstr "מערכת"
+#: .\dashboard\templates\report_form.html:17
+msgid "Report"
+msgstr "דווח"
 
 #: .\templates\registration\login.html:13
 #: .\templates\registration\login.html:20
@@ -370,294 +313,44 @@ msgstr "הירשם"
 msgid "Working Days:"
 msgstr "ימי עבודה:"
 
-#: .\templates\registration\register.html:29
-#: .\templates\student_details.html:25 .\templates\timetable.html:140
-#: .\timetable\forms.py:85 .\timetable\forms.py:115 .\timetable\models.py:261
-#: .\timetable\models.py:264 .\timetable\models.py:267
-#: .\timetable\models.py:270
+#: .\templates\registration\register.html:29 .\timetable\forms.py:78
+#: .\timetable\forms.py:108 .\timetable\models.py:279 .\timetable\models.py:282
+#: .\timetable\models.py:285 .\timetable\models.py:288
+#: .\timetable\templates\student_details.html:25
+#: .\timetable\templates\timetable.html:140
 msgid "Sunday"
 msgstr "ראשון"
 
-#: .\templates\registration\register.html:30
-#: .\templates\student_details.html:26 .\templates\timetable.html:141
-#: .\timetable\forms.py:86 .\timetable\forms.py:116 .\timetable\models.py:273
-#: .\timetable\models.py:276 .\timetable\models.py:279
-#: .\timetable\models.py:282
+#: .\templates\registration\register.html:30 .\timetable\forms.py:79
+#: .\timetable\forms.py:109 .\timetable\models.py:291 .\timetable\models.py:294
+#: .\timetable\models.py:297 .\timetable\models.py:300
+#: .\timetable\templates\student_details.html:26
+#: .\timetable\templates\timetable.html:141
 msgid "Monday"
 msgstr "שני"
 
-#: .\templates\registration\register.html:31
-#: .\templates\student_details.html:27 .\templates\timetable.html:142
-#: .\timetable\forms.py:87 .\timetable\forms.py:117 .\timetable\models.py:285
-#: .\timetable\models.py:288 .\timetable\models.py:292
-#: .\timetable\models.py:295
+#: .\templates\registration\register.html:31 .\timetable\forms.py:80
+#: .\timetable\forms.py:110 .\timetable\models.py:303 .\timetable\models.py:306
+#: .\timetable\models.py:310 .\timetable\models.py:313
+#: .\timetable\templates\student_details.html:27
+#: .\timetable\templates\timetable.html:142
 msgid "Tuesday"
 msgstr "שלישי"
 
-#: .\templates\registration\register.html:32
-#: .\templates\student_details.html:28 .\templates\timetable.html:143
-#: .\timetable\forms.py:88 .\timetable\forms.py:118 .\timetable\models.py:299
-#: .\timetable\models.py:303 .\timetable\models.py:307
-#: .\timetable\models.py:311
+#: .\templates\registration\register.html:32 .\timetable\forms.py:81
+#: .\timetable\forms.py:111 .\timetable\models.py:317 .\timetable\models.py:321
+#: .\timetable\models.py:325 .\timetable\models.py:329
+#: .\timetable\templates\student_details.html:28
+#: .\timetable\templates\timetable.html:143
 msgid "Wednesday"
 msgstr "רביעי"
 
-#: .\templates\registration\register.html:33
-#: .\templates\student_details.html:29 .\templates\timetable.html:144
-#: .\timetable\forms.py:89 .\timetable\forms.py:119 .\timetable\models.py:315
-#: .\timetable\models.py:319
+#: .\templates\registration\register.html:33 .\timetable\forms.py:82
+#: .\timetable\forms.py:112 .\timetable\models.py:333 .\timetable\models.py:337
+#: .\timetable\templates\student_details.html:29
+#: .\timetable\templates\timetable.html:144
 msgid "Thursday"
 msgstr "חמישי"
-
-#: .\templates\setSub.html:4
-msgid "Set Substitution"
-msgstr "קבע החלפות"
-
-#: .\templates\setSub.html:13
-msgid "change"
-msgstr "החלף"
-
-#: .\templates\setSub.html:16
-msgid "No Classes To Sub"
-msgstr "אין שיעורים שצריכים החלפות"
-
-#: .\templates\set_schedule.html:10
-msgid "Set Your Schedule"
-msgstr "קבע את המערכת שלך"
-
-#: .\templates\set_schedule.html:25
-msgid "Set!"
-msgstr "קבע!"
-
-#: .\templates\student_details.html:9
-msgid "Grade"
-msgstr "כיתה"
-
-#: .\templates\student_details.html:10 .\timetable\forms.py:120
-msgid "Tutor"
-msgstr "חונך"
-
-#: .\templates\student_details.html:11
-msgid "Shacharit"
-msgstr "שחרית"
-
-#: .\templates\student_manager.html:9 .\templates\student_manager.html:11
-msgid "Manage Students"
-msgstr "ניהול תלמידים"
-
-#: .\templates\student_manager.html:12
-msgid "Students With Schedules"
-msgstr "תלמידים עם מערכת"
-
-#: .\templates\student_manager.html:12
-msgid "Students Without"
-msgstr "תלמידים ללא מערכת"
-
-#: .\templates\student_manager.html:12
-msgid "Total Students"
-msgstr "תלמידים"
-
-#: .\templates\student_manager.html:16
-msgid "invited "
-msgstr "הזמנה נשלחה "
-
-#: .\templates\student_manager.html:28
-msgid "Student Creation Form"
-msgstr "טופס יצירת תלמידים"
-
-#: .\templates\student_manager.html:32
-msgid "Warning, this will send an email to every student with no Schedule"
-msgstr "אזהרה, אתה עומד לשלוח הודעה לכל התלמידים ללא מערכת"
-
-#: .\templates\student_manager.html:32
-msgid "Invite all"
-msgstr "שלח הזמנה לכולם"
-
-#: .\templates\student_manager.html:33
-msgid ""
-"WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS "
-"IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???"
-msgstr ""
-"**אזהרה**!!! הפעולה תאפס את כל המערכות במערכת!! הפעולה היא בלתי הפיכה!! האם "
-"אתה בטוח שאתה רוצה להמשיך???"
-
-#: .\templates\student_manager.html:33
-msgid "Reset ALL"
-msgstr "אפס את כל המערכות"
-
-#: .\templates\student_manager.html:40
-msgid "Search Student"
-msgstr "חפש תלמיד"
-
-#: .\templates\student_manager.html:52
-msgid "Open in new page"
-msgstr "פתח פרטים בדף חדש"
-
-#: .\templates\student_manager.html:53
-msgid "Reset Schedule"
-msgstr "מחק מערכת"
-
-#: .\templates\student_manager.html:54 .\templates\student_manager.html:69
-msgid "Copied Link To Clipboard"
-msgstr "קישור הועתק"
-
-#: .\templates\student_manager.html:54 .\templates\student_manager.html:69
-msgid "Update Details"
-msgstr "עדכן פרטים"
-
-#: .\templates\student_manager.html:64
-msgid "Last Invite"
-msgstr "הזמנה אחרונה"
-
-#: .\templates\student_manager.html:67
-msgid "Send Invite"
-msgstr "שלח הזמנה לקביעת מערכת"
-
-#: .\templates\student_manager.html:68
-msgid "Set Schedule"
-msgstr "קבע מערכת"
-
-#: .\templates\studentregister.html:13 .\templates\studentregister.html:20
-#: .\templates\studentregister.html:27
-msgid "Register Student"
-msgstr "רשום תלמיד"
-
-#: .\templates\teacher_home.html:5
-msgid "Home"
-msgstr "דף הבית"
-
-#: .\templates\teacher_home.html:19
-msgid "Report Absence"
-msgstr "דווח על העדרות"
-
-#: .\templates\teacher_home.html:26
-msgid "My Substitutions"
-msgstr "ההחלפות שלי"
-
-#: .\templates\teacher_home.html:40
-msgid "My Absences"
-msgstr "ההיעדרויות שלי"
-
-#: .\templates\teacher_manager.html:50 .\templates\teacher_manager.html:52
-msgid "Manage Teachers"
-msgstr "ניהול מורים"
-
-#: .\templates\teacher_manager.html:53
-msgid "Teacher's Email"
-msgstr "אימייל של המורה"
-
-#: .\templates\teacher_manager.html:53
-msgid "Add Teacher / Generate Teacher Form"
-msgstr "הוסף מורה / צור טופס של מורה"
-
-#: .\templates\teacher_manager.html:54
-msgid "Click To Copy: "
-msgstr "לחץ כדי להעתיק: "
-
-#: .\templates\teacher_manager.html:62
-msgid "Search Teachers"
-msgstr "חפש מורה"
-
-#: .\templates\teacher_manager.html:78
-msgid "Invite Teacher"
-msgstr "הזמן מורה"
-
-#: .\templates\thanks.html:20
-msgid "Success!"
-msgstr "הושלם!"
-
-#: .\templates\timetable.html:20 .\timetable\forms.py:43
-#: .\timetable\forms.py:186
-msgid "Description"
-msgstr "תיאור"
-
-#: .\templates\timetable.html:29 .\timetable\models.py:29
-#: .\timetable\models.py:133 .\timetable\models.py:169
-#: .\timetable\models.py:244
-msgid "First Grade"
-msgstr "כיתה א'"
-
-#: .\templates\timetable.html:36 .\timetable\models.py:30
-#: .\timetable\models.py:134 .\timetable\models.py:170
-#: .\timetable\models.py:245
-msgid "Second Grade"
-msgstr "כיתה ב'"
-
-#: .\templates\timetable.html:43 .\timetable\models.py:31
-#: .\timetable\models.py:135 .\timetable\models.py:171
-#: .\timetable\models.py:246
-msgid "Third Grade"
-msgstr "כיתה ג'"
-
-#: .\templates\timetable.html:50 .\timetable\models.py:32
-#: .\timetable\models.py:136 .\timetable\models.py:172
-#: .\timetable\models.py:247
-msgid "Fourth Grade"
-msgstr "כיתה ד'"
-
-#: .\templates\timetable.html:57 .\timetable\models.py:33
-#: .\timetable\models.py:137 .\timetable\models.py:173
-#: .\timetable\models.py:248
-msgid "Fifth Grade"
-msgstr "כיתה ה'"
-
-#: .\templates\timetable.html:64 .\timetable\models.py:34
-#: .\timetable\models.py:138 .\timetable\models.py:174
-#: .\timetable\models.py:249
-msgid "Sixth Grade"
-msgstr "כיתה ו'"
-
-#: .\templates\timetable.html:71 .\timetable\models.py:35
-#: .\timetable\models.py:139 .\timetable\models.py:175
-#: .\timetable\models.py:250
-msgid "Seventh Grade"
-msgstr "כיתה ז'"
-
-#: .\templates\timetable.html:78 .\timetable\models.py:36
-#: .\timetable\models.py:140 .\timetable\models.py:176
-#: .\timetable\models.py:251
-msgid "Eighth Grade"
-msgstr "כיתה ח'"
-
-#: .\templates\timetable.html:85 .\timetable\models.py:37
-#: .\timetable\models.py:141 .\timetable\models.py:177
-#: .\timetable\models.py:252
-msgid "Ninth Grade"
-msgstr "כיתה ט'"
-
-#: .\templates\timetable.html:92 .\timetable\models.py:38
-#: .\timetable\models.py:142 .\timetable\models.py:178
-#: .\timetable\models.py:253
-msgid "Tenth Grade"
-msgstr "כיתה י'"
-
-#: .\templates\timetable.html:99 .\timetable\models.py:39
-#: .\timetable\models.py:143 .\timetable\models.py:179
-#: .\timetable\models.py:254
-msgid "Eleventh Grade"
-msgstr "כיתה יא'"
-
-#: .\templates\timetable.html:106 .\timetable\models.py:40
-#: .\timetable\models.py:144 .\timetable\models.py:180
-#: .\timetable\models.py:255
-msgid "Twelfth Grade"
-msgstr "כיתה יב'"
-
-#: .\templates\timetable.html:123
-msgid "Uncheck All"
-msgstr "נקה הכל"
-
-#: .\templates\timetable.html:124
-msgid "Print Today's Schedule"
-msgstr "הדפס את המערכת של היום"
-
-#: .\templates\timetable.html:130
-msgid "Classes"
-msgstr "שיעורים"
-
-#: .\templates\timetable.html:133
-msgid "Free Rooms"
-msgstr "חדרים פנויים"
 
 #: .\timetable\forms.py:32
 msgid "Subject"
@@ -671,79 +364,492 @@ msgstr "יום"
 msgid "Hour"
 msgstr "שעה"
 
-#: .\timetable\forms.py:37 .\timetable\models.py:131
+#: .\timetable\forms.py:37 .\timetable\models.py:135
 msgid "Is a Student Teaching?"
 msgstr "תלמידים מלמדים?"
 
-#: .\timetable\forms.py:38 .\timetable\models.py:132
+#: .\timetable\forms.py:38 .\timetable\models.py:136
 msgid "Student Teaching"
 msgstr "תלמיד שמלמד"
 
-#: .\timetable\forms.py:49
-msgid "Class that needs sub"
-msgstr "שיעור שצריך החלפה"
+#: .\timetable\forms.py:43 .\timetable\forms.py:179
+#: .\timetable\templates\timetable.html:20
+msgid "Description"
+msgstr "תיאור"
 
-#: .\timetable\forms.py:79 .\timetable\forms.py:92 .\timetable\forms.py:137
+#: .\timetable\forms.py:72 .\timetable\forms.py:85 .\timetable\forms.py:130
 msgid "First Name"
 msgstr "שם פרטי"
 
-#: .\timetable\forms.py:80 .\timetable\forms.py:93 .\timetable\forms.py:138
+#: .\timetable\forms.py:73 .\timetable\forms.py:86 .\timetable\forms.py:131
 msgid "Last Name"
 msgstr "שם משפחה"
 
-#: .\timetable\forms.py:81 .\timetable\forms.py:91 .\timetable\forms.py:130
-#: .\timetable\forms.py:140
+#: .\timetable\forms.py:74 .\timetable\forms.py:84 .\timetable\forms.py:123
+#: .\timetable\forms.py:133
 msgid "Password"
 msgstr "סיסמה"
 
-#: .\timetable\forms.py:82 .\timetable\forms.py:90 .\timetable\forms.py:142
-#: .\timetable\forms.py:176
+#: .\timetable\forms.py:75 .\timetable\forms.py:83 .\timetable\forms.py:135
+#: .\timetable\forms.py:169
 msgid "Phone Number"
 msgstr "מספר טלפון"
 
-#: .\timetable\forms.py:121
+#: .\timetable\forms.py:113 .\timetable\templates\student_details.html:10
+msgid "Tutor"
+msgstr "חונך"
+
+#: .\timetable\forms.py:114
 msgid "Shocher"
 msgstr "שוחר"
 
-#: .\timetable\forms.py:122
+#: .\timetable\forms.py:115
 msgid "Substitutes?"
 msgstr "מחליף?"
 
-#: .\timetable\forms.py:123
+#: .\timetable\forms.py:116
 msgid "Manages Subs"
 msgstr "מנהלת החלפות"
 
-#: .\timetable\forms.py:124
+#: .\timetable\forms.py:117
 msgid "Manages Schedule"
 msgstr "מנהל מערכת"
 
-#: .\timetable\forms.py:129 .\timetable\forms.py:139 .\timetable\forms.py:174
+#: .\timetable\forms.py:122 .\timetable\forms.py:132 .\timetable\forms.py:167
 msgid "Email"
 msgstr "אימייל"
 
-#: .\timetable\forms.py:173
+#: .\timetable\forms.py:166
 msgid "Name"
 msgstr "שם מלא"
 
-#: .\timetable\forms.py:191
+#: .\timetable\forms.py:184
 msgid "Select a file"
 msgstr "בחירת קובץ"
 
-#: .\timetable\views.py:132
+#: .\timetable\models.py:30 .\timetable\models.py:137 .\timetable\models.py:173
+#: .\timetable\models.py:262 .\timetable\templates\timetable.html:29
+msgid "First Grade"
+msgstr "כיתה א'"
+
+#: .\timetable\models.py:31 .\timetable\models.py:138 .\timetable\models.py:174
+#: .\timetable\models.py:263 .\timetable\templates\timetable.html:36
+msgid "Second Grade"
+msgstr "כיתה ב'"
+
+#: .\timetable\models.py:32 .\timetable\models.py:139 .\timetable\models.py:175
+#: .\timetable\models.py:264 .\timetable\templates\timetable.html:43
+msgid "Third Grade"
+msgstr "כיתה ג'"
+
+#: .\timetable\models.py:33 .\timetable\models.py:140 .\timetable\models.py:176
+#: .\timetable\models.py:265 .\timetable\templates\timetable.html:50
+msgid "Fourth Grade"
+msgstr "כיתה ד'"
+
+#: .\timetable\models.py:34 .\timetable\models.py:141 .\timetable\models.py:177
+#: .\timetable\models.py:266 .\timetable\templates\timetable.html:57
+msgid "Fifth Grade"
+msgstr "כיתה ה'"
+
+#: .\timetable\models.py:35 .\timetable\models.py:142 .\timetable\models.py:178
+#: .\timetable\models.py:267 .\timetable\templates\timetable.html:64
+msgid "Sixth Grade"
+msgstr "כיתה ו'"
+
+#: .\timetable\models.py:36 .\timetable\models.py:143 .\timetable\models.py:179
+#: .\timetable\models.py:268 .\timetable\templates\timetable.html:71
+msgid "Seventh Grade"
+msgstr "כיתה ז'"
+
+#: .\timetable\models.py:37 .\timetable\models.py:144 .\timetable\models.py:180
+#: .\timetable\models.py:269 .\timetable\templates\timetable.html:78
+msgid "Eighth Grade"
+msgstr "כיתה ח'"
+
+#: .\timetable\models.py:38 .\timetable\models.py:145 .\timetable\models.py:181
+#: .\timetable\models.py:270 .\timetable\templates\timetable.html:85
+msgid "Ninth Grade"
+msgstr "כיתה ט'"
+
+#: .\timetable\models.py:39 .\timetable\models.py:146 .\timetable\models.py:182
+#: .\timetable\models.py:271 .\timetable\templates\timetable.html:92
+msgid "Tenth Grade"
+msgstr "כיתה י'"
+
+#: .\timetable\models.py:40 .\timetable\models.py:147 .\timetable\models.py:183
+#: .\timetable\models.py:272 .\timetable\templates\timetable.html:99
+msgid "Eleventh Grade"
+msgstr "כיתה יא'"
+
+#: .\timetable\models.py:41 .\timetable\models.py:148 .\timetable\models.py:184
+#: .\timetable\models.py:273 .\timetable\templates\timetable.html:106
+msgid "Twelfth Grade"
+msgstr "כיתה יב'"
+
+#: .\timetable\models.py:107
+msgid "Empty"
+msgstr "ריק"
+
+#: .\timetable\models.py:149
+msgid "Visible"
+msgstr "מוצג"
+
+#: .\timetable\templates\class_manager.html:9
+#: .\timetable\templates\class_manager.html:95
+msgid "Manage Classes"
+msgstr "ניהול שיעורים"
+
+#: .\timetable\templates\class_manager.html:96
+msgid "Create New Class"
+msgstr "צור שיעור חדש"
+
+#: .\timetable\templates\class_manager.html:106
+msgid "Edit Description"
+msgstr "ערוך תיאור"
+
+#: .\timetable\templates\class_manager.html:192
+msgid "Add Class"
+msgstr "הוסף שיעור"
+
+#: .\timetable\templates\class_manager.html:234
+msgid "Search Classes"
+msgstr "חפש שיעור"
+
+#: .\timetable\templates\class_manager.html:243
+msgid "Students"
+msgstr "תלמידים"
+
+#: .\timetable\templates\class_manager.html:246
+#: .\timetable\templates\class_manager.html:248
+msgid "Change Description"
+msgstr "ערוך תיאור"
+
+#: .\timetable\templates\dangerzone.html:4
+#: .\timetable\templates\dangerzone.html:8
+msgid "Danger Zone"
+msgstr "אזור הסכנה"
+
+#: .\timetable\templates\dangerzone.html:18
+msgid "Repeat Value Above"
+msgstr "חזור על הערך למעלה"
+
+#: .\timetable\templates\dangerzone.html:19
+msgid "Perform Action"
+msgstr "בצע פעולה"
+
+#: .\timetable\templates\dangerzone.html:25
+#: .\timetable\templates\dangerzone.html:26
+msgid "Delete All Schedules"
+msgstr "מחק את כל המערכות"
+
+#: .\timetable\templates\dangerzone.html:27
+#: .\timetable\templates\dangerzone.html:28
+msgid "Increase Grade For All Students"
+msgstr "העלאת כיתה לכל התלמידים"
+
+#: .\timetable\templates\dangerzone.html:29
+#: .\timetable\templates\dangerzone.html:30
+msgid "Delete All Tutor - Student Relations"
+msgstr "מחק את כל קשרי תלמיד - חונך"
+
+#: .\timetable\templates\dangerzone.html:31
+#: .\timetable\templates\dangerzone.html:32
+msgid "Delete All Shachariot"
+msgstr "מחק את כל השחריות"
+
+#: .\timetable\templates\dangerzone.html:33
+msgid "Delete All Classes"
+msgstr "מחק את כל השיעורים"
+
+#: .\timetable\templates\dangerzone.html:34
+msgid "Delete All Students"
+msgstr "מחק את כל התלמידים"
+
+#: .\timetable\templates\first_time.html:13
+msgid "Hi There!"
+msgstr "שלום!"
+
+#: .\timetable\templates\first_time.html:15
+msgid ""
+"It Looks like this is the first time you are Using ClassCover! First things "
+"first, were gonna need to create a User, This user will be your "
+"Administrator user, and is very important! (P.S:Remember These Credentials!)"
+msgstr ""
+"נראה שזו הפעם הראשונה שאתה משתמש ב-ClassCover! דבר ראשון, בוא ניצור משתמש, "
+"משתמש זה יהיה המשתמש המנהל שלך, והוא מאוד חשוב! (נ.ב: זכור את הפרטים שלך!)"
+
+#: .\timetable\templates\first_time.html:20
+msgid "Create User and Get Started!"
+msgstr "צור משתמש והתחל!"
+
+#: .\timetable\templates\import_page.html:3
+msgid "Import"
+msgstr "ייבא"
+
+#: .\timetable\templates\import_page.html:6
+msgid "Import Students From CSV"
+msgstr "ייבוא תלמידים מ-CSV"
+
+#: .\timetable\templates\import_page.html:7
+msgid ""
+"The CSV Should be Formatted as The Schools Contact Sheet, Beware That This "
+"Creates A Student For Each row, regardless of if a Student with this name "
+"exists"
+msgstr ""
+"ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר, שימ/י לב: פעולה זו תיצור "
+"תלמיד לכל שורה בקובץ, גם אם תלמיד בשם זה כבר קיים"
+
+#: .\timetable\templates\import_page.html:11
+#: .\timetable\templates\import_page.html:19
+msgid "import"
+msgstr "ייבא"
+
+#: .\timetable\templates\import_page.html:14
+msgid "Import Teachers From CSV"
+msgstr "ייבוא מורים מ-CSV"
+
+#: .\timetable\templates\import_page.html:15
+msgid "The CSV Should be Formatted as The Schools Contact Sheet"
+msgstr "ה-CSV צריך להיות בפורמט של דף הקשר של בית הספר"
+
+#: .\timetable\templates\index.html:3 .\timetable\templates\publicBase.html:21
+msgid "Today's Subs"
+msgstr "ההחלפות היום"
+
+#: .\timetable\templates\index.html:16
+msgid "No Sub Yet"
+msgstr "טרם נקבע מחליף"
+
+#: .\timetable\templates\index.html:18
+msgid "Substitute Teacher:"
+msgstr "מורה מחליף:"
+
+#: .\timetable\templates\index.html:30
+msgid "No Subs For today!"
+msgstr "אין החלפות להיום!"
+
+#: .\timetable\templates\log.html:11 .\timetable\templates\setSub.html:12
+#: .\timetable\templates\setSub.html:47
+msgid "Date And Time"
+msgstr "תאריך ושעה"
+
+#: .\timetable\templates\log.html:12 .\timetable\templates\setSub.html:13
+#: .\timetable\templates\setSub.html:48
+msgid "Class"
+msgstr "שיעור"
+
+#: .\timetable\templates\log.html:13 .\timetable\templates\setSub.html:14
+#: .\timetable\templates\setSub.html:49
+msgid "Original Teacher"
+msgstr "מורה מוחלף"
+
+#: .\timetable\templates\log.html:15 .\timetable\templates\setSub.html:16
+#: .\timetable\templates\setSub.html:51
+msgid "Subbing Teacher"
+msgstr "מורה מחליף"
+
+#: .\timetable\templates\publicBase.html:20
+msgid "Login"
+msgstr "התחבר"
+
+#: .\timetable\templates\publicBase.html:22
+#: .\timetable\templates\timetable.html:6
+msgid "Schedule"
+msgstr "מערכת"
+
+#: .\timetable\templates\setSub.html:43
+msgid "Classes that already have a substitution:"
+msgstr "שיעורים שכבר יש להם החלפות:"
+
+#: .\timetable\templates\set_schedule.html:10
+msgid "Set Your Schedule"
+msgstr "קבע את המערכת שלך"
+
+#: .\timetable\templates\set_schedule.html:25
+msgid "Set!"
+msgstr "קבע!"
+
+#: .\timetable\templates\student_details.html:9
+msgid "Grade"
+msgstr "כיתה"
+
+#: .\timetable\templates\student_details.html:11
+msgid "Shacharit"
+msgstr "שחרית"
+
+#: .\timetable\templates\student_manager.html:9
+#: .\timetable\templates\student_manager.html:11
+msgid "Manage Students"
+msgstr "ניהול תלמידים"
+
+#: .\timetable\templates\student_manager.html:12
+msgid "Students With Schedules"
+msgstr "תלמידים עם מערכת"
+
+#: .\timetable\templates\student_manager.html:12
+msgid "Students Without"
+msgstr "תלמידים ללא מערכת"
+
+#: .\timetable\templates\student_manager.html:12
+msgid "Total Students"
+msgstr "תלמידים"
+
+#: .\timetable\templates\student_manager.html:16
+msgid "invited "
+msgstr "הזמנה נשלחה "
+
+#: .\timetable\templates\student_manager.html:28
+msgid "Student Creation Form"
+msgstr "טופס יצירת תלמידים"
+
+#: .\timetable\templates\student_manager.html:32
+msgid "Warning, this will send an email to every student with no Schedule"
+msgstr "אזהרה, אתה עומד לשלוח הודעה לכל התלמידים ללא מערכת"
+
+#: .\timetable\templates\student_manager.html:32
+msgid "Invite all"
+msgstr "שלח הזמנה לכולם"
+
+#: .\timetable\templates\student_manager.html:33
+msgid ""
+"WARNING!!! THIS WILL RESET *ALL* SCHEDULES (!!!) FOREVER, THIS ACTION IS "
+"IRREVERSIBLE ARE YOU SURE YOU WANT TO CONTINUE???"
+msgstr ""
+"**אזהרה**!!! הפעולה תאפס את כל המערכות במערכת!! הפעולה היא בלתי הפיכה!! האם "
+"אתה בטוח שאתה רוצה להמשיך???"
+
+#: .\timetable\templates\student_manager.html:33
+msgid "Reset ALL"
+msgstr "אפס את כל המערכות"
+
+#: .\timetable\templates\student_manager.html:40
+msgid "Search Student"
+msgstr "חפש תלמיד"
+
+#: .\timetable\templates\student_manager.html:52
+msgid "Open in new page"
+msgstr "פתח פרטים בדף חדש"
+
+#: .\timetable\templates\student_manager.html:53
+msgid "Reset Schedule"
+msgstr "מחק מערכת"
+
+#: .\timetable\templates\student_manager.html:54
+#: .\timetable\templates\student_manager.html:69
+msgid "Copied Link To Clipboard"
+msgstr "קישור הועתק"
+
+#: .\timetable\templates\student_manager.html:54
+#: .\timetable\templates\student_manager.html:69
+msgid "Update Details"
+msgstr "עדכן פרטים"
+
+#: .\timetable\templates\student_manager.html:64
+msgid "Last Invite"
+msgstr "הזמנה אחרונה"
+
+#: .\timetable\templates\student_manager.html:67
+msgid "Send Invite"
+msgstr "שלח הזמנה לקביעת מערכת"
+
+#: .\timetable\templates\student_manager.html:68
+msgid "Set Schedule"
+msgstr "קבע מערכת"
+
+#: .\timetable\templates\studentregister.html:13
+#: .\timetable\templates\studentregister.html:20
+#: .\timetable\templates\studentregister.html:27
+msgid "Register Student"
+msgstr "רשום תלמיד"
+
+#: .\timetable\templates\teacher_home.html:19
+msgid "Report Absence"
+msgstr "דווח על העדרות"
+
+#: .\timetable\templates\teacher_home.html:26
+msgid "My Substitutions"
+msgstr "ההחלפות שלי"
+
+#: .\timetable\templates\teacher_home.html:40
+msgid "My Absences"
+msgstr "ההיעדרויות שלי"
+
+#: .\timetable\templates\teacher_manager.html:50
+#: .\timetable\templates\teacher_manager.html:52
+msgid "Manage Teachers"
+msgstr "ניהול מורים"
+
+#: .\timetable\templates\teacher_manager.html:53
+msgid "Teacher's Email"
+msgstr "אימייל של המורה"
+
+#: .\timetable\templates\teacher_manager.html:53
+msgid "Add Teacher / Generate Teacher Form"
+msgstr "הוסף מורה / צור טופס של מורה"
+
+#: .\timetable\templates\teacher_manager.html:54
+msgid "Click To Copy: "
+msgstr "לחץ כדי להעתיק: "
+
+#: .\timetable\templates\teacher_manager.html:62
+msgid "Search Teachers"
+msgstr "חפש מורה"
+
+#: .\timetable\templates\teacher_manager.html:78
+msgid "Invite Teacher"
+msgstr "הזמן מורה"
+
+#: .\timetable\templates\thanks.html:20
+msgid "Success!"
+msgstr "הושלם!"
+
+#: .\timetable\templates\timetable.html:123
+msgid "Uncheck All"
+msgstr "נקה הכל"
+
+#: .\timetable\templates\timetable.html:124
+msgid "Print Today's Schedule"
+msgstr "הדפס את המערכת של היום"
+
+#: .\timetable\templates\timetable.html:130
+msgid "Classes"
+msgstr "שיעורים"
+
+#: .\timetable\templates\timetable.html:133
+msgid "Free Rooms"
+msgstr "חדרים פנויים"
+
+#: .\timetable\views.py:141
 msgid "Absence reported."
 msgstr "היעדרות דווחה."
 
-#: .\timetable\views.py:140
+#: .\timetable\views.py:149
 msgid "Absence already reported."
 msgstr "היעדרות כבר דווחה."
 
-#: .\timetable\views.py:242
+#: .\timetable\views.py:232
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין שזו תקלה, פנה לחונך."
 
-#: .\timetable\views.py:567
+#: .\timetable\views.py:557
 msgid "Successfully sent!"
 msgstr "נשלח בהצלחה!"
+
+#~ msgid "Of Pins Not Resolved"
+#~ msgstr "מספר הבעיות שלא נפתרו:"
+
+#~ msgid "Set Substitution"
+#~ msgstr "קבע החלפות"
+
+#~ msgid "change"
+#~ msgstr "החלף"
+
+#~ msgid "No Classes To Sub"
+#~ msgstr "אין שיעורים שצריכים החלפות"
+
+#~ msgid "Class that needs sub"
+#~ msgstr "שיעור שצריך החלפה"
 
 #~ msgid ""
 #~ "The CSV Should be Formatted as The Schools Contant Sheet, Beware That "

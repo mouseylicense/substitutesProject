@@ -8,7 +8,6 @@ urlpatterns = [
     path('student/register/',views.register_student, name='register_student'),
     path('teacher/manage_students/',views.student_manager, name='student_manager'),
     path('teacher/setSub/',views.sub,name='sub'),
-    path('get/<int:n>/',views.get_possible_subs,name='possible subs'),
     path('teacher/user/details/<uuid:uuid>', views.register, name='register'),
     path('getRoom/',views.get_possible_rooms,name='possible_rooms'),
     path('getClasses/<int:n>',views.get_teacher_classes,name='get_classes'),
@@ -25,5 +24,6 @@ urlpatterns = [
     path('managment/import/',views.import_page,name='import'),
     path('getDecriptionForm',views.editDescription,name='editDescription'),
     path('getStudents/<slug:id>',views.get_student_list,name='get_student_list'),
-    path('invite_teacher/',views.send_register_email,name='invite_teacher')
+    path('invite_teacher/',views.send_register_email,name='invite_teacher'),
+    path('teacher/log/',views.log,name='log')
 ]
