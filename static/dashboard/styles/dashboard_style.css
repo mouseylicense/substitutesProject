@@ -33,13 +33,13 @@ div.desc {
   text-align: center;
 }
 #container{
-  margin-top: 5px;
-  height:100%;
+    margin-top: 5px;
+    height:100%;
     display: flex;
-  grid-gap: 3px;
+    grid-gap: 3px;
     flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: baseline;
+    align-items: flex-start;
+    align-content: baseline;
 }
 div.problem{
     border: 1px solid rgba(219, 85, 85); 
