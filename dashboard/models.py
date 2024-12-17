@@ -6,7 +6,7 @@ from django.db.models import Q
 # Create your models here.
 def get_random_teacher():
     lowest_ref_count = (
-    timetable.models.Teacher.objects.annotate(assigned_count=models.Count('assigned_problems'))
+    timetable.models.Teacher.objects.filter(type=1).annotate(assigned_count=models.Count('assigned_problems'))
     .aggregate(models.Min('assigned_count'))['assigned_count__min']
 )
     if timetable.models.Teacher.objects.filter(type=1).exists():

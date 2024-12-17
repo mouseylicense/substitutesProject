@@ -6,7 +6,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
-
+from dashboard.models import get_random_teacher
 import timetable.models
 from dashboard.models import problem
 from .forms import ProblemForm
@@ -90,3 +90,19 @@ def resolve(request):
     prob.resolved_by = request.user
     prob.save()
     return HttpResponse("OK")
+
+@login_required()
+def problems(request):
+    return render(request,"problems.html",{"problems":problem.objects.filter(resolved=False).order_by("-urgency")})
+
+@require_POST
+@login_required
+def change_assignee(request):
+    problem_id = request.POST['problem']
+    prob = problem.objects.get(pk=problem_id)
+    prob.assignee = get_random_teacher()
+    prob.save()
+    res =  HttpResponse("OK")
+    res["HX-Refresh"] = "true"
+
+    return res

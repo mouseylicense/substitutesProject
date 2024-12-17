@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 13:43+0200\n"
-"PO-Revision-Date: 2024-12-04 13:45+0200\n"
+"POT-Creation-Date: 2024-12-17 12:12+0200\n"
+"PO-Revision-Date: 2024-12-17 12:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -43,8 +43,9 @@ msgstr "מספר מחשבים"
 
 #: .\LaptopLoaning\forms.py:15
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:17
-#: .\dashboard\forms.py:15 .\timetable\templates\log.html:14
-#: .\timetable\templates\setSub.html:15 .\timetable\templates\setSub.html:50
+#: .\dashboard\forms.py:15 .\dashboard\templates\problems.html:13
+#: .\timetable\templates\log.html:14 .\timetable\templates\setSub.html:15
+#: .\timetable\templates\setSub.html:50
 msgid "Room"
 msgstr "חדר"
 
@@ -144,6 +145,7 @@ msgid "For"
 msgstr "עבור"
 
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:20
+#: .\dashboard\templates\problems.html:16
 msgid "Actions"
 msgstr "פעולות"
 
@@ -233,7 +235,7 @@ msgstr "עברית"
 msgid "English"
 msgstr "אנגלית"
 
-#: .\dashboard\forms.py:14
+#: .\dashboard\forms.py:14 .\dashboard\templates\problems.html:12
 msgid "Problem"
 msgstr "בעיה"
 
@@ -281,6 +283,26 @@ msgstr "דף הבית"
 #: .\dashboard\templates\dashboard_home.html:8
 msgid "My Assigned Problems"
 msgstr "התקלות שלי"
+
+#: .\dashboard\templates\problems.html:7
+msgid "All Problems"
+msgstr "כל הבעיות"
+
+#: .\dashboard\templates\problems.html:14
+msgid "Reporter"
+msgstr "מדווח"
+
+#: .\dashboard\templates\problems.html:15
+msgid "Assigned"
+msgstr "הוקצה"
+
+#: .\dashboard\templates\problems.html:28
+msgid "Change Assignee"
+msgstr "שנה מוקצה"
+
+#: .\dashboard\templates\problems.html:29
+msgid "Resolve"
+msgstr "פתור"
 
 #: .\dashboard\templates\report_form.html:9
 msgid "Report A Problem"

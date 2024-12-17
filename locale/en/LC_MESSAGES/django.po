@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 13:43+0200\n"
+"POT-Creation-Date: 2024-12-17 12:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,8 +41,9 @@ msgstr ""
 
 #: .\LaptopLoaning\forms.py:15
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:17
-#: .\dashboard\forms.py:15 .\timetable\templates\log.html:14
-#: .\timetable\templates\setSub.html:15 .\timetable\templates\setSub.html:50
+#: .\dashboard\forms.py:15 .\dashboard\templates\problems.html:13
+#: .\timetable\templates\log.html:14 .\timetable\templates\setSub.html:15
+#: .\timetable\templates\setSub.html:50
 msgid "Room"
 msgstr ""
 
@@ -142,6 +143,7 @@ msgid "For"
 msgstr ""
 
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:20
+#: .\dashboard\templates\problems.html:16
 msgid "Actions"
 msgstr ""
 
@@ -231,7 +233,7 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: .\dashboard\forms.py:14
+#: .\dashboard\forms.py:14 .\dashboard\templates\problems.html:12
 msgid "Problem"
 msgstr ""
 
@@ -278,6 +280,26 @@ msgstr ""
 
 #: .\dashboard\templates\dashboard_home.html:8
 msgid "My Assigned Problems"
+msgstr ""
+
+#: .\dashboard\templates\problems.html:7
+msgid "All Problems"
+msgstr ""
+
+#: .\dashboard\templates\problems.html:14
+msgid "Reporter"
+msgstr ""
+
+#: .\dashboard\templates\problems.html:15
+msgid "Assigned"
+msgstr ""
+
+#: .\dashboard\templates\problems.html:28
+msgid "Change Assignee"
+msgstr ""
+
+#: .\dashboard\templates\problems.html:29
+msgid "Resolve"
 msgstr ""
 
 #: .\dashboard\templates\report_form.html:9

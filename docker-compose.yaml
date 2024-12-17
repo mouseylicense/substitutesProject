@@ -21,7 +21,7 @@ services:
       retries: 10
 
   backend:
-    image: mouseylicense/substitutes:v4.05.2
+    image: mouseylicense/substitutes:v4.05.3
     container_name: Substitutes_backend
     restart: unless-stopped
     ports:

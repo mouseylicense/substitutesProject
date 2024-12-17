@@ -1,0 +1,36 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% load i18n %}
+{% block static%}
+    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+{% endblock %}
+{% block title %}{% trans "All Problems" %}{% endblock %}
+{% block content %}
+    <table class="table table-bordered table-responsive-sm">
+    <thead>
+        <tr>
+            <th>{% trans "Problem" %}</th>
+            <th>{% trans "Room" %}</th>
+            <th>{% trans "Reporter" %}</th>
+            <th>{% trans "Assigned" %}</th>
+            <th>{% trans "Actions" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for problem in problems %}
+        <tr class="table-danger">
+            <td>{{ problem.problem }}</td>
+            <td>{{ problem.room }}</td>
+            <td>{{ problem.reporter }}</td>
+            <td>{{ problem.assignee }}</td>
+            <td>
+
+                <button class="btn-info btn" name="problem" value="{{ problem.id }}" hx-post="{% url "change_assignee" %}">{% trans "Change Assignee" %}</button>
+                <button class="btn-success btn" name="problem" value="{{ problem.id }}" hx-post="{% url "resolve_problem" %}" hx-swap="delete" hx-target="closest .table-danger">{% trans "Resolve" %}</button>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}
