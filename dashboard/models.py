@@ -2,7 +2,12 @@ import random
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import timetable.models
+from django.conf import settings
+from slack_sdk import WebClient
 from django.db.models import Q
+
+if settings.SLACK_BOT_TOKEN:
+    client = WebClient(token=settings.SLACK_BOT_TOKEN)
 # Create your models here.
 def get_random_teacher():
     lowest_ref_count = (
@@ -24,3 +29,9 @@ class problem(models.Model):
     resolved_by = models.ForeignKey(timetable.models.Teacher,limit_choices_to={"type":1},related_name="resolved_problems",null=True,blank=True, on_delete=models.SET_NULL)
     def __str__(self):
         return f"{self.problem} {_('In')} {self.room}, {_('Reported by')}: {self.reporter}, {_('Assigned to')} {self.assignee}"
+    def save(self, *args, **kwargs):
+        if client and self.assignee.slack_id:
+            client.chat_postMessage(channel=f"{self.assignee.slack_id}",text=f"A New problem has been assigned to you! {self.problem} in {self.room}! The problem was reported by {self.reporter}, he says its {self.urgency}")
+        super(problem, self).save(*args, **kwargs)
+
+

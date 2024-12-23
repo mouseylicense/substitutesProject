@@ -11,6 +11,10 @@ from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+from slack_sdk import WebClient
+from django.conf import settings
+if settings.SLACK_BOT_TOKEN:
+    client = WebClient(token=settings.SLACK_BOT_TOKEN)
 
 DAYS_OF_WEEKDAY_DICT = {
     6: 'Sunday',
@@ -83,10 +87,14 @@ class Teacher(AbstractUser):
     manage_schedule = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
     type = models.IntegerField(choices=[(0,"Teacher"),(1,"TED"),(2,"Management")],default=0)
+    slack_id = models.CharField(null=True,blank=True,max_length=100)
     objects = TeacherManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
-
+    def save(self, *args, **kwargs):
+        if client:
+            self.slack_id = client.users_lookupByEmail(email=self.email)
+        super(Teacher, self).save(*args, **kwargs)
     def __str__(self):
         if self.first_name and self.last_name:
             return self.first_name + " " + self.last_name

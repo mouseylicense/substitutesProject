@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import json
+import os
+
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 from dotenv import load_dotenv
@@ -204,7 +206,8 @@ else:
 if LAPTOPS_ENABLED:
     CONSTANCE_CONFIG['LAPTOPS'] = (0,"Number Of Laptops Available (CHANGING THIS REQUIRES RESTARTING)",int)
     INSTALLED_APPS += 'LaptopLoaning.apps.LaptoploaningConfig',
-
+if environ.get("SLACK_BOT_TOKEN"):
+    SLACK_BOT_TOKEN = environ.get("SLACK_BOT_TOKEN")
 
 DASHBOARD_ENABLED = environ.get('DASHBOARD_ENABLED', False)
 if DASHBOARD_ENABLED == "True":
