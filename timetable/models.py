@@ -13,7 +13,7 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from slack_sdk import WebClient
 from django.conf import settings
-if settings.SLACK_BOT_TOKEN:
+if hasattr(settings, 'SLACK_BOT_TOKEN'):
     client = WebClient(token=settings.SLACK_BOT_TOKEN)
 
 DAYS_OF_WEEKDAY_DICT = {
@@ -85,15 +85,21 @@ class Teacher(AbstractUser):
     shocher = models.BooleanField(default=False)
     manage_subs = models.BooleanField(default=False)
     manage_schedule = models.BooleanField(default=False)
+    ted_manager = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
     type = models.IntegerField(choices=[(0,"Teacher"),(1,"TED"),(2,"Management")],default=0)
-    slack_id = models.CharField(null=True,blank=True,max_length=100)
+    slack_id = models.CharField(max_length=100,blank=True)
     objects = TeacherManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
     def save(self, *args, **kwargs):
-        if client:
-            self.slack_id = client.users_lookupByEmail(email=self.email)
+        try:
+            try:
+                self.slack_id = client.users_lookupByEmail(email=self.email)["user"]["id"]
+            except:
+                print("Slack ID doesn't exist")
+        except NameError:
+            print("no Client")
         super(Teacher, self).save(*args, **kwargs)
     def __str__(self):
         if self.first_name and self.last_name:

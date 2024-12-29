@@ -19,6 +19,7 @@
     <div class="graph-container">
         <canvas style="width:50px;height: 50px" id="myChart"></canvas>
         <canvas  style="width: 50px;height: 50px" id="myChart2"></canvas>
+        <canvas  style="width: 50px;height: 50px" id="myChart3"></canvas>
     </div>
 
 <script>
@@ -26,14 +27,21 @@
     if(document.dir === "rtl")
         {isRightToLeft = true}
     const problems_by_teacher = JSON.parse('{{ problems_by_teacher|safe }}');
+    const problems_by_assignee = JSON.parse('{{ problems_by_assignee|safe }}');
     const ctx = document.getElementById('myChart');
+    const Chart3 = document.getElementById('myChart3');
     console.log(problems_by_teacher)
     const PinsPerMonthChart = document.getElementById('myChart2');
     var resolved = []
+    var resolved_by_member = []
     var not_resolved = []
+    var not_resolved_by_member = []
     for(let i = 0;i<Object.values(problems_by_teacher).length;i++){
       resolved.push(Object.values(Object.values(problems_by_teacher)[i])[0])
+      resolved_by_member.push(Object.values(Object.values(problems_by_assignee)[i])[0])
       not_resolved.push(Object.values(Object.values(problems_by_teacher)[i])[1])
+      not_resolved_by_member.push(Object.values(Object.values(problems_by_assignee)[i])[1])
+
     }
 
     var myChart = new Chart(ctx, {
@@ -67,8 +75,39 @@
 
         }
       }
-    }
-    });
+    }})
+    var myChart3 = new Chart(Chart3, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(problems_by_assignee),
+      datasets: [{
+        label: '# {% trans "Of Problems Resolved" %}',
+        data: resolved_by_member,
+        borderWidth: 1
+      },
+      {
+        label: '# {% trans "Of Problems Not Resolved" %}',
+        data: not_resolved_by_member,
+        borderWidth: 1
+      }
+      ]
+    },
+    options: {
+      responsive:true,
+      rtl:true,
+      scales: {
+        x: {
+            reverse: isRightToLeft ? true : false,
+            stacked:true,
+        },
+        y: {
+            stacked:true,
+            beginAtZero: true,
+            position: isRightToLeft ? 'right' : 'left',
+
+        }
+      }
+    }});
     new Chart(PinsPerMonthChart, {
     type: 'line',
     data: {

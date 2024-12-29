@@ -1,3 +1,6 @@
+body *{
+        font-family: helvetica, arial, sans-serif !important;
+}
 form{
     display: flex;
     flex-direction: column;
@@ -11,7 +14,6 @@ form{
     padding: 10px;
     border-radius: 10px;
     color: #f3f3f3;
-    font-family: helvetica, arial, sans-serif !important;
 }
 body,html{
     box-sizing: border-box;
@@ -42,4 +44,52 @@ span{
     border-radius: 5px;
     background-color: #F1DAC4;
     color: #1b1b1b;
+}
+ /* The Modal (background) */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+.modal-content button{
+    display:inline-block;
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f3f3f3;
+}
+.close{
+    transition:all .2s ease-in;
+    background-color: rgba(205, 92, 92, 0.29) !important;
+    border:#bb2d3b 2px solid !important;
+}
+.close:hover{
+    background-color: #bb2d3b !important;
+    color: white;
+}
+.login{
+    transition:all .2s ease-in;
+    background-color: rgba(143, 188, 143, 0.29) !important;
+    border:#198754 2px solid !important;
+}
+.login:hover{
+    background-color: #198754 !important;
+    color: white;
 }

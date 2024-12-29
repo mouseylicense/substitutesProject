@@ -207,6 +207,8 @@ if LAPTOPS_ENABLED:
     CONSTANCE_CONFIG['LAPTOPS'] = (0,"Number Of Laptops Available (CHANGING THIS REQUIRES RESTARTING)",int)
     INSTALLED_APPS += 'LaptopLoaning.apps.LaptoploaningConfig',
 if environ.get("SLACK_BOT_TOKEN"):
+    INSTALLED_APPS += 'slack',
+    CONSTANCE_CONFIG['SLACK_PROBLEMS_CHANNEL_ID'] = ("","ID for slack problems channel",str)
     SLACK_BOT_TOKEN = environ.get("SLACK_BOT_TOKEN")
 
 DASHBOARD_ENABLED = environ.get('DASHBOARD_ENABLED', False)

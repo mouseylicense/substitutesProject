@@ -1,13 +1,15 @@
 import json
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import AnonymousUser
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from dashboard.models import get_random_teacher
 import timetable.models
 from dashboard.models import problem
-from .forms import ProblemForm
+from .forms import ProblemForm, ProblemFormGuest
 
 DAYS_OF_WEEKDAY_DICT = {
     6: 'Sunday',
@@ -19,14 +21,20 @@ DAYS_OF_WEEKDAY_DICT = {
 # Create your views here.
 def report(request):
     if request.method == 'POST':
-        form = ProblemForm(data=request.POST)
+        if request.user.is_authenticated:
+            form = ProblemForm(data=request.POST)
+        else:
+            form = ProblemFormGuest(data=request.POST)
         if form.is_valid():
             form.save()
         else:
             print(form.errors)
         return render(request,"thanks.html")
     user = request.user
-    return render(request,'report_form.html',{"form":ProblemForm(initial={"reporter": user})})
+    if user.is_authenticated:
+        return render(request,'report_form.html',{"form":ProblemForm(initial={"reporter": user})})
+    else:
+        return render(request,'report_form.html',{"form":ProblemFormGuest()})
 
 
 def dashboard(request):
@@ -44,9 +52,10 @@ def data(request):
             r[room.name] = {"problems":list(room.problem_set.filter(resolved=False).values_list("problem", flat=True))}
         r[room.name]["isFree"] = room.get_class(timezone.localtime(timezone.now()).strftime("%H:%m"),DAYS_OF_WEEKDAY_DICT[timezone.now().weekday()])
     return JsonResponse(r)
-
+@login_required
 def stats(request):
     prob_by_teacher = {}
+    prob_by_assignee = {}
     problems = problem.objects.all().order_by('date_reported')
     problems_resolved = problem.objects.filter(resolved=True)
     years = {}
@@ -59,23 +68,28 @@ def stats(request):
     for prob in problems:
         try:
             if prob.resolved:
-                prob_by_teacher[prob.reporter.name()]['resolved'] += 1
+                prob_by_teacher[prob.name()]['resolved'] += 1
+                prob_by_assignee[prob.assignee.name()]['resolved'] += 1
             else:
-                prob_by_teacher[prob.reporter.name()]['not_resolved'] += 1
+                prob_by_teacher[prob.name()]['not_resolved'] += 1
+                prob_by_assignee[prob.assignee.name()]['not_resolved'] += 1
         except KeyError:
             if prob.resolved:
-                prob_by_teacher[prob.reporter.name()] = {"resolved": 1, "not_resolved": 0}
+                prob_by_teacher[prob.name()] = {"resolved": 1, "not_resolved": 0}
+                prob_by_assignee[prob.assignee.name()] = {"resolved": 1, "not_resolved": 0}
             else:
-                prob_by_teacher[prob.reporter.name()] = {"resolved": 0, "not_resolved": 1}
+                prob_by_teacher[prob.name()] = {"resolved": 0, "not_resolved": 1}
+                prob_by_assignee[prob.assignee.name()] = {"resolved": 0, "not_resolved": 1}
     fixed_the_most = timetable.models.Teacher.objects.order_by('-resolved_problems').first()
     return render(request, 'dash_statistics.html',
                   {"problems_by_teacher": json.dumps(prob_by_teacher), "problems_by_month": years,
-                   "problems_resolved": problems_resolved.count(), "total_problems": problems.count(),"fixed_the_most": fixed_the_most})
+                   "problems_resolved": problems_resolved.count(), "total_problems": problems.count(),"fixed_the_most": fixed_the_most,"problems_by_assignee": json.dumps(prob_by_assignee)})
 @login_required
 def home(request):
     user = request.user
     myProblems = problem.objects.filter(assignee=user,resolved=False).order_by("-urgency")
-    return render(request,"dashboard_home.html",{"myProblems":myProblems})
+    allProblems = problem.objects.filter(resolved=False).order_by("-urgency")
+    return render(request,"dashboard_home.html",{"myProblems":myProblems,"allProblems":allProblems})
 
 
 @login_required
@@ -84,12 +98,11 @@ def resolve(request):
 
     problem_id = request.POST['problem']
     prob = problem.objects.get(pk=problem_id)
-    prob.resolved = True
-    prob.resolved_by = request.user
-    prob.save()
+    prob.resolve(request.user)
     return HttpResponse("OK")
 
 @login_required()
+@user_passes_test(lambda u: u.is_superuser or u.ted_manager)
 def problems(request):
     return render(request,"problems.html",{"problems":problem.objects.filter(resolved=False).order_by("-urgency")})
 

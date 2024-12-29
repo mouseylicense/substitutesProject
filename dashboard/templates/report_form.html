@@ -10,7 +10,23 @@
     <link rel="stylesheet" href="{% static 'dashboard/styles/report_form.css' %}">
 </head>
 <body>
-        <form method="post" action="{% url "report" %}">
+        {% if not user.is_authenticated %}
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <p>{% trans "You are not logged in! Would you like to log in or continue as guest?" %}</p>
+      <div style="display: flex;gap: 5px">
+        <button class="close" onclick="document.getElementById('myModal').style.display='none'">{% trans "Continue as guest" %}</button>
+        <button class="login" onclick="location.href='/he/teacher/user/login/?next=/dashboard/report'">{% trans "Log In" %}</button>
+      </div>
+  </div>
+
+</div>
+        {% endif %}
+                <form method="post" action="{% url "report" %}">
             {% csrf_token %}
             {{ form }}
             <span id="value"></span>

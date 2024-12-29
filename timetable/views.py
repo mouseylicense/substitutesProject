@@ -455,7 +455,7 @@ def register_student(request):
             form = StudentRegistrationForm()
             return render(request,"studentregister.html",{"form":form})
         return HttpResponse("Registering Students is currently disabled")
-
+@login_required()
 def class_manager(request):
     if request.method == 'POST':
         form = ClassForm(request.POST)
