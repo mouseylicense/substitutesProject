@@ -19,7 +19,7 @@ NUMBERS_TO_GRADES = {
 
 
 class ClassAdmin(admin.ModelAdmin):
-    fields = [('name','description'),('day_of_week','hour'),'room','teacher',('student_teacher','student_teaching'),('first_grade','second_grade','third_grade','fourth_grade','fifth_grade','sixth_grade','seventh_grade','eighth_grade','ninth_grade','tenth_grade','eleventh_grade','twelfth_grade'),('visible',)]
+    fields = [('name','description'),('day_of_week','hour'),'room','teachers',('student_teacher','student_teaching'),('first_grade','second_grade','third_grade','fourth_grade','fifth_grade','sixth_grade','seventh_grade','eighth_grade','ninth_grade','tenth_grade','eleventh_grade','twelfth_grade'),('visible',)]
 
 
 class TeacherAdmin(admin.ModelAdmin):

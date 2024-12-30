@@ -30,7 +30,7 @@ class AbsenceForm(forms.Form):
 
 class ClassForm(forms.ModelForm):
     name = forms.CharField(label=_("Subject"),widget=forms.TextInput(attrs={'class': 'subject-input', 'placeholder': _('Subject')}))
-    teacher = forms.ModelChoiceField(Teacher.objects,required=False,label=_("Teacher"),widget=forms.Select(attrs={"style":"flex-grow:1",'class': 'select','id':'teacher'}))
+    teachers = forms.ModelMultipleChoiceField(Teacher.objects,required=False,label=_("Teachers"),widget=forms.SelectMultiple(attrs={'id':'teacher'}))
     day_of_week = forms.CharField(label=_("Day"),widget=forms.TextInput(attrs={"required":"","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;","id":"day"}))
     hour = forms.CharField(label=_("Hour"),widget=forms.TextInput(attrs={"required":"","id":"hour","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;"}))
     room = forms.ModelChoiceField(Room.objects,widget=forms.Select(attrs={'id': 'room',"disabled":""}))
@@ -50,6 +50,38 @@ class ScheduleForm(forms.ModelForm):
         widgets={
             "student":HiddenInput(),
         }
+        labels = {
+            "sunday_first": _("Sunday") + " 09:15",
+            "sunday_second": _("Sunday") + " 10:07",
+            "sunday_third": _("Sunday") + " 11:45",
+            "sunday_fourth": _("Sunday") + " 12:45",
+            "sunday_ld": _("Sunday") + " " + _("Long Day"),
+
+            "monday_first": _("Monday") + " 09:15",
+            "monday_second": _("Monday") + " 10:07",
+            "monday_third": _("Monday") + " 11:45",
+            "monday_fourth": _("Monday") + " 12:45",
+            "monday_ld": _("Monday") + " " + _("Long Day"),
+
+            "tuesday_first": _("Tuesday") + " 09:15",
+            "tuesday_second": _("Tuesday") + " 10:07",
+            "tuesday_third": _("Tuesday") + " 11:45",
+            "tuesday_fourth": _("Tuesday") + " 12:45",
+            "tuesday_ld": _("Tuesday") + " " + _("Long Day"),
+
+            "wednesday_first": _("Wednesday") + " 09:15",
+            "wednesday_second": _("Wednesday") + " 10:07",
+            "wednesday_third": _("Wednesday") + " 11:45",
+            "wednesday_fourth": _("Wednesday") + " 12:45",
+            "wednesday_ld": _("Wednesday") + " " + _("Long Day"),
+
+            "thursday_first": _("Thursday") + " 09:15",
+            "thursday_second": _("Thursday") + " 10:07",
+            "thursday_third": _("Thursday") + " 11:45",
+            "thursday_fourth": _("Thursday") + " 12:45",
+            "thursday_ld": _("Thursday") + " " + _("Long Day"),
+
+        }
     def __init__(self, *args, **kwargs):
         print(args)
         student = args[0]['student']
@@ -57,12 +89,22 @@ class ScheduleForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         filter_query = {NUMBERS_TO_GRADES[Student.objects.get(pk=student).grade]:True}
         if student:
+            ld = ["sunday_ld","monday_ld","tuesday_ld","wednesday_ld","thursday_ld"]
+
+
             excluded_classes = Class.objects.filter(**filter_query)
             for field_name in self.fields:
                 if field_name.startswith('sunday_') or field_name.startswith('monday_') or \
                         field_name.startswith('tuesday_') or field_name.startswith('wednesday_') or \
                         field_name.startswith('thursday_'):
                     self.fields[field_name].queryset = self.fields[field_name].queryset.filter(**filter_query)
+
+
+            for longday in ld:
+                if len(self.fields[longday].choices)<=1:
+                    self.fields[longday].widget = HiddenInput()
+
+
 
 class RegistrationForm(forms.ModelForm):
     class Meta:

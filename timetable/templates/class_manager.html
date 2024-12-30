@@ -3,7 +3,11 @@
 {% load static %}
 {% block static %}
     <link type="text/css" rel="stylesheet" href="{% static "timetable/styles/bootstrap.min.css" %}">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 {% endblock %}
 
 {% block title %}{% trans "Manage Classes" %}{% endblock %}
@@ -120,7 +124,7 @@ button:dir(ltr),.button-div:dir(ltr){
         {{ form.student_teacher }}<label>{{ form.student_teacher.label }}</label>
         <div class="two-fields">
             {{ form.name }}
-            {{ form.teacher }}
+            {{ form.teachers }}
             {{ form.student_teaching }}
         </div>
         <div class="two-fields">
@@ -159,6 +163,14 @@ button:dir(ltr),.button-div:dir(ltr){
         <td><button disabled class="timeframe" type="button" id="Monday-12:45" onClick="ButtonClick(this)"></button></td>
         <td><button disabled class="timeframe" type="button" id="Tuesday-12:45" onClick="ButtonClick(this)"></button></td>
         <td><button disabled class="timeframe" type="button" id="Wednesday-12:45" onClick="ButtonClick(this)"></button></td>
+    </tr>
+            <tr>
+        <th>{% trans "Long Day" %}</th>
+        <td><button disabled class="timeframe" type="button" id="Sunday-14:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Monday-14:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Tuesday-14:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Wednesday-14:15" onClick="ButtonClick(this)"></button></td>
+        <td><button disabled class="timeframe" type="button" id="Thursday-14:15" onClick="ButtonClick(this)"></button></td>
     </tr>
 </table>
 

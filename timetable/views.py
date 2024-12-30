@@ -29,6 +29,7 @@ HOUR_TO_NUMBER_OF_CLASS = {
     datetime.time(10,7):"second",
     datetime.time(11,45):"third",
     datetime.time(12,45):"fourth",
+    datetime.time(14,15):"ld",
 }
 DAYS_OF_WEEKDAY = {
     6: 'Sunday',
@@ -179,7 +180,7 @@ def get_possible_rooms(request):
 
 @require_GET
 def get_teacher_classes(request, n):
-    classes = Class.objects.filter(teacher__pk=n)
+    classes = Class.objects.filter(teachers__pk=n)
     classesTimes = []
     for c in classes:
         classesTimes.append({'day': c.day_of_week, "hour": str(c.hour)[:5]})
@@ -190,7 +191,7 @@ def timetable(request):
     rooms = []
     for room in Room.objects.filter(show_as_possible=True):
         rooms.append(room.name)
-    classes = Class.objects.filter(visible=True)
+    classes = Class.objects.all()
     teachers = []
     for t in Teacher.objects.filter(type=0):
         teachers.append(t)
@@ -199,18 +200,18 @@ def timetable(request):
         grades = str(c.str_grades())
         grades_all = str(c.all_grades())
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
-            if c.teacher:
+            if c.teachers:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
-                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.teacher.first_name + " " + c.teacher.last_name,
+                    {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
                      "room": c.room.name,"description":c.description}]
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
                     {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.student_teaching,
                      "room": c.room.name,"description":c.description}]
         else:
-            if c.teacher:
+            if c.teachers:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
-                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.teacher.first_name + " " + c.teacher.last_name,
+                    {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
                      "room": c.room.name,"description":c.description})
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
@@ -459,6 +460,7 @@ def register_student(request):
 def class_manager(request):
     if request.method == 'POST':
         form = ClassForm(request.POST)
+        print(form.errors)
         if form.is_valid:
             form.save()
         else:

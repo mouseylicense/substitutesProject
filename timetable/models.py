@@ -142,10 +142,10 @@ class Class(models.Model):
     day_of_week = models.CharField(default="", max_length=100, choices=DAYS_OF_WEEKDAY)
     hour = models.fields.TimeField(
         choices=[ (datetime.time(9, 15), "09:15"), (datetime.time(10, 7), "10:07"),
-                 (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45")])
+                 (datetime.time(11, 0), "11:00"), (datetime.time(11, 45), "11:45"), (datetime.time(12, 45), "12:45"),(datetime.time(14,15), "LD")])
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
+    teachers = models.ManyToManyField(Teacher,related_name="teachers", blank=True)
     student_teacher = models.BooleanField(default=False, verbose_name=_("Is a Student Teaching?"))
     student_teaching = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Student Teaching"))
     first_grade = models.BooleanField(default=False, verbose_name=_("First Grade"))
@@ -169,7 +169,10 @@ class Class(models.Model):
     def who_teaches(self):
         if self.student_teacher:
             return self.student_teaching
-        return self.teacher
+        teachers_str = ""
+        for teacher in self.teachers.all():
+            teachers_str = teachers_str + teacher.__str__() + ","
+        return teachers_str[:-1] +"."
     def all_grades(self):
         grades = [self.first_grade, self.second_grade, self.third_grade, self.fourth_grade, self.fifth_grade,
                   self.sixth_grade, self.seventh_grade, self.eighth_grade, self.ninth_grade, self.tenth_grade,
@@ -213,11 +216,11 @@ class Class(models.Model):
         return None
 
     def __str__(self):
-        if self.teacher:
-            return str(self.hour)[:5] + " --- " + self.name + " - " + self.teacher.first_name + " " + self.teacher.last_name
-        else:
-            return str(self.hour)[:5] + " --- " + self.name + " - " + self.student_teaching
-
+        if self.teachers.all().exists():
+            teachers_str = ""
+            for teacher in self.teachers.all():
+                teachers_str = teachers_str + teacher.__str__() + ","
+            return str(self.hour)[:5] + " --- " + self.name + " - " + teachers_str[:-1] + "."
 
 class ClassNeedsSub(models.Model):
     related_absence = models.ForeignKey(Absence,null=True,blank=True, on_delete=models.CASCADE)
@@ -302,6 +305,9 @@ class Schedule(models.Model):
     sunday_fourth = models.ForeignKey(Class,verbose_name=_("Sunday") + " 12:45", on_delete=models.SET_NULL, null=True, blank=True,
                                       limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(12, 45),
                                                         }, related_name='sunday_fourth_classes')
+    sunday_ld = models.ForeignKey(Class,verbose_name=_("Sunday") + _("Long Day"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(14, 15),
+                                                        }, related_name='sunday_ld_classes')
     monday_first = models.ForeignKey(Class,verbose_name=_("Monday") + " 09:15", on_delete=models.SET_NULL, null=True, blank=True,
                                      limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(9, 15),
                                                        }, related_name='monday_first_classes')
@@ -314,6 +320,9 @@ class Schedule(models.Model):
     monday_fourth = models.ForeignKey(Class,verbose_name=_("Monday") + " 12:45", on_delete=models.SET_NULL, null=True, blank=True,
                                       limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(12, 45),
                                                         }, related_name='monday_fourth_classes')
+    monday_ld = models.ForeignKey(Class,verbose_name=_("Monday") + _("Long Day"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(14, 15),
+                                                        }, related_name='monday_ld_classes')
     tuesday_first = models.ForeignKey(Class, verbose_name=_("Tuesday") + " 09:15",on_delete=models.SET_NULL, null=True, blank=True,
                                       limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(9, 15),
                                                         }, related_name='tuesday_first_classes')
@@ -328,6 +337,9 @@ class Schedule(models.Model):
                                        limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(12, 45),
                                                          },
                                        related_name='tuesday_fourth_classes')
+    tuesday_ld = models.ForeignKey(Class,verbose_name=_("Tuesday") + _("Long Day"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(14, 15),
+                                                        }, related_name='tuesday_ld_classes')
     wednesday_first = models.ForeignKey(Class,verbose_name=_("Wednesday") + " 09:15", on_delete=models.SET_NULL, null=True, blank=True,
                                         limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(9, 15),
                                                           },
@@ -344,6 +356,9 @@ class Schedule(models.Model):
                                          limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(12, 45),
                                                            },
                                          related_name='wednesday_fourth_classes')
+    wednesday_ld = models.ForeignKey(Class,verbose_name=_("Wednesday") + _("Long Day"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(14, 15),
+                                                        }, related_name='wednesday_ld_classes')
     thursday_first = models.ForeignKey(Class, verbose_name=_("Thursday") + " 09:15",on_delete=models.SET_NULL, null=True, blank=True,
                                        limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(9, 15),
                                                          },
@@ -352,6 +367,9 @@ class Schedule(models.Model):
                                         limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(10, 7),
                                                           },
                                         related_name='thursday_second_classes')
+    thursday_ld = models.ForeignKey(Class,verbose_name=_("Thursday") + _("Long Day"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(14, 15),
+                                                        }, related_name='Thursday_ld_classes')
     def __str__(self):
         return self.student.name + " Schedule"
 
