@@ -216,11 +216,9 @@ class Class(models.Model):
         return None
 
     def __str__(self):
-        if self.teachers.all().exists():
-            teachers_str = ""
-            for teacher in self.teachers.all():
-                teachers_str = teachers_str + teacher.__str__() + ","
-            return str(self.hour)[:5] + " --- " + self.name + " - " + teachers_str[:-1] + "."
+
+        return str(self.hour)[:5] + " --- " + self.name + " - " + self.who_teaches() + "."
+
 
 class ClassNeedsSub(models.Model):
     related_absence = models.ForeignKey(Absence,null=True,blank=True, on_delete=models.CASCADE)

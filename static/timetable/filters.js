@@ -1,6 +1,7 @@
 const checkboxes = document.getElementsByClassName('grades-checkboxes');
 const classes = document.getElementsByClassName('class');
 const teacher = document.getElementById('teacher-select');
+const room = document.getElementById('room-select');
 
 
 function filterTeachers(){
@@ -17,6 +18,24 @@ function filterTeachers(){
 
         for(let i=0; i < classes.length; i++) {
             classes[i].classList.remove("teacherFilter");
+        }
+    }
+}
+
+function filterRooms(){
+    console.log(room.value);
+    if(!(room.value === '')){
+    for(let i=0; i < classes.length; i++) {
+
+   if (!(classes[i].dataset.room.includes(room.value))) {
+       classes[i].classList.add("roomFilter");
+        } else {
+            classes[i].classList.remove('roomFilter');
+        }
+    }} else {
+
+        for(let i=0; i < classes.length; i++) {
+            classes[i].classList.remove("roomFilter");
         }
     }
 }
@@ -47,6 +66,7 @@ function filterGrades(){
 }
 function uncheck(){
     teacher.value=""
+    room.value=""
     for(const checkbox of checkboxes){
         if(checkbox.checked){
             checkbox.checked=false

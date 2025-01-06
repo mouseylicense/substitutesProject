@@ -218,7 +218,7 @@ def timetable(request):
                     {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.student_teaching,
                      "room": c.room.name,"description":c.description})
 
-    return render(request, "timetable.html", {"classesByHour": classesByHour, "teachers": teachers, "rooms": rooms})
+    return render(request, "timetable.html", {"classesByHour": classesByHour,"allRooms":Room.objects.all().values("name"), "teachers": teachers, "rooms": rooms})
 
 
 def set_schedule(request, uuid):

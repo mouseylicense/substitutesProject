@@ -112,11 +112,19 @@
 
 
         </div>
-        <label> {% trans "Teacher" %}:
+        <label style="margin-bottom:5px ">  {% trans "Teacher" %}:
         <select onchange="filterTeachers()" id="teacher-select">
             <option selected value> -------- </option>
             {% for teacher in teachers  %}
             <option id="{{ teacher }}">{{ teacher }}</option>
+            {% endfor %}
+        </select>
+        </label>
+            <label> {% trans "Room" %}:
+        <select onchange="filterRooms()" id="room-select">
+            <option selected value> -------- </option>
+            {% for room in allRooms  %}
+            <option id="{{ room.name }}">{{ room.name }}</option>
             {% endfor %}
         </select>
         </label>
@@ -203,7 +211,7 @@
         </div>
 
     <style>
-    .filterGrade,.teacherFilter{
+    .filterGrade,.teacherFilter,.roomFilter{
         display:none;
     }
     </style>
