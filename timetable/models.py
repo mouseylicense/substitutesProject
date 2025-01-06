@@ -88,7 +88,7 @@ class Teacher(AbstractUser):
     ted_manager = models.BooleanField(default=False)
     last_sub = models.DateField(default=timezone.now)
     type = models.IntegerField(choices=[(0,"Teacher"),(1,"TED"),(2,"Management")],default=0)
-    slack_id = models.CharField(max_length=100,blank=True)
+    slack_id = models.CharField(max_length=100,blank=True,default="")
     objects = TeacherManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']

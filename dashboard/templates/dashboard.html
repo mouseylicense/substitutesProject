@@ -37,7 +37,7 @@
     var problemsList = ""
     if (response[room]['problems'][0]){
       
-      var img = `<img src="{% static "dashboard/xMark.png" %}" alt="problem" width="150" height="100">`
+      var img = `<img src="{% static "dashboard/Xmark.png" %}" alt="problem" width="150" height="100">`
       for(let i=0;i<response[room]['problems'].length;i++){
         problemsList += `<div class="problem"><p>${response[room]['problems'][i]}</p></div>`
 
