@@ -2,6 +2,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
 const rooms = JSON.parse(document.getElementById("rooms").textContent)
     console.log(rooms)
 console.log(classesByHour)
+const eleven_row = document.getElementById("eleven-row")
 const filtering = document.getElementsByClassName("filtering")[0]
 const classesTab = document.getElementById("classes-tab")
 const roomsTab = document.getElementById("free-tab")
@@ -11,6 +12,9 @@ const timeframes = document.getElementsByClassName("timeframe")
     const span = document.getElementsByClassName("close")[0];
     function markClasses(){
         Object.keys(classesByHour).forEach(function(key) {
+            if(key.slice(-5) === "11:00"){
+                eleven_row.style.display = "block"
+            }
            let div = document.getElementById(key)
             for(let i = 0; i<classesByHour[key].length;i++){
                 let new_element = document.createElement("button")
