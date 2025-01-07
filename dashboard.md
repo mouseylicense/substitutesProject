@@ -1,6 +1,16 @@
 # Dashboard
 # The Dashboard Part of this project:
 
+# High Seas Demo:
+https://cc.mousey.hackclub.app/dashboard/report - to report a problem
+https://cc.mousey.hackclub.app/dashboard/ - dashboard
+https://cc.mousey.hackclub.app/dashboard/home - dashboard home
+Slack Bot channel: #mouseys-bot-spam
+User:
+email: example@example.com
+password: example
+
+
 This project originally was a project to help school manage teacher substitutions, over time this project grew and grew, to the point where it is now supposed to manage the entire school's schedule.
 
 **Now this project is growing even more, ill try to explain the need, the solution, and why this project is not a project in itself:**
