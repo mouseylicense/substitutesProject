@@ -201,7 +201,7 @@ def timetable(request):
         grades = str(c.str_grades())
         grades_all = str(c.all_grades())
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
-            if c.teachers:
+            if c.teachers.count() > 0:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
                     {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
                      "room": c.room.name,"description":c.description}]
@@ -210,7 +210,7 @@ def timetable(request):
                     {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.student_teaching,
                      "room": c.room.name,"description":c.description}]
         else:
-            if c.teachers:
+            if c.teachers.count() > 0:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
                     {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
                      "room": c.room.name,"description":c.description})
