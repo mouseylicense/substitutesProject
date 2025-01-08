@@ -90,6 +90,7 @@ class ScheduleForm(forms.ModelForm):
         filter_query = {NUMBERS_TO_GRADES[Student.objects.get(pk=student).grade]:True}
         if student:
             ld = ["sunday_ld","monday_ld","tuesday_ld","wednesday_ld","thursday_ld"]
+            recess = ["sunday_recess","monday_recess","tuesday_recess","wednesday_recess","thursday_recess"]
 
 
             excluded_classes = Class.objects.filter(**filter_query)
@@ -99,10 +100,19 @@ class ScheduleForm(forms.ModelForm):
                         field_name.startswith('thursday_'):
                     self.fields[field_name].queryset = self.fields[field_name].queryset.filter(**filter_query)
 
+            # This is an option to hide fields with no choice:
+            # for field_name,field in self.fields.items():
+            #     if len(field.choices)<=1:
+            #         field.widget = HiddenInput()
+            #     print(field_name)
 
-            for longday in ld:
-                if len(self.fields[longday].choices)<=1:
-                    self.fields[longday].widget = HiddenInput()
+            # This hides the longday and recess fields if they are empty:
+            for day in range(0,5):
+                if len(self.fields[ld[day]].choices)<=1:
+                    self.fields[ld[day]].widget = HiddenInput()
+                if len(self.fields[recess[day]].choices)<=1:
+                    self.fields[recess[day]].widget = HiddenInput()
+
 
 
 

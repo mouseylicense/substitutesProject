@@ -20,7 +20,7 @@ class LaptopLoaningForm(forms.ModelForm):
             "reason": forms.TextInput(attrs={'placeholder': _("Reason")}),
             "Teacher":forms.HiddenInput(),
             "date": forms.DateInput(attrs={'type': 'date'}),
-            "numberOfLaptops":forms.NumberInput(attrs={'type': 'range','min':1,'max':config.LAPTOPS}),
+            "numberOfLaptops":forms.NumberInput(attrs={'id':'numberOfLaptops','type': 'range','min':1}),
             "taking_time": forms.TimeInput(attrs={'type':'time','onChange':'setMin(this)'}),
             "returning_time": forms.TimeInput(attrs={'type':'time','id':'returning_time'},format='%H:%M'),
         }

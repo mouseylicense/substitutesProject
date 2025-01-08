@@ -39,10 +39,10 @@ def report(request):
 
 def dashboard(request):
 
-    return render(request, 'dashboard.html',context={"rooms":timetable.models.Room.objects.all(),"problems":problem.objects.all()})
+    return render(request, 'dashboard.html',context={"rooms":timetable.models.Room.objects.filter(show_in_dashboard=True),"problems":problem.objects.all()})
 
 def data(request):
-    rooms = timetable.models.Room.objects.all()
+    rooms = timetable.models.Room.objects.filter(show_in_dashboard=True)
     r = {}
     print(timezone.localtime(timezone.now()).strftime("%H:%m"))
     for room in rooms:
@@ -68,7 +68,7 @@ def stats(request):
     for prob in problems:
         try:
             if prob.resolved:
-                prob_by_teacher[prob.name()]['resolved'] += 1
+                prob_by_teacher[str(prob.name())]['resolved'] += 1
                 prob_by_assignee[prob.assignee.name()]['resolved'] += 1
             else:
                 prob_by_teacher[prob.name()]['not_resolved'] += 1

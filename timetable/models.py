@@ -113,6 +113,7 @@ class Teacher(AbstractUser):
 class Room(models.Model):
     name = models.CharField(max_length=100)
     show_as_possible = models.BooleanField(default=True)
+    show_in_dashboard = models.BooleanField(default=True)
     def __str__(self):
         return self.name
     def get_class(self,time,day):
@@ -297,6 +298,9 @@ class Schedule(models.Model):
     sunday_second = models.ForeignKey(Class,verbose_name=_("Sunday") + " 10:07", on_delete=models.SET_NULL, null=True, blank=True,
                                       limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(10, 7),
                                                         }, related_name='sunday_second_classes')
+    sunday_recess = models.ForeignKey(Class,verbose_name=_("Sunday") + _("Recess"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(11, 0),
+                                                        }, related_name='sunday_recess_classes')
     sunday_third = models.ForeignKey(Class,verbose_name=_("Sunday") + " 11:45", on_delete=models.SET_NULL, null=True, blank=True,
                                      limit_choices_to={'day_of_week': "Sunday", "hour": datetime.time(11, 45),
                                                        }, related_name='sunday_third_classes')
@@ -312,6 +316,9 @@ class Schedule(models.Model):
     monday_second = models.ForeignKey(Class,verbose_name=_("Monday") + " 10:07", on_delete=models.SET_NULL, null=True, blank=True,
                                       limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(10, 7),
                                                         }, related_name='monday_second_classes')
+    monday_recess = models.ForeignKey(Class,verbose_name=_("Monday") + _("Recess"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(11, 0),
+                                                        }, related_name='monday_recess_classes')
     monday_third = models.ForeignKey(Class,verbose_name=_("Monday") + " 11:45", on_delete=models.SET_NULL, null=True, blank=True,
                                      limit_choices_to={'day_of_week': "Monday", "hour": datetime.time(11, 45),
                                                        }, related_name='monday_third_classes')
@@ -328,6 +335,9 @@ class Schedule(models.Model):
                                        limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(10, 7),
                                                          },
                                        related_name='tuesday_second_classes')
+    tuesday_recess = models.ForeignKey(Class,verbose_name=_("Tuesday") + _("Recess"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(11, 0),
+                                                        }, related_name='tuesday_recess_classes')
     tuesday_third = models.ForeignKey(Class,verbose_name=_("Tuesday") + " 11:45", on_delete=models.SET_NULL, null=True, blank=True,
                                       limit_choices_to={'day_of_week': "Tuesday", "hour": datetime.time(11, 45),
                                                         }, related_name='tuesday_third_classes')
@@ -346,6 +356,9 @@ class Schedule(models.Model):
                                          limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(10, 7),
                                                            },
                                          related_name='wednesday_second_classes')
+    wednesday_recess = models.ForeignKey(Class,verbose_name=_("Wednesday") + _("Recess"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(11, 0),
+                                                        }, related_name='wednesday_recess_classes')
     wednesday_third = models.ForeignKey(Class,verbose_name=_("Wednesday") + " 11:45", on_delete=models.SET_NULL, null=True, blank=True,
                                         limit_choices_to={'day_of_week': "Wednesday", "hour": datetime.time(11, 45),
                                                           },
@@ -365,6 +378,9 @@ class Schedule(models.Model):
                                         limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(10, 7),
                                                           },
                                         related_name='thursday_second_classes')
+    thursday_recess = models.ForeignKey(Class,verbose_name=_("Thursday") + _("Recess"), on_delete=models.SET_NULL, null=True, blank=True,
+                                      limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(11, 0),
+                                                        }, related_name='thursday_recess_classes')
     thursday_ld = models.ForeignKey(Class,verbose_name=_("Thursday") + _("Long Day"), on_delete=models.SET_NULL, null=True, blank=True,
                                       limit_choices_to={'day_of_week': "Thursday", "hour": datetime.time(14, 15),
                                                         }, related_name='Thursday_ld_classes')

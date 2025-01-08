@@ -63,7 +63,7 @@ class problem(models.Model):
                 blocks_private = [
         {
             "text": {
-                "text": f"A New problem has been assigned to you! {self.problem} in {self.room}! The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}",
+                "text": f"A New problem has been assigned to you!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}",
                 "type": "mrkdwn"
             },
             "type": "section"
@@ -84,7 +84,7 @@ class problem(models.Model):
                 blocks_public = [
         {
             "text": {
-                "text": f"A new Problem has been assigned to <@{self.assignee.slack_id}>! {self.problem} in {self.room}! The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}",
+                "text": f"A new Problem has been assigned to <@{self.assignee.slack_id}>!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}",
                 "type": "mrkdwn"
             },
             "type": "section"
@@ -105,7 +105,7 @@ class problem(models.Model):
                 # change to urgent text if problem is very urgent
                 if self.urgency == 2:
                     blocks_public[0]["text"][
-                        "text"] = f"<!channel> A new VERY URGENT Problem has been assigned to <@{self.assignee.slack_id}>! {self.problem} in {self.room}! The problem was reported by {self.name()}"
+                        "text"] = f"<!channel> A new VERY URGENT Problem has been assigned to <@{self.assignee.slack_id}>!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}"
 
                 # if the problem is reassigned, delete old dm
                 if self.private_ts:
@@ -115,21 +115,21 @@ class problem(models.Model):
 
                     if self.urgency == 2:
                         client.chat_update(channel=constance.config.SLACK_PROBLEMS_CHANNEL_ID,ts=self.public_ts,
-                                                    text=f"<!channel> A new VERY URGENT Problem has been assigned to <@{self.assignee.slack_id}>! {self.problem} in {self.room}! The problem was reported by {self.name()}",
+                                                    text=f"<!channel> A new VERY URGENT Problem has been assigned to <@{self.assignee.slack_id}>!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}",
                                            blocks=blocks_public)
                     else:
-                        client.chat_update(ts=self.public_ts,channel=constance.config.SLACK_PROBLEMS_CHANNEL_ID,blocks=blocks_public,text=f"A new Problem has been assigned to <@{self.assignee.slack_id}>! {self.problem} in {self.room}! The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}")
+                        client.chat_update(ts=self.public_ts,channel=constance.config.SLACK_PROBLEMS_CHANNEL_ID,blocks=blocks_public,text=f"A new Problem has been assigned to <@{self.assignee.slack_id}>!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}")
                 else:
                     if self.urgency == 2:
                         public_message = client.chat_postMessage(channel=constance.config.SLACK_PROBLEMS_CHANNEL_ID,
-                                                    text=f"<!channel> A new VERY URGENT Problem has been assigned to <@{self.assignee.slack_id}>! {self.problem} in {self.room}! The problem was reported by {self.name()}",
+                                                    text=f"<!channel> A new VERY URGENT Problem has been assigned to <@{self.assignee.slack_id}>!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}",
                                                     blocks=blocks_public)
                     else:
-                        public_message = client.chat_postMessage(channel=constance.config.SLACK_PROBLEMS_CHANNEL_ID,blocks=blocks_public,text=f"A new Problem has been assigned to <@{self.assignee.slack_id}>! {self.problem} in {self.room}! The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}")
+                        public_message = client.chat_postMessage(channel=constance.config.SLACK_PROBLEMS_CHANNEL_ID,blocks=blocks_public,text=f"A new Problem has been assigned to <@{self.assignee.slack_id}>!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}")
                     self.public_ts = public_message["message"]["ts"]
 
                 private_message = client.chat_postMessage(channel=f"{self.assignee.slack_id}",
-                                        text=f"A New problem has been assigned to you! {self.problem} in {self.room}! The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}",
+                                        text=f"A New problem has been assigned to you!\n {self.problem} in {self.room}!\n The problem was reported by {self.name()}, he says its {URGENCY_DICT[self.urgency]}",
                                         blocks=blocks_private)
                 self.private_ts = private_message["message"]["ts"]
                 self.private_id = private_message["channel"]

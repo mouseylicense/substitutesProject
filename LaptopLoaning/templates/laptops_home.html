@@ -66,12 +66,13 @@
 </div>
 </div>
     <script>
+        document.getElementById("numberOfLaptops").max = {{ maxLaptops }}
         const returning_time = document.getElementById("returning_time")
         function setMin(a){
             console.log("test")
             returning_time.min = a.value
         }
-        var slider = document.getElementById("id_numberOfLaptops");
+        var slider = document.getElementById("numberOfLaptops");
         var output = document.getElementById("numberOfLaptops_value");
         output.innerHTML = slider.value; // Display the default slider value
 

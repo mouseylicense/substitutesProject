@@ -27,6 +27,7 @@ FROM_EMAIL=environ['FROM_EMAIL']
 HOUR_TO_NUMBER_OF_CLASS = {
     datetime.time(9,15):"first",
     datetime.time(10,7):"second",
+    datetime.time(11,0):"recess",
     datetime.time(11,45):"third",
     datetime.time(12,45):"fourth",
     datetime.time(14,15):"ld",

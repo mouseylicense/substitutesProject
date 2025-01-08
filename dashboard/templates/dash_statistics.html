@@ -38,10 +38,11 @@
     var not_resolved_by_member = []
     for(let i = 0;i<Object.values(problems_by_teacher).length;i++){
       resolved.push(Object.values(Object.values(problems_by_teacher)[i])[0])
-      resolved_by_member.push(Object.values(Object.values(problems_by_assignee)[i])[0])
       not_resolved.push(Object.values(Object.values(problems_by_teacher)[i])[1])
+    }
+    for(let i = 0;i<Object.values(problems_by_assignee).length;i++){
+      resolved_by_member.push(Object.values(Object.values(problems_by_assignee)[i])[0])
       not_resolved_by_member.push(Object.values(Object.values(problems_by_assignee)[i])[1])
-
     }
 
     var myChart = new Chart(ctx, {

@@ -32,7 +32,7 @@ def home(request):
         if form.is_valid():
             form.save()
     user = request.user
-    return render(request,"laptops_home.html",{"form":LaptopLoaningForm(initial={"Teacher":user}),"grantedPins":LaptopPin.objects.filter(Teacher=user,granted=True, expired=False).all().order_by("date").values(),"nonGrantedPins":LaptopPin.objects.filter(Teacher=user,granted=False,expired=False).all().order_by("date").values()})
+    return render(request,"laptops_home.html",{"form":LaptopLoaningForm(initial={"Teacher":user}),"maxLaptops":config.LAPTOPS,"grantedPins":LaptopPin.objects.filter(Teacher=user,granted=True, expired=False).all().order_by("date").values(),"nonGrantedPins":LaptopPin.objects.filter(Teacher=user,granted=False,expired=False).all().order_by("date").values()})
 
 @user_passes_test(lambda u: u.is_superuser or u.type == 1 or u.manage_ted)
 @login_required

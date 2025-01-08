@@ -14,7 +14,7 @@
 <h1>{{ name }}</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.invisible_fields }}
+    {{ form.student }}
 
     {% for field in form.visible_fields %}
         <div class="field">

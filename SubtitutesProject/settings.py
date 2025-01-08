@@ -36,7 +36,6 @@ DEVELOPMENT_MODE = False
 ALLOWED_HOSTS = ["*"]
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
-
 # Application definition
 
 INSTALLED_APPS = [
