@@ -16,7 +16,7 @@ from django.utils import timezone
 @require_GET
 def check_pin(request):
     pin = request.GET.get('pin')
-    if LaptopPin.objects.filter(PIN=pin,granted=True,expired=False,Teacher=request.user).exists():
+    if LaptopPin.objects.filter(PIN=pin,granted=True,expired=False).exists():
 
         pin = LaptopPin.objects.filter(PIN=pin).get()
         if pin.date == timezone.now().date():

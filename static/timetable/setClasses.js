@@ -23,7 +23,7 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
     function resetBoard(reset){
         const hour = document.getElementById("hour")
         const day = document.getElementById("day")
-        const buttons = document.getElementsByTagName("button")
+        const buttons = document.getElementsByClassName("timeframe")
         for(let k=0;k<buttons.length;k++){
             buttons[k].disabled = reset
             buttons[k].style.background = ""
@@ -90,20 +90,20 @@ const classesByHour = JSON.parse(document.getElementById("ClassesByHour").textCo
 
 
     const button_2 = document.getElementsByTagName("button")
-    const teacherSelect = document.getElementById("teacher")
+    const teacherSelectCont = document.getElementsByClassName("dropdown")
     const CheckBox = document.getElementById("isAStudentTeaching")
     const studentTeacherInput = document.getElementById("studentTeaching")
     function toggleTeacherStudent(checkbox){
         if (CheckBox.checked){
-            teacherSelect.hidden = true;
-            teacherSelect.value =""
+            teacherSelectCont[0].hidden = "none";
+            TeacherSelect.value =""
             studentTeacherInput.required = true
             studentTeacherInput.hidden = false;
             resetBoard(false)
         }
         else {
             studentTeacherInput.required = false;
-            teacherSelect.hidden = false;
+            teacherSelectCont[0].hidden = false;
             studentTeacherInput.hidden = true;
             resetBoard(true)
         }
