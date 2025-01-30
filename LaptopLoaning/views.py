@@ -1,9 +1,10 @@
 import json
 from dataclasses import fields
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from constance import config
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 from django.views.decorators.http import require_GET
@@ -26,7 +27,9 @@ def check_pin(request):
 
 @login_required
 def home(request):
-    LaptopPin.objects.filter(date__lt=timezone.now()).expire = True
+
+    LaptopPin.objects.filter(date__lt=timezone.now().date()).update(expired=True)
+
     if request.method == 'POST':
         form = LaptopLoaningForm(request.POST)
         if form.is_valid():
@@ -37,6 +40,8 @@ def home(request):
 @user_passes_test(lambda u: u.is_superuser or u.type == 1 or u.manage_ted)
 @login_required
 def pin_manager(request):
+    LaptopPin.objects.filter(date__lt=timezone.now()).update(expired=True)
+
     if request.method == 'POST':
         if request.POST.get('grant'):
             pin = LaptopPin.objects.get(id=int(request.POST.get('grant')))
@@ -45,9 +50,7 @@ def pin_manager(request):
             return render(request,'grantedPin.html',{"pin":pin})
         if request.POST.get('deny'):
             pin = LaptopPin.objects.get(id=int(request.POST.get('deny')))
-            pin.expired = True
-            pin.granted = False
-            pin.save()
+            pin.deny()
         return HttpResponse("test")
 
     return render(request,"laptops_pin_manager.html",{"pins":LaptopPin.objects.filter(expired=False)})
