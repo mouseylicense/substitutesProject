@@ -11,4 +11,5 @@ urlpatterns = [
     path('problems',views.problems,name='all_problems'),
     path('change_assignee',views.change_assignee,name='change_assignee'),
     path('resolve_problem',views.resolve,name='resolve_problem'),
+    path('thank_you',views.thank_you, name="thank_you")
 ]

@@ -1,7 +1,8 @@
 import json
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import AnonymousUser
-from django.http import JsonResponse, HttpResponse
+from django.db.models import Q
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
@@ -10,6 +11,7 @@ from dashboard.models import get_random_teacher
 import timetable.models
 from dashboard.models import problem
 from .forms import ProblemForm, ProblemFormGuest
+from collections import defaultdict
 
 DAYS_OF_WEEKDAY_DICT = {
     6: 'Sunday',
@@ -29,13 +31,15 @@ def report(request):
             form.save()
         else:
             print(form.errors)
-        return render(request,"thanks.html")
+        return HttpResponseRedirect("thank_you")
     user = request.user
     if user.is_authenticated:
         return render(request,'report_form.html',{"form":ProblemForm(initial={"reporter": user})})
     else:
         return render(request,'report_form.html',{"form":ProblemFormGuest()})
 
+def thank_you(request):
+    return render(request,"thanks.html")
 
 def dashboard(request):
 
@@ -52,43 +56,47 @@ def data(request):
             r[room.name] = {"problems":list(room.problem_set.filter(resolved=False).values_list("problem", flat=True))}
         r[room.name]["isFree"] = room.get_class(timezone.localtime(timezone.now()).strftime("%H:%m"),DAYS_OF_WEEKDAY_DICT[timezone.now().weekday()])
     return JsonResponse(r)
+
 @login_required
 def stats(request):
-    prob_by_teacher = {}
-    prob_by_assignee = {}
+    prob_by_teacher = defaultdict(lambda: {"resolved": 0, "not_resolved": 0})
+    prob_by_assignee = defaultdict(lambda: {"resolved": 0, "not_resolved": 0})
+
     problems = problem.objects.all().order_by('date_reported')
     problems_resolved = problem.objects.filter(resolved=True)
-    years = {}
-    for k in problem.objects.all().values_list('date_reported__year'):
-        if k[0] not in years:
-            years[k[0]] = []
-    for year in years:
-        for month in [9, 10, 11, 12, 1, 2, 3, 4, 5, 6]:
-            years[year].append(problem.objects.filter(date_reported__month=month, date_reported__year=year).count())
+
+    years = {year: [problem.objects.filter(date_reported__month=month, date_reported__year=year).count()
+                    for month in [9, 10, 11, 12, 1, 2, 3, 4, 5, 6]]
+             for year in problem.objects.values_list('date_reported__year', flat=True).distinct()}
+
     for prob in problems:
-        try:
-            if prob.resolved:
-                prob_by_teacher[str(prob.name())]['resolved'] += 1
-                prob_by_assignee[prob.assignee.name()]['resolved'] += 1
-            else:
-                prob_by_teacher[prob.name()]['not_resolved'] += 1
-                prob_by_assignee[prob.assignee.name()]['not_resolved'] += 1
-        except KeyError:
-            if prob.resolved:
-                prob_by_teacher[prob.name()] = {"resolved": 1, "not_resolved": 0}
-                prob_by_assignee[prob.assignee.name()] = {"resolved": 1, "not_resolved": 0}
-            else:
-                prob_by_teacher[prob.name()] = {"resolved": 0, "not_resolved": 1}
-                prob_by_assignee[prob.assignee.name()] = {"resolved": 0, "not_resolved": 1}
+        teacher_name = prob.name()
+        assignee_name = prob.assignee.name()
+
+        if prob.resolved:
+            prob_by_teacher[teacher_name]["resolved"] += 1
+            prob_by_assignee[assignee_name]["resolved"] += 1
+        else:
+            prob_by_teacher[teacher_name]["not_resolved"] += 1
+            prob_by_assignee[assignee_name]["not_resolved"] += 1
+
     fixed_the_most = timetable.models.Teacher.objects.order_by('-resolved_problems').first()
-    return render(request, 'dash_statistics.html',
-                  {"problems_by_teacher": json.dumps(prob_by_teacher), "problems_by_month": years,
-                   "problems_resolved": problems_resolved.count(), "total_problems": problems.count(),"fixed_the_most": fixed_the_most,"problems_by_assignee": json.dumps(prob_by_assignee)})
+
+    return render(request, 'dash_statistics.html', {
+        "problems_by_teacher": json.dumps(prob_by_teacher),
+        "problems_by_month": years,
+        "problems_resolved": problems_resolved.count(),
+        "total_problems": problems.count(),
+        "fixed_the_most": fixed_the_most,
+        "problems_by_assignee": json.dumps(prob_by_assignee)
+    })
+
+
 @login_required
 def home(request):
     user = request.user
     myProblems = problem.objects.filter(assignee=user,resolved=False).order_by("-urgency")
-    allProblems = problem.objects.filter(resolved=False).order_by("-urgency")
+    allProblems = problem.objects.filter(Q(resolved=False),~Q(assignee=user)).order_by("-urgency")
     return render(request,"dashboard_home.html",{"myProblems":myProblems,"allProblems":allProblems})
 
 

@@ -43,7 +43,9 @@ class problem(models.Model):
         else:
             return self.reporter_guest
     def __str__(self):
-        return f"{self.problem} {_('In')} {self.room}, {_('Reported by')}: {self.name()}, {_('Assigned to')} {self.assignee}"
+        if not self.resolved:
+            return f"{self.problem} {_('In')} {self.room}, {_('Reported by')}: {self.name()}, {_('assigned to')} {self.assignee}"
+        return f"✔ - {self.problem} {_('In')} {self.room}, {_('Reported by')}: {self.name()}, {_('Fixed by')} {self.resolved_by}"
     def resolve(self,user):
         self.resolved = True
         self.resolved_by = user
