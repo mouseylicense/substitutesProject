@@ -1,7 +1,7 @@
 import json
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import AnonymousUser
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
@@ -80,8 +80,7 @@ def stats(request):
             prob_by_teacher[teacher_name]["not_resolved"] += 1
             prob_by_assignee[assignee_name]["not_resolved"] += 1
 
-    fixed_the_most = timetable.models.Teacher.objects.order_by('-resolved_problems').first()
-
+    fixed_the_most = timetable.models.Teacher.objects.annotate(num_resolved_problems=Count("resolved_problems",resolved=True)).order_by('-num_resolved_problems').first()
     return render(request, 'dash_statistics.html', {
         "problems_by_teacher": json.dumps(prob_by_teacher),
         "problems_by_month": years,
