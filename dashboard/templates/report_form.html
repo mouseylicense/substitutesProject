@@ -10,8 +10,64 @@
     <link rel="stylesheet" href="{% static 'dashboard/styles/report_form.css' %}">
 </head>
 <body>
-        {% if not user.is_authenticated %}
+<style>
 
+@keyframes loadingC {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+    .load-3 .line:nth-last-child(1) {
+  animation: loadingC 0.6s 0.1s linear infinite;
+}
+.load-3 .line:nth-last-child(2) {
+  animation: loadingC 0.6s 0.2s linear infinite;
+}
+.load-3 .line:nth-last-child(3) {
+  animation: loadingC 0.6s 0.3s linear infinite;
+}
+#loadingWheel {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+
+}
+.load-wrapp{
+    display:none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.line {
+  display: inline-block;
+  width: 100px;
+  height: 200px;
+  border-radius: 50px;
+  background-color: #4b9cdb;
+
+}
+
+</style>
+<div class="load-wrapp" id="loadingDiv">
+    <div class="load-3" id="loadingWheel">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+</div>
+
+        {% if not user.is_authenticated %}
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -26,13 +82,31 @@
 
 </div>
         {% endif %}
-                <form method="post" action="{% url "report" %}">
+                <form onsubmit="showloader()" method="post" action="{% url "report" %}">
             {% csrf_token %}
             {{ form }}
             <span id="value"></span>
-            <input type="submit" value="{% trans "Report" %}">
+            <input type="submit" onsubmit="submit()" value="{% trans "Report" %}">
         </form>
     <script>
+
+    function submit() {
+
+        var allowSubmit = true;
+        frm.onsubmit = function () {
+           if (allowSubmit)
+               allowSubmit = false;
+           else
+               return false;
+        }
+    }
+        const loadingWheel = document.getElementById('loadingDiv')
+
+    function showloader() {
+        console.log('hi')
+        loadingWheel.style.display = 'block';
+
+    }
     var slider = document.getElementById("slider");
     var output = document.getElementById("value");
     output.innerHTML = slider.value;

@@ -39,7 +39,9 @@ CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'constance',
+    'channels',
     'constance.backends.database',
     'timetable.apps.TimetableConfig',
     'django.contrib.admin',
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+ASGI_APPLICATION = 'SubtitutesProject.asgi.application'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

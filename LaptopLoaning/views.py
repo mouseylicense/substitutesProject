@@ -14,17 +14,6 @@ from .models import LaptopPin
 from django.utils import timezone
 # Create your views here.
 
-@require_GET
-def check_pin(request):
-    pin = request.GET.get('pin')
-    if LaptopPin.objects.filter(PIN=pin,granted=True,expired=False).exists():
-
-        pin = LaptopPin.objects.filter(PIN=pin).get()
-        if pin.date == timezone.now().date():
-            pin.use()
-            return HttpResponse(200)
-    return HttpResponseNotFound(503)
-
 @login_required
 def home(request):
 

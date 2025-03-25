@@ -6,3 +6,4 @@ uuid==1.30
 django-debug-toolbar==4.4.6
 django-constance==4.0.0
 slack-sdk==3.34.0
+channels==4.1.0

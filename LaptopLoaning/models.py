@@ -46,44 +46,45 @@ class LaptopPin(models.Model):
         return f"{self.Teacher} - {self.PIN} - {self.date}"
     def save(self, *args, **kwargs):
         if not self.pk:
-            try :
                 if self.granted == False:
                     super().save(*args, **kwargs)
-                    GRANT_BLOCK = [
-                        {
-                            "text": {
-                                "text": f"{self.Teacher} requested {self.numberOfLaptops} Laptops for {self.reason} in room {self.room} \n From {self.taking_time} to {self.returning_time} on {self.date}",
-                                "type": "mrkdwn"
-                            },
-                            "type": "section"
-                        }, {
-                            "type": "actions",
-                            "block_id": "grant",
-                            "elements": [{
-                                "type": "button",
-                                "style": "primary",
+                    try:
+
+                        GRANT_BLOCK = [
+                            {
                                 "text": {
-                                    "type": "plain_text",
-                                    "text": "Grant",
+                                    "text": f"{self.Teacher} requested {self.numberOfLaptops} Laptops for {self.reason} in room {self.room} \n From {self.taking_time} to {self.returning_time} on {self.date}",
+                                    "type": "mrkdwn"
                                 },
-                                "value": f"{self.id}",
-                                "action_id": "grant"
-                            },{
-                                "type": "button",
-                                "style": "danger",
-                                "text": {
-                                    "type": "plain_text",
-                                    "text": "Deny",
-                                },
-                                "value": f"{self.id}",
-                                "action_id": "deny"
-                            }]}
-                    ]
-                    message = client.chat_postMessage(channel=constance.config.SLACK_LAPTOPS_CHANNEL_ID,blocks=GRANT_BLOCK, text=GRANT_BLOCK[0]['text']['text'])
-                    self.slack_ts = message['ts']
-            except Exception as e:
-                print(e)
-                print("Slack not configured")
+                                "type": "section"
+                            }, {
+                                "type": "actions",
+                                "block_id": "grant",
+                                "elements": [{
+                                    "type": "button",
+                                    "style": "primary",
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "Grant",
+                                    },
+                                    "value": f"{self.id}",
+                                    "action_id": "grant"
+                                },{
+                                    "type": "button",
+                                    "style": "danger",
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "Deny",
+                                    },
+                                    "value": f"{self.id}",
+                                    "action_id": "deny"
+                                }]}
+                        ]
+                        message = client.chat_postMessage(channel=constance.config.SLACK_LAPTOPS_CHANNEL_ID,blocks=GRANT_BLOCK, text=GRANT_BLOCK[0]['text']['text'])
+                        self.slack_ts = message['ts']
+                    except Exception as e:
+                        print(e)
+                        print("Slack not configured")
         super().save(*args, **kwargs)
     def grant(self):
         self.granted = True
