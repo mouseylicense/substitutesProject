@@ -142,7 +142,9 @@ class Absence(models.Model):
 # removes classes that needs sub if absence is deleted
 @receiver(post_delete, sender=Absence)
 def remove_classes(sender, instance, using, **kwargs):
-    c = ClassNeedsSub.objects.filter(Class_That_Needs_Sub__teacher=instance.teacher, date=instance.date).delete()
+    print(instance.teacher)
+
+    c = ClassNeedsSub.objects.filter(Class_That_Needs_Sub__teachers__id=instance.teacher.id, date=instance.date).delete()
     print(c)
 
 
