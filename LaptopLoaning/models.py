@@ -2,10 +2,13 @@ import datetime
 from random import randint
 import constance
 from django.conf import settings
+from django.core.mail import send_mail
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.template.loader import render_to_string
 from slack_sdk import WebClient
-
+from os import environ
+FROM_EMAIL=environ['FROM_EMAIL']
 import timetable.models
 
 if hasattr(settings, 'SLACK_BOT_TOKEN'):
@@ -89,6 +92,17 @@ class LaptopPin(models.Model):
     def grant(self):
         self.granted = True
         self.save()
+        try:
+            send_mail(
+                subject="Your Laptops PIN has beem granted!",
+                message=f"Your PIN: {self.PIN}, for {self.reason} at {self.date} Has been granted",
+                from_email=FROM_EMAIL,
+                recipient_list=[self.Teacher.email],
+                html_message=render_to_string("granted_email.html",{"PIN":self.PIN,"reason":self.reason,"date":self.date,"taking_time":self.taking_time,"returning_time":self.returning_time,"room":self.room,"teacher":self.Teacher,"number_of_laptops":self.numberOfLaptops})
+
+            )
+        except Exception as e:
+            print(e)
         try:
             client.chat_update(channel=constance.config.SLACK_LAPTOPS_CHANNEL_ID,ts=self.slack_ts,text=f" ~{self.Teacher} requested {self.numberOfLaptops} Laptops for {self.reason} in room {self.room}~ \n ~From {self.taking_time} to {self.returning_time} on {self.date}~ \n *Granted,Code is {self.PIN}*")
         except Exception as e:

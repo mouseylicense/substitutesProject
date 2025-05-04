@@ -5,14 +5,27 @@ from datetime import datetime, timedelta
 from constance import config
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.decorators.http import require_GET
 
 from .forms import LaptopLoaningForm
 from .models import LaptopPin
 from django.utils import timezone
+from .consumers import PinConsumer
 # Create your views here.
+
+@login_required
+def form(request):
+    if request.method == 'POST':
+        form = LaptopLoaningForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("thank_you"))
+    else:
+        form = LaptopLoaningForm(initial={"Teacher":request.user})
+    return render(request, "form.html", {"form": form,"maxLaptops":config.LAPTOPS})
 
 @login_required
 def home(request):
@@ -89,3 +102,6 @@ def stats(request):
                 pins_by_teacher[pin.Teacher.name()] = {"granted":0,"not_granted":1}
 
     return render(request,'statistics.html',{"pins_by_teacher":json.dumps(pins_by_teacher),"pins_by_month":years,"total_time":time_used,"pins_granted":pins_granted.count(),"total_laptops":total_laptops})
+
+def thank_you(request):
+    return render(request,"thanks.html")

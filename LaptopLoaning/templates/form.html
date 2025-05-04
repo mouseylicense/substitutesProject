@@ -1,0 +1,43 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'laptopLoaning/styles/loaning_form.css' %}">
+
+    <title>{% trans "Loan Laptops" %}</title>
+</head>
+<body>
+<div class="container">
+    <form  action="{% url "loan" %}" method="post">
+        {% csrf_token %}
+        {{ form.Teacher }}
+        {{ form.reason }}
+        {{ form.room }}
+        <p style="margin: 0">{% trans "Number of Laptops:" %} <span id="numberOfLaptops_value"></span></p>
+        {{ form.numberOfLaptops }}
+        {{ form.date }}
+        <div class="form-two-fields">{{ form.taking_time }}{{ form.returning_time }}</div>
+        <button type="submit">{% trans "Order" %}</button>
+    </form>
+</div>
+ <script>
+        document.getElementById("numberOfLaptops").max = {{ maxLaptops }}
+        const returning_time = document.getElementById("returning_time")
+        function setMin(a){
+            console.log("test")
+            returning_time.min = a.value
+        }
+        var slider = document.getElementById("numberOfLaptops");
+        var output = document.getElementById("numberOfLaptops_value");
+        output.innerHTML = slider.value; // Display the default slider value
+
+        // Update the current slider value (each time you drag the slider handle)
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>

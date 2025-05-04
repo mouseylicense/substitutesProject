@@ -15,7 +15,7 @@ from .forms import RegistrationForm, ClassForm, ScheduleForm, TeacherForm, Super
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
 from django.utils import timezone
-from django.db.models import Q, Exists, OuterRef
+from django.db.models import Exists, OuterRef
 from django.utils.translation import gettext_lazy as _
 import datetime
 from dotenv import load_dotenv
@@ -24,14 +24,6 @@ from constance import config
 
 load_dotenv()
 FROM_EMAIL=environ['FROM_EMAIL']
-HOUR_TO_NUMBER_OF_CLASS = {
-    datetime.time(9,15):"first",
-    datetime.time(10,7):"second",
-    datetime.time(11,0):"recess",
-    datetime.time(11,45):"third",
-    datetime.time(12,45):"fourth",
-    datetime.time(14,15):"ld",
-}
 DAYS_OF_WEEKDAY = {
     6: 'Sunday',
     0: 'Monday',
@@ -200,25 +192,25 @@ def timetable(request):
     for c in classes:
         grades = str(c.str_grades())
         grades_all = str(c.all_grades())
+        student_count = f"{c.get_students().count()}/{c.max_students}"
         if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
             if c.teachers.count() > 0:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
                     {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
-                     "room": c.room.name,"description":c.description}]
+                     "room": c.room.name,"description":c.description,"student_count":student_count}]
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = [
                     {"name": c.name, "all_grades": grades_all, "grades_display": grades, "teacher": c.student_teaching,
-                     "room": c.room.name,"description":c.description}]
+                     "room": c.room.name,"description":c.description,"student_count":student_count}]
         else:
             if c.teachers.count() > 0:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
                     {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": [t.first_name + ' ' + t.last_name for t in c.teachers.all()],
-                     "room": c.room.name,"description":c.description})
+                     "room": c.room.name,"description":c.description,"student_count":student_count})
             else:
                 classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]].append(
                     {"name": c.name, "grades_display": grades, "all_grades": grades_all, "teacher": c.student_teaching,
-                     "room": c.room.name,"description":c.description})
-
+                     "room": c.room.name,"description":c.description,"student_count":student_count})
     return render(request, "timetable.html", {"classesByHour": classesByHour,"allRooms":Room.objects.all().values("name"), "teachers": teachers, "rooms": rooms})
 
 
@@ -472,7 +464,7 @@ def class_manager(request):
     else:
         class_pool = Class.objects.filter(teacher=request.user)
     for c in class_pool:
-        classes_and_students[c.name] = [Schedule.objects.filter(**{c.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[c.hour]:c}).count(),c.id]
+        classes_and_students[c.name] = [c.get_students().count(),c.id]
     form = forms.ClassForm
     classes = Class.objects.all()
     classesByHour = {}
@@ -491,7 +483,7 @@ def get_student_list(request,id):
     <ul>
     
     """
-    for s in Schedule.objects.filter(**{c.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[c.hour]:c}):
+    for s in c.get_students():
         html+=f"<li>{s.student.name}</li>"
     html+="</ul"
     res = HttpResponse(html)

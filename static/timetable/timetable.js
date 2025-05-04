@@ -21,11 +21,13 @@ const timeframes = document.getElementsByClassName("timeframe")
                 new_element.innerText = classesByHour[key][i]["name"] + " - " + classesByHour[key][i]["teacher"] + " - " + classesByHour[key][i]["grades_display"] + " - " + classesByHour[key][i]["room"];
                 new_element.dataset.name = classesByHour[key][i]["name"];
                 new_element.className = "class"
+                console.log(classesByHour[key][i]["student_count"])
                 new_element.dataset.room = classesByHour[key][i]["room"];
                 new_element.dataset.teacher = classesByHour[key][i]["teacher"];
                 new_element.dataset.grades = classesByHour[key][i]["grades_display"];
                 new_element.dataset.hour = key.slice(-5)
                 new_element.dataset.description = classesByHour[key][i]["description"]
+                new_element.dataset.student_count = classesByHour[key][i]["student_count"]
                 new_element.dataset.all_grades = classesByHour[key][i]["all_grades"];
                 new_element.setAttribute("onclick","setModalContent(this);")
                 div.append(new_element)
@@ -40,6 +42,7 @@ const timeframes = document.getElementsByClassName("timeframe")
             modalContent.querySelector("#room").innerText = element.dataset.room
             modalContent.querySelector("#hour").innerText = element.dataset.hour
             modalContent.querySelector("#description").innerText = element.dataset.description
+            modalContent.querySelector("#student_count").innerText = element.dataset.student_count
             modal.style.display = "block";
         }
 

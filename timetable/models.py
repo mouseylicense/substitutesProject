@@ -44,6 +44,14 @@ GRADES = [
     (10, _('Eleventh Grade')),
     (11, _('Twelfth Grade')),
 ]
+HOUR_TO_NUMBER_OF_CLASS = {
+    datetime.time(9,15):"first",
+    datetime.time(10,7):"second",
+    datetime.time(11,0):"recess",
+    datetime.time(11,45):"third",
+    datetime.time(12,45):"fourth",
+    datetime.time(14,15):"ld",
+}
 
 class TeacherManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None,**extra_fields):
@@ -162,6 +170,7 @@ class Class(models.Model):
     eleventh_grade = models.BooleanField(default=False, verbose_name=_("Eleventh Grade"))
     twelfth_grade = models.BooleanField(default=False, verbose_name=_("Twelfth Grade"))
     visible = models.BooleanField(default=True, verbose_name=_("Visible"))
+    max_students = models.IntegerField(default=25, verbose_name=_("Max Students"))
     class Meta:
         permissions = (
             ('see_classes', "can add classes"),
@@ -185,6 +194,8 @@ class Class(models.Model):
                 grades_positive.append(i)
             i += 1
         return grades_positive
+    def get_students(self):
+        return Schedule.objects.filter(**{self.day_of_week.lower() +"_"+ HOUR_TO_NUMBER_OF_CLASS[self.hour]:self})
 
     def str_grades(self):
         number_to_grade = {

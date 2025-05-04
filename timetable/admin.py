@@ -75,9 +75,9 @@ admin.site.register(models.Student,StudentAdmin)
 
 
 class ScheduleAdmin(admin.ModelAdmin):
-    fields = ['student',('sunday_first', 'sunday_second', 'sunday_third', 'sunday_fourth'),
-                ('monday_first', 'monday_second', 'monday_third', 'monday_fourth'),
-                ('tuesday_first', 'tuesday_second', 'tuesday_third', 'tuesday_fourth'),
-                ('wednesday_first', 'wednesday_second', 'wednesday_third', 'wednesday_fourth'),
-                ('thursday_first', 'thursday_second')]
+    fields = ['student',('sunday_first', 'sunday_second','sunday_recess', 'sunday_third', 'sunday_fourth','sunday_ld'),
+                ('monday_first', 'monday_second','monday_recess' ,'monday_third', 'monday_fourth','monday_ld'),
+                ('tuesday_first', 'tuesday_second','tuesday_recess', 'tuesday_third', 'tuesday_fourth','tuesday_ld'),
+                ('wednesday_first', 'wednesday_second','wednesday_recess', 'wednesday_third', 'wednesday_fourth', 'wednesday_ld'),
+                ('thursday_first' ,'thursday_second','thursday_recess','thursday_ld')]
 admin.site.register(models.Schedule,ScheduleAdmin)

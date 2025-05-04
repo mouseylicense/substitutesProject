@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 12:30+0200\n"
-"PO-Revision-Date: 2024-12-30 12:31+0200\n"
+"POT-Creation-Date: 2025-05-04 19:58+0300\n"
+"PO-Revision-Date: 2025-05-04 20:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: .\LaptopLoaning\forms.py:11
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:12
-#: .\timetable\templates\timetable.html:115
+#: .\timetable\templates\timetable.html:116
 msgid "Teacher"
 msgstr "מורה"
 
@@ -46,6 +46,7 @@ msgstr "מספר מחשבים"
 #: .\dashboard\forms.py:15 .\dashboard\forms.py:28
 #: .\dashboard\templates\problems.html:13 .\timetable\templates\log.html:14
 #: .\timetable\templates\setSub.html:15 .\timetable\templates\setSub.html:50
+#: .\timetable\templates\timetable.html:124
 msgid "Room"
 msgstr "חדר"
 
@@ -60,6 +61,20 @@ msgstr "עד"
 #: .\LaptopLoaning\forms.py:20 .\timetable\forms.py:26 .\timetable\forms.py:27
 msgid "Reason"
 msgstr "סיבה"
+
+#: .\LaptopLoaning\templates\form.html:10
+msgid "Loan Laptops"
+msgstr "השאל מחשבים"
+
+#: .\LaptopLoaning\templates\form.html:19
+#: .\LaptopLoaning\templates\laptops_home.html:15
+msgid "Number of Laptops:"
+msgstr "מספר מחשבים:"
+
+#: .\LaptopLoaning\templates\form.html:23
+#: .\LaptopLoaning\templates\laptops_home.html:19
+msgid "Order"
+msgstr "הזמן"
 
 #: .\LaptopLoaning\templates\grantedPin.html:15
 #: .\LaptopLoaning\templates\laptops_pin_manager.html:44
@@ -99,14 +114,6 @@ msgstr "rtl"
 #: .\LaptopLoaning\templates\laptops_home.html:4
 msgid "Order Laptops"
 msgstr "הזמנת מחשבים"
-
-#: .\LaptopLoaning\templates\laptops_home.html:15
-msgid "Number of Laptops:"
-msgstr "מספר מחשבים:"
-
-#: .\LaptopLoaning\templates\laptops_home.html:19
-msgid "Order"
-msgstr "הזמן"
 
 #: .\LaptopLoaning\templates\laptops_home.html:26
 msgid "My pins"
@@ -178,60 +185,60 @@ msgid "Of Pins Not Granted"
 msgstr "קודים שנדחו"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "September"
 msgstr "ספטמבר"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "October"
 msgstr "אוקטובר"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "November"
 msgstr "נובמבר"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "December"
 msgstr "דצמבר"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "January"
 msgstr "ינואר"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "February"
 msgstr "פברואר"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "March"
 msgstr "מרץ"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "April"
 msgstr "אפריל"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "May"
 msgstr "מאי"
 
 #: .\LaptopLoaning\templates\statistics.html:74
-#: .\dashboard\templates\dash_statistics.html:114
+#: .\dashboard\templates\dash_statistics.html:115
 msgid "June"
 msgstr "יוני"
 
-#: .\SubtitutesProject\settings.py:167
+#: .\SubtitutesProject\settings.py:170
 msgid "Hebrew"
 msgstr "עברית"
 
-#: .\SubtitutesProject\settings.py:168
+#: .\SubtitutesProject\settings.py:171
 msgid "English"
 msgstr "אנגלית"
 
@@ -244,33 +251,21 @@ msgstr "בעיה"
 msgid "Urgency"
 msgstr "דְחִיפוּת"
 
-#: .\dashboard\forms.py:26 .\timetable\forms.py:208
+#: .\dashboard\forms.py:26 .\timetable\forms.py:218
 msgid "Name"
 msgstr "שם מלא"
 
-#: .\dashboard\models.py:30 .\dashboard\templates\report_form.html:39
+#: .\dashboard\models.py:30 .\dashboard\templates\report_form.html:113
 msgid "Take Your Time"
 msgstr "קחו את הזמן שלך"
 
-#: .\dashboard\models.py:30 .\dashboard\templates\report_form.html:39
+#: .\dashboard\models.py:30 .\dashboard\templates\report_form.html:113
 msgid "Urgent"
 msgstr "דחוף"
 
-#: .\dashboard\models.py:30 .\dashboard\templates\report_form.html:39
+#: .\dashboard\models.py:30 .\dashboard\templates\report_form.html:113
 msgid "COME RIGHT NOW!"
 msgstr "צריך עזרה מיד!"
-
-#: .\dashboard\models.py:46
-msgid "In"
-msgstr "ב"
-
-#: .\dashboard\models.py:46
-msgid "Reported by"
-msgstr "דווח על ידי"
-
-#: .\dashboard\models.py:46
-msgid "Assigned to"
-msgstr "משויך ל"
 
 #: .\dashboard\templates\dash_statistics.html:7
 msgid "Total Number Of Problems Resolved:"
@@ -284,13 +279,13 @@ msgstr "מספר של בעיות:"
 msgid "Best Fixer:"
 msgstr "המתקן הטוב ביותר:"
 
-#: .\dashboard\templates\dash_statistics.html:52
-#: .\dashboard\templates\dash_statistics.html:84
+#: .\dashboard\templates\dash_statistics.html:53
+#: .\dashboard\templates\dash_statistics.html:85
 msgid "Of Problems Resolved"
 msgstr "מספר הבעיות שנפתרו"
 
-#: .\dashboard\templates\dash_statistics.html:57
-#: .\dashboard\templates\dash_statistics.html:89
+#: .\dashboard\templates\dash_statistics.html:58
+#: .\dashboard\templates\dash_statistics.html:90
 msgid "Of Problems Not Resolved"
 msgstr "מספר הבעיות שלא נפתרו"
 
@@ -332,19 +327,19 @@ msgstr "פתור"
 msgid "Report A Problem"
 msgstr "דווח על תקלה"
 
-#: .\dashboard\templates\report_form.html:20
+#: .\dashboard\templates\report_form.html:76
 msgid "You are not logged in! Would you like to log in or continue as guest?"
 msgstr "אתה לא מחובר! האם תרצה להתחבר או להמשיך כאורח?"
 
-#: .\dashboard\templates\report_form.html:22
+#: .\dashboard\templates\report_form.html:78
 msgid "Continue as guest"
 msgstr "המשך כאורח"
 
-#: .\dashboard\templates\report_form.html:23
+#: .\dashboard\templates\report_form.html:79
 msgid "Log In"
 msgstr "התחבר"
 
-#: .\dashboard\templates\report_form.html:33
+#: .\dashboard\templates\report_form.html:89
 msgid "Report"
 msgstr "דווח"
 
@@ -373,50 +368,55 @@ msgstr "ימי עבודה:"
 
 #: .\templates\registration\register.html:29 .\timetable\forms.py:54
 #: .\timetable\forms.py:55 .\timetable\forms.py:56 .\timetable\forms.py:57
-#: .\timetable\forms.py:58 .\timetable\forms.py:120 .\timetable\forms.py:150
-#: .\timetable\models.py:296 .\timetable\models.py:299
-#: .\timetable\models.py:302 .\timetable\models.py:305
-#: .\timetable\models.py:308 .\timetable\templates\student_details.html:25
-#: .\timetable\templates\timetable.html:140
+#: .\timetable\forms.py:58 .\timetable\forms.py:130 .\timetable\forms.py:160
+#: .\timetable\models.py:306 .\timetable\models.py:309
+#: .\timetable\models.py:312 .\timetable\models.py:315
+#: .\timetable\models.py:318 .\timetable\models.py:321
+#: .\timetable\templates\student_details.html:25
+#: .\timetable\templates\timetable.html:149
 msgid "Sunday"
 msgstr "יום ראשון"
 
 #: .\templates\registration\register.html:30 .\timetable\forms.py:60
 #: .\timetable\forms.py:61 .\timetable\forms.py:62 .\timetable\forms.py:63
-#: .\timetable\forms.py:64 .\timetable\forms.py:121 .\timetable\forms.py:151
-#: .\timetable\models.py:311 .\timetable\models.py:314
-#: .\timetable\models.py:317 .\timetable\models.py:320
-#: .\timetable\models.py:323 .\timetable\templates\student_details.html:26
-#: .\timetable\templates\timetable.html:141
+#: .\timetable\forms.py:64 .\timetable\forms.py:131 .\timetable\forms.py:161
+#: .\timetable\models.py:324 .\timetable\models.py:327
+#: .\timetable\models.py:330 .\timetable\models.py:333
+#: .\timetable\models.py:336 .\timetable\models.py:339
+#: .\timetable\templates\student_details.html:26
+#: .\timetable\templates\timetable.html:150
 msgid "Monday"
 msgstr "יום שני"
 
 #: .\templates\registration\register.html:31 .\timetable\forms.py:66
 #: .\timetable\forms.py:67 .\timetable\forms.py:68 .\timetable\forms.py:69
-#: .\timetable\forms.py:70 .\timetable\forms.py:122 .\timetable\forms.py:152
-#: .\timetable\models.py:326 .\timetable\models.py:329
-#: .\timetable\models.py:333 .\timetable\models.py:336
-#: .\timetable\models.py:340 .\timetable\templates\student_details.html:27
-#: .\timetable\templates\timetable.html:142
+#: .\timetable\forms.py:70 .\timetable\forms.py:132 .\timetable\forms.py:162
+#: .\timetable\models.py:342 .\timetable\models.py:345
+#: .\timetable\models.py:349 .\timetable\models.py:352
+#: .\timetable\models.py:355 .\timetable\models.py:359
+#: .\timetable\templates\student_details.html:27
+#: .\timetable\templates\timetable.html:151
 msgid "Tuesday"
 msgstr "יום שלישי"
 
 #: .\templates\registration\register.html:32 .\timetable\forms.py:72
 #: .\timetable\forms.py:73 .\timetable\forms.py:74 .\timetable\forms.py:75
-#: .\timetable\forms.py:76 .\timetable\forms.py:123 .\timetable\forms.py:153
-#: .\timetable\models.py:343 .\timetable\models.py:347
-#: .\timetable\models.py:351 .\timetable\models.py:355
-#: .\timetable\models.py:359 .\timetable\templates\student_details.html:28
-#: .\timetable\templates\timetable.html:143
+#: .\timetable\forms.py:76 .\timetable\forms.py:133 .\timetable\forms.py:163
+#: .\timetable\models.py:362 .\timetable\models.py:366
+#: .\timetable\models.py:370 .\timetable\models.py:373
+#: .\timetable\models.py:377 .\timetable\models.py:381
+#: .\timetable\templates\student_details.html:28
+#: .\timetable\templates\timetable.html:152
 msgid "Wednesday"
 msgstr "יום רביעי"
 
 #: .\templates\registration\register.html:33 .\timetable\forms.py:78
 #: .\timetable\forms.py:79 .\timetable\forms.py:80 .\timetable\forms.py:81
-#: .\timetable\forms.py:82 .\timetable\forms.py:124 .\timetable\forms.py:154
-#: .\timetable\models.py:362 .\timetable\models.py:366
-#: .\timetable\models.py:370 .\timetable\templates\student_details.html:29
-#: .\timetable\templates\timetable.html:144
+#: .\timetable\forms.py:82 .\timetable\forms.py:134 .\timetable\forms.py:164
+#: .\timetable\models.py:384 .\timetable\models.py:388
+#: .\timetable\models.py:392 .\timetable\models.py:395
+#: .\timetable\templates\student_details.html:29
+#: .\timetable\templates\timetable.html:153
 msgid "Thursday"
 msgstr "יום חמישי"
 
@@ -436,141 +436,151 @@ msgstr "יום"
 msgid "Hour"
 msgstr "שעה"
 
-#: .\timetable\forms.py:37 .\timetable\models.py:149
+#: .\timetable\forms.py:37 .\timetable\models.py:158
 msgid "Is a Student Teaching?"
 msgstr "תלמידים מלמדים?"
 
-#: .\timetable\forms.py:38 .\timetable\models.py:150
+#: .\timetable\forms.py:38 .\timetable\models.py:159
 msgid "Student Teaching"
 msgstr "תלמיד שמלמד"
 
-#: .\timetable\forms.py:43 .\timetable\forms.py:221
+#: .\timetable\forms.py:43 .\timetable\forms.py:231
 #: .\timetable\templates\timetable.html:20
 msgid "Description"
 msgstr "תיאור"
 
 #: .\timetable\forms.py:58 .\timetable\forms.py:64 .\timetable\forms.py:70
-#: .\timetable\forms.py:76 .\timetable\forms.py:82 .\timetable\models.py:308
-#: .\timetable\models.py:323 .\timetable\models.py:340
-#: .\timetable\models.py:359 .\timetable\models.py:370
-#: .\timetable\templates\class_manager.html:168
-#: .\timetable\templates\timetable.html:190
+#: .\timetable\forms.py:76 .\timetable\forms.py:82 .\timetable\models.py:321
+#: .\timetable\models.py:339 .\timetable\models.py:359
+#: .\timetable\models.py:381 .\timetable\models.py:395
+#: .\timetable\templates\class_manager.html:173
+#: .\timetable\templates\timetable.html:209
 msgid "Long Day"
 msgstr "יום ארוך"
 
-#: .\timetable\forms.py:114 .\timetable\forms.py:127 .\timetable\forms.py:172
+#: .\timetable\forms.py:124 .\timetable\forms.py:137 .\timetable\forms.py:182
 msgid "First Name"
 msgstr "שם פרטי"
 
-#: .\timetable\forms.py:115 .\timetable\forms.py:128 .\timetable\forms.py:173
+#: .\timetable\forms.py:125 .\timetable\forms.py:138 .\timetable\forms.py:183
 msgid "Last Name"
 msgstr "שם משפחה"
 
-#: .\timetable\forms.py:116 .\timetable\forms.py:126 .\timetable\forms.py:165
-#: .\timetable\forms.py:175
+#: .\timetable\forms.py:126 .\timetable\forms.py:136 .\timetable\forms.py:175
+#: .\timetable\forms.py:185
 msgid "Password"
 msgstr "סיסמה"
 
-#: .\timetable\forms.py:117 .\timetable\forms.py:125 .\timetable\forms.py:177
-#: .\timetable\forms.py:211
+#: .\timetable\forms.py:127 .\timetable\forms.py:135 .\timetable\forms.py:187
+#: .\timetable\forms.py:221
 msgid "Phone Number"
 msgstr "מספר טלפון"
 
-#: .\timetable\forms.py:155 .\timetable\templates\student_details.html:10
+#: .\timetable\forms.py:165 .\timetable\templates\student_details.html:10
 msgid "Tutor"
 msgstr "חונך"
 
-#: .\timetable\forms.py:156
+#: .\timetable\forms.py:166
 msgid "Shocher"
 msgstr "שוחר"
 
-#: .\timetable\forms.py:157
+#: .\timetable\forms.py:167
 msgid "Substitutes?"
 msgstr "מחליף?"
 
-#: .\timetable\forms.py:158
+#: .\timetable\forms.py:168
 msgid "Manages Subs"
 msgstr "מנהלת החלפות"
 
-#: .\timetable\forms.py:159
+#: .\timetable\forms.py:169
 msgid "Manages Schedule"
 msgstr "מנהל מערכת"
 
-#: .\timetable\forms.py:164 .\timetable\forms.py:174 .\timetable\forms.py:209
+#: .\timetable\forms.py:174 .\timetable\forms.py:184 .\timetable\forms.py:219
 msgid "Email"
 msgstr "אימייל"
 
-#: .\timetable\forms.py:226
+#: .\timetable\forms.py:236
 msgid "Select a file"
 msgstr "בחירת קובץ"
 
-#: .\timetable\models.py:34 .\timetable\models.py:151 .\timetable\models.py:190
-#: .\timetable\models.py:279 .\timetable\templates\timetable.html:29
+#: .\timetable\models.py:34 .\timetable\models.py:160 .\timetable\models.py:202
+#: .\timetable\models.py:289 .\timetable\templates\timetable.html:30
 msgid "First Grade"
 msgstr "כיתה א'"
 
-#: .\timetable\models.py:35 .\timetable\models.py:152 .\timetable\models.py:191
-#: .\timetable\models.py:280 .\timetable\templates\timetable.html:36
+#: .\timetable\models.py:35 .\timetable\models.py:161 .\timetable\models.py:203
+#: .\timetable\models.py:290 .\timetable\templates\timetable.html:37
 msgid "Second Grade"
 msgstr "כיתה ב'"
 
-#: .\timetable\models.py:36 .\timetable\models.py:153 .\timetable\models.py:192
-#: .\timetable\models.py:281 .\timetable\templates\timetable.html:43
+#: .\timetable\models.py:36 .\timetable\models.py:162 .\timetable\models.py:204
+#: .\timetable\models.py:291 .\timetable\templates\timetable.html:44
 msgid "Third Grade"
 msgstr "כיתה ג'"
 
-#: .\timetable\models.py:37 .\timetable\models.py:154 .\timetable\models.py:193
-#: .\timetable\models.py:282 .\timetable\templates\timetable.html:50
+#: .\timetable\models.py:37 .\timetable\models.py:163 .\timetable\models.py:205
+#: .\timetable\models.py:292 .\timetable\templates\timetable.html:51
 msgid "Fourth Grade"
 msgstr "כיתה ד'"
 
-#: .\timetable\models.py:38 .\timetable\models.py:155 .\timetable\models.py:194
-#: .\timetable\models.py:283 .\timetable\templates\timetable.html:57
+#: .\timetable\models.py:38 .\timetable\models.py:164 .\timetable\models.py:206
+#: .\timetable\models.py:293 .\timetable\templates\timetable.html:58
 msgid "Fifth Grade"
 msgstr "כיתה ה'"
 
-#: .\timetable\models.py:39 .\timetable\models.py:156 .\timetable\models.py:195
-#: .\timetable\models.py:284 .\timetable\templates\timetable.html:64
+#: .\timetable\models.py:39 .\timetable\models.py:165 .\timetable\models.py:207
+#: .\timetable\models.py:294 .\timetable\templates\timetable.html:65
 msgid "Sixth Grade"
 msgstr "כיתה ו'"
 
-#: .\timetable\models.py:40 .\timetable\models.py:157 .\timetable\models.py:196
-#: .\timetable\models.py:285 .\timetable\templates\timetable.html:71
+#: .\timetable\models.py:40 .\timetable\models.py:166 .\timetable\models.py:208
+#: .\timetable\models.py:295 .\timetable\templates\timetable.html:72
 msgid "Seventh Grade"
 msgstr "כיתה ז'"
 
-#: .\timetable\models.py:41 .\timetable\models.py:158 .\timetable\models.py:197
-#: .\timetable\models.py:286 .\timetable\templates\timetable.html:78
+#: .\timetable\models.py:41 .\timetable\models.py:167 .\timetable\models.py:209
+#: .\timetable\models.py:296 .\timetable\templates\timetable.html:79
 msgid "Eighth Grade"
 msgstr "כיתה ח'"
 
-#: .\timetable\models.py:42 .\timetable\models.py:159 .\timetable\models.py:198
-#: .\timetable\models.py:287 .\timetable\templates\timetable.html:85
+#: .\timetable\models.py:42 .\timetable\models.py:168 .\timetable\models.py:210
+#: .\timetable\models.py:297 .\timetable\templates\timetable.html:86
 msgid "Ninth Grade"
 msgstr "כיתה ט'"
 
-#: .\timetable\models.py:43 .\timetable\models.py:160 .\timetable\models.py:199
-#: .\timetable\models.py:288 .\timetable\templates\timetable.html:92
+#: .\timetable\models.py:43 .\timetable\models.py:169 .\timetable\models.py:211
+#: .\timetable\models.py:298 .\timetable\templates\timetable.html:93
 msgid "Tenth Grade"
 msgstr "כיתה י'"
 
-#: .\timetable\models.py:44 .\timetable\models.py:161 .\timetable\models.py:200
-#: .\timetable\models.py:289 .\timetable\templates\timetable.html:99
+#: .\timetable\models.py:44 .\timetable\models.py:170 .\timetable\models.py:212
+#: .\timetable\models.py:299 .\timetable\templates\timetable.html:100
 msgid "Eleventh Grade"
 msgstr "כיתה יא'"
 
-#: .\timetable\models.py:45 .\timetable\models.py:162 .\timetable\models.py:201
-#: .\timetable\models.py:290 .\timetable\templates\timetable.html:106
+#: .\timetable\models.py:45 .\timetable\models.py:171 .\timetable\models.py:213
+#: .\timetable\models.py:300 .\timetable\templates\timetable.html:107
 msgid "Twelfth Grade"
 msgstr "כיתה יב'"
 
-#: .\timetable\models.py:121
+#: .\timetable\models.py:130
 msgid "Empty"
 msgstr "ריק"
 
-#: .\timetable\models.py:163
+#: .\timetable\models.py:172
 msgid "Visible"
 msgstr "מוצג"
+
+#: .\timetable\models.py:173
+msgid "Max Students"
+msgstr "מקסימום תלמידים"
+
+#: .\timetable\models.py:312 .\timetable\models.py:330
+#: .\timetable\models.py:349 .\timetable\models.py:370
+#: .\timetable\models.py:392
+msgid "Recess"
+msgstr "הַפסָקָה"
 
 #: .\timetable\templates\class_manager.html:13
 #: .\timetable\templates\class_manager.html:99
@@ -585,20 +595,21 @@ msgstr "צור שיעור חדש"
 msgid "Edit Description"
 msgstr "ערוך תיאור"
 
-#: .\timetable\templates\class_manager.html:204
+#: .\timetable\templates\class_manager.html:209
 msgid "Add Class"
 msgstr "הוסף שיעור"
 
-#: .\timetable\templates\class_manager.html:246
+#: .\timetable\templates\class_manager.html:251
 msgid "Search Classes"
 msgstr "חפש שיעור"
 
-#: .\timetable\templates\class_manager.html:255
+#: .\timetable\templates\class_manager.html:260
+#: .\timetable\templates\timetable.html:21
 msgid "Students"
 msgstr "תלמידים"
 
-#: .\timetable\templates\class_manager.html:258
-#: .\timetable\templates\class_manager.html:260
+#: .\timetable\templates\class_manager.html:263
+#: .\timetable\templates\class_manager.html:265
 msgid "Change Description"
 msgstr "ערוך תיאור"
 
@@ -881,37 +892,46 @@ msgstr "הזמן מורה"
 msgid "Success!"
 msgstr "הושלם!"
 
-#: .\timetable\templates\timetable.html:123
+#: .\timetable\templates\timetable.html:132
 msgid "Uncheck All"
 msgstr "נקה הכל"
 
-#: .\timetable\templates\timetable.html:124
+#: .\timetable\templates\timetable.html:133
 msgid "Print Today's Schedule"
 msgstr "הדפס את המערכת של היום"
 
-#: .\timetable\templates\timetable.html:130
+#: .\timetable\templates\timetable.html:139
 msgid "Classes"
 msgstr "שיעורים"
 
-#: .\timetable\templates\timetable.html:133
+#: .\timetable\templates\timetable.html:142
 msgid "Free Rooms"
 msgstr "חדרים פנויים"
 
-#: .\timetable\views.py:142
+#: .\timetable\views.py:135
 msgid "Absence reported."
 msgstr "היעדרות דווחה."
 
-#: .\timetable\views.py:150
+#: .\timetable\views.py:143
 msgid "Absence already reported."
 msgstr "היעדרות כבר דווחה."
 
-#: .\timetable\views.py:233
+#: .\timetable\views.py:226
 msgid "A Schedule for This Student already Exists,Please Contact T.E.D!"
 msgstr "מערכת לתלמיד זה כבר קיימת, אם אתה מאמין שזו תקלה, פנה לחונך."
 
-#: .\timetable\views.py:559
+#: .\timetable\views.py:552
 msgid "Successfully sent!"
 msgstr "נשלח בהצלחה!"
+
+#~ msgid "In"
+#~ msgstr "ב"
+
+#~ msgid "Reported by"
+#~ msgstr "דווח על ידי"
+
+#~ msgid "Assigned to"
+#~ msgstr "משויך ל"
 
 #, fuzzy
 #~| msgid "Monday"

@@ -11,10 +11,14 @@ if hasattr(settings, 'SLACK_BOT_TOKEN'):
 
 
 class PinConsumer(WebsocketConsumer):
+    esp_instance = None
     def connect(self):
+
+        PinConsumer.esp_instance = self
         self.accept()
 
     def disconnect(self, close_code):
+        PinConsumer.esp_instance = None
         self.close()
     def receive(self, text_data):
 
@@ -41,4 +45,6 @@ class PinConsumer(WebsocketConsumer):
             else:
 
                 self.send(text_data="False")
-
+    def open_box(self):
+        if PinConsumer.esp_instance:
+            PinConsumer.esp_instance.send("OPEN")
