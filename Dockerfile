@@ -1,4 +1,4 @@
-FROM python:3.12
+ccFROM python:3.12
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -9,5 +9,5 @@ COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
 COPY . /app/
-
+EXPOSE 5858
 CMD ["sh","entrypoint.sh"]
