@@ -4,7 +4,7 @@
 {% block static%}
     <link rel="stylesheet" href="{% static "timetable/styles/bootstrap.min.css" %}">
 {% endblock %}
-{% block title %}Pin Manager{% endblock %}
+{% block title %}{% trans "Class Manager" %}{% endblock %}
 {% block content %}
     <table class="table table-bordered table-responsive-sm">
     <thead>
@@ -27,7 +27,7 @@
 
                     <form hx-swap="none"  hx-post="{% url "sub" %}">
                         <input name="class" type="hidden" value="{{ class.id }}">
-                        <select>
+                        <select name="sub">
                             <option value="none" selected>-----</option>
                             {% for i in class.possible_subs %}
                                 <option value="{{ i.id }}">{{ i.name }}</option>
@@ -63,7 +63,7 @@
                     <form hx-swap="none"  hx-post="{% url "sub" %}">
                         <input name="class" type="hidden" value="{{ class.id }}">
                         <select name="sub">
-                            <option selected value="{{ class.substitute_teacher.id }}">{{ class.substitute_teacher.first_name }}</option>
+                            <option selected value="{{ class.substitute_teacher.id }}">{{ class.substitute_teacher.first_name }} {{ class.substitute_teacher.last_name }}</option>
                             {% for i in class.possible_subs %}
                                 <option value="{{ i.id }}">{{ i.name }}</option>
                             {% endfor %}

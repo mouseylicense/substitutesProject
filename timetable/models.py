@@ -8,7 +8,7 @@ import datetime
 from django.db.models import Exists, OuterRef, Q
 from django.template.defaultfilters import first
 from django.utils import timezone
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from slack_sdk import WebClient
@@ -129,24 +129,44 @@ class Room(models.Model):
             if t == None:
                 return _("Empty")
             return t.name
-class Absence(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+class Day(models.Model):
     date = models.DateField()
-    reason = models.CharField(max_length=100)
-    def date_str(self):
-        return str(self.date)
     def __str__(self):
-        return self.teacher.first_name + " - " + str(self.date)
+        return str(self.date)
 
-
-# removes classes that needs sub if absence is deleted
+class Absence(models.Model):
+    teacher = models.ForeignKey(Teacher,on_delete=models.CASCADE)
+    reason = models.CharField(max_length=100)
+    day = models.ForeignKey(Day, on_delete=models.CASCADE)
+    def date_str(self):
+        return str(self.day.date)
+    def __str__(self):
+        return self.teacher.first_name + " - " + str(self.day.date) + " - " + self.reason
+@receiver(post_save, sender=Absence)
+def modify_classes_that_needs_subs(sender, instance, created, **kwargs):
+    if created:
+        day = instance.day
+        # Get classes where ALL teachers have an absence on that day
+        classes = Class.objects.filter(
+            day_of_week=DAYS_OF_WEEKDAY_DICT[day.date.weekday()],
+            # Get classes that have at least one teacher
+            teachers__isnull=False
+        ).exclude(
+            # Exclude classes where ANY teacher doesn't have an absence on that day
+            teachers__in=Teacher.objects.exclude(absence__day=day)
+        ).distinct()
+        # Create ClassNeedsSub instances for each class
+        for class_instance in classes:
+            ClassNeedsSub.objects.get_or_create(
+                Class_That_Needs_Sub=class_instance,
+                date=day.date,
+            )
 @receiver(post_delete, sender=Absence)
-def remove_classes(sender, instance, using, **kwargs):
-    print(instance.teacher)
-
-    c = ClassNeedsSub.objects.filter(Class_That_Needs_Sub__teachers__id=instance.teacher.id, date=instance.date).delete()
-    print(c)
-
+def delete_classes_that_needs_subs(sender, instance, **kwargs):
+    day = instance.day
+    ClassNeedsSub.objects.filter(Class_That_Needs_Sub__teachers=instance.teacher,date=day.date).delete()
+    if day.absence_set.count() == 0:
+        day.delete()
 
 class Class(models.Model):
     name = models.CharField(max_length=100)
@@ -235,7 +255,6 @@ class Class(models.Model):
 
 
 class ClassNeedsSub(models.Model):
-    related_absence = models.ForeignKey(Absence,null=True,blank=True, on_delete=models.CASCADE)
     Class_That_Needs_Sub = models.ForeignKey(Class, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
     substitute_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
@@ -247,16 +266,16 @@ class ClassNeedsSub(models.Model):
         c = self
         filter_dict = {DAYS_OF_WEEKDAY_DICT[c.date.weekday()]: True}
         teacherQuery = Teacher.objects.filter(
-            ~Exists(Class.objects.filter(teacher=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY_DICT[c.date.weekday()],
+            ~Exists(Class.objects.filter(teachers=OuterRef("pk"), day_of_week=DAYS_OF_WEEKDAY_DICT[c.date.weekday()],
                                          hour=c.Class_That_Needs_Sub.hour)),
             ~Exists(ClassNeedsSub.objects.filter(substitute_teacher=OuterRef("pk"), date=c.date,
                                                  Class_That_Needs_Sub__hour=c.Class_That_Needs_Sub.hour)),
-            ~Q(absence__date=c.date),
+            ~Q(absence__day__date=c.date),
             can_substitute=True,
-            **filter_dict).values("pk", "first_name")
+            **filter_dict).values("pk", "first_name","last_name")
         availableTeachers = []
         for teacher in teacherQuery:
-            availableTeachers.append({'id': teacher['pk'], 'name': teacher['first_name']})
+            availableTeachers.append({'id': teacher['pk'], 'name': f"{teacher['first_name']}  {teacher['last_name']}"})
         return availableTeachers
     def __str__(self):
         if self.substitute_teacher is None:

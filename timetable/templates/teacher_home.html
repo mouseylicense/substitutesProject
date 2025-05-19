@@ -44,7 +44,7 @@
         <li>
             <div class="absence">
                 <div>
-                <h2>{{ absence.date }}</h2>
+                <h2>{{ absence.day.date }}</h2>
                 <h3 class="hour">{{ absence.reason }}</h3>
                 </div>
                 <button style="all:unset; cursor: pointer " hx-target="closest .absence" hx-swap="delete" hx-post="{% url "delete_absence" %}" name="{{ request.user.uuid }}" value="{{ absence.date_str }}" >

@@ -120,6 +120,7 @@ button:dir(ltr),.button-div:dir(ltr){
 
     <div class="container">
     <form action="{% url "class_manager" %}" method="post">
+        {{ form.max_students }}
         {% csrf_token %}
         {{ form.student_teacher }}<label>{{ form.student_teacher.label }}</label>
         <div class="two-fields">

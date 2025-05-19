@@ -30,16 +30,17 @@ class AbsenceForm(forms.Form):
 
 class ClassForm(forms.ModelForm):
     name = forms.CharField(label=_("Subject"),widget=forms.TextInput(attrs={'class': 'subject-input', 'placeholder': _('Subject')}))
-    teachers = forms.ModelMultipleChoiceField(Teacher.objects.filter(type=0),required=False,label=_("Teachers"),widget=forms.SelectMultiple(attrs={'id':'teacher','class':'select form-select selectpicker'}))
+    teachers = forms.ModelMultipleChoiceField(Teacher.objects.filter(type=0).only("pk","first_name","last_name"),required=False,label=_("Teachers"),widget=forms.SelectMultiple(attrs={'id':'teacher','class':'select form-select selectpicker'}))
     day_of_week = forms.CharField(label=_("Day"),widget=forms.TextInput(attrs={"required":"","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;","id":"day"}))
     hour = forms.CharField(label=_("Hour"),widget=forms.TextInput(attrs={"required":"","id":"hour","onkeydown":"return false;","style":"caret-color: transparent !important;pointer-events: none;"}))
-    room = forms.ModelChoiceField(Room.objects,widget=forms.Select(attrs={'id': 'room',"disabled":""}))
+    room = forms.ModelChoiceField(Room.objects.only("pk","name"),widget=forms.Select(attrs={'id': 'room',"disabled":""}))
     student_teacher = forms.BooleanField(required=False,label=_("Is a Student Teaching?"),widget=forms.CheckboxInput(attrs={"onclick":'toggleTeacherStudent(this);','class':'checkbox','id':'isAStudentTeaching'}))
     student_teaching = forms.CharField(required=False,widget=TextInput(attrs={'placeholder':_("Student Teaching"),'hidden':'','class':'subject-input','id':'studentTeaching'}))
     class Meta:
         model = Class
         fields = "__all__"
         widgets= {
+            "max_students":forms.HiddenInput(),
             "description":forms.Textarea(attrs={'placeholder':_("Description")+"...",'style':'flex-grow:1'}),
         }
 

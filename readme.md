@@ -25,6 +25,7 @@ some environment variables need to be defined in an .env file:
 | DB_USER              | Database Username                                                   |
 | DB_PASSWORD          | Database password                                                   |
 | DB_HOST              | Database Host IP                                                    |
+| DB_NAME              | Database Name                                                       |
 | DB_PORT              | Database Host Port, Also needs to be changed in docker-compose.yaml |
 | DB_ROOT_PASSWORD     | Database Root Password                                              |
 | DJANGO_SECRET_KEY    | The Django Secret Key (optional)                                    |

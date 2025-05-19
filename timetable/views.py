@@ -98,7 +98,6 @@ def index(request):
 @login_required()
 @user_passes_test(lambda u: u.manage_subs or u.is_superuser)
 def log(request):
-
     return render(request, 'log.html',{"classes":ClassNeedsSub.objects.filter(substitute_teacher__isnull=False).order_by("date")})
 
 
@@ -128,25 +127,29 @@ def teacher_home(request):
     if request.method == 'POST':
         form = forms.AbsenceForm(request.POST)
         if form.is_valid():
-            if not Absence.objects.filter(teacher=request.user, date=form.cleaned_data['date']).exists():
-                absence = Absence(teacher=request.user, date=form.cleaned_data['date'],
-                                  reason=form.cleaned_data['reason'])
-                absence.save()
-                messages.success(request, _("Absence reported."))
-                q = Class.objects.filter(teacher=request.user,
-                                         day_of_week=DAYS_OF_WEEKDAY[form.cleaned_data['date'].weekday()])
+            if not Absence.objects.filter(teacher=request.user,day__date=form.cleaned_data['date']).exists():
+                day = Day.objects.get_or_create(date=form.cleaned_data['date'])[0]
+                day.save()
 
-                for c in q:
-                    newClass = ClassNeedsSub(Class_That_Needs_Sub=c, date=form.cleaned_data['date'],related_absence=absence)
-                    newClass.save()
+                absence = Absence(teacher=request.user,
+                                  reason=form.cleaned_data['reason'],
+                                  day=day,)
+                absence.save()
+
+                messages.success(request, _("Absence reported."))
             else:
                 messages.error(request, _("Absence already reported."))
         else:
             return HttpResponse("error")
-    Absence.objects.filter(date__lt=timezone.now().date()).delete()
+
+    # deletes days that are older than today, commented line is to delete absences as well
+    old_day = Day.objects.filter(date__lt=timezone.now().date())
+    for d in old_day:
+        # d.absence__set.all().delete()
+        d.delete()
     form = forms.AbsenceForm()
     mySubs = ClassNeedsSub.objects.filter(substitute_teacher=request.user).order_by('date').values("Class_That_Needs_Sub__room","Class_That_Needs_Sub__name","date","Class_That_Needs_Sub__hour")
-    myAbsences = Absence.objects.filter(teacher=request.user).order_by('date')
+    myAbsences = Absence.objects.filter(teacher=request.user).order_by('day__date')
     return render(request, "teacher_home.html", {"mySubs": mySubs,"form":form,"myAbsence":myAbsences})
 
 def register(request,uuid):
@@ -396,8 +399,8 @@ def create_teacher(request):
 @login_required()
 def delete_absence(request):
     payload = request.body.decode("utf-8").split("=")
-    if Absence.objects.filter(teacher__uuid=payload[0],date=payload[1]).exists():
-        Absence.objects.filter(teacher__uuid=payload[0],date=payload[1]).delete()
+    if Absence.objects.filter(teacher__uuid=payload[0],day__date=payload[1]).exists():
+        Absence.objects.filter(teacher__uuid=payload[0],day__date=payload[1]).delete()
         return HttpResponse(200)
     return HttpResponse(404)
 
@@ -466,13 +469,13 @@ def class_manager(request):
     for c in class_pool:
         classes_and_students[c.name] = [c.get_students().count(),c.id]
     form = forms.ClassForm
-    classes = Class.objects.all()
+    classes = Class.objects.all().values("day_of_week","hour")
     classesByHour = {}
     for c in classes:
-        if (str(c.day_of_week) + "-" + str(c.hour)[:5]) not in classesByHour:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] = 1
+        if (str(c['day_of_week']) + "-" + str(c['hour'])[:5]) not in classesByHour:
+            classesByHour[str(c['day_of_week']) + "-" + str(c['hour'])[:5]] = 1
         else:
-            classesByHour[str(c.day_of_week) + "-" + str(c.hour)[:5]] += 1
+            classesByHour[str(c['day_of_week']) + "-" + str(c['hour'])[:5]] += 1
     return render(request,"class_manager.html",{"classes":classes_and_students,"form": form, "classesByHour": classesByHour})
 
 @require_GET

@@ -10,5 +10,12 @@
       <jdbc-url>jdbc:mysql://192.168.1.254:3303/subs</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="postgres@db.yvjbrisetjwqewxjmyjs.supabase.co" uuid="91313bca-1f9e-460a-b390-67c6e0a1b5c0">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://db.yvjbrisetjwqewxjmyjs.supabase.co:5432/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
